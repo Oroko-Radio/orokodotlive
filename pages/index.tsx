@@ -4,10 +4,12 @@ import Newsletter from '../components/forms/newsletter'
 const Home: NextPage = () => {
   return (
     <main>
-      <h1>Oroko Radio - Coming soon!</h1>
+      <div className='mx-auto w-1/2 mt-60'>
+        <h1 className='font-bold mb-8 text-4xl'>Oroko Radio - Coming soon!</h1>
 
-      <div>
-        <Newsletter />
+        <div>
+          <Newsletter />
+        </div>
       </div>
     </main>
   )
