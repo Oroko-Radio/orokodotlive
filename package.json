@@ -16,6 +16,9 @@
     "swr": "^1.0.1"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.3.0",
+    "@tailwindcss/forms": "^0.3.4",
+    "@tailwindcss/typography": "^0.4.1",
     "@types/react": "17.0.28",
     "autoprefixer": "^10.3.7",
     "eslint": "7",
