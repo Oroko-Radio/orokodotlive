@@ -1,0 +1,15 @@
+<svg id="Newsletter_BG" data-name="Newsletter BG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="600" viewBox="0 0 1920 600">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Pfad_32" data-name="Pfad 32" d="M0,0H1920V600H0Z" transform="translate(0 966)" fill="#fff" stroke="#000" stroke-width="2"/>
+    </clipPath>
+  </defs>
+  <g id="Gruppe_maskieren_1" data-name="Gruppe maskieren 1" transform="translate(0 -966)" clip-path="url(#clip-path)">
+    <g id="Banner-Backgrounds_OROKO-Banner-Background-Circles" transform="translate(729.55 1035.55)">
+      <rect id="Rechteck_6" data-name="Rechteck 6" width="1965.288" height="651.288" transform="translate(-751.121 -91.69)" fill="#ffc928"/>
+      <rect id="Rechteck_7" data-name="Rechteck 7" width="600" height="600" transform="translate(-69.55 -69.55)" fill="none"/>
+      <path id="Pfad_33" d="M702.6,1346.826c355.7,0,644.093-288.464,644.093-644.169S1058.306,58.489,702.6,58.489,58.509,346.953,58.509,702.657,346.9,1346.826,702.6,1346.826" transform="translate(-476.245 -468.039)" fill="#ff6a37"/>
+      <path id="Pfad_34" d="M416.651,670.772c140.324,0,254.01-113.762,254.01-254.01,0-140.4-113.762-254.161-254.01-254.161S162.642,276.363,162.642,416.763c0,140.324,113.686,254.01,254.009,254.01" transform="translate(-189.897 -181.67)" fill="#ff4948"/>
+    </g>
+  </g>
+</svg>

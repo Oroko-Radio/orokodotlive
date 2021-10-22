@@ -36,22 +36,21 @@ export default function Newsletter() {
 
   return (
     <form method='POST' onSubmit={handleSubmit}>
-      <label htmlFor='email' className='mr-4'>
-        Email
-      </label>
-
       <input
-        className='mb-4'
+        className='mb-4 mr-4 px-2 py-0 rounded-xl border-black border-2 font-serif'
         autoComplete='email'
         id='email'
         name='email'
-        placeholder='name@email.com'
+        placeholder='Your email here'
         required
+        aria-label='email'
         type='email'
       />
-      <br />
-      <button type='submit' className='border p-2'>
-        Subscribe
+      <button
+        type='submit'
+        className='border-2 border-black bg-white rounded-xl font-bold px-2 '
+      >
+        Submit
       </button>
     </form>
   )
