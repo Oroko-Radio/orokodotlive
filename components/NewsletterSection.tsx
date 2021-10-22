@@ -5,7 +5,7 @@ const NewsletterSection = () => {
   return (
     <div className='relative h-96 flex flex-col justify-center items-center text-center border-b-2 border-black'>
       <Image
-        src='/../public/images/Newsletter BG.svg'
+        src='/images/Newsletter BG.svg'
         alt=''
         layout='fill'
         className='-z-10'

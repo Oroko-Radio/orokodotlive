@@ -11,14 +11,14 @@ const Banner: React.FC<BannerProps> = ({ color }) => {
         Oroko will launch December 2021
       </h1>
       <Image
-        src='/../public/images/Oroko Small Logo White Lines.svg'
+        src='/images/Oroko Small Logo White Lines.svg'
         alt='Oroko logo small'
         height='50'
         width='50'
       />
       <p className='font-serif inline text-5xl mx-4'>Stay Tuned</p>
       <Image
-        src='/../public/images/Oroko Small Logo White Lines.svg'
+        src='/images/Oroko Small Logo White Lines.svg'
         alt='Oroko logo small'
         height='50'
         width='50'
