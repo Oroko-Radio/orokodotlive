@@ -1,11 +1,13 @@
 import Image from "next/image";
+import hero from "../images/hero-banner-bg.png";
 
 const Hero = () => {
   return (
     <div className="relative h-hero border-b-2 border-black">
       <Image
         className="w-full -z-10"
-        src="/images/hero-banner-bg.png"
+        src={hero}
+        placeholder="blur"
         alt="Hero image"
         layout="fill"
         objectFit="cover"
