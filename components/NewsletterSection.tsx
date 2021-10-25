@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Newsletter from "./forms/newsletter";
-import newsletterBG from "../images/newsletter-bg.svg";
+import newsletterBG from "/public/static/newsletter-bg.svg";
 
 const NewsletterSection = () => {
   return (

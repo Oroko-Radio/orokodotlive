@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logoSmall from "../images/logo-small-outline.svg";
+import logoSmall from "/public/static/logo-small-outline.svg";
 
 type BannerProps = {
   color: string;
