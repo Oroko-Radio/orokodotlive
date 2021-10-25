@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Newsletter from "./forms/newsletter";
+import newsletterBG from "/images/newsletter-bg.svg";
 
 const NewsletterSection = () => {
   return (
     <div className="relative h-96 flex items-center justify-center border-b-2 border-black">
       <Image
-        src="/images/newsletter-bg.svg"
+        src={newsletterBG}
         alt=""
         layout="fill"
         className="-z-10"

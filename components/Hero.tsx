@@ -1,5 +1,6 @@
 import Image from "next/image";
-import hero from "../images/hero-banner-bg.png";
+import hero from "../images/street.jpg";
+import logo from "/images/logo-full-color.svg";
 
 const Hero = () => {
   return (
@@ -13,12 +14,7 @@ const Hero = () => {
         objectFit="cover"
       />
       <div className="w-full h-full flex p-20 justify-center">
-        <Image
-          src="/images/logo-full-color.svg"
-          alt="Oroko Radio logo"
-          height="200"
-          width="200"
-        />
+        <Image src={logo} alt="Oroko Radio logo" height="200" width="200" />
       </div>
     </div>
   );
