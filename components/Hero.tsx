@@ -1,5 +1,5 @@
 import Image from "next/image";
-import hero from "../images/street.jpg";
+import hero from "../images/Hero-Banner-BG-Nico2b.png";
 import logo from "/public/static/logo-full-color.svg";
 
 const Hero = () => {

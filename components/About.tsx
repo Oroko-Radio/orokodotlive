@@ -1,5 +1,5 @@
 import Image from "next/image";
-import shop from "../images/shop.jpg";
+import shop from "../images/view.jpg";
 
 const About = () => {
   return (
