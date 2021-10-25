@@ -5,7 +5,13 @@ const About = () => {
   return (
     <div className="grid md:grid-cols-2 auto-rows-min border-b-2 border-black">
       <div className="relative h-96 md:h-auto">
-        <Image src={aboutImage} alt="LUST" objectFit="cover" layout="fill" />
+        <Image
+          src={aboutImage}
+          alt="LUST"
+          objectFit="cover"
+          placeholder="blur"
+          layout="fill"
+        />
       </div>
       <div className="p-12 max-w-xl mx-auto">
         <p className="font-bold text-2xl text-center mb-8">About Us</p>
