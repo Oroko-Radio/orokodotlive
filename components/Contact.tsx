@@ -1,5 +1,5 @@
 import Image from "next/image";
-import contactBG from "/images/contact-bg.svg";
+import contactBG from "../images/contact-bg.svg";
 
 const Contact = () => {
   return (

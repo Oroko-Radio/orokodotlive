@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logoSmall from "/images/logo-small-outline.svg";
+import logoSmall from "../images/logo-small-outline.svg";
 
 const Footer = () => {
   return (

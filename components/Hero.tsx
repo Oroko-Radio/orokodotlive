@@ -1,6 +1,6 @@
 import Image from "next/image";
 import hero from "../images/street.jpg";
-import logo from "/images/logo-full-color.svg";
+import logo from "../images/logo-full-color.svg";
 
 const Hero = () => {
   return (
