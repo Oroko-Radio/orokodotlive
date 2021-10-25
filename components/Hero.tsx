@@ -1,5 +1,5 @@
 import Image from "next/image";
-import hero from "/public/static/street.jpg";
+import hero from "../images/street.jpg";
 import logo from "/public/static/logo-full-color.svg";
 
 const Hero = () => {
@@ -9,7 +9,7 @@ const Hero = () => {
         className="w-full -z-10"
         src={hero}
         placeholder="blur"
-        alt="Hero image"
+        alt="Street"
         layout="fill"
         objectFit="cover"
       />
