@@ -12,12 +12,10 @@ const NewsletterSection = () => {
         objectFit="cover"
       />
       <p className="font-bold text-2xl mb-4">Newsletter</p>
-      <h2 className="font-serif text-5xl mb-4">
-        Receive all the news about Oroko!
-      </h2>
+      <h2 className="font-serif text-5xl mb-4">Join the Oroko community!</h2>
       <p className="font-serif mb-4 max-w-sm">
-        Be part of the OROKO Family and stay in touch for all updates and future
-        plans.
+        Sign up to the Oroko newsletter to stay up to date with all our upcoming
+        events, projects, announcements, residencies and more.
       </p>
       <Newsletter />
     </div>
