@@ -7,7 +7,7 @@ const About = () => {
       <div className="relative h-96 md:h-auto">
         <Image
           src={aboutImage}
-          alt="LUST"
+          alt=""
           objectFit="cover"
           placeholder="blur"
           layout="fill"
