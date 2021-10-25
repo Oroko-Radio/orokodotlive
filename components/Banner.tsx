@@ -1,13 +1,17 @@
 import Image from "next/image";
 import logoSmall from "/images/logo-small-outline.svg";
 
-interface BannerProps {
+type BannerProps = {
   color: string;
-}
+};
 
-const Banner: React.FC<BannerProps> = ({ color }) => {
+const colors: any = {
+  black: "bg-black text-white",
+};
+
+const Banner = ({ color }: BannerProps) => {
   return (
-    <div className="bg-black text-white py-2">
+    <div className={`py-2 ${colors[color]}`}>
       <h1 className="font-heading inline text-6xl mx-4">
         Oroko will launch December 2021
       </h1>

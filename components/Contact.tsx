@@ -20,10 +20,10 @@ const Contact = () => {
           in English and French.
         </p>
         <div className="flex">
-          <div className="border-2 border-black bg-white rounded-xl font-bold px-2 mr-4">
+          <div className="border-2 border-black bg-white rounded-full font-bold px-3 py-1 mr-4">
             Apply Now (EN)
           </div>
-          <div className="border-2 border-black bg-white rounded-xl font-bold px-2">
+          <div className="border-2 border-black bg-white rounded-full font-bold px-3 py-1">
             Apply Now (FR)
           </div>
         </div>
