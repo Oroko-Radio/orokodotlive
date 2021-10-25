@@ -1,14 +1,12 @@
 import Image from "next/image";
-import shop from "/public/static/shop.jpg";
 
 const About = () => {
   return (
     <div className="grid md:grid-cols-2 auto-rows-min border-b-2 border-black">
       <div className="relative h-96 md:h-auto">
         <Image
-          src={shop}
+          src="/public/static/shop.jpg"
           alt=""
-          placeholder="blur"
           objectFit="cover"
           layout="fill"
         />
