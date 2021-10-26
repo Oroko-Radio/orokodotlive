@@ -16,24 +16,26 @@ const Banner = ({ color }: BannerProps) => {
       <Marquee gradient={false} speed={30}>
         {[...Array(3)].map(() => (
           <>
-            <h1 className="font-heading inline text-6xl ml-3 mr-4">
+            <h1 className="font-heading inline text-5xl xl:text-6xl ml-3 mr-4">
               Oroko will launch December 2021
             </h1>
             <div className="mb-0.5">
               <Image
                 src={logoSmall}
                 alt="Oroko logo small"
-                height="45"
-                width="45"
+                height="40"
+                width="40"
               />
             </div>
-            <p className="font-serif inline text-5xl ml-3 mr-4">Stay Tuned</p>
+            <p className="font-serif inline text-4xl xl:text-5xl ml-3 mr-4">
+              Stay Tuned
+            </p>
             <div className="mb-0.5">
               <Image
                 src={logoSmall}
                 alt="Oroko logo small"
-                height="45"
-                width="45"
+                height="40"
+                width="40"
               />
             </div>
           </>
