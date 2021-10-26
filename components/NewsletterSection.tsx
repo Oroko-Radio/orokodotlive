@@ -4,7 +4,7 @@ import newsletterBG from "/public/static/newsletter-bg.svg";
 
 const NewsletterSection = () => {
   return (
-    <div className="relative h-96 flex items-center justify-center border-b-2 border-black">
+    <div className="relative py-20 flex items-center justify-center border-b-2 border-black">
       <Image
         src={newsletterBG}
         alt=""

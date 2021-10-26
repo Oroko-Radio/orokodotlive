@@ -5,12 +5,13 @@ import DotButton from "./ui/DotButton";
 import logo from "/public/static/logo-full-color.svg";
 import Lottie from "react-lottie";
 import * as animationData from "../images/animations/OROKO.json";
+import SocialSection from "./SocialSection";
 
 const Hero = () => {
   return (
     <div id="hero" className="relative h-hero border-b-2 border-black">
       <Link href="https://patreon.com/">
-        <a>
+        <a target="_blank">
           <div className="absolute top-4 right-4 z-10">
             <DotButton>Find us on Patreon</DotButton>
           </div>
@@ -27,6 +28,9 @@ const Hero = () => {
       <div className="w-full h-full flex p-20 justify-center">
         {/* <Image src={logo} alt="Oroko Radio logo" height="200" width="200" /> */}
         <Lottie options={{ autoplay: true, loop: false, animationData }} />
+      </div>
+      <div className="absolute right-4 bottom-4">
+        <SocialSection />
       </div>
     </div>
   );

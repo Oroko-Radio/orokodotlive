@@ -28,7 +28,7 @@ const Splash = () => {
       {isScrolled && (
         <Link href="#hero">
           <a>
-            <div className="fixed cursor-pointer top-4 left-4 z-10">
+            <div className="fixed cursor-pointer top-4 left-4 z-20">
               <Image src={logo} alt="Oroko logo" height="50" width="50" />
             </div>
           </a>

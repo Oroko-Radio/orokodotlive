@@ -5,7 +5,7 @@ import DotButton from "./ui/DotButton";
 
 const Contact = () => {
   return (
-    <div className="relative h-96 flex items-center justify-center border-b-2 border-black">
+    <div className="relative py-20 flex items-center justify-center border-b-2 border-black">
       <Image
         src={contactBG}
         alt=""
@@ -23,12 +23,12 @@ const Contact = () => {
         </p>
         <div className="flex gap-3">
           <Link href="https://forms.gle/a4RTQhGMNDZvXgma9">
-            <a>
+            <a target="_blank">
               <DotButton>Apply Now (EN)</DotButton>
             </a>
           </Link>
           <Link href="https://forms.gle/nwS9GJ8wcBaYaMZn9">
-            <a>
+            <a target="_blank">
               <DotButton text="Apply Now (FR)">Apply Now (FR)</DotButton>
             </a>
           </Link>
