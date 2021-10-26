@@ -26,8 +26,8 @@ const Hero = () => {
         objectFit="cover"
       />
       <div className="w-full h-full flex p-20 justify-center">
-        {/* <Image src={logo} alt="Oroko Radio logo" height="200" width="200" /> */}
-        <Lottie options={{ autoplay: true, loop: false, animationData }} />
+        <Image src={logo} alt="Oroko Radio logo" height="200" width="200" />
+        {/* <Lottie options={{ autoplay: true, loop: false, animationData }} /> */}
       </div>
       <div className="absolute right-4 bottom-4">
         <SocialSection />

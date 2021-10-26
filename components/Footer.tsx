@@ -11,12 +11,12 @@ const Footer = () => {
         <ul className="flex font-bold text-2xl justify-center gap-10 mb-8">
           <Link href="https://www.patreon.com/orokoradio">
             <a target="_blank">
-              <li>Patreon</li>
+              <li className="hover:opacity-70 transition-opacity">Patreon</li>
             </a>
           </Link>
           <Link href="mailto:info@oroko.live">
             <a>
-              <li>Contact</li>
+              <li className="hover:opacity-70 transition-opacity">Contact</li>
             </a>
           </Link>
         </ul>
@@ -24,12 +24,15 @@ const Footer = () => {
           <SocialSection />
         </div>
         <Image src={logoSmall} alt="Oroko logo small" height="50" width="50" />
+
         <p className="mt-8 mb-6">©OROKO 2021</p>
         <p className="mb-6">
-          <span className="mr-4">
+          <span className="mr-4 hover:opacity-70 transition-opacity">
             <Link href="/imprint">Imprint</Link>
           </span>
-          <Link href="/legal">Legal</Link>
+          <span className="hover:opacity-70 transition-opacity">
+            <Link href="/legal">Legal</Link>
+          </span>
         </p>
         <p className="inline">Powered by</p>
         <div className="relative inline-block h-4 w-20 cursor-pointer">

@@ -38,7 +38,7 @@ export default function Newsletter() {
   return (
     <form method="POST" onSubmit={handleSubmit}>
       <input
-        className="mb-4 mr-4 px-3 py-1 rounded-full border-black border-2 font-serif"
+        className="xl:text-lg mb-4 mr-4 px-3 py-1 rounded-full border-black border-2 font-serif"
         autoComplete="email"
         id="email"
         name="email"

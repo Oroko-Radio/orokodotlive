@@ -14,9 +14,11 @@ const Contact = () => {
         objectFit="cover"
       />
       <div className="z-10 flex flex-col items-center text-center justify-center">
-        <p className="font-bold text-2xl mb-8">Radio Residencies</p>
-        <h2 className="font-serif text-5xl mb-8">Applications are now open</h2>
-        <p className="font-serif mb-8 max-w-sm">
+        <p className="font-bold text-2xl xl:text-3xl mb-8">Radio Residencies</p>
+        <h2 className="font-serif text-5xl xl:text-6xl mb-8">
+          Applications are now open
+        </h2>
+        <p className="font-serif mb-8 max-w-sm xl:text-lg">
           We are currently accepting applications to become an Oroko Radio
           resident - fill in the forms below to apply. Applications are accepted
           in English and French.
