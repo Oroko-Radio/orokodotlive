@@ -13,7 +13,7 @@ const About = () => {
           layout="fill"
         />
       </div>
-      <div className="p-12 max-w-xl mx-auto">
+      <div className="px-6 lg:px-12 py-12 max-w-xl mx-auto">
         <p className="font-bold text-2xl text-center mb-8">About Us</p>
         <h2 className="font-serif text-5xl text-center mb-8">
           Broadcasting from Accra and beyond

@@ -24,7 +24,7 @@ const Footer = () => {
           <SocialSection />
         </div>
         <Image src={logoSmall} alt="Oroko logo small" height="50" width="50" />
-        <p className="my-8">©OROKO 2021</p>
+        <p className="mt-8 mb-6">©OROKO 2021</p>
         <p className="mb-6">
           <span className="mr-4">
             <Link href="/imprint">Imprint</Link>
