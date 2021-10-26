@@ -34,13 +34,6 @@ const Splash = () => {
           </a>
         </Link>
       )}
-      <Link href="https://patreon.com/">
-        <a>
-          <div className="absolute top-4 right-4 z-10">
-            <DotButton>Find us on Patreon</DotButton>
-          </div>
-        </a>
-      </Link>
       <Hero />
       <Banner color="black" />
       <NewsletterSection />
