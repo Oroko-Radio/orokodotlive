@@ -1,5 +1,5 @@
+import cx from "classnames";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import About from "../components/About";
 import Banner from "../components/Banner";
@@ -7,7 +7,6 @@ import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import NewsletterSection from "../components/NewsletterSection";
-import DotButton from "../components/ui/DotButton";
 import logo from "../images/logo-small-full-color.svg";
 import useScrollListener from "../hooks/useScrollListener";
 
@@ -25,15 +24,15 @@ const Splash = () => {
 
   return (
     <div className="relative">
-      {isScrolled && (
-        <Link href="#hero">
-          <a>
-            <div className="fixed cursor-pointer top-4 left-4 z-20">
-              <Image src={logo} alt="Oroko logo" height="50" width="50" />
-            </div>
-          </a>
-        </Link>
-      )}
+      <div
+        onClick={() => window.scrollTo(0, 0)}
+        className={cx("fixed cursor-pointer top-4 left-4 z-20 ", {
+          hidden: !isScrolled,
+          block: isScrolled,
+        })}
+      >
+        <Image src={logo} alt="Oroko logo" height="50" width="50" />
+      </div>
       <Hero />
       <Banner color="black" />
       <NewsletterSection />

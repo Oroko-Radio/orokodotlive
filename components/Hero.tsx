@@ -9,7 +9,7 @@ import SocialSection from "./SocialSection";
 
 const Hero = () => {
   return (
-    <div id="hero" className="relative h-hero border-b-2 border-black">
+    <div className="relative h-hero border-b-2 border-black">
       <Link href="https://patreon.com/">
         <a target="_blank">
           <div className="absolute top-4 right-4 z-10">
