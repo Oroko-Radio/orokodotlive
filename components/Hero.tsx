@@ -10,7 +10,7 @@ import SocialSection from "./SocialSection";
 const Hero = () => {
   return (
     <div className="relative h-hero border-b-2 border-black">
-      <Link href="https://patreon.com/">
+      <Link href="https://patreon.com/orokoradio">
         <a target="_blank">
           <div className="absolute top-4 right-4 z-10">
             <DotButton>Find us on Patreon</DotButton>

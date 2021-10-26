@@ -8,10 +8,17 @@ const Footer = () => {
   return (
     <div className="bg-black p-8">
       <div className="max-w-sm mx-auto text-center text-white">
-        <ul className="flex font-bold justify-center gap-20 mb-8">
-          <li>Patreon</li>
-          <li>Residency</li>
-          <li>Contact</li>
+        <ul className="flex font-bold text-2xl justify-center gap-10 mb-8">
+          <Link href="https://www.patreon.com/orokoradio">
+            <a target="_blank">
+              <li>Patreon</li>
+            </a>
+          </Link>
+          <Link href="mailto:info@oroko.live">
+            <a>
+              <li>Contact</li>
+            </a>
+          </Link>
         </ul>
         <div className="flex justify-center mb-8">
           <SocialSection />
@@ -20,9 +27,9 @@ const Footer = () => {
         <p className="my-8">©OROKO 2021</p>
         <p className="mb-6">
           <span className="mr-4">
-            <Link href="/">Imprint</Link>
+            <Link href="/imprint">Imprint</Link>
           </span>
-          <Link href="/">Legal</Link>
+          <Link href="/legal">Legal</Link>
         </p>
         <p className="inline">Powered by</p>
         <div className="relative inline-block h-4 w-20 cursor-pointer">
