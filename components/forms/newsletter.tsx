@@ -1,4 +1,5 @@
 import type { FormEvent } from "react";
+import DotButton from "../ui/DotButton";
 
 export default function Newsletter() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -46,11 +47,8 @@ export default function Newsletter() {
         aria-label="email"
         type="email"
       />
-      <button
-        type="submit"
-        className="border-2 border-black bg-white rounded-full font-bold px-3 py-1"
-      >
-        Submit
+      <button type="submit">
+        <DotButton>Submit</DotButton>
       </button>
     </form>
   );

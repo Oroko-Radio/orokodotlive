@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className="bg-black text-white text-center p-8">
       <div className="mx-auto w-1/3">
-        <ul className="flex font-bold justify-between mb-8">
+        <ul className="flex font-bold justify-center gap-20 mb-8">
           <li>Patreon</li>
           <li>Residency</li>
           <li>Contact</li>

@@ -1,5 +1,7 @@
+import Link from "next/link";
 import Image from "next/image";
 import contactBG from "/public/static/contact-bg.svg";
+import DotButton from "./ui/DotButton";
 
 const Contact = () => {
   return (
@@ -19,13 +21,17 @@ const Contact = () => {
           resident - fill in the forms below to apply. Applications are accepted
           in English and French.
         </p>
-        <div className="flex">
-          <div className="border-2 border-black bg-white rounded-full font-bold px-3 py-1 mr-4">
-            Apply Now (EN)
-          </div>
-          <div className="border-2 border-black bg-white rounded-full font-bold px-3 py-1">
-            Apply Now (FR)
-          </div>
+        <div className="flex gap-3">
+          <Link href="https://forms.gle/a4RTQhGMNDZvXgma9">
+            <a>
+              <DotButton>Apply Now (EN)</DotButton>
+            </a>
+          </Link>
+          <Link href="https://forms.gle/nwS9GJ8wcBaYaMZn9">
+            <a>
+              <DotButton text="Apply Now (FR)">Apply Now (FR)</DotButton>
+            </a>
+          </Link>
         </div>
       </div>
     </div>

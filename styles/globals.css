@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   @font-face {
     font-family: Digitalt;
     src: url("/fonts/Digitalt-04no.ttf");

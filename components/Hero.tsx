@@ -4,7 +4,7 @@ import logo from "/public/static/logo-full-color.svg";
 
 const Hero = () => {
   return (
-    <div className="relative h-hero border-b-2 border-black">
+    <div id="hero" className="relative h-hero border-b-2 border-black">
       <Image
         className="w-full -z-10"
         src={hero}
