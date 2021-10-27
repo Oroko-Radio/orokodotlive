@@ -9,6 +9,7 @@ import Hero from "../components/Hero";
 import NewsletterSection from "../components/NewsletterSection";
 import logo from "../images/logo-small-full-color.svg";
 import useScrollListener from "../hooks/useScrollListener";
+import StayTuned from "../components/StayTuned";
 
 const Splash = () => {
   const scroll = useScrollListener();
@@ -34,7 +35,9 @@ const Splash = () => {
         <Image src={logo} alt="Oroko logo" height="50" width="50" />
       </div>
       <Hero />
-      <Banner color="black" />
+      <Banner color="black">
+        <StayTuned />
+      </Banner>
       <NewsletterSection />
       <About />
       <Contact />
