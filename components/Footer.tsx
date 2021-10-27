@@ -26,14 +26,14 @@ const Footer = () => {
         <Image src={logoSmall} alt="Oroko logo small" height="50" width="50" />
 
         <p className="mt-8 mb-6">©OROKO 2021</p>
-        <p className="mb-6">
+        {/* <p className="mb-6">
           <span className="mr-4 hover:opacity-70 transition-opacity">
             <Link href="/imprint">Imprint</Link>
           </span>
           <span className="hover:opacity-70 transition-opacity">
             <Link href="/legal">Legal</Link>
           </span>
-        </p>
+        </p> */}
         <p className="inline">Powered by</p>
         <div className="relative inline-block h-4 w-20 cursor-pointer">
           <Link
