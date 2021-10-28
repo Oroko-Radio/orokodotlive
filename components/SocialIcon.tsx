@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import facebook from "../images/socials/facebook-vector-cropped.svg";
 import instagram from "../images/socials/Insta-vector-cropped.svg";
-import tiktok from "../images/socials/tiktok.png";
+import tiktok from "../images/socials/TikTok-vector-cropped.svg";
 import twitter from "../images/socials/twitter-vector-cropped.svg";
 
 const socialsMap: socialsMapType = {
