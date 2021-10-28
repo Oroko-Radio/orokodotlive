@@ -1,7 +1,29 @@
+import { useState } from "react";
 import type { FormEvent } from "react";
+import Image from "next/image";
 import DotButton from "../ui/DotButton";
+import Modal from "react-modal";
+import logoSmall from "/public/static/logo-small-outline.svg";
+import closeIcon from "../../images/ui/close_icon.svg";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "#2F2726",
+    borderRadius: "20px",
+    border: "none",
+  },
+  overlay: { zIndex: 100, backgroundColor: "rgba(0, 0, 0, 0.4)" },
+};
 
 export default function NewsletterForm() {
+  const [showModal, setShowModal] = useState(false);
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -26,6 +48,7 @@ export default function NewsletterForm() {
       });
 
       if (r.ok) {
+        setShowModal(true);
         return;
       }
 
@@ -47,9 +70,35 @@ export default function NewsletterForm() {
         aria-label="email"
         type="email"
       />
+
       <button type="submit">
         <DotButton>Submit</DotButton>
       </button>
+
+      <Modal
+        isOpen={showModal}
+        style={customStyles}
+        onRequestClose={() => setShowModal(false)}
+        bodyOpenClassName="modal_body"
+      >
+        <button
+          onClick={() => setShowModal(false)}
+          className="text-white absolute right-4 top-4"
+        >
+          <Image src={closeIcon} alt="Close" height="20" width="20" />
+        </button>
+        <div className="flex flex-col justify-center mt-6 px-8">
+          <Image
+            src={logoSmall}
+            alt="Oroko logo small"
+            height="50"
+            width="50"
+          />
+          <p className="mt-4 mb-8 font-sans font-medium xl:text-base text-white">
+            Thank you for subscribing!
+          </p>
+        </div>
+      </Modal>
     </form>
   );
 }
