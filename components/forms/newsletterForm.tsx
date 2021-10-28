@@ -1,7 +1,7 @@
 import type { FormEvent } from "react";
 import DotButton from "../ui/DotButton";
 
-export default function Newsletter() {
+export default function NewsletterForm() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 

@@ -20,7 +20,7 @@ const Contact = () => {
         <h2 className="font-serif text-5xl xl:text-6xl mb-8">
           Applications are now open
         </h2>
-        <p className="mb-8 max-w-sm xl:max-w-md">
+        <p className="mb-8 max-w-sm xl:max-w-2xl">
           We are currently accepting applications to become an Oroko Radio
           resident - fill in the forms below to apply. Applications are accepted
           in English and French.

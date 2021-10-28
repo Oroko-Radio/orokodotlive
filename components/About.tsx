@@ -25,7 +25,7 @@ const About = () => {
           Accra, Ghana. We aim to connect, inspire and empower through
           conversation, collaboration and community.
         </p>
-        <h3 className="font-heading text-3xl leading-8 xl:text-4xl text-center mb-6">
+        <h3 className="font-heading text-3xl leading-8 xl:text-4xl xl:leading-8 text-center mb-6">
           »Our global platform is for African and Diasporic voices to be heard,
           in our own words.«
         </h3>

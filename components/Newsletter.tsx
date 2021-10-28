@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Newsletter from "./forms/newsletter";
+import NewsletterForm from "./forms/newsletterForm";
 import newsletterBG from "/public/static/newsletter-bg.svg";
 
-const NewsletterSection = () => {
+const Newsletter = () => {
   return (
     <div className="relative py-20 flex items-center justify-center border-b-2 border-black">
       <Image
@@ -17,14 +17,14 @@ const NewsletterSection = () => {
         <h2 className="font-serif text-5xl xl:text-6xl mb-8">
           Join the Oroko community!
         </h2>
-        <p className="mb-8 max-w-sm xl:max-w-md">
+        <p className="mb-8 max-w-sm xl:max-w-2xl">
           Sign up to the Oroko newsletter to stay up to date with all our
           upcoming events, projects, announcements, residencies and more.
         </p>
-        <Newsletter />
+        <NewsletterForm />
       </div>
     </div>
   );
 };
 
-export default NewsletterSection;
+export default Newsletter;
