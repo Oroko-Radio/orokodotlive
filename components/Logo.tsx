@@ -19,7 +19,7 @@ const Logo = () => {
   return (
     <div
       onClick={() => window.scrollTo(0, 0)}
-      className={cx("fixed cursor-pointer top-4 left-4 transition-opacity", {
+      className={cx("fixed cursor-pointer top-4 left-4 transition-all", {
         "opacity-0 -z-10": !isScrolled,
         "opacity-100 z-20": isScrolled,
       })}
