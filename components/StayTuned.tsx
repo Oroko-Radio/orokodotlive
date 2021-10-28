@@ -17,9 +17,9 @@ const StayTuned = () => {
               width="40"
             />
           </div>
-          <p className="font-serif inline text-4xl xl:text-5xl ml-3 mr-4">
+          <h2 className="font-serif inline text-4xl xl:text-5xl ml-3 mr-4">
             Stay Tuned
-          </p>
+          </h2>
           <div>
             <Image
               src={logoSmall}

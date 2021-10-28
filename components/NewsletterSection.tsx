@@ -13,11 +13,11 @@ const NewsletterSection = () => {
         objectFit="cover"
       />
       <div className="z-10 flex flex-col items-center text-center justify-center">
-        <p className="font-bold text-2xl xl:text-3xl mb-8">Newsletter</p>
+        <h3 className="font-bold text-2xl xl:text-3xl mb-8">Newsletter</h3>
         <h2 className="font-serif text-5xl xl:text-6xl mb-8">
           Join the Oroko community!
         </h2>
-        <p className="font-serif xl:text-lg mb-8 max-w-sm">
+        <p className="mb-8 max-w-sm xl:max-w-md">
           Sign up to the Oroko newsletter to stay up to date with all our
           upcoming events, projects, announcements, residencies and more.
         </p>

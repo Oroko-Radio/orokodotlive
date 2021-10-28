@@ -14,22 +14,22 @@ const About = () => {
         />
       </div>
       <div className="px-6 lg:px-12 py-10 xl:py-20 max-w-xl mx-auto">
-        <p className="font-bold text-2xl xl:text-3xl text-center mb-8">
+        <h3 className="font-bold text-2xl xl:text-3xl text-center mb-8">
           About Us
-        </p>
+        </h3>
         <h2 className="font-serif text-5xl xl:text-6xl text-center mb-8">
           Broadcasting from Accra and beyond
         </h2>
-        <p className="font-serif mb-6 xl:text-lg">
+        <p>
           Oroko is a not-for-profit independent internet radio station based in
           Accra, Ghana. We aim to connect, inspire and empower through
           conversation, collaboration and community.
         </p>
-        <h3 className="font-heading text-3xl xl:text-4xl text-center mb-6">
+        <h3 className="font-heading text-3xl leading-8 xl:text-4xl text-center mb-6">
           »Our global platform is for African and Diasporic voices to be heard,
           in our own words.«
         </h3>
-        <p className="font-serif xl:text-lg">
+        <p>
           We aim to reclaim and recenter narratives from the African and
           Diasporic artistic communities, with a particular focus on local
           perspectives in Accra, in addition to cultivating and nurturing

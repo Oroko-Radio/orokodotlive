@@ -6,6 +6,9 @@
   html {
     scroll-behavior: smooth;
   }
+  p {
+    @apply font-serif mb-6 text-base xl:text-2xl xl:leading-7;
+  }
   @font-face {
     font-family: Digitalt;
     src: url("/fonts/Digitalt-04no.ttf");

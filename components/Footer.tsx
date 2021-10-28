@@ -24,17 +24,8 @@ const Footer = () => {
           <SocialSection />
         </div>
         <Image src={logoSmall} alt="Oroko logo small" height="50" width="50" />
-
-        <p className="mt-8 mb-6">©OROKO 2021</p>
-        {/* <p className="mb-6">
-          <span className="mr-4 hover:opacity-70 transition-opacity">
-            <Link href="/imprint">Imprint</Link>
-          </span>
-          <span className="hover:opacity-70 transition-opacity">
-            <Link href="/legal">Legal</Link>
-          </span>
-        </p> */}
-        <p className="inline">Powered by</p>
+        <p className="mt-2 mb-8 font-sans xl:text-base">©OROKO 2021</p>
+        <p className="inline font-sans xl:text-base">Powered by</p>
         <div className="relative inline-block h-4 w-20 cursor-pointer">
           <Link
             href="https://vercel.com/?utm_source=oroko&utm_campaign=oss"
