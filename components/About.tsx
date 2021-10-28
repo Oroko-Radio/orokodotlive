@@ -13,7 +13,7 @@ const About = () => {
           layout="fill"
         />
       </div>
-      <div className="px-6 lg:px-12 py-10 xl:py-20 max-w-xl mx-auto">
+      <div className="px-6 lg:px-12 py-10 xl:py-20 max-w-2xl mx-auto">
         <h3 className="font-bold text-2xl xl:text-3xl text-center mb-8">
           About Us
         </h3>
