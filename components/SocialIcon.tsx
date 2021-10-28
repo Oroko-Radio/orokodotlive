@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import facebook from "../images/socials/facebook.png";
-import instagram from "../images/socials/instagram.png";
+import facebook from "../images/socials/facebook-vector-cropped.svg";
+import instagram from "../images/socials/Insta-vector-cropped.svg";
 import tiktok from "../images/socials/tiktok.png";
-import twitter from "../images/socials/twitter.png";
+import twitter from "../images/socials/twitter-vector-cropped.svg";
 
 const socialsMap: socialsMapType = {
   Facebook: { icon: facebook, link: "https://www.facebook.com/OrokoRadio" },
