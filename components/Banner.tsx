@@ -1,13 +1,12 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
-import StayTuned from "./StayTuned";
 
 type BannerProps = {
   color: string;
 };
 
 const colors: any = {
-  black: "bg-black text-white",
+  black: "bg-offBlack text-white",
 };
 
 const Banner: React.FC<BannerProps> = ({ color, children }) => {
