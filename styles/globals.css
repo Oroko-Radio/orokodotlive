@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  p {
+    @apply font-serif mb-6 text-base xl:text-2xl xl:leading-8;
+  }
+  @font-face {
+    font-family: Digitalt;
+    src: url("/fonts/Digitalt-04no.ttf");
+  }
+  @font-face {
+    font-family: Dozza-Regalic;
+    src: url("/fonts/Dozza-Regalic.otf");
+  }
+  @font-face {
+    font-family: Public-Sans;
+    src: url("/fonts/PublicSans-VariableFont_wght.ttf");
+  }
+}

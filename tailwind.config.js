@@ -3,7 +3,47 @@ module.exports = {
   purge: ["components/**/*.tsx", "pages/**/*.tsx", "views/**/*.tsx"],
   darkMode: false,
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: [
+        "Public-Sans",
+        "system-ui",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica Neue",
+        "Arial",
+        "Noto Sans",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji",
+      ],
+      serif: [
+        "Dozza-Regalic",
+        "Georgia",
+        "Cambria",
+        "Times New Roman",
+        "Times",
+        "serif",
+      ],
+      heading: ["Digitalt"],
+    },
+    transitionDuration: {
+      DEFAULT: "200ms",
+    },
+    extend: {
+      height: {
+        hero: "70vh",
+      },
+      zIndex: {
+        "-10": -10,
+      },
+      colors: {
+        offBlack: "#2F2726",
+      },
+    },
   },
   variants: {
     extend: {},

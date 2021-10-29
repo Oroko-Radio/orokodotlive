@@ -1,16 +1,17 @@
-import type { NextPage } from 'next'
-import Newsletter from '../components/forms/newsletter'
+import Head from "next/head";
+import type { NextPage } from "next";
+import Splash from "../views/splash";
+import Meta from "../components/Meta";
 
 const Home: NextPage = () => {
   return (
     <main>
-      <h1>Oroko Radio - Coming soon!</h1>
-
-      <div>
-        <Newsletter />
-      </div>
+      <Head>
+        <Meta />
+      </Head>
+      <Splash />
     </main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
