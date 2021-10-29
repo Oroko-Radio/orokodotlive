@@ -7,6 +7,7 @@ const Home: NextPage = () => {
   return (
     <main>
       <Head>
+        <title>Oroko Radio - Stay Tuned</title>
         <Meta />
       </Head>
       <Splash />
