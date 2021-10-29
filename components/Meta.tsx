@@ -1,6 +1,13 @@
-const Meta = () => {
+import Head from "next/head";
+
+type MetaProps = {
+  title: string;
+};
+
+const Meta = ({ title }: MetaProps) => {
   return (
-    <>
+    <Head>
+      <title>{title}</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta
         name="description"
@@ -21,7 +28,7 @@ const Meta = () => {
       <meta property="og:image:width" content="1000" />
       <meta property="og:image:height" content="1000" />
       <meta property="og:image:alt" content="Oroko Radio Logo" />
-    </>
+    </Head>
   );
 };
 
