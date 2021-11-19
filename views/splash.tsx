@@ -19,7 +19,7 @@ const Splash = () => {
       <About />
       <Contact />
       <Footer />
-      {/* test */}
+      {/* test 2 */}
     </div>
   );
 };
