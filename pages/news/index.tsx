@@ -17,9 +17,9 @@ export async function getStaticProps({ preview = false }) {
   }: InferGetStaticPropsType<typeof getStaticProps>) {
     return (
       <div>
-          {articles.map(({title, author, coverImage, slug}) => (
+          {articles.map(({articleType, title, author, coverImage, slug}) => (
               <div key={slug} className="m-8">
-
+                  <p>{articleType}</p>
                   <h1>{title}</h1>
                   <h2 className="mb-4">{author?.name}</h2>
                   <Image src={coverImage.url} alt={title} objectFit="cover" width="200" height="200" />
