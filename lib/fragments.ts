@@ -42,3 +42,22 @@ export const FeaturedArticleFragment = /* GraphQL */ `
     title
   }
 `;
+
+export const RelatedArticleFragment = /* GraphQL */ `
+  fragment RelatedArticleFragment on Article {
+    articleType
+    coverImage {
+      sys {
+        id
+      }
+      title
+      description
+      url
+      width
+      height
+    }
+    date
+    slug
+    title
+  }
+`;
