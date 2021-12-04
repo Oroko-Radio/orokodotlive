@@ -31,7 +31,13 @@ export default function Article({
   );
 }
 
-export async function getStaticProps({ params, preview = false }) {
+export async function getStaticProps({
+  params,
+  preview = false,
+}: {
+  params: any;
+  preview: boolean;
+}) {
   const data = await getNewsPageSingle(params.slug, preview);
 
   return {

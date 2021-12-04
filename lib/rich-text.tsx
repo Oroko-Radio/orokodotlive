@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Block, BLOCKS, INLINES, Inline } from "@contentful/rich-text-types";
+import { Block, Inline, BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { Asset, Content } from "../types/shared";
 
 interface EmbeddedAssetBlock extends Block {

@@ -19,12 +19,12 @@ export default function NewsPage({
   return (
     <div>
       {articles.map(({ articleType, title, author, coverImage, slug }) => (
-        <div key={slug} className="m-8 cursor-pointer">
+        <div key={slug} className="m-8">
+          <p>{articleType}</p>
+          <h1>{title}</h1>
+          <h2 className="mb-4">{author?.name}</h2>
           <Link href={`/news/${slug}`} passHref>
-            <div>
-              <p>{articleType}</p>
-              <h1>{title}</h1>
-              <h2 className="mb-4">{author?.name}</h2>
+            <div className="cursor-pointer">
               <Image
                 src={coverImage.url}
                 alt={title}
