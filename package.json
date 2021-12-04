@@ -19,6 +19,7 @@
     "react-fast-marquee": "^1.2.1",
     "react-lottie": "^1.2.3",
     "react-modal": "^3.14.3",
+    "react-ridge-state": "4.1.7",
     "swr": "^1.0.1"
   },
   "devDependencies": {

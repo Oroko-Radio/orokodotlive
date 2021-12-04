@@ -5,7 +5,7 @@ import {
   ArticlePreviewFragment,
   FeaturedArticleFragment,
   RelatedArticleFragment,
-} from "../../fragments";
+} from "../fragments";
 
 export async function getNewsPage(preview: boolean) {
   const NewsPageQuery = /* GraphQL */ `
