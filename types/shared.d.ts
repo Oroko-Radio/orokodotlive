@@ -1,3 +1,5 @@
+import { Document } from "@contentful/rich-text-types";
+
 export type ErrorPayloadMessage = {
   message: string;
   extensions: {

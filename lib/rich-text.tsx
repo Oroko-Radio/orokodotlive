@@ -24,7 +24,10 @@ export function renderRichTextWithImages(content: Content) {
 
     return documentToReactComponents(content.json, {
       renderNode: {
-        [INLINES.HYPERLINK]: function InlineHyperlink(node: Inline, children) {
+        [INLINES.HYPERLINK]: function InlineHyperlink(
+          node: Block | Inline,
+          children
+        ) {
           const uri = node.data.uri as string;
 
           if (uri.includes("mixcloud.com/widget")) {
@@ -41,9 +44,7 @@ export function renderRichTextWithImages(content: Content) {
 
           return <a href={uri}>{children}</a>;
         },
-        [BLOCKS.EMBEDDED_ASSET]: function EmbeddedAsset(
-          node: EmbeddedAssetBlock
-        ) {
+        [BLOCKS.EMBEDDED_ASSET]: function EmbeddedAsset(node: Block | Inline) {
           const id = node.data.target.sys.id;
 
           const asset = getAssetById(id, blockAssets);
