@@ -61,3 +61,21 @@ export const RelatedArticleFragment = /* GraphQL */ `
     title
   }
 `;
+
+export const AllArtistFragment = /* GraphQL */ `
+  fragment AllArtistFragment on Artist {
+    name
+    slug
+    isResident: role
+    photo {
+      sys {
+        id
+      }
+      title
+      description
+      url
+      width
+      height
+    }
+  }
+`;

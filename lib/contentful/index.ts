@@ -1,6 +1,12 @@
 import { ENDPOINT } from "../../constants";
 import type { ErrorPayload } from "../../types/shared";
 
+export const LIMITS = {
+  SHOWS: 550,
+  ARTISTS: 2000,
+  ARTICLES: 100,
+};
+
 function getErrorMessage(payload: ErrorPayload) {
   return payload.errors[0].message;
 }

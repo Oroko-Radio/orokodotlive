@@ -52,3 +52,37 @@ export interface Content {
   json: Document;
   links?: Links;
 }
+
+export interface ShowInterface {
+  mixcloudLink: string;
+  title: string;
+  date: string;
+  slug: string;
+  coverImage: CoverImage;
+  coverImagePosition: CoverImagePosition;
+  isFeatured: boolean;
+  artistsCollection: {
+    items: ArtistInterface[];
+  };
+  genresCollection: {
+    items: GenreInterface[];
+  };
+  content: Content;
+}
+
+export type ArtistEntry = {
+  sys: { id: string };
+  name: string;
+  slug: string;
+  photo: CoverImage;
+  coverImagePosition: CoverImagePosition;
+  content?: Content;
+  linkedFrom?: { showCollection: { items: ShowInterface[] | [] } };
+};
+
+export type AllArtistEntry = {
+  name: string;
+  slug: string;
+  isResident: boolean;
+  photo: CoverImage;
+};

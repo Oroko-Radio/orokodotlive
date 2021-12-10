@@ -16,9 +16,10 @@ const LivePlayer = dynamic(() => import("../components/LivePlayer"), {
 function OrokoApp({ Component, pageProps }: AppProps) {
   return (
     <Fragment>
+      <LivePlayer />
+
       <Component {...pageProps} />
 
-      <LivePlayer />
       <MixcloudPlayer />
     </Fragment>
   );
