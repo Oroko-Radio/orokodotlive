@@ -66,7 +66,6 @@ export const AllArtistFragment = /* GraphQL */ `
   fragment AllArtistFragment on Artist {
     name
     slug
-    isResident: role
     photo {
       sys {
         id

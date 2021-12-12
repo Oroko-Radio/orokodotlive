@@ -17,8 +17,6 @@ export default function Show({ show, relatedShows, preview }: Props) {
   const [, setKey] = showKey.use();
   const player = playerWidget.useValue();
 
-  console.log(show);
-
   const handlePlayShow = async () => {
     setKey(getMixcloudKey(show.mixcloudLink));
 

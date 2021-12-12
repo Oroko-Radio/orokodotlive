@@ -61,3 +61,30 @@ export async function getShowPathsToPreRender() {
 
   return paths;
 }
+
+export async function getArtistPathsToPreRender() {
+  const data = await graphql(/* GraphQL */ `
+    query ArtistPathsToPreRenderQuery {
+      artistCollection(
+        where: { slug_exists: true }
+        limit: 100
+        order: name_ASC
+      ) {
+        items {
+          slug
+        }
+      }
+    }
+  `);
+
+  const collection = extractCollection<{ slug: string }>(
+    data,
+    "artistCollection"
+  );
+
+  const paths = collection.map((el) => ({
+    params: { slug: el.slug },
+  }));
+
+  return paths;
+}
