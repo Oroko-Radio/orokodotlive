@@ -41,7 +41,7 @@ export async function graphql(
 
   if (r.ok) {
     return r.json();
+  } else {
+    throw new Error(getErrorMessage(await r.json()));
   }
-
-  throw new Error(getErrorMessage(await r.json()));
 }

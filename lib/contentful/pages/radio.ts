@@ -65,8 +65,7 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
             description
             url
             width
-            heightC
-            }
+            height
           }
           artistsCollection(limit: 9) {
             items {

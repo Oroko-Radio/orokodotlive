@@ -29,3 +29,6 @@ export const sort = {
 };
 
 export const uniq = <T>(arr: T[]) => Array.from(new Set(arr));
+
+export const getMixcloudKey = (url: string) =>
+  url.replace("https://www.mixcloud.com", "");

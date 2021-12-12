@@ -1,8 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { InferGetStaticPropsType } from "next";
 import { getRadioPage } from "../../lib/contentful/pages/radio";
-import { renderRichTextWithImages } from "../../lib/rich-text";
 
 export async function getStaticProps({ preview = false }) {
   return {
@@ -21,18 +21,20 @@ export default function RadioPage({
     <div>
       {pastShows.map((show) => (
         <div key={show.slug}>
-          <Image
-            src={show.coverImage.url}
-            alt={show.coverImage.title}
-            objectFit="cover"
-            width="200"
-            height="200"
-          />
+          <Link href={`/radio/${show.slug}`} passHref>
+            <Image
+              className="cursor-pointer"
+              src={show.coverImage.url}
+              alt={show.coverImage.title}
+              objectFit="cover"
+              width="200"
+              height="200"
+            />
+          </Link>
           <h1>{show.title}</h1>
           {show.artistsCollection.items.map(({ name, slug }) => (
             <h2 key={slug}>{name}</h2>
           ))}
-          <p>{renderRichTextWithImages(show.content)}</p>
         </div>
       ))}
     </div>
