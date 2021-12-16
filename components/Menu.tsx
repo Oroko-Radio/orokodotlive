@@ -16,17 +16,21 @@ const links = [
   },
 ];
 
-const Menu = () => {
+type MenuProps = {
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Menu = ({ setIsMenuOpen }: MenuProps) => {
   return (
     <div className="absolute top-0 w-full h-96 bg-yellow-300 text-black z-30">
       <nav className="mt-20">
         <ul className="flex justify-center space-x-2">
           {links.map(({ name, url }, idx) => (
-            <li key={idx}>
-              <Link href={url} passHref>
+            <Link key={idx} href={url} passHref>
+              <li onClick={() => setIsMenuOpen(false)}>
                 <DotButton>{name}</DotButton>
-              </Link>
-            </li>
+              </li>
+            </Link>
           ))}
         </ul>
       </nav>

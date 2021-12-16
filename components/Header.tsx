@@ -31,7 +31,7 @@ const Header = () => {
       >
         <DotButton>Menu</DotButton>
       </div>
-      {isMenuOpen && <Menu />}
+      {isMenuOpen && <Menu setIsMenuOpen={setIsMenuOpen} />}
     </div>
   );
 };
