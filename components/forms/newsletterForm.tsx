@@ -3,7 +3,7 @@ import type { FormEvent } from "react";
 import Image from "next/image";
 import DotButton from "../ui/DotButton";
 import Modal from "react-modal";
-import logoSmall from "/public/static/logo-small-outline.svg";
+import logoSmall from "../../images/logo-small-outline.svg";
 import closeIcon from "../../images/ui/close_icon.svg";
 
 const customStyles = {

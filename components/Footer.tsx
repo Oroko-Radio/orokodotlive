@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import logoSmall from "/public/static/logo-small-outline.svg";
-import vercelLogo from "/public/static/vercel-logotype-light.png";
+import logoSmall from "../images/logo-small-outline.svg";
+import vercelLogo from "../images/vercel-logotype-light.png";
 import SocialSection from "./SocialSection";
 
 const Footer = () => {

@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { Fragment } from "react";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { LivePlayerLoading } from "../components/LivePlayer";
 import "../styles/globals.css";
@@ -23,6 +24,7 @@ function OrokoApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
 
       <MixcloudPlayer />
+      <Footer />
     </Fragment>
   );
 }
