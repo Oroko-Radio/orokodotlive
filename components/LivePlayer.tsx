@@ -1,5 +1,6 @@
 import cn from "classnames";
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import usePlayerState from "../hooks/usePlayerState";
 import useRadioCo from "../hooks/useRadioCo";
 import Pause from "../icons/pause";
@@ -44,13 +45,6 @@ export default function LivePlayer() {
     url: AUDIO_SRC,
   });
 
-  const playerWrapperClassNames = cn(
-    "bg-black text-white h-12 sm:h-16 px-4 sm:px-8 flex items-center space-x-3 sm:space-x-9",
-    {
-      "sticky top-0 z-50": isOnline,
-    }
-  );
-
   useEffect(() => {
     if ("mediaSession" in navigator && data?.current_track) {
       navigator.mediaSession.metadata = new MediaMetadata({
@@ -68,24 +62,51 @@ export default function LivePlayer() {
   }, [data]);
 
   return (
-    <section className={playerWrapperClassNames}>
-      <BroadcastingIndicator status={data?.status} />
-
-      {isOnline ? (
-        <Banner color="black">{data?.current_track?.title}</Banner>
-      ) : null}
+    <section
+      className={cn(
+        "text-white h-18 flex items-center border-b border-black overflow-hidden",
+        {
+          "sticky top-0 z-20": isOnline,
+        }
+      )}
+    >
+      {/* <BroadcastingIndicator status={data?.status} /> */}
 
       {isOnline && (
-        <button
-          className="flex-grow-0 h-7 w-7 sm:h-9 sm:w-9 focus:outline-none focus:ring-4"
-          onClick={isPlaying ? pause : play}
-          aria-label={
-            isPlaying ? "Pause Live Broadcast" : "Play Live Broadcast"
-          }
-        >
-          {isPlaying ? <Pause /> : <Play />}
-        </button>
+        <div className="px-4 h-full flex bg-yellow-400 text-black border-r border-black">
+          <div className="rounded-full self-center bg-white border-black border h-16 w-16 flex justify-center items-center">
+            <button
+              className="h-7 w-7 sm:h-9 sm:w-9 focus:outline-none focus:ring-4"
+              onClick={isPlaying ? pause : play}
+              aria-label={
+                isPlaying ? "Pause Live Broadcast" : "Play Live Broadcast"
+              }
+            >
+              {isPlaying ? <Pause /> : <Play />}
+            </button>
+          </div>
+        </div>
       )}
+
+      {isOnline ? (
+        <Banner color="red">
+          {[...Array(3)].map((x, idx) => (
+            <div className="h-full flex align-middle items-center" key={idx}>
+              <h1 className="font-heading inline text-5xl xl:text-6xl ml-3 mr-4">
+                {data?.current_track?.title}
+              </h1>
+              <div className="relative h-full w-36 border-r border-l border-black">
+                <Image
+                  src={data.current_track.artwork_url}
+                  alt={data.current_track.title}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+            </div>
+          ))}
+        </Banner>
+      ) : null}
 
       <audio hidden id="refuge-live-player" preload="none" ref={player}>
         <source ref={source} type="audio/mpeg" />

@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { Fragment } from "react";
+import Header from "../components/Header";
 import { LivePlayerLoading } from "../components/LivePlayer";
 import "../styles/globals.css";
 
@@ -16,6 +17,7 @@ const LivePlayer = dynamic(() => import("../components/LivePlayer"), {
 function OrokoApp({ Component, pageProps }: AppProps) {
   return (
     <Fragment>
+      <Header />
       <LivePlayer />
 
       <Component {...pageProps} />

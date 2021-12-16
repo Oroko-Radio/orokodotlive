@@ -35,6 +35,7 @@ module.exports = {
     },
     extend: {
       height: {
+        18: "4.5rem",
         hero: "70vh",
       },
       zIndex: {
