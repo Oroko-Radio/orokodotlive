@@ -33,7 +33,7 @@ const Contact = () => {
           </Link>
           <Link href="https://forms.gle/nwS9GJ8wcBaYaMZn9">
             <a target="_blank">
-              <DotButton text="Apply Now (FR)">Apply Now (FR)</DotButton>
+              <DotButton>Apply Now (FR)</DotButton>
             </a>
           </Link>
         </div>
