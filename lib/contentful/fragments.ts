@@ -1,9 +1,11 @@
 export const ArticlePreviewFragment = /* GraphQL */ `
   fragment ArticlePreviewFragment on Article {
     articleType
+    city
     author {
       name
     }
+    subtitle
     content {
       json
     }
@@ -26,6 +28,7 @@ export const ArticlePreviewFragment = /* GraphQL */ `
 export const FeaturedArticleFragment = /* GraphQL */ `
   fragment FeaturedArticleFragment on Article {
     articleType
+    city
     coverImage {
       sys {
         id

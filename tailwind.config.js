@@ -45,6 +45,7 @@ module.exports = {
         offBlack: "#2F2726",
         orokoYellow: "#FFC928",
         orokoRed: "#FF4948",
+        orokoGray: "#F0F0F0",
       },
     },
   },

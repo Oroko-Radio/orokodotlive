@@ -22,6 +22,7 @@ export interface ArticleInterface {
   title: string;
   subtitle?: string;
   articleType: ArticleType;
+  city?: string;
   author?: {
     name: string;
   };
