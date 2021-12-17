@@ -15,9 +15,10 @@ const BroadcastingIndicator = ({
 }) => {
   if (status === "online")
     return (
-      <div className="flex-grow-0 flex items-center space-x-6">
-        <div className="flex-shrink-0 w-7 h-7 sm:h-10 sm:w-10 rounded-full bg-red animate-pulse" />
-        <Logo color="black" width="10" height="full" />
+      <div className="flex-grow-0 flex items-center">
+        <div className="pl-10 pr-4">
+          <Logo color="black" width="10" height="full" />
+        </div>
         <p className="hidden md:block leading-none font-sans mb-0 pr-10">
           Live
         </p>
@@ -25,7 +26,7 @@ const BroadcastingIndicator = ({
     );
 
   return (
-    <div className="flex-grow-0 flex items-center space-x-6">
+    <div className="flex-grow-0 flex items-center">
       <div className="flex-shrink-0 w-7 h-7 sm:h-10 sm:w-10 rounded-full bg-white opacity-25" />
       <p className="leading-none font-sans mb-0">Offline</p>
     </div>
@@ -68,15 +69,15 @@ export default function LivePlayer() {
   return (
     <section
       className={cn(
-        "text-white h-18 flex items-center border-b border-black overflow-hidden",
+        "text-white h-18 flex items-center border-b-2 border-black overflow-hidden",
         {
           "sticky top-0 z-20": isOnline,
         }
       )}
     >
       {isOnline && (
-        <div className="px-4 h-full flex bg-orokoYellow text-black border-r border-black">
-          <div className="rounded-full self-center bg-white border-black border h-16 w-16 flex justify-center items-center">
+        <div className="px-4 h-full flex bg-orokoYellow text-black border-r-2 border-black">
+          <div className="rounded-full self-center bg-white border-black border-2 h-16 w-16 flex justify-center items-center">
             <button
               className="h-7 w-7 sm:h-9 sm:w-9 focus:outline-none focus:ring-4"
               onClick={isPlaying ? pause : play}
@@ -95,7 +96,7 @@ export default function LivePlayer() {
           {[...Array(3)].map((x, idx) => (
             <div className="h-full flex align-middle items-center" key={idx}>
               <BroadcastingIndicator status={data?.status} />
-              <h1 className="font-heading inline text-5xl xl:text-6xl ml-3 mr-4">
+              <h1 className="font-heading inline text-5xl xl:text-6xl mr-10">
                 {data?.current_track?.title}
               </h1>
               <div className="relative h-full w-36 border-r border-l border-black">
