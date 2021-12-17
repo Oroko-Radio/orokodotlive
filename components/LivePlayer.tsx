@@ -6,6 +6,7 @@ import useRadioCo from "../hooks/useRadioCo";
 import Pause from "../icons/pause";
 import Play from "../icons/play";
 import Banner from "./Banner";
+import Logo from "./Logo";
 
 const BroadcastingIndicator = ({
   status,
@@ -16,14 +17,17 @@ const BroadcastingIndicator = ({
     return (
       <div className="flex-grow-0 flex items-center space-x-6">
         <div className="flex-shrink-0 w-7 h-7 sm:h-10 sm:w-10 rounded-full bg-red animate-pulse" />
-        <p className="hidden md:block leading-none mt-1">Live</p>
+        <Logo color="black" width="10" height="full" />
+        <p className="hidden md:block leading-none font-sans mb-0 pr-10">
+          Live
+        </p>
       </div>
     );
 
   return (
     <div className="flex-grow-0 flex items-center space-x-6">
       <div className="flex-shrink-0 w-7 h-7 sm:h-10 sm:w-10 rounded-full bg-white opacity-25" />
-      <p className="leading-none mt-1">Offline</p>
+      <p className="leading-none font-sans mb-0">Offline</p>
     </div>
   );
 };
@@ -70,8 +74,6 @@ export default function LivePlayer() {
         }
       )}
     >
-      {/* <BroadcastingIndicator status={data?.status} /> */}
-
       {isOnline && (
         <div className="px-4 h-full flex bg-yellow-400 text-black border-r border-black">
           <div className="rounded-full self-center bg-white border-black border h-16 w-16 flex justify-center items-center">
@@ -92,6 +94,7 @@ export default function LivePlayer() {
         <Banner color="red">
           {[...Array(3)].map((x, idx) => (
             <div className="h-full flex align-middle items-center" key={idx}>
+              <BroadcastingIndicator status={data?.status} />
               <h1 className="font-heading inline text-5xl xl:text-6xl ml-3 mr-4">
                 {data?.current_track?.title}
               </h1>

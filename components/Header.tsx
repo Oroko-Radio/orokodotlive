@@ -4,6 +4,7 @@ import Image from "next/image";
 import Menu from "./Menu";
 import DotButton from "./ui/DotButton";
 import logo from "../images/logo-small-outline.svg";
+import Logo from "./Logo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,12 +15,7 @@ const Header = () => {
           className="p-2 ml-8 h-10 w-10 z-50 cursor-pointer"
           onClick={() => isMenuOpen && setIsMenuOpen(false)}
         >
-          <Image
-            src={logo}
-            alt="Oroko Radio Logo"
-            layout="intrinsic"
-            objectFit="cover"
-          />
+          <Logo color={isMenuOpen ? "black" : "white"} width="6" height="6" />
         </div>
       </Link>
       <h1 className="font-heading text-center text-5xl xl:text-6xl">
