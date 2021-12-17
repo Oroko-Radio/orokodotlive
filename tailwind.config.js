@@ -43,6 +43,8 @@ module.exports = {
       },
       colors: {
         offBlack: "#2F2726",
+        orokoYellow: "#FFC928",
+        orokoRed: "#FF4948",
       },
     },
   },

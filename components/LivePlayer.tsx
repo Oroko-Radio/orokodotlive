@@ -75,7 +75,7 @@ export default function LivePlayer() {
       )}
     >
       {isOnline && (
-        <div className="px-4 h-full flex bg-yellow-400 text-black border-r border-black">
+        <div className="px-4 h-full flex bg-orokoYellow text-black border-r border-black">
           <div className="rounded-full self-center bg-white border-black border h-16 w-16 flex justify-center items-center">
             <button
               className="h-7 w-7 sm:h-9 sm:w-9 focus:outline-none focus:ring-4"

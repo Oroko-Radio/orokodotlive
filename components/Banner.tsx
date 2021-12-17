@@ -8,7 +8,7 @@ type BannerProps = {
 
 const colors: any = {
   black: "bg-offBlack text-white",
-  red: "bg-red-500 text-black",
+  red: "bg-orokoRed text-black",
 };
 
 const Banner = ({ color, children }: BannerProps) => {

@@ -22,7 +22,7 @@ type MenuProps = {
 
 const Menu = ({ setIsMenuOpen }: MenuProps) => {
   return (
-    <div className="absolute top-0 p-20 w-full bg-yellow-300 text-black z-30">
+    <div className="absolute top-0 p-20 w-full bg-orokoYellow text-black z-30">
       <nav className="">
         <ul className="flex justify-center space-x-2">
           {links.map(({ name, url }, idx) => (
