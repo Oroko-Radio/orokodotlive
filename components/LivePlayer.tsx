@@ -17,7 +17,7 @@ const BroadcastingIndicator = ({
     return (
       <div className="flex-grow-0 flex items-center">
         <div className="pl-10 pr-4">
-          <Logo color="black" width="10" height="full" />
+          <Logo className="text-black w-10 h-full" />
         </div>
         <p className="hidden md:block leading-none font-sans mb-0 pr-10">
           Live

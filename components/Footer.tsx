@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import logoSmall from "../images/logo-small-outline.svg";
 import vercelLogo from "../images/vercel-logotype-light.png";
 import SocialSection from "./SocialSection";
+import Logo from "./Logo";
 
 const Footer = () => {
   return (
@@ -23,7 +23,7 @@ const Footer = () => {
         <div className="flex justify-center mb-8">
           <SocialSection />
         </div>
-        <Image src={logoSmall} alt="Oroko logo small" height="50" width="50" />
+        <Logo className="text-white w-10 h-10 inline-block mb-4" />
         <p className="mt-2 mb-8 font-sans xl:text-base">©OROKO 2021</p>
         <p className="inline font-sans xl:text-base">Powered by</p>
         <div className="relative inline-block h-4 w-20 cursor-pointer">

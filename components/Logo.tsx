@@ -1,8 +1,6 @@
-const Logo = ({ color, width, height }) => {
+const Logo = ({ className }) => {
   return (
-    <div
-      className={`text-${color} w-${width} h-${height} stroke-1 stroke-current`}
-    >
+    <div className={`${className} stroke-1 stroke-current`}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.417 66">
         <g
           id="Oroko_Small_Logo_White_Lines"

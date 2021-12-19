@@ -14,7 +14,12 @@ const Header = () => {
           className="p-2 ml-8 h-10 w-10 z-50 cursor-pointer"
           onClick={() => isMenuOpen && setIsMenuOpen(false)}
         >
-          <Logo color={isMenuOpen ? "black" : "white"} width="6" height="6" />
+          <Logo
+            className={cx("w-6 h-6", {
+              "text-black": isMenuOpen,
+              "text-white": !isMenuOpen,
+            })}
+          />
         </div>
       </Link>
       <h1
