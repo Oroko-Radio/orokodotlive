@@ -17,12 +17,8 @@ const Slider: React.FunctionComponent & SliderSubComponents = ({
   const { handlePrev, handleNext, slideProps, containerRef, hasNext, hasPrev } =
     useSliding(width, React.Children.count(children));
 
-  const contextValue = {
-    elementRef,
-  };
-
   return (
-    <SliderContext.Provider value={contextValue}>
+    <SliderContext.Provider value={{ elementRef }}>
       <SliderWrapper>
         <div>
           <div
@@ -39,5 +35,7 @@ const Slider: React.FunctionComponent & SliderSubComponents = ({
     </SliderContext.Provider>
   );
 };
+
+Slider.Card = Card;
 
 export default Slider;
