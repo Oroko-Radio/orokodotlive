@@ -9,9 +9,7 @@ const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
 
         <Slider>
           {featuredArticles.map((article, idx) => (
-            <Slider.Card key={idx} idx={idx} data={article}>
-              item1
-            </Slider.Card>
+            <Slider.Card key={idx} idx={idx} data={article} />
           ))}
         </Slider>
       </div>

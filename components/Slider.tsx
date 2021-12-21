@@ -4,10 +4,10 @@ import SliderButton from "./SliderButton";
 import SliderWrapper from "./SliderWrapper";
 import useSliding from "../hooks/useSliding";
 import useSizeElement from "../hooks/useSizeElement";
-import Card from "./Card";
+import SliderCard from "./SliderCard";
 
 interface SliderSubComponents {
-  Card?: typeof Card;
+  Card?: typeof SliderCard;
 }
 
 const Slider: React.FunctionComponent & SliderSubComponents = ({
@@ -36,6 +36,6 @@ const Slider: React.FunctionComponent & SliderSubComponents = ({
   );
 };
 
-Slider.Card = Card;
+Slider.Card = SliderCard;
 
 export default Slider;
