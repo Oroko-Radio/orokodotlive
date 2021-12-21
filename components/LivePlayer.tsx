@@ -105,6 +105,7 @@ export default function LivePlayer() {
                   alt={data.current_track.title}
                   layout="fill"
                   objectFit="cover"
+                  unoptimized
                 />
               </div>
             </div>
