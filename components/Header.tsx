@@ -4,16 +4,16 @@ import Link from "next/link";
 import Menu from "./Menu";
 import DotButton from "./ui/DotButton";
 import Logo from "./Logo";
-import MenuIcon from "./ui/MenuIcon";
-import CloseIcon from "./ui/CloseIcon";
+import MenuIcon from "../icons/MenuIcon";
+import CloseIcon from "../icons/CloseIcon";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <div className="grid grid-cols-4 py-1 bg-black">
+    <div className="grid grid-cols-5 py-1 bg-black">
       <Link href="/" passHref>
         <div
-          className="p-2 ml-4 md:ml-8 h-10 w-10 z-50 cursor-pointer"
+          className="p-2 mb-1 ml-4 md:ml-8 h-10 w-10 z-50 cursor-pointer"
           onClick={() => isMenuOpen && setIsMenuOpen(false)}
         >
           <Logo
@@ -26,7 +26,7 @@ const Header = () => {
       </Link>
       <h1
         className={cx(
-          "col-span-2 font-heading text-center self-center text-4xl md:text-5xl xl:text-6xl z-50",
+          "col-span-3 mb-0 font-heading text-center self-center text-4xl md:text-5xl xl:text-6xl z-50",
           {
             "text-black": isMenuOpen,
             "text-white": !isMenuOpen,
@@ -43,10 +43,13 @@ const Header = () => {
           <DotButton>Menu</DotButton>
         </div>
         <div
-          className={cx("h-full w-8 md:hidden cursor-pointer fill-current", {
-            "text-white": !isMenuOpen,
-            "text-black": isMenuOpen,
-          })}
+          className={cx(
+            "h-full w-7 mb-0.5 md:hidden cursor-pointer fill-current",
+            {
+              "text-white": !isMenuOpen,
+              "text-black": isMenuOpen,
+            }
+          )}
         >
           {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
         </div>
