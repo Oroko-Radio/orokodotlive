@@ -15,7 +15,7 @@ const Card = ({ data, idx, children }) => (
         <div
           ref={elementRef}
           className={cn(
-            "inline-block flex-shrink-0 slider-container bg-orokoGray cursor-pointer border-2 border-black",
+            "inline-block flex-shrink-0 card bg-orokoGray cursor-pointer border-2 border-black",
             {
               "border-l-0": idx !== 0,
             }
