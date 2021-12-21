@@ -17,7 +17,7 @@ const Header = () => {
           onClick={() => isMenuOpen && setIsMenuOpen(false)}
         >
           <Logo
-            className={cx("w-4 h-4 md:w-6 md:h-6", {
+            className={cx("w-5 h-5 md:w-6 md:h-6", {
               "text-black": isMenuOpen,
               "text-white": !isMenuOpen,
             })}
@@ -26,7 +26,7 @@ const Header = () => {
       </Link>
       <h1
         className={cx(
-          "col-span-2 font-heading text-center self-center text-3xl md:text-5xl xl:text-6xl z-50",
+          "col-span-2 font-heading text-center self-center text-4xl md:text-5xl xl:text-6xl z-50",
           {
             "text-black": isMenuOpen,
             "text-white": !isMenuOpen,
@@ -43,7 +43,7 @@ const Header = () => {
           <DotButton>Menu</DotButton>
         </div>
         <div
-          className={cx("md:hidden cursor-pointer fill-current", {
+          className={cx("h-full w-8 md:hidden cursor-pointer fill-current", {
             "text-white": !isMenuOpen,
             "text-black": isMenuOpen,
           })}
