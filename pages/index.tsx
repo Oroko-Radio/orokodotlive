@@ -1,14 +1,14 @@
-import type { InferGetStaticPropsType, NextPage } from "next";
+import type { InferGetStaticPropsType } from "next";
 import Hero from "../components/Hero";
 import Meta from "../components/Meta";
 import Newsletter from "../components/Newsletter";
-import { getNewsPage } from "../lib/contentful/pages/news";
+import { getHomePage } from "../lib/contentful/pages/home";
 import FeaturedArticles from "../views/FeaturedArticles";
 
 export async function getStaticProps({ preview = false }) {
   return {
-    props: { preview, ...(await getNewsPage(preview)) },
-    revalidate: 60,
+    props: await getHomePage(),
+    revalidate: 60 * 60,
   };
 }
 
@@ -19,7 +19,7 @@ export default function HomePage({
     <main>
       <Meta title="Oroko Radio" />
       <Hero />
-      <FeaturedArticles featuredArticles={featuredArticles} />
+      <FeaturedArticles featuredArticles={featuredArticles} heading="News" />
       <Newsletter />
     </main>
   );

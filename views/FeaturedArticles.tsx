@@ -1,11 +1,11 @@
 import React from "react";
 import Slider from "../components/Slider";
 
-const FeaturedArticles = ({ featuredArticles }) => {
+const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
   return (
     <>
       <div className="overflow-hidden">
-        <h1 className="font-serif text-6xl m-8">Featured News</h1>
+        <h1 className="font-serif text-6xl m-8">{heading}</h1>
 
         <Slider>
           {featuredArticles.map((article, idx) => (

@@ -81,3 +81,27 @@ export const AllArtistFragment = /* GraphQL */ `
     }
   }
 `;
+
+export const ShowPreviewFragment = /* GraphQL */ `
+  fragment ShowPreviewFragment on Show {
+    coverImage {
+      sys {
+        id
+      }
+      title
+      description
+      url
+      width
+      height
+    }
+    date
+    genresCollection(limit: 9) {
+      items {
+        name
+      }
+    }
+    mixcloudLink
+    slug
+    title
+  }
+`;

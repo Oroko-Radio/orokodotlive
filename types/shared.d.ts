@@ -87,3 +87,13 @@ export type AllArtistEntry = {
   isResident: boolean;
   photo: CoverImage;
 };
+
+export interface NextUpSection {
+  content: Content;
+}
+
+export type HomePageData = {
+  featuredShowsCollection: {
+    items: Array<ShowPreviewEntry>;
+  };
+};

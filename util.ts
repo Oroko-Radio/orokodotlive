@@ -1,6 +1,15 @@
 import { ShowInterface } from "./types/shared";
 import dayjs from "dayjs";
 
+interface PageResponse {
+  data: {
+    [key: string]: any;
+  };
+}
+
+export const extractPage = <T>(fetchResponse: PageResponse, key: string): T =>
+  fetchResponse?.data?.[key];
+
 interface CollectionResponse {
   data: {
     [key: string]: {
