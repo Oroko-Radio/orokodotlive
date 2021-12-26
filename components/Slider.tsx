@@ -1,7 +1,6 @@
 import React from "react";
 import SliderContext from "./contexts/sliderContext";
-import SliderButton from "./SliderButton";
-import SliderWrapper from "./SliderWrapper";
+import SliderButton from "./ui/SliderButton";
 import useSliding from "../hooks/useSliding";
 import useSizeElement from "../hooks/useSizeElement";
 import SliderCard from "./SliderCard";
@@ -9,6 +8,10 @@ import SliderCard from "./SliderCard";
 interface SliderSubComponents {
   Card?: typeof SliderCard;
 }
+
+const SliderWrapper = ({ children }) => (
+  <div className="mb-8 overflow-hidden relative">{children}</div>
+);
 
 const Slider: React.FunctionComponent & SliderSubComponents = ({
   children,
