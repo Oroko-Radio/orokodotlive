@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { InferGetStaticPropsType } from "next";
 import { getRadioPage } from "../../lib/contentful/pages/radio";
+import AllShows from "../../views/AllShows";
+import FeaturedShows from "../../views/FeaturedShows";
 
 export async function getStaticProps({ preview = false }) {
   return {
@@ -16,27 +18,12 @@ export default function RadioPage({
   pastShows,
   preview,
   upcomingShows,
+  featuredShows,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div>
-      {pastShows.map((show) => (
-        <div key={show.slug}>
-          <Link href={`/radio/${show.slug}`} passHref>
-            <Image
-              className="cursor-pointer"
-              src={show.coverImage.url}
-              alt={show.coverImage.title}
-              objectFit="cover"
-              width="200"
-              height="200"
-            />
-          </Link>
-          <h1>{show.title}</h1>
-          {show.artistsCollection.items.map(({ name, slug }) => (
-            <h2 key={slug}>{name}</h2>
-          ))}
-        </div>
-      ))}
-    </div>
+    <>
+      <FeaturedShows shows={featuredShows} />
+      <AllShows shows={pastShows} />
+    </>
   );
 }

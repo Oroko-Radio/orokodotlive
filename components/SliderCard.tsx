@@ -4,12 +4,14 @@ import SliderContext from "./contexts/sliderContext";
 import Card from "./Card";
 
 interface CardProps {
-  data: any;
+  imageUrl: string;
+  title: string;
+  link: string;
   idx?: number;
   children?: any;
 }
 
-const SliderCard = ({ data, idx, children }: CardProps) => (
+const SliderCard = ({ imageUrl, title, link, idx, children }: CardProps) => (
   <SliderContext.Consumer>
     {({ elementRef }) => {
       return (
@@ -22,7 +24,9 @@ const SliderCard = ({ data, idx, children }: CardProps) => (
             }
           )}
         >
-          <Card data={data} />
+          <Card imageUrl={imageUrl} title={title} link={link}>
+            {children}
+          </Card>
         </div>
       );
     }}

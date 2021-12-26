@@ -38,10 +38,13 @@ export async function getRadioPage(preview: boolean) {
 
   const genres = uniq(pastShowGenres).sort(sort.alpha);
 
+  const featuredShows = shows.filter((show) => show.isFeatured);
+
   return {
     upcomingShows,
     pastShows,
     genres,
+    featuredShows,
   };
 }
 

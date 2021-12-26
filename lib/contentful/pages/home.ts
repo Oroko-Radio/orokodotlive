@@ -54,7 +54,7 @@ export async function getHomePage() {
       data,
       "featuredArticles"
     ),
-    featuredShows: extractPage<HomePageData>(data, "featuredShows"),
+    featuredShows: extractCollection<HomePageData>(data, "featuredShows"),
     latestArticles: extractCollection<ArticleInterface>(data, "latestArticles"),
   };
 }
