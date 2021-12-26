@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { InferGetStaticPropsType } from "next";
 import { getArtistsPage } from "../../lib/contentful/pages/artists";
+import AllArtists from "../../views/AllArtists";
 
 export async function getStaticProps({ preview = false }) {
   return {
@@ -9,17 +10,13 @@ export async function getStaticProps({ preview = false }) {
   };
 }
 
-export default function ArtistsPage({
+export default function ResidentsPage({
   preview,
   allArtists,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div>
-      {allArtists.map(({ name, slug }) => (
-        <Link href={`/artists/${slug}`} key={slug} passHref>
-          <h1 className="cursor-pointer">{name}</h1>
-        </Link>
-      ))}
-    </div>
+    <>
+      <AllArtists allArtists={allArtists} />
+    </>
   );
 }

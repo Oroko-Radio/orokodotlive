@@ -7,8 +7,8 @@ const links = [
     url: "/radio",
   },
   {
-    name: "Artists",
-    url: "/artists",
+    name: "Residents",
+    url: "/residents",
   },
   {
     name: "News",
