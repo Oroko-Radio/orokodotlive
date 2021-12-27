@@ -99,7 +99,7 @@ export default function LivePlayer() {
               <h1 className="font-heading inline text-5xl xl:text-6xl mr-10">
                 {data?.current_track?.title}
               </h1>
-              <div className="relative h-full w-36 border-r border-l border-black">
+              <div className="relative h-full w-36 border-r-2 border-l-2 border-black">
                 <Image
                   src={data.current_track.artwork_url}
                   alt={data.current_track.title}

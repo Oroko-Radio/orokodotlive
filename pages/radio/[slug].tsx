@@ -32,11 +32,11 @@ export default function Show({ show, relatedShows, preview }: Props) {
   const {
     coverImage,
     title,
+    date,
+    content,
     artistsCollection,
     genresCollection,
     mixcloudLink,
-    slug,
-    content,
   } = show;
 
   return (
@@ -44,7 +44,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
       <SinglePage
         coverImage={coverImage.url}
         title={title}
-        slug={slug}
+        date={date}
         content={content}
         artists={artistsCollection.items}
         genres={genresCollection.items}
