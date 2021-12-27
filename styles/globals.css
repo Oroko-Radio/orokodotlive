@@ -71,4 +71,8 @@
   .rich-text ul p {
     @apply mb-0;
   }
+
+  .rich-text a {
+    @apply text-orokoBlue;
+  }
 }
