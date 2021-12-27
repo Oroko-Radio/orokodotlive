@@ -88,6 +88,16 @@ export type AllArtistEntry = {
   photo: CoverImage;
 };
 
+export interface ArtistInterface {
+  sys: { id: string };
+  name: string;
+  slug: string;
+  photo: CoverImage;
+  coverImagePosition: CoverImagePosition;
+  isResident: boolean;
+  content?: Content;
+}
+
 export interface NextUpSection {
   content: Content;
 }

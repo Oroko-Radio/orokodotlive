@@ -15,7 +15,7 @@ const FeaturedShows = ({ shows, heading = "Featured Shows" }) => {
             <Slider.Card
               imageUrl={coverImage.url}
               title={title}
-              link={`/news/${slug}`}
+              link={`/radio/${slug}`}
               key={idx}
               idx={idx}
             >

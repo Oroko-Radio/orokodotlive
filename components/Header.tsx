@@ -13,7 +13,7 @@ const Header = () => {
     <div className="grid grid-cols-5 py-1 bg-black">
       <Link href="/" passHref>
         <div
-          className="p-2 mb-1 ml-4 md:ml-8 h-10 w-10 z-50 cursor-pointer"
+          className="p-2 mb-1 ml-4 md:mb-2 md:ml-8 h-10 w-10 z-50 cursor-pointer self-center"
           onClick={() => isMenuOpen && setIsMenuOpen(false)}
         >
           <Logo

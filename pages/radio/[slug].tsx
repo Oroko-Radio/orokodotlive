@@ -1,11 +1,9 @@
-import Image from "next/image";
-
 import { getRadioPageSingle } from "../../lib/contentful/pages/radio";
 import { getShowPathsToPreRender } from "../../lib/contentful/paths";
 import { playerWidget, showKey } from "../../lib/mixcloud";
-import { renderRichTextWithImages } from "../../lib/rich-text";
 import { ShowInterface } from "../../types/shared";
 import { getMixcloudKey } from "../../util";
+import SinglePage from "../../views/SinglePage";
 
 type Props = {
   show: ShowInterface;
@@ -31,23 +29,28 @@ export default function Show({ show, relatedShows, preview }: Props) {
     }
   };
 
+  const {
+    coverImage,
+    title,
+    artistsCollection,
+    genresCollection,
+    mixcloudLink,
+    slug,
+    content,
+  } = show;
+
   return (
-    <div key={show.slug}>
-      <Image
-        src={show.coverImage.url}
-        alt={show.coverImage.title}
-        objectFit="cover"
-        width="200"
-        height="200"
+    <div>
+      <SinglePage
+        coverImage={coverImage.url}
+        title={title}
+        slug={slug}
+        content={content}
+        artists={artistsCollection.items}
+        genres={genresCollection.items}
+        mixcloudLink={mixcloudLink}
+        handlePlayShow={handlePlayShow}
       />
-      <h1>{show.title}</h1>
-      {show.artistsCollection.items.map(({ name, slug }) => (
-        <h2 key={slug}>{name}</h2>
-      ))}
-      <p>{renderRichTextWithImages(show.content)}</p>
-      <h1 className="text-extrabold cursor-pointer" onClick={handlePlayShow}>
-        PLAY
-      </h1>
     </div>
   );
 }
