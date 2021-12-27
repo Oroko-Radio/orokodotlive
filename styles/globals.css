@@ -22,6 +22,8 @@
     src: url("/fonts/PublicSans-VariableFont_wght.ttf");
   }
 
+  /* Card width */
+
   .card {
     width: calc(50% - 16px);
   }
@@ -30,5 +32,43 @@
     .card {
       width: calc(100% - 32px);
     }
+  }
+
+  /* Rich text styles */
+
+  .rich-text h1 {
+    @apply text-6xl font-bold mb-6;
+  }
+
+  .rich-text h2 {
+    @apply text-4xl font-bold mb-6;
+  }
+
+  .rich-text h3 {
+    @apply text-3xl font-bold mb-6;
+  }
+
+  .rich-text h4 {
+    @apply text-2xl font-bold mb-6;
+  }
+
+  .rich-text h5 {
+    @apply text-xl font-bold mb-6;
+  }
+
+  .rich-text h6 {
+    @apply text-lg font-bold mb-6;
+  }
+
+  .rich-text p {
+    @apply text-2xl font-sans;
+  }
+
+  .rich-text ul {
+    @apply list-disc ml-6 mb-6;
+  }
+
+  .rich-text ul p {
+    @apply mb-0;
   }
 }

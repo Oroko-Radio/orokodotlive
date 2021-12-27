@@ -39,6 +39,7 @@ export default function LivePlayer() {
   const AUDIO_SRC = `https://streaming.radio.co/${REFUGE_WORLDWIDE}/listen`;
 
   const { data } = useRadioCo(REFUGE_WORLDWIDE);
+  console.log(data);
   const isOnline = data?.status === "online";
 
   const player = useRef<HTMLAudioElement>(null);

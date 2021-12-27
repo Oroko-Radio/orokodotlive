@@ -30,6 +30,9 @@ module.exports = {
       ],
       heading: ["Digitalt"],
     },
+    container: {
+      padding: "1.2rem",
+    },
     transitionDuration: {
       DEFAULT: "200ms",
     },
@@ -37,6 +40,7 @@ module.exports = {
       height: {
         18: "4.5rem",
         hero: "70vh",
+        half: "50vh",
       },
       zIndex: {
         "-10": -10,
