@@ -4,17 +4,13 @@ import { getArtistPathsToPreRender } from "../../lib/contentful/paths";
 import { renderRichTextWithImages } from "../../lib/rich-text";
 import { ArtistEntry, ShowInterface } from "../../types/shared";
 
-type ResidentProps = {
+type ArtistProps = {
   artist: ArtistEntry;
   preview: boolean;
   relatedShows?: ShowInterface[];
 };
 
-export default function Resident({
-  artist,
-  relatedShows,
-  preview,
-}: ResidentProps) {
+export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
   const {
     name,
     photo: { url: imageUrl },

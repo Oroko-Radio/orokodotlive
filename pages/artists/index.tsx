@@ -10,7 +10,7 @@ export async function getStaticProps({ preview = false }) {
   };
 }
 
-export default function ResidentsPage({
+export default function ArtistsPage({
   preview,
   allArtists,
 }: InferGetStaticPropsType<typeof getStaticProps>) {

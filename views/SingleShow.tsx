@@ -66,7 +66,7 @@ export default function SingleShow({
             {artists &&
               artists.map(({ name, slug }, idx) => (
                 <span key={slug}>
-                  <Link href={`/residents/${slug}`} passHref>
+                  <Link href={`/artists/${slug}`} passHref>
                     <span className="border-b-2 border-black cursor-pointer">
                       {name}
                     </span>
