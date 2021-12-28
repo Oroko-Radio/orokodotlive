@@ -14,7 +14,7 @@ const Tag = ({ text, color }: TagProps) => {
         "bg-black text-white": color === "black",
       })}
     >
-      <p className="font-sans inline-block font-semibold text-sm mb-0 px-2 py-1">
+      <p className="font-sans inline-block font-semibold text-sm lg:text-lg mb-0 px-2 py-1">
         {text.toUpperCase()}
       </p>
     </div>

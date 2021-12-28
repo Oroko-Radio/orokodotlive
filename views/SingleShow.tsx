@@ -6,6 +6,7 @@ import { renderRichTextWithImages } from "../lib/rich-text";
 import Play from "../icons/play";
 import dayjs from "dayjs";
 import Tag from "../components/Tag";
+import BackButton from "../components/ui/BackButton";
 
 interface SingleShowProps {
   coverImage: string;
@@ -32,6 +33,9 @@ export default function SingleShow({
     <article>
       <div className="relative h-half border-r-2 border-l-2 border-black">
         <Image src={coverImage} layout="fill" alt={title} objectFit="cover" />
+        <div className="absolute top-8 left-8">
+          <BackButton />
+        </div>
       </div>
       <section className="relative border-2 border-black mb-6">
         {mixcloudLink && (
