@@ -34,12 +34,12 @@ const BroadcastingIndicator = ({
 };
 
 export default function LivePlayer() {
-  const REFUGE_WORLDWIDE = "s3699c5e49";
+  const OROKO_LIVE = "s23b8ada46";
 
-  const AUDIO_SRC = `https://streaming.radio.co/${REFUGE_WORLDWIDE}/listen`;
+  const AUDIO_SRC = `https://s5.radio.co/${OROKO_LIVE}/listen`;
 
-  const { data } = useRadioCo(REFUGE_WORLDWIDE);
-  console.log(data);
+  const { data } = useRadioCo(OROKO_LIVE);
+
   const isOnline = data?.status === "online";
 
   const player = useRef<HTMLAudioElement>(null);
@@ -55,10 +55,10 @@ export default function LivePlayer() {
     if ("mediaSession" in navigator && data?.current_track) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: data.current_track.title,
-        artist: "Refuge Worldwide",
+        artist: "Oroko Radio",
         artwork: [
           {
-            src: data.current_track.artwork_url,
+            src: data.current_track.artwork_url_large,
             sizes: "1024x1024",
             type: "image/png",
           },
@@ -96,9 +96,10 @@ export default function LivePlayer() {
         <Banner color="red">
           {[...Array(3)].map((x, idx) => (
             <div className="h-full flex align-middle items-center" key={idx}>
+              <div className="border-black border-l-2 h-full"></div>
               <BroadcastingIndicator status={data?.status} />
               <h1 className="font-heading inline text-5xl xl:text-6xl mr-10">
-                {data?.current_track?.title}
+                {data?.current_track?.title.split("-")[1]}
               </h1>
               <div className="relative h-full w-36 border-r-2 border-l-2 border-black">
                 <Image
@@ -109,6 +110,9 @@ export default function LivePlayer() {
                   unoptimized
                 />
               </div>
+              <h1 className="font-serif inline text-4xl xl:text-5xl mx-10">
+                With {data?.current_track?.title.split("-")[0]}
+              </h1>
             </div>
           ))}
         </Banner>

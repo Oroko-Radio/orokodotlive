@@ -16,6 +16,7 @@ const SliderCard = ({ imageUrl, title, link, idx, children }: CardProps) => (
     {({ elementRef }) => {
       return (
         <div
+          key={idx}
           ref={elementRef}
           className={cn(
             "inline-block flex-shrink-0 card bg-orokoGray cursor-pointer border-2 border-black",
