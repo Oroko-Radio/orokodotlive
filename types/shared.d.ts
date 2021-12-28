@@ -83,6 +83,9 @@ export type ArtistEntry = {
   sys: { id: string };
   name: string;
   slug: string;
+  city: {
+    name: string;
+  };
   photo: CoverImage;
   coverImagePosition: CoverImagePosition;
   content?: Content;
@@ -100,6 +103,9 @@ export interface ArtistInterface {
   sys: { id: string };
   name: string;
   slug: string;
+  city: {
+    name: string;
+  };
   photo: CoverImage;
   coverImagePosition: CoverImagePosition;
   isResident: boolean;

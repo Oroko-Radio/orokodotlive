@@ -37,6 +37,9 @@ export async function getArtistsPageSingle(slug: string, preview: boolean) {
             id
           }
           name
+          city {
+            name
+          }
           slug
           photo {
             sys {
