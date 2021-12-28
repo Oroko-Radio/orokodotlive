@@ -25,8 +25,8 @@ const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
               >
                 <div className="p-4">
                   <div className="flex flex-wrap gap-1 mb-4">
-                    {city && <Tag text={city.name} color="black" />}
-                    <Tag text={articleType} color="white" />
+                    {city && <Tag text={city.name} color="black" card />}
+                    <Tag text={articleType} color="white" card />
                   </div>
                   <p className="font-sans mb-2 font-semibold">
                     {dayjs(date).format("DD MMMM YYYY")}

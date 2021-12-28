@@ -25,10 +25,10 @@ const FeaturedShows = ({ shows, heading = "Featured Shows" }) => {
                 </p>
                 <h1 className="font-heading mb-4 text-4xl">{title}</h1>
                 <div className="flex flex-wrap gap-1">
-                  {city && <Tag text={city} color="black" />}
+                  {city && <Tag text={city} color="black" card />}
                   {genresCollection.items.map(({}) => (
                     <>
-                      <Tag text="test" color="white" />
+                      <Tag text="test" color="white" card />
                     </>
                   ))}
                 </div>

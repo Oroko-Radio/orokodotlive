@@ -19,7 +19,7 @@ const AllShows = ({ shows }) => {
               >
                 <div className="p-4">
                   <div className="flex flex-wrap gap-1 mb-4">
-                    {city && <Tag text={city} color="black" />}
+                    {city && <Tag text={city} color="black" card />}
                   </div>
                   <p className="font-sans mb-2 font-semibold">
                     {dayjs(date).format("DD MMMM YYYY")}
