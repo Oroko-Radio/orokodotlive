@@ -4,6 +4,7 @@ import { getNewsPageSingle } from "../../lib/contentful/pages/news";
 import { getArticlePathsToPreRender } from "../../lib/contentful/paths";
 import { renderRichTextWithImages } from "../../lib/rich-text";
 import { ArticleInterface } from "../../types/shared";
+import SingleArticle from "../../views/SingleArticle";
 
 type ArticleProps = {
   article: ArticleInterface;
@@ -18,15 +19,7 @@ export default function Article({
 }: ArticleProps) {
   return (
     <div>
-      <Image
-        src={article.coverImage.url}
-        alt={article.coverImage.title}
-        objectFit="cover"
-        width="200"
-        height="200"
-      />
-      <h1>{article.title}</h1>
-      <p>{renderRichTextWithImages(article.content)}</p>
+      <SingleArticle article={article} />
     </div>
   );
 }

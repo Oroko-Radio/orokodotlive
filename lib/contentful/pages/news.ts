@@ -62,6 +62,9 @@ export async function getNewsPageSingle(slug: string, preview: boolean) {
           title
           subtitle
           articleType
+          city {
+            name
+          }
           author {
             name
           }

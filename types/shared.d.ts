@@ -22,7 +22,7 @@ export interface ArticleInterface {
   title: string;
   subtitle?: string;
   articleType: ArticleType;
-  city?: string;
+  city: CityInterface;
   author?: {
     name: string;
   };
@@ -31,6 +31,10 @@ export interface ArticleInterface {
   coverImage: CoverImage;
   coverImagePosition: CoverImagePosition;
   content: Content;
+}
+
+export interface CityInterface {
+  name: string;
 }
 
 export interface Asset {
@@ -69,6 +73,10 @@ export interface ShowInterface {
     items: GenreInterface[];
   };
   content: Content;
+}
+
+export interface GenreInterface {
+  name: string;
 }
 
 export type ArtistEntry = {
