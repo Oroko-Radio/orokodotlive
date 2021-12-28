@@ -7,7 +7,7 @@ import Play from "../icons/play";
 import dayjs from "dayjs";
 import Tag from "../components/Tag";
 
-interface SinglePageProps {
+interface SingleShowProps {
   coverImage: string;
   title: string;
   content: any;
@@ -18,7 +18,7 @@ interface SinglePageProps {
   handlePlayShow: () => Promise<void>;
 }
 
-export default function SinglePage({
+export default function SingleShow({
   coverImage,
   title,
   date,
@@ -27,7 +27,7 @@ export default function SinglePage({
   mixcloudLink,
   content,
   handlePlayShow,
-}: SinglePageProps) {
+}: SingleShowProps) {
   return (
     <>
       <div className="relative h-half border-r-2 border-l-2 border-black">

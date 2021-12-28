@@ -3,7 +3,7 @@ import { getShowPathsToPreRender } from "../../lib/contentful/paths";
 import { playerWidget, showKey } from "../../lib/mixcloud";
 import { ShowInterface } from "../../types/shared";
 import { getMixcloudKey } from "../../util";
-import SinglePage from "../../views/SinglePage";
+import SingleShow from "../../views/SingleShow";
 
 type Props = {
   show: ShowInterface;
@@ -41,7 +41,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
 
   return (
     <div>
-      <SinglePage
+      <SingleShow
         coverImage={coverImage.url}
         title={title}
         date={date}
