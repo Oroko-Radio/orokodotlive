@@ -8,7 +8,7 @@ const SliderButton = ({ onClick, type }) => (
   <button
     onClick={onClick}
     className={cn(
-      `group absolute cursor-pointer bg-offBlack z-40 top-1/2 -translate-y-1/2 rounded-full h-16 w-16 border-black border-2 flex justify-center items-center transition-transform`,
+      `group absolute cursor-pointer bg-offBlack z-20 top-1/2 -translate-y-1/2 rounded-full h-16 w-16 border-black border-2 flex justify-center items-center transition-transform`,
       {
         "left-4 hover:-translate-x-2": type === "left",
         "right-4 hover:translate-x-2": type === "right",

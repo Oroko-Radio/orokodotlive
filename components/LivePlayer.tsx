@@ -72,7 +72,7 @@ export default function LivePlayer() {
       className={cn(
         "text-white h-18 flex items-center border-b-2 border-black overflow-hidden",
         {
-          "sticky top-0 z-50": isOnline,
+          "sticky top-0 z-30": isOnline,
         }
       )}
     >
