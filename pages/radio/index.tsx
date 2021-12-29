@@ -5,6 +5,7 @@ import { InferGetStaticPropsType } from "next";
 import { getRadioPage } from "../../lib/contentful/pages/radio";
 import AllShows from "../../views/AllShows";
 import FeaturedShows from "../../views/FeaturedShows";
+import UpcomingShows from "../../views/UpcomingShows";
 
 export async function getStaticProps({ preview = false }) {
   return {
@@ -22,6 +23,7 @@ export default function RadioPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
+      <UpcomingShows shows={upcomingShows} />
       <FeaturedShows shows={featuredShows} />
       <AllShows shows={pastShows} />
     </>

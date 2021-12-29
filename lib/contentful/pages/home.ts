@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { graphql } from "..";
 import {
   ArticleInterface,
@@ -5,12 +6,13 @@ import {
   NextUpSection,
   ShowInterface,
 } from "../../../types/shared";
-import { extractCollection, extractPage } from "../../../util";
+import { extractCollection, extractPage, sort } from "../../../util";
 import {
   ArticlePreviewFragment,
   FeaturedArticleFragment,
   ShowPreviewFragment,
 } from "../fragments";
+import { getAllShows } from "./radio";
 
 export async function getHomePage() {
   const HomePageQuery = /* GraphQL */ `
@@ -31,7 +33,7 @@ export async function getHomePage() {
         }
       }
 
-      latestShows: showCollection(limit: 8) {
+      allShows: showCollection(limit: 8) {
         items {
           ...ShowPreviewFragment
         }
@@ -55,13 +57,21 @@ export async function getHomePage() {
 
   const data = await graphql(HomePageQuery);
 
+  const today = dayjs();
+
+  const shows = await getAllShows(false);
+
+  const latestShows = shows
+    .sort(sort.date_DESC)
+    .filter((show) => dayjs(show.date).isBefore(today));
+
   return {
     featuredArticles: extractCollection<ArticleInterface>(
       data,
       "featuredArticles"
     ),
     featuredShows: extractCollection<HomePageData>(data, "featuredShows"),
-    latestShows: extractCollection<HomePageData>(data, "latestShows"),
+    latestShows,
     latestArticles: extractCollection<ArticleInterface>(data, "latestArticles"),
   };
 }
