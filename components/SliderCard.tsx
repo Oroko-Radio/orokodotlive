@@ -9,18 +9,28 @@ interface CardProps {
   link: string;
   idx?: number;
   children?: any;
+  cardWidth?: "half" | "quarter";
 }
 
-const SliderCard = ({ imageUrl, title, link, idx, children }: CardProps) => (
+const SliderCard = ({
+  imageUrl,
+  title,
+  link,
+  idx,
+  children,
+  cardWidth = "half",
+}: CardProps) => (
   <SliderContext.Consumer>
     {({ elementRef }) => {
       return (
         <div
           ref={elementRef}
           className={cn(
-            "inline-block flex-shrink-0 card bg-orokoGray cursor-pointer border-2 border-black",
+            `inline-block flex-shrink-0 bg-orokoGray cursor-pointer border-2 border-black`,
             {
               "border-l-0": idx !== 0,
+              "card-half": cardWidth === "half",
+              "card-quarter": cardWidth === "quarter",
             }
           )}
         >

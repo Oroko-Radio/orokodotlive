@@ -5,6 +5,7 @@ import Newsletter from "../components/Newsletter";
 import { getHomePage } from "../lib/contentful/pages/home";
 import FeaturedArticles from "../views/FeaturedArticles";
 import FeaturedShows from "../views/FeaturedShows";
+import LatestShows from "../views/LatestShows";
 
 export async function getStaticProps({ preview = false }) {
   return {
@@ -16,11 +17,13 @@ export async function getStaticProps({ preview = false }) {
 export default function HomePage({
   featuredArticles,
   featuredShows,
+  latestShows,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <main>
       <Meta title="Oroko Radio" />
       <Hero />
+      <LatestShows shows={latestShows} />
       <FeaturedShows shows={featuredShows} />
       <FeaturedArticles featuredArticles={featuredArticles} heading="News" />
       <Newsletter />

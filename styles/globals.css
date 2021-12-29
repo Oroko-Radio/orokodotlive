@@ -24,13 +24,21 @@
 
   /* Card width */
 
-  .card {
-    width: calc(50% - 16px);
+  .card-half,
+  .card-quarter {
+    width: calc(100% - 32px);
   }
 
-  @media only screen and (max-width: 768px) {
-    .card {
-      width: calc(100% - 32px);
+  @media only screen and (min-width: 768px) {
+    .card-half,
+    .card-quarter {
+      width: calc(50% - 16px);
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .card-quarter {
+      width: calc(25% - 8px);
     }
   }
 

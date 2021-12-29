@@ -31,6 +31,12 @@ export async function getHomePage() {
         }
       }
 
+      latestShows: showCollection(limit: 8) {
+        items {
+          ...ShowPreviewFragment
+        }
+      }
+
       latestArticles: articleCollection(
         order: date_DESC
         where: { isFeatured: false }
@@ -55,6 +61,7 @@ export async function getHomePage() {
       "featuredArticles"
     ),
     featuredShows: extractCollection<HomePageData>(data, "featuredShows"),
+    latestShows: extractCollection<HomePageData>(data, "latestShows"),
     latestArticles: extractCollection<ArticleInterface>(data, "latestArticles"),
   };
 }
