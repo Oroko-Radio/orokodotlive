@@ -11,7 +11,18 @@ const FeaturedShows = ({ shows, heading = "Featured Shows" }) => {
 
       <Slider>
         {shows.map(
-          ({ title, date, slug, city, genresCollection, coverImage }, idx) => (
+          (
+            {
+              title,
+              date,
+              slug,
+              city,
+              artistsCollection,
+              genresCollection,
+              coverImage,
+            },
+            idx
+          ) => (
             <Slider.Card
               imageUrl={coverImage.url}
               title={title}
@@ -25,11 +36,13 @@ const FeaturedShows = ({ shows, heading = "Featured Shows" }) => {
                 </p>
                 <h1 className="font-heading mb-4 text-4xl">{title}</h1>
                 <div className="flex flex-wrap gap-1">
-                  {city && <Tag text={city} color="black" card />}
-                  {genresCollection.items.map(({}) => (
-                    <>
-                      <Tag text="test" color="white" card />
-                    </>
+                  <Tag
+                    text={artistsCollection.items[0].city.name}
+                    color="black"
+                    card
+                  />
+                  {genresCollection.items.map(({ name }, idx) => (
+                    <Tag key={idx} text={name} color="white" card />
                   ))}
                 </div>
               </div>

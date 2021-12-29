@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import Tag from "../../components/Tag";
 import { renderRichTextWithImages } from "../../lib/rich-text";
 import Play from "../../icons/play";
+import TitleBox from "../../components/TitleBox";
 
 type Props = {
   show: ShowInterface;
@@ -50,7 +51,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
       coverImageAlt={title}
       withBackButton
     >
-      <section className="relative border-2 border-black mb-6">
+      <TitleBox>
         {mixcloudLink && (
           <div className="flex md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black bg-orokoBlue text-black">
             <div className="mx-8 my-2 rounded-full self-center bg-white border-black border-2 h-16 w-16 lg:h-32 lg:w-32 flex justify-center items-center">
@@ -66,7 +67,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
         )}
         <div className="container max-w-4xl mx-auto">
           {date && (
-            <p className="my-4 lg:mt-6 lg:mb-8 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
+            <p className="mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
               {dayjs(date).format("ddd DD MMMM YYYY @ HH") + "H"}
             </p>
           )}
@@ -88,14 +89,15 @@ export default function Show({ show, relatedShows, preview }: Props) {
                 </span>
               ))}
           </h2>
-          <div className="flex gap-1 mb-6 lg:mb-8">
+          <div className="flex gap-1">
+            <Tag text={artistsCollection.items[0].city.name} color="black" />
             {genresCollection &&
               genresCollection.items.map(({ name }, idx) => (
                 <Tag text={name} color="white" key={idx} />
               ))}
           </div>
         </div>
-      </section>
+      </TitleBox>
       <section className="container max-w-4xl mx-auto rich-text mb-24">
         {renderRichTextWithImages(content)}
       </section>

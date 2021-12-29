@@ -1,4 +1,5 @@
 import Tag from "../../components/Tag";
+import TitleBox from "../../components/TitleBox";
 import { getArtistsPageSingle } from "../../lib/contentful/pages/artists";
 import { getArtistPathsToPreRender } from "../../lib/contentful/paths";
 import { renderRichTextWithImages } from "../../lib/rich-text";
@@ -21,18 +22,16 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
 
   return (
     <SinglePage coverImage={imageUrl} coverImageAlt={name} withBackButton>
-      <section className="border-black border-2 mb-6">
-        <div className="container max-w-4xl mx-auto my-6">
+      <TitleBox>
+        <div className="container max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
             {name}
           </h1>
-          <div className="mb-6">
-            <div className="inline-flex mr-6">
-              <Tag text={city.name} color="black" />
-            </div>
+          <div className="inline-block">
+            <Tag text={city.name} color="black" />
           </div>
         </div>
-      </section>
+      </TitleBox>
       <section className="container max-w-4xl mx-auto rich-text mb-24">
         {renderRichTextWithImages(content)}
       </section>

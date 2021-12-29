@@ -104,6 +104,14 @@ export const ShowPreviewFragment = /* GraphQL */ `
         name
       }
     }
+    artistsCollection(limit: 5) {
+      items {
+        name
+        city {
+          name
+        }
+      }
+    }
     mixcloudLink
     slug
     title

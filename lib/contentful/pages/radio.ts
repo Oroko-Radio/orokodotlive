@@ -74,6 +74,9 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
             items {
               name
               slug
+              city {
+                name
+              }
             }
           }
           genresCollection(limit: 9) {
@@ -166,10 +169,13 @@ export async function getAllShows(preview: boolean, limit = LIMITS.SHOWS) {
             width
             height
           }
-          artistsCollection(limit: 9) {
+          artistsCollection(limit: 4) {
             items {
               name
               slug
+              city {
+                name
+              }
             }
           }
           genresCollection(limit: 9) {
