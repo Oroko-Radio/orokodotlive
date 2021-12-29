@@ -30,7 +30,7 @@ export default function Article({
       <section className="relative border-2 border-black mb-6">
         <div className="container max-w-4xl mx-auto my-6">
           <div className="mb-6">
-            <div className="inline-flex mr-6">
+            <div className="flex md:inline-flex mb-4 md:mb-0 mr-6">
               <Tag text={city.name} color="black" />
               <Tag text={articleType} color="white" />
             </div>
