@@ -121,3 +121,14 @@ export type HomePageData = {
     items: Array<ShowPreviewEntry>;
   };
 };
+
+type ShowPreviewEntry = {
+  coverImage: CoverImage;
+  date: string;
+  genresCollection: {
+    items: GenreInterface[];
+  };
+  mixcloudLink: string;
+  slug: string;
+  title: string;
+};

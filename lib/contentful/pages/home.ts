@@ -59,7 +59,7 @@ export async function getHomePage() {
 
   const today = dayjs();
 
-  const shows = await getAllShows(false);
+  const shows = extractCollection<ShowInterface>(data, "allShows");
 
   const latestShows = shows
     .sort(sort.date_DESC)
