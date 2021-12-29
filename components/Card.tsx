@@ -12,7 +12,7 @@ const Card = ({ imageUrl, link, title, children }: CardProps) => {
   return (
     <Link href={link} passHref>
       <div className="cursor-pointer">
-        <div className="relative w-full h-80 border-b-2 border-black">
+        <div className="relative w-full h-80 lg:h-96 border-b-2 border-black">
           <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
         </div>
         {children}
