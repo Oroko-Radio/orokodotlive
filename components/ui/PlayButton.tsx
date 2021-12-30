@@ -1,22 +1,42 @@
 import cn from "classnames";
-import Play from "../../icons/play";
+import Play from "../../icons/Play";
+import { playerWidget, showKey } from "../../lib/mixcloud";
+import { getMixcloudKey } from "../../util";
 
 interface PlayButtonProps {
-  handlePlayShow: () => Promise<void>;
-  colorScheme: "solid" | "transparent";
+  colorScheme?: "solid" | "transparent";
+  mixcloudLink: string;
 }
 
 const PlayButton = ({
-  handlePlayShow,
   colorScheme = "solid",
+  mixcloudLink,
 }: PlayButtonProps) => {
+  const [, setKey] = showKey.use();
+  const player = playerWidget.useValue();
+
+  const handlePlayShow = async () => {
+    setKey(getMixcloudKey(mixcloudLink));
+
+    if (player?.play) {
+      console.log("[Mixcloud]", "Play");
+
+      try {
+        await player.togglePlay();
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <div
       className={cn(
         "mx-8 my-2 rounded-full self-center border-black border-2 h-16 w-16 lg:h-32 lg:w-32 flex justify-center items-center",
         {
-          "bg-white": colorScheme === "solid",
-          "bg-transparent": colorScheme === "transparent",
+          "bg-white border-black text-black": colorScheme === "solid",
+          "text-white border-white bg-orokoTransparentBlack hover:scale-110 transition-transform":
+            colorScheme === "transparent",
         }
       )}
     >
@@ -25,7 +45,7 @@ const PlayButton = ({
         onClick={handlePlayShow}
         aria-label="Play Archived Show"
       >
-        <Play />
+        <Play solid={colorScheme === "solid"} />
       </button>
     </div>
   );

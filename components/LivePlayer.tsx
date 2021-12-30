@@ -3,8 +3,8 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import usePlayerState from "../hooks/usePlayerState";
 import useRadioCo from "../hooks/useRadioCo";
-import Pause from "../icons/pause";
-import Play from "../icons/play";
+import Pause from "../icons/Pause";
+import Play from "../icons/Play";
 import Banner from "./Banner";
 import Logo from "../icons/Logo";
 
@@ -17,7 +17,7 @@ const BroadcastingIndicator = ({
     return (
       <div className="flex-grow-0 flex items-center">
         <div className="pl-10 pr-4">
-          <Logo className="text-black w-10 h-full" />
+          <Logo className="text-black stroke-current stroke-2 w-10 h-full" />
         </div>
         <p className="leading-none font-sans mb-0 pr-10">Live</p>
       </div>

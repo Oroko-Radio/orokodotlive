@@ -3,8 +3,17 @@ import dayjs from "dayjs";
 
 import Slider from "../components/Slider";
 import Tag from "../components/Tag";
+import { ShowInterface } from "../types/shared";
 
-const FeaturedShows = ({ shows, heading = "Featured Shows" }) => {
+interface FeaturedShowsProps {
+  shows: ShowInterface[];
+  heading: string;
+}
+
+const FeaturedShows = ({
+  shows,
+  heading = "Featured Shows",
+}: FeaturedShowsProps) => {
   return (
     <div className="overflow-hidden bg-orokoOrange border-b-2 border-black">
       <h1 className="font-serif text-6xl p-8">{heading}</h1>
@@ -16,7 +25,7 @@ const FeaturedShows = ({ shows, heading = "Featured Shows" }) => {
               title,
               date,
               slug,
-              city,
+              mixcloudLink,
               artistsCollection,
               genresCollection,
               coverImage,
@@ -29,6 +38,7 @@ const FeaturedShows = ({ shows, heading = "Featured Shows" }) => {
               link={`/radio/${slug}`}
               key={idx}
               idx={idx}
+              mixcloudLink={mixcloudLink}
             >
               <div className="p-4">
                 <p className="font-sans mb-2 font-semibold">

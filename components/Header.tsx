@@ -17,10 +17,13 @@ const Header = () => {
           onClick={() => isMenuOpen && setIsMenuOpen(false)}
         >
           <Logo
-            className={cx("self-center w-8 h-8 md:w-10 md:h-10", {
-              "text-black": isMenuOpen,
-              "text-white": !isMenuOpen,
-            })}
+            className={cx(
+              "stroke-current stroke-2 self-center w-8 h-8 md:w-10 md:h-10",
+              {
+                "text-black": isMenuOpen,
+                "text-white": !isMenuOpen,
+              }
+            )}
           />
         </div>
       </Link>

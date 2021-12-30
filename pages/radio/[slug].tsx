@@ -8,7 +8,6 @@ import SinglePage from "../../views/SinglePage";
 import dayjs from "dayjs";
 import Tag from "../../components/Tag";
 import { renderRichTextWithImages } from "../../lib/rich-text";
-import Play from "../../icons/play";
 import TitleBox from "../../components/TitleBox";
 import PlayButton from "../../components/ui/PlayButton";
 
@@ -19,23 +18,6 @@ type Props = {
 };
 
 export default function Show({ show, relatedShows, preview }: Props) {
-  const [, setKey] = showKey.use();
-  const player = playerWidget.useValue();
-
-  const handlePlayShow = async () => {
-    setKey(getMixcloudKey(show.mixcloudLink));
-
-    if (player?.play) {
-      console.log("[Mixcloud]", "Play");
-
-      try {
-        await player.togglePlay();
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
   const {
     coverImage,
     title,
@@ -55,7 +37,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
       <TitleBox>
         {mixcloudLink && (
           <div className="flex md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black bg-orokoBlue text-black">
-            <PlayButton colorScheme="solid" handlePlayShow={handlePlayShow} />
+            <PlayButton mixcloudLink={mixcloudLink} />
           </div>
         )}
         <div className="container max-w-4xl mx-auto">

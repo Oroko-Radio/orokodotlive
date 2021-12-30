@@ -23,7 +23,7 @@ const Footer = () => {
         <div className="flex justify-center mb-8">
           <SocialSection />
         </div>
-        <Logo className="text-white w-10 h-10 inline-block mb-4" />
+        <Logo className="stroke-current stroke-2 text-white w-10 h-10 lg:w-14 lg:h-14 inline-block mb-4" />
         <p className="mt-2 mb-8 font-sans xl:text-base">©OROKO 2021</p>
         <p className="inline font-sans xl:text-base">Powered by</p>
         <div className="relative inline-block h-4 w-20 cursor-pointer">

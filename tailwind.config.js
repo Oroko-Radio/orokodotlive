@@ -53,6 +53,7 @@ module.exports = {
         orokoOrange: "#FF6A37",
         orokoBlue: "#27ABFE",
         orokoGreen: "#339D43",
+        orokoTransparentBlack: "rgba(0, 0, 0, 0.3)",
       },
     },
   },

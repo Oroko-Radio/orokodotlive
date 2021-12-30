@@ -1,7 +1,7 @@
 const Logo = ({ className }) => {
   return (
     <svg
-      className={className + " stroke-current stroke-2"}
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 48.417 66"
     >
