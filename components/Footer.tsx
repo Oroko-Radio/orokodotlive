@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import vercelLogo from "../images/vercel-logotype-light.png";
 import SocialSection from "./SocialSection";
-import Logo from "./Logo";
+import Logo from "../icons/Logo";
 
 const Footer = () => {
   return (

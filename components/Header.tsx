@@ -3,7 +3,7 @@ import cx from "classnames";
 import Link from "next/link";
 import Menu from "./Menu";
 import DotButton from "./ui/DotButton";
-import Logo from "./Logo";
+import Logo from "../icons/Logo";
 import MenuIcon from "../icons/MenuIcon";
 import CloseIcon from "../icons/CloseIcon";
 
@@ -13,11 +13,11 @@ const Header = () => {
     <div className="grid grid-cols-5 py-1 bg-black">
       <Link href="/" passHref>
         <div
-          className="p-2 mb-1 ml-4 md:mb-2 md:ml-8 h-10 w-10 z-50 cursor-pointer self-center"
+          className="p-1 mb-1 ml-4 md:mb-2 md:ml-8 h-10 w-10 z-50 cursor-pointer self-center"
           onClick={() => isMenuOpen && setIsMenuOpen(false)}
         >
           <Logo
-            className={cx("w-5 h-5 md:w-6 md:h-6", {
+            className={cx("w-6 h-6 md:w-7 md:h-7", {
               "text-black": isMenuOpen,
               "text-white": !isMenuOpen,
             })}

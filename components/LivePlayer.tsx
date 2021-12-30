@@ -6,7 +6,7 @@ import useRadioCo from "../hooks/useRadioCo";
 import Pause from "../icons/pause";
 import Play from "../icons/play";
 import Banner from "./Banner";
-import Logo from "./Logo";
+import Logo from "../icons/Logo";
 
 const BroadcastingIndicator = ({
   status,
