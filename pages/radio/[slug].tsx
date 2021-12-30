@@ -10,6 +10,7 @@ import Tag from "../../components/Tag";
 import { renderRichTextWithImages } from "../../lib/rich-text";
 import Play from "../../icons/play";
 import TitleBox from "../../components/TitleBox";
+import PlayButton from "../../components/ui/PlayButton";
 
 type Props = {
   show: ShowInterface;
@@ -54,20 +55,12 @@ export default function Show({ show, relatedShows, preview }: Props) {
       <TitleBox>
         {mixcloudLink && (
           <div className="flex md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black bg-orokoBlue text-black">
-            <div className="mx-8 my-2 rounded-full self-center bg-white border-black border-2 h-16 w-16 lg:h-32 lg:w-32 flex justify-center items-center">
-              <button
-                className="h-7 w-7 lg:h-14 lg:w-14 sm:h-9 sm:w-9 focus:outline-none focus:ring-4"
-                onClick={handlePlayShow}
-                aria-label="Play Archived Show"
-              >
-                <Play />
-              </button>
-            </div>
+            <PlayButton colorScheme="solid" handlePlayShow={handlePlayShow} />
           </div>
         )}
         <div className="container max-w-4xl mx-auto">
           {date && (
-            <p className="mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
+            <p className="pt-6 md:pt-0 mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
               {dayjs(date).format("ddd DD MMMM YYYY @ HH") + "H"}
             </p>
           )}
