@@ -34,9 +34,9 @@ export function renderRichTextWithImages(content: Content) {
             return <iframe width="100%" height="120" src={uri} />;
           }
 
-          if (uri.includes("refugeworldwide.com")) {
+          if (uri.includes("oroko.live")) {
             return (
-              <Link href={uri.replace("https://refugeworldwide.com", "")}>
+              <Link href={uri.replace("https://oroko.live", "")}>
                 <a>{children}</a>
               </Link>
             );
@@ -51,14 +51,20 @@ export function renderRichTextWithImages(content: Content) {
 
           if (asset?.contentType.includes("image")) {
             return (
-              <Image
-                src={asset.url}
-                alt={asset.title}
-                width={asset.width}
-                height={asset.height}
-                layout="responsive"
-              />
+              <div className="mb-6">
+                <Image
+                  src={asset.url}
+                  alt={asset.title}
+                  width={asset.width}
+                  height={asset.height}
+                  layout="responsive"
+                />
+              </div>
             );
+          }
+
+          if (asset?.contentType.includes("video")) {
+            return <video src={asset.url} controls />;
           }
 
           return null;

@@ -19,9 +19,7 @@ const BroadcastingIndicator = ({
         <div className="pl-10 pr-4">
           <Logo className="text-black w-10 h-full" />
         </div>
-        <p className="hidden md:block leading-none font-sans mb-0 pr-10">
-          Live
-        </p>
+        <p className="leading-none font-sans mb-0 pr-10">Live</p>
       </div>
     );
 
@@ -94,27 +92,25 @@ export default function LivePlayer() {
 
       {isOnline ? (
         <Banner color="red">
-          {[...Array(3)].map((x, idx) => (
-            <div className="h-full flex align-middle items-center" key={idx}>
-              <div className="border-black border-l-2 h-full"></div>
-              <BroadcastingIndicator status={data?.status} />
-              <h1 className="font-heading inline text-5xl xl:text-6xl mr-10">
-                {data?.current_track?.title.split("-")[1]}
-              </h1>
-              <div className="relative h-full w-36 border-r-2 border-l-2 border-black">
-                <Image
-                  src={data.current_track.artwork_url}
-                  alt={data.current_track.title}
-                  layout="fill"
-                  objectFit="cover"
-                  unoptimized
-                />
-              </div>
-              <h1 className="font-serif inline text-4xl xl:text-5xl mx-10">
-                With {data?.current_track?.title.split("-")[0]}
-              </h1>
+          <div className="h-full flex align-middle items-center">
+            <div className="border-black border-l-2 h-full"></div>
+            <BroadcastingIndicator status={data?.status} />
+            <h1 className="font-heading inline text-5xl xl:text-6xl mr-10">
+              {data?.current_track?.title.split(" - ")[1]}
+            </h1>
+            <div className="relative h-full w-36 border-r-2 border-l-2 border-black">
+              <Image
+                src={data.current_track.artwork_url}
+                alt={data.current_track.title}
+                layout="fill"
+                objectFit="cover"
+                unoptimized
+              />
             </div>
-          ))}
+            <h1 className="font-serif inline text-4xl xl:text-5xl mx-10">
+              With {data?.current_track?.title.split(" - ")[0]}
+            </h1>
+          </div>
         </Banner>
       ) : null}
 

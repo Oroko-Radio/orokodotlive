@@ -83,4 +83,8 @@
   .rich-text a {
     @apply text-orokoBlue;
   }
+
+  .rich-text video {
+    @apply mb-6;
+  }
 }
