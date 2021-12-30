@@ -32,7 +32,7 @@ const PlayButton = ({
   return (
     <div
       className={cn(
-        "mx-8 my-2 rounded-full self-center border-black border-2 h-16 w-16 lg:h-32 lg:w-32 flex justify-center items-center",
+        "mx-8 my-2 rounded-full self-center border-black border-2 h-16 w-16 lg:h-24 lg:w-24 flex justify-center items-center",
         {
           "bg-white border-black text-black": colorScheme === "solid",
           "text-white border-white bg-orokoTransparentBlack hover:scale-110 transition-transform":
