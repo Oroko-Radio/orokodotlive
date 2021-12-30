@@ -87,4 +87,10 @@
   .rich-text video {
     @apply mb-6;
   }
+
+  /* Marquee spacing fix */
+
+  .marquee-wrapper .marquee {
+    min-width: 0% !important;
+  }
 }
