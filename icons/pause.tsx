@@ -1,4 +1,4 @@
-export default function Pause() {
+export function Pause() {
   return (
     <div className="m-1">
       <svg
