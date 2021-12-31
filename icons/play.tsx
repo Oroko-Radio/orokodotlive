@@ -1,4 +1,4 @@
-export default function Play() {
+export default function play() {
   return (
     <>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -2 40 40">
