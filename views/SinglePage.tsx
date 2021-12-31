@@ -25,7 +25,7 @@ const SinglePage = ({
           objectFit="cover"
         />
         {withBackButton && (
-          <div className="absolute top-8 left-8">
+          <div className="absolute top-4 left-4 md:top-8 md:left-8">
             <BackButton />
           </div>
         )}
