@@ -4,7 +4,7 @@ import Image from "next/image";
 import usePlayerState from "../hooks/usePlayerState";
 import useRadioCo from "../hooks/useRadioCo";
 import Pause from "../icons/pause";
-import Play from "../icons/Play";
+import Play from "../icons/play";
 import Banner from "./Banner";
 import Logo from "../icons/Logo";
 

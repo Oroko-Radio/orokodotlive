@@ -1,5 +1,5 @@
 import cn from "classnames";
-import Play from "../../icons/Play";
+import Play from "../../icons/play";
 import { playerWidget, showKey } from "../../lib/mixcloud";
 import { getMixcloudKey } from "../../util";
 
