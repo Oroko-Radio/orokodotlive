@@ -70,7 +70,7 @@ export async function getHomePage() {
       data,
       "featuredArticles"
     ),
-    featuredShows: extractCollection<HomePageData>(data, "featuredShows"),
+    featuredShows: extractCollection<ShowInterface>(data, "featuredShows"),
     latestShows,
     latestArticles: extractCollection<ArticleInterface>(data, "latestArticles"),
   };

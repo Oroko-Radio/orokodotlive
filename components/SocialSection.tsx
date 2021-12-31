@@ -7,6 +7,7 @@ const SocialSection = () => {
       <SocialIcon social="Twitter" />
       <SocialIcon social="Facebook" />
       <SocialIcon social="Instagram" />
+      <SocialIcon social="Discord" />
     </div>
   );
 };

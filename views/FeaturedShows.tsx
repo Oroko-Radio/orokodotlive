@@ -7,7 +7,7 @@ import { ShowInterface } from "../types/shared";
 
 interface FeaturedShowsProps {
   shows: ShowInterface[];
-  heading: string;
+  heading?: string;
 }
 
 const FeaturedShows = ({

@@ -6,7 +6,7 @@ interface CardProps {
   imageUrl: string;
   title: string;
   link: string;
-  mixcloudLink: string;
+  mixcloudLink?: string;
   children?: any;
 }
 

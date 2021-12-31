@@ -4,10 +4,10 @@ import dayjs from "dayjs";
 import Card from "../components/Card";
 import Tag from "../components/Tag";
 
-const AllNews = ({ articles }) => {
+const AllNews = ({ articles, heading = "All News" }) => {
   return (
     <>
-      <h1 className="font-serif text-6xl m-8">All News</h1>
+      <h1 className="font-serif text-6xl m-8">{heading}</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 m-8">
         {articles.map(
           (
