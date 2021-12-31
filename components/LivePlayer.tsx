@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import usePlayerState from "../hooks/usePlayerState";
 import useRadioCo from "../hooks/useRadioCo";
-import Play from "../icons/Play";
 import Banner from "./Banner";
 import Logo from "../icons/Logo";
 import PauseIcon from "../icons/PauseIcon";
