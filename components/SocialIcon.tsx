@@ -11,7 +11,7 @@ const socialsMap: socialsMapType = {
   Instagram: { icon: instagram, link: "https://www.instagram.com/orokoradio/" },
   TikTok: { icon: tiktok, link: "https://www.tiktok.com/@orokoradio" },
   Twitter: { icon: twitter, link: "https://twitter.com/orokoradio" },
-  Discord: { icon: discord, link: "https://twitter.com/orokoradio" },
+  Discord: { icon: discord, link: "https://discord.gg/BDSBE6Ey4w" },
 };
 
 type socialType = {
