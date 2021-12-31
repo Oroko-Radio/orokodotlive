@@ -1,11 +1,11 @@
 import { graphql } from "..";
-import { SupportPageData } from "../../../types/shared";
+import { AboutPageData } from "../../../types/shared";
 import { extractPage } from "../../../util";
 
-export async function getSupportPage(preview: boolean) {
-  const SupportPageQuery = /* GraphQL */ `
-    query SupportPageQuery($preview: Boolean) {
-      page(id: "5byT8RSCOlOn5gy3LgyTF5", preview: $preview) {
+export async function getAboutPage(preview: boolean) {
+  const AboutPageQuery = /* GraphQL */ `
+    query AboutPageQuery($preview: Boolean) {
+      page(id: "6vUKuPtMaZBYWP7K3dMER7", preview: $preview) {
         title
         subtitle
         coverImage {
@@ -34,10 +34,10 @@ export async function getSupportPage(preview: boolean) {
     }
   `;
 
-  const data = await graphql(SupportPageQuery, {
+  const data = await graphql(AboutPageQuery, {
     variables: { preview },
     preview,
   });
 
-  return extractPage<SupportPageData>(data, "page");
+  return extractPage<AboutPageData>(data, "page");
 }

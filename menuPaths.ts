@@ -17,4 +17,8 @@ export const links: LinkInterface[] = [
     name: "Support",
     url: "/support",
   },
+  {
+    name: "About",
+    url: "/about",
+  },
 ];

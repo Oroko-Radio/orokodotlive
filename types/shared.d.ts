@@ -144,3 +144,10 @@ export interface SupportPageData {
   coverImage: CoverImage;
   content: Content;
 }
+
+export interface AboutPageData {
+  title: string;
+  subtitle: string;
+  coverImage: CoverImage;
+  content: Content;
+}

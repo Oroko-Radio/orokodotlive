@@ -6,7 +6,7 @@ export default function TitleBox({
   bgColor,
 }: {
   children: ReactNode;
-  bgColor?: "green";
+  bgColor?: "green" | "red";
 }) {
   return (
     <section
@@ -14,6 +14,7 @@ export default function TitleBox({
         "relative border-black border-2 mb-6 pb-6 md:py-6 lg:pb-10",
         {
           "bg-orokoGreen": bgColor === "green",
+          "bg-orokoRed": bgColor === "red",
         }
       )}
     >

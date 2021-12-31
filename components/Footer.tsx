@@ -8,8 +8,8 @@ import { links } from "../menuPaths";
 const Footer = () => {
   return (
     <div className="bg-black p-8">
-      <div className="max-w-sm mx-auto text-center text-white">
-        <ul className="flex font-bold text-2xl justify-center gap-10 mb-8">
+      <div className="mx-auto text-center text-white">
+        <ul className="flex flex-wrap font-bold text-lg md:text-2xl justify-center gap-6 md:gap-10 mb-8">
           {links.map(({ name, url }, idx) => (
             <Link key={idx} href={url} passHref>
               <li className="cursor-pointer hover:opacity-70 transition-opacity">
