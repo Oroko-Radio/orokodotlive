@@ -7,6 +7,7 @@ import Play from "../icons/Play";
 import Banner from "./Banner";
 import Logo from "../icons/Logo";
 import PauseIcon from "../icons/PauseIcon";
+import PlayIcon from "../icons/PlayIcon";
 
 const BroadcastingIndicator = ({
   status,
@@ -84,7 +85,7 @@ export default function LivePlayer() {
                 isPlaying ? "Pause Live Broadcast" : "Play Live Broadcast"
               }
             >
-              {isPlaying ? <PauseIcon /> : <Play />}
+              {isPlaying ? <PauseIcon /> : <PlayIcon />}
             </button>
           </div>
         </div>
