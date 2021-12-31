@@ -16,7 +16,6 @@ const UpcomingShows = ({ shows, heading = "Coming up on OROKO" }) => {
               title,
               date,
               slug,
-              city,
               artistsCollection,
               genresCollection,
               coverImage,

@@ -12,7 +12,7 @@ interface CardProps {
   children?: any;
   cardWidth?: "half" | "quarter";
   playButton?: boolean;
-  mixcloudLink: string;
+  mixcloudLink?: string;
 }
 
 const SliderCard = ({
