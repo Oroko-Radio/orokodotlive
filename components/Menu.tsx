@@ -1,20 +1,6 @@
 import Link from "next/link";
+import { links } from "../menuPaths";
 import DotButton from "./ui/DotButton";
-
-const links = [
-  {
-    name: "Radio",
-    url: "/radio",
-  },
-  {
-    name: "Artists",
-    url: "/artists",
-  },
-  {
-    name: "News",
-    url: "/news",
-  },
-];
 
 type MenuProps = {
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;

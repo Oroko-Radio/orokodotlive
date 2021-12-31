@@ -132,3 +132,8 @@ type ShowPreviewEntry = {
   slug: string;
   title: string;
 };
+
+export interface LinkInterface {
+  name: string;
+  url: string;
+}

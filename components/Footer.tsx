@@ -3,12 +3,20 @@ import Image from "next/image";
 import vercelLogo from "../images/vercel-logotype-light.png";
 import SocialSection from "./SocialSection";
 import Logo from "../icons/Logo";
+import { links } from "../menuPaths";
 
 const Footer = () => {
   return (
     <div className="bg-black p-8">
       <div className="max-w-sm mx-auto text-center text-white">
         <ul className="flex font-bold text-2xl justify-center gap-10 mb-8">
+          {links.map(({ name, url }, idx) => (
+            <Link key={idx} href={url} passHref>
+              <li className="cursor-pointer hover:opacity-70 transition-opacity">
+                {name}
+              </li>
+            </Link>
+          ))}
           <Link href="https://www.patreon.com/orokoradio">
             <a target="_blank">
               <li className="hover:opacity-70 transition-opacity">Patreon</li>

@@ -65,7 +65,7 @@ export default function MixcloudPlayer({ mini = true }: { mini?: boolean }) {
         onLoad={handleIframeLoad}
         id="mixcloud-player"
         height={mini ? 60 : 120}
-        className="fixed bottom-0 left-0 w-full md:w-2/3 lg:w-1/2"
+        className="z-50 fixed bottom-0 left-0 w-full md:w-2/3 lg:w-1/2"
         src={
           `https://www.mixcloud.com/widget/iframe/?` +
           `hide_cover=1&` +

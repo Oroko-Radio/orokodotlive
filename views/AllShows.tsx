@@ -18,6 +18,7 @@ const AllShows = ({ shows }) => {
               genresCollection,
               artistsCollection,
               coverImage,
+              mixcloudLink,
             },
             idx
           ) => (
@@ -26,6 +27,7 @@ const AllShows = ({ shows }) => {
                 imageUrl={coverImage.url}
                 title={title}
                 link={`/radio/${slug}`}
+                mixcloudLink={mixcloudLink}
               >
                 <div className="p-4">
                   <p className="font-sans mb-2 font-semibold">
