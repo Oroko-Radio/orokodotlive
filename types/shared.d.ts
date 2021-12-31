@@ -137,3 +137,10 @@ export interface LinkInterface {
   name: string;
   url: string;
 }
+
+export interface SupportPageData {
+  title: string;
+  subtitle: string;
+  coverImage: CoverImage;
+  content: Content;
+}

@@ -5,14 +5,14 @@ import BackButton from "../components/ui/BackButton";
 interface SinglePageProps {
   coverImage: string;
   coverImageAlt: string;
-  withBackButton: boolean;
+  withBackButton?: boolean;
   children: ReactNode;
 }
 
 const SinglePage = ({
   coverImage,
   coverImageAlt,
-  withBackButton,
+  withBackButton = false,
   children,
 }: SinglePageProps) => {
   return (
