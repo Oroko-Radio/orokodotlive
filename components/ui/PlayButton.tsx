@@ -31,7 +31,7 @@ const PlayButton = ({
   return (
     <>
       {colorScheme === "solid" ? (
-        <div className="bg-white text-black mx-8 my-2 rounded-full self-center border-black border-2 h-16 w-16 lg:h-24 lg:w-24 flex justify-center items-center">
+        <div className="hover:scale-110 transition-transform bg-white text-black mx-8 my-2 rounded-full self-center border-black border-2 h-16 w-16 lg:h-24 lg:w-24 flex justify-center items-center">
           <button
             className="h-7 w-7 lg:h-14 lg:w-14 sm:h-9 sm:w-9 focus:outline-none focus:ring-4"
             onClick={handlePlayShow}
