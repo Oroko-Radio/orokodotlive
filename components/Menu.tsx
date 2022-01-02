@@ -14,20 +14,10 @@ const Menu = ({ setIsMenuOpen }: MenuProps) => {
           {links.map(({ name, url }, idx) => (
             <Link key={idx} href={url} passHref>
               <li onClick={() => setIsMenuOpen(false)}>
-                <DotButton>{name}</DotButton>
+                <DotButton transparent>{name}</DotButton>
               </li>
             </Link>
           ))}
-          <Link href="https://www.patreon.com/orokoradio" passHref>
-            <li onClick={() => setIsMenuOpen(false)}>
-              <DotButton>Patreon</DotButton>
-            </li>
-          </Link>
-          <Link href="mailto:info@oroko.live" passHref>
-            <li onClick={() => setIsMenuOpen(false)}>
-              <DotButton>Contact</DotButton>
-            </li>
-          </Link>
         </ul>
       </nav>
       <p className="block text-xl md:text-3xl text-center">

@@ -43,7 +43,7 @@ const Header = () => {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <div className="hidden md:block">
-          <DotButton>Menu</DotButton>
+          <DotButton size="large">Menu</DotButton>
         </div>
         <div
           className={cx(

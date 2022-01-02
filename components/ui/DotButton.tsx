@@ -3,17 +3,21 @@ import { ReactNode } from "react";
 
 const DotButton = ({
   size = "small",
+  transparent = false,
   children,
 }: {
   size?: "small" | "large";
+  transparent?: boolean;
   children: ReactNode;
 }) => {
   return (
     <div
       className={cn(
-        "inline group xl:text-lg cursor-pointer border-2 border-black bg-white rounded-full font-bold px-3 py-1",
+        "inline group xl:text-lg cursor-pointer border-2 border-black rounded-full font-bold px-3 py-1",
         {
           "py-1.5": size === "large",
+          "bg-transparent": transparent,
+          "bg-white": !transparent,
         }
       )}
     >
