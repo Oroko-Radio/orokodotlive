@@ -25,7 +25,7 @@ const SinglePage = ({
             {[...Array(2)].map((x, idx) => (
               <div
                 key={idx}
-                className="relative w-3/5 flex-shrink-0 border-r-2 border-black"
+                className="relative w-full lg:w-3/5 flex-shrink-0 border-r-2 border-black"
               >
                 <Image
                   key={idx}
