@@ -1,7 +1,7 @@
 import type { InferGetStaticPropsType } from "next";
 import Hero from "../components/Hero";
 import Meta from "../components/Meta";
-import Newsletter from "../components/Newsletter";
+import NewsletterSection from "../components/NewsletterSection";
 import { getHomePage } from "../lib/contentful/pages/home";
 import FeaturedArticles from "../views/FeaturedArticles";
 import FeaturedShows from "../views/FeaturedShows";
@@ -26,7 +26,7 @@ export default function HomePage({
       <LatestShows shows={latestShows} />
       <FeaturedShows shows={featuredShows} />
       <FeaturedArticles featuredArticles={featuredArticles} heading="News" />
-      <Newsletter />
+      <NewsletterSection />
     </main>
   );
 }

@@ -2,10 +2,10 @@ import { graphql } from "..";
 import { SinglePageData } from "../../../types/shared";
 import { extractPage } from "../../../util";
 
-export async function getSupportPage(preview: boolean) {
-  const SupportPageQuery = /* GraphQL */ `
-    query SupportPageQuery($preview: Boolean) {
-      page(id: "5byT8RSCOlOn5gy3LgyTF5", preview: $preview) {
+export async function getNewsletterPage(preview: boolean) {
+  const NewsletterPageQuery = /* GraphQL */ `
+    query NewsletterPageQuery($preview: Boolean) {
+      page(id: "7v8oxc2kd55IN0YyHQINuE", preview: $preview) {
         title
         subtitle
         coverImage {
@@ -34,7 +34,7 @@ export async function getSupportPage(preview: boolean) {
     }
   `;
 
-  const data = await graphql(SupportPageQuery, {
+  const data = await graphql(NewsletterPageQuery, {
     variables: { preview },
     preview,
   });

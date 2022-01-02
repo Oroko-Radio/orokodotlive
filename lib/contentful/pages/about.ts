@@ -1,5 +1,5 @@
 import { graphql } from "..";
-import { AboutPageData } from "../../../types/shared";
+import { SinglePageData } from "../../../types/shared";
 import { extractPage } from "../../../util";
 
 export async function getAboutPage(preview: boolean) {
@@ -39,5 +39,5 @@ export async function getAboutPage(preview: boolean) {
     preview,
   });
 
-  return extractPage<AboutPageData>(data, "page");
+  return extractPage<SinglePageData>(data, "page");
 }

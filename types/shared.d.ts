@@ -1,5 +1,25 @@
 import { Document } from "@contentful/rich-text-types";
 
+export interface CoverImage {
+  sys: { id: string };
+  title: string;
+  description: string;
+  url: string;
+  width: number;
+  height: number;
+}
+
+export interface Links {
+  assets: {
+    block: Asset[];
+  };
+}
+
+export interface Content {
+  json: Document;
+  links?: Links;
+}
+
 export type ErrorPayloadMessage = {
   message: string;
   extensions: {
@@ -138,14 +158,7 @@ export interface LinkInterface {
   url: string;
 }
 
-export interface SupportPageData {
-  title: string;
-  subtitle: string;
-  coverImage: CoverImage;
-  content: Content;
-}
-
-export interface AboutPageData {
+export interface SinglePageData {
   title: string;
   subtitle: string;
   coverImage: CoverImage;

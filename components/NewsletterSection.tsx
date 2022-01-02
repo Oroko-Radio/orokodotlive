@@ -2,7 +2,7 @@ import Image from "next/image";
 import NewsletterForm from "./forms/newsletterForm";
 import newsletterBG from "/public/static/newsletter-bg.svg";
 
-const Newsletter = () => {
+const NewsletterSection = () => {
   return (
     <div className="relative py-20 flex items-center justify-center border-t-2 border-black">
       <Image
@@ -21,10 +21,12 @@ const Newsletter = () => {
           Sign up to the Oroko newsletter to stay up to date with all our
           upcoming events, projects, announcements, residencies and more.
         </p>
-        <NewsletterForm />
+        <div className="w-full">
+          <NewsletterForm />
+        </div>
       </div>
     </div>
   );
 };
 
-export default Newsletter;
+export default NewsletterSection;
