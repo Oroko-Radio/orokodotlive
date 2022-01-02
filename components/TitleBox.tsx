@@ -6,18 +6,16 @@ export default function TitleBox({
   bgColor,
 }: {
   children: ReactNode;
-  bgColor?: "green" | "red" | "orange";
+  bgColor?: "green" | "red" | "orange" | "light-orange";
 }) {
   return (
     <section
-      className={cn(
-        "relative border-black border-2 mb-6 pb-6 md:py-6 lg:pb-10",
-        {
-          "bg-orokoGreen": bgColor === "green",
-          "bg-orokoRed": bgColor === "red",
-          "bg-orokoOrange": bgColor === "orange",
-        }
-      )}
+      className={cn("relative border-black border-2 pb-6 md:py-6 lg:pb-10", {
+        "bg-orokoGreen": bgColor === "green",
+        "bg-orokoRed": bgColor === "red",
+        "bg-orokoOrange": bgColor === "orange",
+        "bg-orokoLightOrange": bgColor === "light-orange",
+      })}
     >
       {children}
     </section>

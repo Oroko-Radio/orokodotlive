@@ -32,7 +32,7 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
           </div>
         </div>
       </TitleBox>
-      <section className="container max-w-4xl mx-auto rich-text mb-24">
+      <section className="container max-w-4xl mx-auto rich-text py-10 mb-24">
         {renderRichTextWithImages(content)}
       </section>
     </SinglePage>

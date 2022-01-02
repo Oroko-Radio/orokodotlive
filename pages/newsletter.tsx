@@ -32,8 +32,8 @@ export default function Newsletter({
           <h2 className="font-serif text-4xl lg:text-6xl">{subtitle}</h2>
         </div>
       </TitleBox>
-      <div className="border-b-2 border-black">
-        <section className="container max-w-4xl pb-6 mx-auto">
+      <div className="border-b-2 border-black py-10">
+        <section className="container max-w-4xl mx-auto">
           <p className="mb-8 text-2xl font-sans">
             Sign up to the Oroko newsletter to stay up to date with all our
             upcoming events, projects, announcements, residencies and more.

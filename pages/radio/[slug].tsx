@@ -73,7 +73,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
           </div>
         </div>
       </TitleBox>
-      <section className="container max-w-4xl mx-auto rich-text mb-24">
+      <section className="container max-w-4xl mx-auto rich-text py-10 mb-24">
         {renderRichTextWithImages(content)}
       </section>
     </SinglePage>

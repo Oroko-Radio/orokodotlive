@@ -25,4 +25,8 @@ export const links: LinkInterface[] = [
     name: "Newsletter",
     url: "/newsletter",
   },
+  {
+    name: "Apply",
+    url: "/apply",
+  },
 ];
