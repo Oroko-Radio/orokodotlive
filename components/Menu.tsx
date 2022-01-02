@@ -8,9 +8,9 @@ type MenuProps = {
 
 const Menu = ({ setIsMenuOpen }: MenuProps) => {
   return (
-    <div className="absolute top-0 p-4 pt-16 md:p-20 w-full max-h-full bg-orokoYellow text-black border-b-2 border-black z-40 shadow-2xl">
+    <div className="absolute top-0 p-4 pt-20 xl:p-20 xl:pt-28 w-full max-h-full bg-orokoYellow text-black border-b-2 border-black z-40 shadow-2xl">
       <nav className="mb-10">
-        <ul className="flex flex-col md:flex-row justify-center items-center md:space-x-2 space-y-4 md:space-y-0">
+        <ul className="flex flex-col xl:flex-row justify-center items-center xl:space-x-2 space-y-4 xl:space-y-0">
           {links.map(({ name, url }, idx) => (
             <Link key={idx} href={url} passHref>
               <li onClick={() => setIsMenuOpen(false)}>
@@ -18,6 +18,16 @@ const Menu = ({ setIsMenuOpen }: MenuProps) => {
               </li>
             </Link>
           ))}
+          <Link href="https://www.patreon.com/orokoradio" passHref>
+            <li onClick={() => setIsMenuOpen(false)}>
+              <DotButton>Patreon</DotButton>
+            </li>
+          </Link>
+          <Link href="mailto:info@oroko.live" passHref>
+            <li onClick={() => setIsMenuOpen(false)}>
+              <DotButton>Contact</DotButton>
+            </li>
+          </Link>
         </ul>
       </nav>
       <p className="block text-xl md:text-3xl text-center">
