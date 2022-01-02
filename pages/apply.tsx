@@ -9,6 +9,7 @@ const Apply = () => {
     <SinglePage
       coverImage="/static/contact-bg.svg"
       coverImageAlt="Contact Oroko"
+      repeatCover={false}
     >
       <TitleBox bgColor="light-orange">
         <div className="container max-w-4xl mx-auto">

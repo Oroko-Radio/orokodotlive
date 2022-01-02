@@ -20,7 +20,11 @@ export default function About({
   content,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <SinglePage coverImage={coverImage.url} coverImageAlt="View">
+    <SinglePage
+      coverImage={coverImage.url}
+      coverImageAlt="View"
+      repeatCover={false}
+    >
       <TitleBox bgColor="red">
         <div className="container max-w-4xl mx-auto">
           <h1 className="mt-6 md:mt-0 text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">

@@ -23,6 +23,7 @@ export default function Newsletter({
     <SinglePage
       coverImage="/static/newsletter-bg.svg"
       coverImageAlt="Newsletter"
+      repeatCover={false}
     >
       <TitleBox bgColor="orange">
         <div className="container max-w-4xl mx-auto">
