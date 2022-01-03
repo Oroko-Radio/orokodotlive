@@ -114,7 +114,7 @@ export default function LivePlayer() {
         </Banner>
       ) : null}
 
-      <audio hidden id="refuge-live-player" preload="none" ref={player}>
+      <audio hidden id="oroko-live-player" preload="none" ref={player}>
         <source ref={source} type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
