@@ -10,6 +10,7 @@ import Tag from "../../components/Tag";
 import { renderRichTextWithImages } from "../../lib/rich-text";
 import TitleBox from "../../components/TitleBox";
 import PlayButton from "../../components/ui/PlayButton";
+import ShareButton from "../../components/ui/ShareButton";
 
 type Props = {
   show: ShowInterface;
@@ -21,6 +22,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
   const {
     coverImage,
     title,
+    slug,
     date,
     content,
     artistsCollection,
@@ -36,8 +38,15 @@ export default function Show({ show, relatedShows, preview }: Props) {
     >
       <TitleBox>
         {mixcloudLink && (
-          <div className="flex md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black bg-orokoBlue text-black">
-            <PlayButton mixcloudLink={mixcloudLink} />
+          <div className="grid grid-cols-2 auto-rows-fr md:grid-cols-1 md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black text-black">
+            <div className="border-black md:order-2 bg-orokoYellow border-r-2 md:border-r-0 flex justify-center">
+              <div className="self-center">
+                <ShareButton details={{ title, slug }} />
+              </div>
+            </div>
+            <div className="border-black md:order-1 bg-orokoBlue md:border-b-2 flex justify-center align-middle">
+              <PlayButton mixcloudLink={mixcloudLink} />
+            </div>
           </div>
         )}
         <div className="container max-w-4xl mx-auto">

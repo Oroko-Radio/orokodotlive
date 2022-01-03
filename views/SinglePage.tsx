@@ -21,7 +21,7 @@ const SinglePage = ({
     <article>
       <div className="relative h-half border-r-2 border-l-2 border-black">
         {repeatCover ? (
-          <div className="flex relative h-full">
+          <div className="flex relative h-full overflow-hidden">
             {[...Array(2)].map((x, idx) => (
               <div
                 key={idx}
