@@ -44,7 +44,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
                 <ShareButton details={{ title, slug }} />
               </div>
             </div>
-            <div className="border-black md:order-1 bg-orokoBlue md:border-b-2 flex justify-center align-middle">
+            <div className="border-black md:order-1 bg-orokoBlue md:border-b-2 flex justify-center align-middle xl:px-16">
               <PlayButton mixcloudLink={mixcloudLink} />
             </div>
           </div>
