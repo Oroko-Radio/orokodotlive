@@ -64,7 +64,7 @@ export function renderRichTextWithImages(content: Content) {
           }
 
           if (asset?.contentType.includes("video")) {
-            return <video src={asset.url} controls />;
+            return <video src={asset.url} autoPlay muted loop />;
           }
 
           return null;
