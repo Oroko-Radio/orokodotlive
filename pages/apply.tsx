@@ -11,7 +11,7 @@ const Apply = () => {
       coverImageAlt="Contact Oroko"
       repeatCover={false}
     >
-      <TitleBox bgColor="light-orange">
+      <TitleBox bgColor="light-orange" title="Apply" slug="apply">
         <div className="container max-w-4xl mx-auto">
           <h1 className="mt-6 md:mt-0 text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
             Radio Residencies

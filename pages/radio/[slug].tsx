@@ -36,19 +36,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
       coverImageAlt={title}
       withBackButton
     >
-      <TitleBox>
-        {mixcloudLink && (
-          <div className="grid grid-cols-2 auto-rows-fr md:grid-cols-1 md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black text-black">
-            <div className="border-black md:order-2 bg-orokoYellow border-r-2 md:border-r-0 flex justify-center">
-              <div className="self-center">
-                <ShareButton details={{ title, slug }} />
-              </div>
-            </div>
-            <div className="border-black md:order-1 bg-orokoBlue md:border-b-2 flex justify-center align-middle xl:px-16">
-              <PlayButton mixcloudLink={mixcloudLink} />
-            </div>
-          </div>
-        )}
+      <TitleBox mixcloudLink={mixcloudLink} title={title} slug={slug}>
         <div className="container max-w-4xl mx-auto">
           {date && (
             <p className="pt-6 md:pt-0 mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
