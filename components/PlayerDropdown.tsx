@@ -28,10 +28,10 @@ export default function PlayerDropdown() {
   }, []);
 
   return (
-    <section className="grid grid-cols-5 bg-orokoRed border-b-2 border-black shadow-2xl">
-      <div className="col-span-3 border-r-2 p-4 border-black">
-        <p className="font-sans font-semibold text-black text-sm mb-2">LIVE</p>
-        <div className="relative border-2 border-black w-full h-72 mb-4">
+    <section className="grid grid-cols-3 bg-orokoRed border-b-2 border-black shadow-2xl">
+      <div className="col-span-2 border-r-2 p-4 border-black">
+        <p className="font-sans text-black text-sm mb-2">LIVE</p>
+        <div className="relative border-2 border-black w-full h-72 xl:h-96 mb-4">
           <Image
             src={data.current_track.artwork_url_large}
             alt={data.current_track.title}
@@ -48,17 +48,21 @@ export default function PlayerDropdown() {
         </h1>
       </div>
       {nextUp && (
-        <div className="col-span-2 bg-orokoBlue p-4 text-black">
-          <p className="font-sans font-semibold text-sm mb-2">NEXT UP</p>
-          <div className="relative border-2 border-black rounded-full overflow-hidden w-72 h-72 mb-4">
-            <Image
-              src={nextUp.coverImage.url}
-              alt={nextUp.title}
-              layout="fill"
-              objectFit="cover"
-            />
+        <div className="col-span-1 bg-orokoBlue p-4 text-black">
+          <p className="font-sans text-sm mb-2">NEXT UP</p>
+          <div className="flex justify-center">
+            <div className="relative border-2 border-black rounded-full overflow-hidden w-72 h-72 xl:w-96 xl:h-96 mb-4">
+              <Image
+                src={nextUp.coverImage.url}
+                alt={nextUp.title}
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
           </div>
-          <p className="font-sans"></p>
+          <p className="font-sans mb-2 text-base">
+            {dayjs(nextUp.date).format("DD MMM / HH").toUpperCase() + "H"}
+          </p>
           <h1 className="font-heading text-5xl">{nextUp.title}</h1>
           <h2 className="font-serif text-4xl mb-4 lg:mb-10">
             {" "}
