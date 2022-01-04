@@ -19,6 +19,7 @@ const LatestShows = ({ shows, heading = "Latest Shows" }) => {
               artistsCollection,
               genresCollection,
               coverImage,
+              mixcloudLink,
             },
             idx
           ) => (
@@ -29,6 +30,7 @@ const LatestShows = ({ shows, heading = "Latest Shows" }) => {
               cardWidth="quarter"
               key={idx}
               idx={idx}
+              mixcloudLink={mixcloudLink}
             >
               <div className="p-4">
                 <p className="font-sans mb-2 font-semibold">
