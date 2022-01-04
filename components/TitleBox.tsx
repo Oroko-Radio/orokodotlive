@@ -18,7 +18,7 @@ export default function TitleBox({
 }) {
   return (
     <section
-      className={cn("relative border-black border-2 md:py-6 lg:pb-10", {
+      className={cn("relative border-black border-b-2 md:py-6 lg:pb-10", {
         "bg-orokoGreen": bgColor === "green",
         "bg-orokoRed": bgColor === "red",
         "bg-orokoOrange": bgColor === "orange",

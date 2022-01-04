@@ -19,13 +19,13 @@ const SinglePage = ({
 }: SinglePageProps) => {
   return (
     <article>
-      <div className="relative h-half border-r-2 border-l-2 border-black">
+      <div className="relative h-half border-black border-b-2">
         {repeatCover ? (
           <div className="flex relative h-full overflow-hidden">
             {[...Array(2)].map((x, idx) => (
               <div
                 key={idx}
-                className="relative w-full lg:w-3/5 flex-shrink-0 border-r-2 border-black"
+                className="relative w-full lg:w-3/5 flex-shrink-0 lg:border-r-2 border-black"
               >
                 <Image
                   key={idx}
