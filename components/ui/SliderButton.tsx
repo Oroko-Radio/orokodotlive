@@ -4,7 +4,13 @@ import Image from "next/image";
 import chevronRight from "../../images/ui/chevron-right.svg";
 import chevronLeft from "../../images/ui/chevron-left.svg";
 
-const SliderButton = ({ onClick, type }) => (
+const SliderButton = ({
+  onClick,
+  type,
+}: {
+  onClick: () => void;
+  type: "left" | "right";
+}) => (
   <button
     onClick={onClick}
     className={cn(

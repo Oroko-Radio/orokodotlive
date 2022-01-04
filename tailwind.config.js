@@ -45,6 +45,10 @@ module.exports = {
       zIndex: {
         "-10": -10,
       },
+      inset: {
+        18: "4.5rem",
+        22: "5.2rem",
+      },
       colors: {
         offBlack: "#2F2726",
         orokoYellow: "#FFC928",

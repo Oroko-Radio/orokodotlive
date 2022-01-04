@@ -1,14 +1,24 @@
+import cn from "classnames";
 import Link from "next/link";
 import { links } from "../menuPaths";
 import DotButton from "./ui/DotButton";
 
-type MenuProps = {
+interface MenuProps {
+  isMenuOpen: boolean;
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
-const Menu = ({ setIsMenuOpen }: MenuProps) => {
+const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
   return (
-    <div className="absolute top-0 p-4 pt-20 xl:p-20 xl:pt-28 w-full max-h-full bg-orokoYellow text-black border-b-2 border-black z-40 shadow-2xl">
+    <div
+      className={cn(
+        "absolute top-0 p-4 pt-20 xl:p-20 xl:pt-28 w-full max-h-full bg-orokoYellow text-black border-b-2 border-black z-40 shadow-2xl transition-transform",
+        {
+          "-translate-y-full": !isMenuOpen,
+          "translate-y-0": isMenuOpen,
+        }
+      )}
+    >
       <nav className="mb-10">
         <ul className="flex flex-col xl:flex-row justify-center items-center xl:space-x-2 space-y-4 xl:space-y-0">
           {links.map(({ name, url }, idx) => (

@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import usePlayerState from "../hooks/usePlayerState";
 import useRadioCo from "../hooks/useRadioCo";
@@ -7,6 +7,10 @@ import Banner from "./Banner";
 import Logo from "../icons/Logo";
 import PauseIcon from "../icons/PauseIcon";
 import PlayIcon from "../icons/PlayIcon";
+import SliderButton from "./ui/SliderButton";
+import DropdownButton from "./ui/DropdownButton";
+import PlayerDropdown from "./PlayerDropdown";
+import { OROKO_LIVE } from "../constants";
 
 const BroadcastingIndicator = ({
   status,
@@ -32,8 +36,6 @@ const BroadcastingIndicator = ({
 };
 
 export default function LivePlayer() {
-  const OROKO_LIVE = "s23b8ada46";
-
   const AUDIO_SRC = `https://s5.radio.co/${OROKO_LIVE}/listen`;
 
   const { data } = useRadioCo(OROKO_LIVE);
@@ -49,6 +51,8 @@ export default function LivePlayer() {
     url: AUDIO_SRC,
   });
 
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+
   useEffect(() => {
     if ("mediaSession" in navigator && data?.current_track) {
       navigator.mediaSession.metadata = new MediaMetadata({
@@ -56,7 +60,7 @@ export default function LivePlayer() {
         artist: "Oroko Radio",
         artwork: [
           {
-            src: data.current_track.artwork_url_large,
+            src: data.current_track.artwork_url,
             sizes: "1024x1024",
             type: "image/png",
           },
@@ -68,7 +72,7 @@ export default function LivePlayer() {
   return (
     <section
       className={cn(
-        "text-white h-18 flex items-center border-b-2 border-black overflow-hidden",
+        "group text-white h-18 flex items-center border-b-2 border-black",
         {
           "sticky top-0 z-30": isOnline,
         }
@@ -91,33 +95,54 @@ export default function LivePlayer() {
       )}
 
       {isOnline ? (
-        <Banner color="red">
-          <div className="h-full flex align-middle items-center">
-            <div className="border-black border-l-2 h-full"></div>
-            <BroadcastingIndicator status={data?.status} />
-            <h1 className="font-heading inline text-5xl xl:text-6xl mr-10">
-              {data?.current_track?.title.split(" - ")[1]}
-            </h1>
-            <div className="relative h-full w-36 border-r-2 border-l-2 border-black">
-              <Image
-                src={data.current_track.artwork_url}
-                alt={data.current_track.title}
-                layout="fill"
-                objectFit="cover"
-                unoptimized
-              />
+        <div className="overflow-hidden h-full z-30">
+          <Banner color="red">
+            <div className="h-full flex align-middle items-center">
+              <div className="border-black border-l-2 h-full"></div>
+              <BroadcastingIndicator status={data?.status} />
+              <h1 className="font-heading inline text-5xl xl:text-6xl mr-10">
+                {data?.current_track?.title.split(" - ")[1]}
+              </h1>
+              <div className="relative h-full w-36 border-r-2 border-l-2 border-black">
+                <Image
+                  src={data.current_track.artwork_url}
+                  alt={data.current_track.title}
+                  layout="fill"
+                  objectFit="cover"
+                  unoptimized
+                />
+              </div>
+              <h1 className="font-serif inline text-4xl xl:text-5xl mx-10">
+                With {data?.current_track?.title.split(" - ")[0]}
+              </h1>
             </div>
-            <h1 className="font-serif inline text-4xl xl:text-5xl mx-10">
-              With {data?.current_track?.title.split(" - ")[0]}
-            </h1>
-          </div>
-        </Banner>
+          </Banner>
+        </div>
       ) : null}
 
       <audio hidden id="oroko-live-player" preload="none" ref={player}>
         <source ref={source} type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
+
+      {isOnline && (
+        <>
+          <div
+            className={cn("absolute w-full transition-transform", {
+              "-translate-y-full -top-full": !dropdownOpen,
+              "translate-y-0 top-18 h-auto ": dropdownOpen,
+            })}
+          >
+            <PlayerDropdown />
+          </div>
+          <div className="absolute left-1/2 top-10 z-10 transition-all group-hover:top-22">
+            <DropdownButton
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              dropdownOpen={dropdownOpen}
+            />
+          </div>
+        </>
+      )}
     </section>
   );
 }

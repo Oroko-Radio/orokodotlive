@@ -9,8 +9,9 @@ import CloseIcon from "../icons/CloseIcon";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <div className="grid grid-cols-5 py-1 bg-black">
+    <div className="grid grid-cols-5 py-1 bg-black z-50">
       <Link href="/" passHref>
         <div
           className="flex ml-4 md:ml-8 h-10 w-10 z-50 cursor-pointer self-center"
@@ -57,7 +58,7 @@ const Header = () => {
           {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
         </div>
       </div>
-      {isMenuOpen && <Menu setIsMenuOpen={setIsMenuOpen} />}
+      <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
     </div>
   );
 };
