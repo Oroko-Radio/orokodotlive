@@ -37,7 +37,7 @@ export default function Article({
       coverImageAlt={title}
       withBackButton
     >
-      <TitleBox title={title} slug={slug}>
+      <TitleBox title={title} slug={`news/${slug}`}>
         <div className="container max-w-4xl mx-auto">
           <div className="mb-6 mt-6 md:mt-0">
             <div className="flex md:inline-flex mb-4 md:mb-0 mr-6">

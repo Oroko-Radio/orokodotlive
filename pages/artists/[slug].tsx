@@ -23,7 +23,7 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
 
   return (
     <SinglePage coverImage={imageUrl} coverImageAlt={name} withBackButton>
-      <TitleBox title={name} slug={slug}>
+      <TitleBox title={name} slug={`artists/${slug}`}>
         <div className="container max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 mt-6 md:mt-0 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
             {name}

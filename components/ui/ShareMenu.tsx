@@ -18,10 +18,20 @@ export default function ShareMenu({ url }: { url: string }) {
       <Menu.Items className="absolute right-2 mt-2 bg-black text-white focus:outline-none">
         <div className="pt-4 pb-4">
           <Menu.Item>
+            {({ active }) => (
+              <WhatsApp link={url} text={TEXT} active={active} />
+            )}
+          </Menu.Item>
+          <Menu.Item>
             {({ active }) => <Facebook link={url} active={active} />}
           </Menu.Item>
           <Menu.Item>
             {({ active }) => <Twitter link={url} text={TEXT} active={active} />}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
+              <Telegram link={url} text={TEXT} active={active} />
+            )}
           </Menu.Item>
         </div>
       </Menu.Items>

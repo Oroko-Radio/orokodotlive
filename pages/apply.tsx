@@ -13,7 +13,7 @@ const Apply = () => {
     >
       <TitleBox bgColor="light-orange" title="Apply" slug="apply">
         <div className="container max-w-4xl mx-auto">
-          <h1 className="mt-6 md:mt-0 text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
             Radio Residencies
           </h1>
           <h2 className="font-serif text-4xl lg:text-6xl">

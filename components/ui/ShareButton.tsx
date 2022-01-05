@@ -13,7 +13,7 @@ export default function ShareButton({
 }) {
   const { title, slug } = details;
 
-  const URL = `https://refuge-worldwide.vercel.app${slug}`;
+  const URL = `https://oroko.live/${slug}`;
 
   const handleOnClick = async () => {
     const shareData: ShareData = {

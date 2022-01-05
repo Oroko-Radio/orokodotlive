@@ -18,17 +18,16 @@ export default function TitleBox({
 }) {
   return (
     <section
-      className={cn("relative border-black border-b-2 md:py-6 lg:pb-10", {
+      className={cn("relative border-black border-b-2 md:py-6 pb-6 lg:pb-10", {
         "bg-orokoGreen": bgColor === "green",
         "bg-orokoRed": bgColor === "red",
         "bg-orokoOrange": bgColor === "orange",
         "bg-orokoLightOrange": bgColor === "light-orange",
       })}
     >
-      {children}
       <div
         className={cn(
-          "mt-6 md:mt-0 grid auto-rows-fr md:grid-cols-1 md:absolute right-0 top-0 h-full border-t-2 md:border-t-0 md:border-l-2 border-black text-black",
+          "grid auto-rows-fr md:grid-cols-1 md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black text-black mb-6 md:mb-0",
           {
             "grid-cols-2": mixcloudLink,
           }
@@ -36,10 +35,12 @@ export default function TitleBox({
       >
         <div
           className={cn(
-            "border-black md:order-2 border-r-2 md:border-r-0 flex justify-center px-8 xl:px-16 py-2",
+            "border-black md:order-2 md:border-r-0 flex px-8 xl:px-16 py-2",
             {
               "bg-orokoYellow": !bgColor,
               "bg-transparent": bgColor,
+              "border-r-2 justify-center": mixcloudLink,
+              "justify-end md:justify-center": !mixcloudLink,
             }
           )}
         >
@@ -53,6 +54,7 @@ export default function TitleBox({
           </div>
         )}
       </div>
+      {children}
     </section>
   );
 }
