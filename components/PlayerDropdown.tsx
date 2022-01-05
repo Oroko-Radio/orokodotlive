@@ -28,8 +28,8 @@ export default function PlayerDropdown() {
   }, []);
 
   return (
-    <section className="grid grid-cols-3 bg-orokoRed border-b-2 border-black shadow-3xl">
-      <div className="col-span-2 border-r-2 p-4 border-black">
+    <section className="hidden md:flex bg-orokoRed border-b-2 border-black shadow-3xl">
+      <div className="flex-grow border-r-2 p-4 border-black">
         <p className="font-sans text-black text-sm mb-2">LIVE</p>
         <div className="relative border-2 border-black w-full h-72 xl:h-96 mb-4">
           <Image
@@ -48,7 +48,7 @@ export default function PlayerDropdown() {
         </h1>
       </div>
       {nextUp && (
-        <div className="col-span-1 bg-orokoBlue p-4 text-black">
+        <div className="bg-orokoBlue p-4 text-black">
           <p className="font-sans text-sm mb-2">NEXT UP</p>
           <div className="flex justify-center">
             <div className="relative border-2 border-black rounded-full overflow-hidden w-72 h-72 xl:w-96 xl:h-96 mb-4">

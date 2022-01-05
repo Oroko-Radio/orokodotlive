@@ -135,7 +135,7 @@ export default function LivePlayer() {
           >
             <PlayerDropdown />
           </div>
-          <div className="absolute left-1/2 top-10 z-10 transition-all group-hover:top-22">
+          <div className="hidden md:block absolute left-1/2 top-10 z-10 transition-all group-hover:top-22">
             <DropdownButton
               onClick={() => setDropdownOpen(!dropdownOpen)}
               dropdownOpen={dropdownOpen}
