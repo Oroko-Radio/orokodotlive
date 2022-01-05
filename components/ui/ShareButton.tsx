@@ -32,7 +32,7 @@ export default function ShareButton({
   if (!isServer && navigator.share)
     return (
       <button
-        className="w-20 h-20 sm:w-28 sm:h-28 focus:outline-none"
+        className="bg-white rounded-full px-4 lg:px-6 py-1.5 border-black border-2 font-semibold text-lg lg:text-xl"
         onClick={handleOnClick}
       >
         Share
