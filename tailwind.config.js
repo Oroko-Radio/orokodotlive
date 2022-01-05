@@ -49,6 +49,9 @@ module.exports = {
         18: "4.5rem",
         22: "5.2rem",
       },
+      boxShadow: {
+        "3xl": "0 20px 30px 0px rgba(0, 0, 0, 0.3)",
+      },
       colors: {
         offBlack: "#2F2726",
         orokoYellow: "#FFC928",

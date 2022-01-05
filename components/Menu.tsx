@@ -12,7 +12,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
   return (
     <div
       className={cn(
-        "absolute top-0 p-4 pt-20 xl:p-20 xl:pt-28 w-full max-h-full bg-orokoYellow text-black border-b-2 border-black z-40 shadow-2xl transition-transform",
+        "absolute top-0 p-4 pt-20 xl:p-20 xl:pt-28 w-full max-h-full bg-orokoYellow text-black border-b-2 border-black z-40 shadow-3xl transition-transform",
         {
           "-translate-y-full": !isMenuOpen,
           "translate-y-0": isMenuOpen,

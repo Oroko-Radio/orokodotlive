@@ -28,7 +28,7 @@ export default function PlayerDropdown() {
   }, []);
 
   return (
-    <section className="grid grid-cols-3 bg-orokoRed border-b-2 border-black shadow-2xl">
+    <section className="grid grid-cols-3 bg-orokoRed border-b-2 border-black shadow-3xl">
       <div className="col-span-2 border-r-2 p-4 border-black">
         <p className="font-sans text-black text-sm mb-2">LIVE</p>
         <div className="relative border-2 border-black w-full h-72 xl:h-96 mb-4">
