@@ -28,17 +28,21 @@ const Header = () => {
           />
         </div>
       </Link>
-      <h1
-        className={cx(
-          "col-span-3 mb-0 font-heading text-center self-center text-4xl md:text-5xl xl:text-6xl z-50",
-          {
-            "text-black": isMenuOpen,
-            "text-white": !isMenuOpen,
-          }
-        )}
-      >
-        Oroko Radio
-      </h1>
+      <div className="col-span-3 flex justify-center">
+        <Link href="/" passHref>
+          <h1
+            className={cx(
+              "mb-0 cursor-pointer inline font-heading text-4xl md:text-5xl xl:text-6xl z-50",
+              {
+                "text-black": isMenuOpen,
+                "text-white": !isMenuOpen,
+              }
+            )}
+          >
+            Oroko Radio
+          </h1>
+        </Link>
+      </div>
       <div
         className="z-50 text-black self-center justify-self-end mr-4"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
