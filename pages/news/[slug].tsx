@@ -37,7 +37,11 @@ export default function Article({
       coverImageAlt={title}
       withBackButton
     >
-      <TitleBox title={title} slug={`news/${slug}`}>
+      <TitleBox
+        boxText={dayjs(date).format("DD MMM YYYY")}
+        title={title}
+        slug={`news/${slug}`}
+      >
         <div className="container max-w-4xl mx-auto">
           <div className="mb-6 mt-6 md:mt-0">
             <div className="flex md:inline-flex mb-4 md:mb-0 mr-6">
@@ -45,7 +49,7 @@ export default function Article({
               <Tag text={articleType} transparent />
             </div>
             {date && (
-              <p className="mb-0 inline-block font-sans font-semibold tracking-wide text-xl lg:text-2xl">
+              <p className="hidden md:inline-block mb-0 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
                 {dayjs(date).format("ddd DD MMMM YYYY @ HH") + "H"}
               </p>
             )}

@@ -36,10 +36,15 @@ export default function Show({ show, relatedShows, preview }: Props) {
       coverImageAlt={title}
       withBackButton
     >
-      <TitleBox mixcloudLink={mixcloudLink} title={title} slug={`news/${slug}`}>
+      <TitleBox
+        boxText={dayjs(date).format("DD MMM YY HH:MM") + "H"}
+        mixcloudLink={mixcloudLink}
+        title={title}
+        slug={`news/${slug}`}
+      >
         <div className="container max-w-4xl mx-auto">
           {date && (
-            <p className="mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
+            <p className="hidden md:block mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
               {dayjs(date).format("ddd DD MMMM YYYY @ HH") + "H"}
             </p>
           )}

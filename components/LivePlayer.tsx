@@ -20,7 +20,7 @@ const BroadcastingIndicator = ({
     return (
       <div className="flex-grow-0 flex items-center">
         <div className="pl-10 pr-4">
-          <Logo className="text-black stroke-current stroke-2 w-10 h-full" />
+          <Logo className="text-black stroke-current stroke-2 w-8 md:w-10 h-full" />
         </div>
         <p className="leading-none font-sans mb-0 pr-10">Live</p>
       </div>
@@ -77,12 +77,12 @@ export default function LivePlayer() {
       >
         <div className="absolute w-full">
           <div className="relative">
-            <div className="flex items-center h-18 border-b-2 border-t-2 border-black text-white">
+            <div className="flex items-center h-14 md:h-18 border-b-2 border-t-2 border-black text-white">
               {isOnline && (
                 <div className="px-4 h-full flex bg-orokoYellow text-black border-r-2 border-black">
-                  <div className="rounded-full self-center bg-white border-black border-2 h-16 w-16 flex justify-center items-center">
+                  <div className="rounded-full self-center bg-white border-black border-2 h-12 w-12 md:h-16 md:w-16 flex justify-center items-center">
                     <button
-                      className="h-7 w-7 sm:h-9 sm:w-9 focus:outline-none focus:ring-4"
+                      className="h-7 w-7 md:h-9 md:w-9 focus:outline-none focus:ring-4"
                       onClick={isPlaying ? pause : play}
                       aria-label={
                         isPlaying

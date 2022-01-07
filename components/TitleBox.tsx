@@ -7,12 +7,14 @@ export default function TitleBox({
   children,
   bgColor,
   mixcloudLink,
+  boxText,
   title,
   slug,
 }: {
   children: ReactNode;
   bgColor?: "green" | "red" | "orange" | "light-orange";
   mixcloudLink?: string;
+  boxText?: string;
   title: string;
   slug: string;
 }) {
@@ -34,8 +36,10 @@ export default function TitleBox({
           }
         )}
       >
-        <div className="flex md:hidden justify-center items-center border-r-2 border-black">
-          <h1>test</h1>
+        <div className="p-4 flex md:hidden justify-center items-center border-r-2 border-black">
+          <p className="mb-0 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
+            {boxText ? boxText : "-"}
+          </p>
         </div>
 
         <div
