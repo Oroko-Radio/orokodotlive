@@ -72,7 +72,7 @@ export default function LivePlayer() {
     <>
       <section
         className={cn("sticky", {
-          "top-0 z-30 mb-18": isOnline,
+          "top-0 z-30 mb-14 md:mb-18": isOnline,
         })}
       >
         <div className="absolute w-full">
