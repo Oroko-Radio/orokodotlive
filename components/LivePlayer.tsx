@@ -69,92 +69,96 @@ export default function LivePlayer() {
   }, [data]);
 
   return (
-    <section
-      className={cn("sticky top-0", {
-        "top-0 z-30": isOnline,
-      })}
-    >
-      <div className="absolute w-full">
-        <div className="relative">
-          <div className="flex items-center h-18 border-b-2 border-t-2 border-black text-white">
-            {isOnline && (
-              <div className="px-4 h-full flex bg-orokoYellow text-black border-r-2 border-black">
-                <div className="rounded-full self-center bg-white border-black border-2 h-16 w-16 flex justify-center items-center">
-                  <button
-                    className="h-7 w-7 sm:h-9 sm:w-9 focus:outline-none focus:ring-4"
-                    onClick={isPlaying ? pause : play}
-                    aria-label={
-                      isPlaying ? "Pause Live Broadcast" : "Play Live Broadcast"
-                    }
-                  >
-                    {isPlaying ? <PauseIcon /> : <PlayIcon />}
-                  </button>
+    <>
+      <section
+        className={cn("sticky", {
+          "top-0 z-30 mb-18": isOnline,
+        })}
+      >
+        <div className="absolute w-full">
+          <div className="relative">
+            <div className="flex items-center h-18 border-b-2 border-t-2 border-black text-white">
+              {isOnline && (
+                <div className="px-4 h-full flex bg-orokoYellow text-black border-r-2 border-black">
+                  <div className="rounded-full self-center bg-white border-black border-2 h-16 w-16 flex justify-center items-center">
+                    <button
+                      className="h-7 w-7 sm:h-9 sm:w-9 focus:outline-none focus:ring-4"
+                      onClick={isPlaying ? pause : play}
+                      aria-label={
+                        isPlaying
+                          ? "Pause Live Broadcast"
+                          : "Play Live Broadcast"
+                      }
+                    >
+                      {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                    </button>
+                  </div>
                 </div>
+              )}
+
+              {isOnline ? (
+                <div className="overflow-hidden h-full z-30">
+                  <Banner color="red">
+                    <div className="h-full flex align-middle items-center">
+                      <div className="border-black border-l-2 h-full"></div>
+                      <BroadcastingIndicator status={data?.status} />
+                      <h1 className="font-heading inline text-5xl xl:text-6xl mr-10">
+                        {data?.current_track?.title.split(" - ")[1]}
+                      </h1>
+                      <div className="relative h-full w-36 border-r-2 border-l-2 border-black">
+                        <Image
+                          src={data.current_track.artwork_url}
+                          alt={data.current_track.title}
+                          layout="fill"
+                          objectFit="cover"
+                          unoptimized
+                        />
+                      </div>
+                      <h1 className="font-serif inline text-4xl xl:text-5xl mx-10">
+                        With {data?.current_track?.title.split(" - ")[0]}
+                      </h1>
+                    </div>
+                  </Banner>
+                </div>
+              ) : null}
+            </div>
+
+            <audio hidden id="oroko-live-player" preload="none" ref={player}>
+              <source ref={source} type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+
+            {isOnline && (
+              <div
+                className={cn(
+                  "hidden md:block absolute -bottom-18 -translate-x-1/2 -translate-y-1/2 left-1/2 z-10",
+                  {
+                    "z-10": !dropdownOpen,
+                    "z-20": dropdownOpen,
+                  }
+                )}
+              >
+                <DropdownButton
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  dropdownOpen={dropdownOpen}
+                />
               </div>
             )}
 
-            {isOnline ? (
-              <div className="overflow-hidden h-full z-30">
-                <Banner color="red">
-                  <div className="h-full flex align-middle items-center">
-                    <div className="border-black border-l-2 h-full"></div>
-                    <BroadcastingIndicator status={data?.status} />
-                    <h1 className="font-heading inline text-5xl xl:text-6xl mr-10">
-                      {data?.current_track?.title.split(" - ")[1]}
-                    </h1>
-                    <div className="relative h-full w-36 border-r-2 border-l-2 border-black">
-                      <Image
-                        src={data.current_track.artwork_url}
-                        alt={data.current_track.title}
-                        layout="fill"
-                        objectFit="cover"
-                        unoptimized
-                      />
-                    </div>
-                    <h1 className="font-serif inline text-4xl xl:text-5xl mx-10">
-                      With {data?.current_track?.title.split(" - ")[0]}
-                    </h1>
-                  </div>
-                </Banner>
+            {isOnline && (
+              <div
+                className={cn("w-full overflow-hidden transition-all", {
+                  "h-0": !dropdownOpen,
+                  "h-auto": dropdownOpen,
+                })}
+              >
+                <PlayerDropdown />
               </div>
-            ) : null}
+            )}
           </div>
-
-          <audio hidden id="oroko-live-player" preload="none" ref={player}>
-            <source ref={source} type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
-
-          {isOnline && (
-            <div
-              className={cn(
-                "hidden md:block absolute -bottom-18 -translate-x-1/2 -translate-y-1/2 left-1/2 z-10",
-                {
-                  "z-10": !dropdownOpen,
-                  "z-20": dropdownOpen,
-                }
-              )}
-            >
-              <DropdownButton
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                dropdownOpen={dropdownOpen}
-              />
-            </div>
-          )}
-
-          {isOnline && (
-            <div
-              className={cn("w-full overflow-hidden transition-all", {
-                "h-0": !dropdownOpen,
-                "h-auto": dropdownOpen,
-              })}
-            >
-              <PlayerDropdown />
-            </div>
-          )}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

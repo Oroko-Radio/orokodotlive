@@ -23,7 +23,7 @@ const AllNews = ({ articles, heading = "All News" }) => {
                 <div className="p-4">
                   <div className="flex flex-wrap gap-1 mb-4">
                     {city && <Tag text={city.name} color="black" card />}
-                    <Tag text={articleType} color="white" card />
+                    <Tag text={articleType} transparent card />
                   </div>
                   <p className="font-sans mb-2 font-semibold">
                     {dayjs(date).format("DD MMMM YYYY")}

@@ -41,7 +41,7 @@ const AllShows = ({ shows }) => {
                       card
                     />
                     {genresCollection.items.map(({ name }, idx) => (
-                      <Tag key={idx} text={name} color="white" card />
+                      <Tag key={idx} text={name} transparent card />
                     ))}
                   </div>
                 </div>

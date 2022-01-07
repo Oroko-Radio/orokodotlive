@@ -65,7 +65,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
             <Tag text={artistsCollection.items[0].city.name} color="black" />
             {genresCollection &&
               genresCollection.items.map(({ name }, idx) => (
-                <Tag text={name} color="white" key={idx} />
+                <Tag text={name} transparent key={idx} />
               ))}
           </div>
         </div>

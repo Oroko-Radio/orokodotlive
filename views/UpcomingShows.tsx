@@ -38,11 +38,11 @@ const UpcomingShows = ({ shows, heading = "Coming up on OROKO" }) => {
                 <div className="flex flex-wrap gap-1">
                   <Tag
                     text={artistsCollection.items[0].city.name}
-                    color="black"
+                    color="blue"
                     card
                   />
                   {genresCollection.items.map(({ name }, idx) => (
-                    <Tag key={idx} text={name} color="white" card />
+                    <Tag key={idx} text={name} transparent card />
                   ))}
                 </div>
               </div>

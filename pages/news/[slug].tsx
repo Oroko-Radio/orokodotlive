@@ -42,7 +42,7 @@ export default function Article({
           <div className="mb-6 mt-6 md:mt-0">
             <div className="flex md:inline-flex mb-4 md:mb-0 mr-6">
               <Tag text={city.name} color="black" />
-              <Tag text={articleType} color="white" />
+              <Tag text={articleType} transparent />
             </div>
             {date && (
               <p className="mb-0 inline-block font-sans font-semibold tracking-wide text-xl lg:text-2xl">

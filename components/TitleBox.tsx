@@ -29,18 +29,22 @@ export default function TitleBox({
         className={cn(
           "grid auto-rows-fr md:grid-cols-1 md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black text-black mb-6 md:mb-0",
           {
-            "grid-cols-2": mixcloudLink,
+            "grid-cols-3": mixcloudLink,
+            "grid-cols-2": !mixcloudLink,
           }
         )}
       >
+        <div className="flex md:hidden justify-center items-center border-r-2 border-black">
+          <h1>test</h1>
+        </div>
+
         <div
           className={cn(
-            "border-black md:order-2 md:border-r-0 flex px-8 xl:px-16 py-2",
+            "border-black justify-center md:order-2 md:border-r-0 flex px-4 md:px-8 xl:px-16 py-2",
             {
               "bg-orokoYellow": !bgColor,
               "bg-transparent": bgColor,
-              "border-r-2 justify-center": mixcloudLink,
-              "justify-end md:justify-center": !mixcloudLink,
+              "border-r-2": mixcloudLink,
             }
           )}
         >

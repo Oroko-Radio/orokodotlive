@@ -2,7 +2,6 @@ import React from "react";
 import cn from "classnames";
 import SliderContext from "./contexts/sliderContext";
 import Card from "./Card";
-import PlayButton from "./ui/PlayButton";
 
 interface CardProps {
   imageUrl: string;
@@ -13,6 +12,7 @@ interface CardProps {
   cardWidth?: "half" | "quarter";
   playButton?: boolean;
   mixcloudLink?: string;
+  bgColor?: "gray" | "white";
 }
 
 const SliderCard = ({
@@ -23,6 +23,7 @@ const SliderCard = ({
   children,
   cardWidth = "half",
   mixcloudLink,
+  bgColor,
 }: CardProps) => (
   <SliderContext.Consumer>
     {({ elementRef }) => {
@@ -30,11 +31,12 @@ const SliderCard = ({
         <div
           ref={elementRef}
           className={cn(
-            `inline-block flex-shrink-0 bg-orokoGray cursor-pointer border-2 border-black`,
+            `inline-block flex-shrink-0 cursor-pointer border-2 border-black`,
             {
               "border-l-0": idx !== 0,
               "card-half": cardWidth === "half",
               "card-quarter": cardWidth === "quarter",
+              "bg-orokoGray": bgColor === "gray",
             }
           )}
         >
