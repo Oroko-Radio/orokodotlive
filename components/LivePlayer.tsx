@@ -134,10 +134,10 @@ export default function LivePlayer() {
             {isOnline && (
               <div
                 className={cn(
-                  "hidden md:block absolute -bottom-18 -translate-x-1/2 -translate-y-1/2 left-1/2 z-10",
+                  "hidden md:block absolute transition-all -translate-x-1/2 -translate-y-1/2 left-1/2 z-10",
                   {
-                    "z-10": !dropdownOpen,
-                    "z-20": dropdownOpen,
+                    "z-10 -bottom-8 group-hover:-bottom-18": !dropdownOpen,
+                    "z-20 -bottom-18": dropdownOpen,
                   }
                 )}
               >
