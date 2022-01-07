@@ -7,7 +7,6 @@ import Banner from "./Banner";
 import Logo from "../icons/Logo";
 import PauseIcon from "../icons/PauseIcon";
 import PlayIcon from "../icons/PlayIcon";
-import SliderButton from "./ui/SliderButton";
 import DropdownButton from "./ui/DropdownButton";
 import PlayerDropdown from "./PlayerDropdown";
 import { OROKO_LIVE } from "../constants";
