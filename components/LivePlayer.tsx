@@ -147,8 +147,8 @@ export default function LivePlayer() {
 
             {isOnline && (
               <div
-                className={cn("w-full overflow-hidden transition-all", {
-                  "h-0": !dropdownOpen,
+                className={cn("w-full transition-all", {
+                  "h-0 overflow-hidden": !dropdownOpen,
                   "h-auto": dropdownOpen,
                 })}
               >
