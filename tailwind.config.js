@@ -47,6 +47,7 @@ module.exports = {
       },
       inset: {
         18: "4.5rem",
+        "-18": "-4.5rem",
         22: "5.2rem",
       },
       boxShadow: {

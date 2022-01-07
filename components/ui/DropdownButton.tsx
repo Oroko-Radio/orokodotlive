@@ -14,12 +14,16 @@ const DropdownButton = ({
   <button
     onClick={onClick}
     className={cn(
-      `group absolute cursor-pointer bg-offBlack top-1/2 -translate-y-1/2 rounded-full h-16 w-16 border-black border-2 flex justify-center items-center transition-transform`
+      `group hover:scale-110 cursor-pointer bg-offBlack rounded-full h-16 w-16 border-black border-2 flex justify-center items-center transition-transform`
     )}
   >
     <div
       className={cn(
-        "relative h-full w-full m-4 group-hover:scale-110 transition-transform"
+        "relative h-full w-full m-4 group-hover:scale-110 transition-transform",
+        {
+          "group-hover:translate-y-0.5": !dropdownOpen,
+          "mb-5": dropdownOpen,
+        }
       )}
     >
       <Image
