@@ -14,7 +14,7 @@ const DropdownButton = ({
   <button
     onClick={onClick}
     className={cn(
-      `group hover:scale-110 cursor-pointer bg-offBlack rounded-full h-16 w-16 border-black border-2 flex justify-center items-center transition-transform`
+      `group group-hover:scale-110 cursor-pointer bg-offBlack rounded-full h-16 w-16 border-black border-2 flex justify-center items-center transition-transform`
     )}
   >
     <div

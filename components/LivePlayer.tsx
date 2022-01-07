@@ -76,7 +76,7 @@ export default function LivePlayer() {
         })}
       >
         <div className="absolute w-full">
-          <div className="relative">
+          <div className="relative group">
             <div className="flex items-center h-14 md:h-18 border-b-2 border-t-2 border-black text-white">
               {isOnline && (
                 <div className="px-4 h-full flex bg-orokoYellow text-black border-r-2 border-black">
@@ -97,7 +97,10 @@ export default function LivePlayer() {
               )}
 
               {isOnline ? (
-                <div className="overflow-hidden h-full z-30">
+                <div
+                  className="overflow-hidden h-full z-30 cursor-pointer"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
                   <Banner color="red">
                     <div className="h-full flex align-middle items-center">
                       <div className="border-black border-l-2 h-full"></div>
