@@ -42,7 +42,7 @@ export default function Article({
         title={title}
         slug={`news/${slug}`}
       >
-        <div className="container max-w-4xl mx-auto">
+        <div className="container max-w-5xl mx-auto">
           <div className="mb-6 mt-6 md:mt-0">
             <div className="flex md:inline-flex mb-4 md:mb-0 mr-6">
               <Tag text={city.name} color="black" />
@@ -62,7 +62,7 @@ export default function Article({
           </h2>
         </div>
       </TitleBox>
-      <section className="container max-w-4xl mx-auto rich-text py-10 mb-24">
+      <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
         <p className="font-bold">{subtitle}</p>
         {renderRichTextWithImages(content)}
       </section>

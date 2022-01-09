@@ -28,7 +28,7 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
         title={name}
         slug={`artists/${slug}`}
       >
-        <div className="container max-w-4xl mx-auto">
+        <div className="container max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 mt-6 md:mt-0 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
             {name}
           </h1>
@@ -37,7 +37,7 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
           </div>
         </div>
       </TitleBox>
-      <section className="container max-w-4xl mx-auto rich-text py-10 mb-24">
+      <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
         {renderRichTextWithImages(content)}
       </section>
     </SinglePage>

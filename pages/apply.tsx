@@ -12,7 +12,7 @@ const Apply = () => {
       repeatCover={false}
     >
       <TitleBox bgColor="light-orange" title="Apply" slug="apply">
-        <div className="container max-w-4xl mx-auto">
+        <div className="container max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
             Radio Residencies
           </h1>
@@ -22,7 +22,7 @@ const Apply = () => {
         </div>
       </TitleBox>
       <div className="bg-orokoYellow py-10">
-        <section className="container max-w-4xl mx-auto">
+        <section className="container max-w-5xl mx-auto">
           <p className="mb-8 text-2xl font-sans">
             We are currently accepting applications to become an Oroko Radio
             resident - fill in the forms below to apply. Applications are

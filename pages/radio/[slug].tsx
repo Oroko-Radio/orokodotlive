@@ -42,7 +42,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
         title={title}
         slug={`news/${slug}`}
       >
-        <div className="container max-w-4xl mx-auto">
+        <div className="container max-w-5xl mx-auto">
           {date && (
             <p className="hidden md:block mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
               {dayjs(date).format("ddd DD MMMM YYYY @ HH") + "H"}
@@ -75,7 +75,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
           </div>
         </div>
       </TitleBox>
-      <section className="container max-w-4xl mx-auto rich-text py-10 mb-24">
+      <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
         {renderRichTextWithImages(content)}
       </section>
     </SinglePage>

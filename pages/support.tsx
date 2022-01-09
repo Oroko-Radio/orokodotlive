@@ -26,7 +26,7 @@ export default function Support({
       repeatCover={false}
     >
       <TitleBox bgColor="green" title={title} slug="support">
-        <div className="container max-w-4xl mx-auto">
+        <div className="container max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
             {title}
           </h1>
@@ -35,7 +35,7 @@ export default function Support({
           </h2>
         </div>
       </TitleBox>
-      <section className="container max-w-4xl mx-auto rich-text py-10 mb-24">
+      <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
         {renderRichTextWithImages(content)}
       </section>
     </SinglePage>
