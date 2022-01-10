@@ -20,11 +20,11 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
       )}
     >
       <nav className="mb-10">
-        <ul className="flex flex-col flex-wrap sm:flex-row justify-center items-center sm:space-x-2 space-y-4 sm:space-y-0">
+        <ul className="flex flex-col flex-wrap sm:flex-row xl:gap-8 justify-center items-center sm:space-x-2 space-y-4 sm:space-y-0">
           {links.map(({ name, url }, idx) => (
             <Link key={idx} href={url} passHref>
               <li
-                className="flex-shrink-0 sm:my-4"
+                className="flex-shrink-0 sm:my-6 xl:my-0"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <DotButton size="large" transparent>
@@ -35,7 +35,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
           ))}
         </ul>
       </nav>
-      <p className="block text-xl md:text-3xl text-center">
+      <p className="block text-xl md:text-3xl xl:text-4xl text-center">
         Oroko is a not-for-profit independent internet radio station based in
         Accra, Ghana. We aim to connect, inspire and empower through
         conversation, collaboration and community.
