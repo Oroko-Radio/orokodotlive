@@ -34,7 +34,7 @@ export default function TitleBox({
       >
         <div
           className={cn(
-            "p-4 flex md:hidden justify-center items-center border-r-2 border-black",
+            "p-4 ml-0.5 flex md:hidden items-center border-r-2 border-black",
             {
               "col-span-2": !mixcloudLink,
             }

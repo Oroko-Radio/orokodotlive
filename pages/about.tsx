@@ -25,8 +25,11 @@ export default function About({
       coverImageAlt="View"
       repeatCover={false}
     >
-      <TitleBox bgColor="red" title={title} slug="about">
+      <TitleBox bgColor="red" title={title} slug="about" boxText="About">
         <div className="container max-w-5xl mx-auto">
+          <p className="hidden md:block mb-4 ml-0.5 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
+            About
+          </p>
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
             {title}
           </h1>
