@@ -29,14 +29,17 @@ export default function TitleBox({
     >
       <div
         className={cn(
-          "grid auto-rows-fr md:grid-cols-1 md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black text-black mb-6 md:mb-0",
-          {
-            "grid-cols-3": mixcloudLink,
-            "grid-cols-2": !mixcloudLink,
-          }
+          "grid auto-rows-fr grid-cols-3 md:grid-cols-1 md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black text-black mb-6 md:mb-0"
         )}
       >
-        <div className="p-4 flex md:hidden justify-center items-center border-r-2 border-black">
+        <div
+          className={cn(
+            "p-4 flex md:hidden justify-center items-center border-r-2 border-black",
+            {
+              "col-span-2": !mixcloudLink,
+            }
+          )}
+        >
           <p className="mb-0 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
             {boxText ? boxText : "-"}
           </p>
