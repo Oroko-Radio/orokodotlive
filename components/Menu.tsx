@@ -27,7 +27,9 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
                 className="flex-shrink-0 sm:my-4"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <DotButton transparent>{name}</DotButton>
+                <DotButton size="large" transparent>
+                  {name}
+                </DotButton>
               </li>
             </Link>
           ))}
