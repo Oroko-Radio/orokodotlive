@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <div className="bg-black p-8">
       <div className="mx-auto text-center text-white">
-        <ul className="flex flex-wrap font-bold text-lg md:text-xl justify-center gap-6 md:gap-10 mb-8">
+        <ul className="flex flex-wrap font-bold text-lg md:text-xl xl:text-2xl justify-center gap-6 md:gap-10 mb-8">
           {links.map(({ name, url }, idx) => (
             <Link key={idx} href={url} passHref>
               <li className="cursor-pointer hover:opacity-70 transition-opacity">
