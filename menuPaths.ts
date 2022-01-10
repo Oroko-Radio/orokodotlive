@@ -29,4 +29,8 @@ export const links: LinkInterface[] = [
     name: "Apply",
     url: "/apply",
   },
+  {
+    name: "Partners",
+    url: "/partners",
+  },
 ];

@@ -88,6 +88,10 @@
     @apply mb-6;
   }
 
+  .rich-text hr {
+    @apply mb-6 border-black;
+  }
+
   /* Marquee spacing fix */
 
   .marquee-wrapper .marquee {
