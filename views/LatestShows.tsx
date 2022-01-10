@@ -1,13 +1,24 @@
 import React from "react";
 import dayjs from "dayjs";
+import Link from "next/link";
 
 import Slider from "../components/Slider";
 import Tag from "../components/Tag";
+import DotButton from "../components/ui/DotButton";
 
 const LatestShows = ({ shows, heading = "Latest Shows" }) => {
   return (
     <div className="overflow-hidden bg-orokoGreen border-b-2 border-black">
-      <h1 className="font-serif text-6xl p-8">{heading}</h1>
+      <div className="flex justify-between p-8">
+        <h1 className="font-serif text-6xl">{heading}</h1>
+        <Link href="/radio" passHref>
+          <div className="hidden md:block mt-4">
+            <DotButton transparent size="large">
+              All Shows
+            </DotButton>
+          </div>
+        </Link>
+      </div>
 
       <Slider>
         {shows.map(
