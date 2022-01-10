@@ -15,7 +15,7 @@ const DotButton = ({
       className={cn(
         "inline group xl:text-xl cursor-pointer border-2 border-black rounded-full font-bold px-3 py-1",
         {
-          "py-2 px-5": size === "large",
+          "py-1.5 md:py-2 md:px-5": size === "large",
           "bg-transparent": transparent,
           "bg-white": !transparent,
         }
