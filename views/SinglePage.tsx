@@ -20,7 +20,7 @@ const SinglePage = ({
   return (
     <article>
       <div className="relative h-half border-black border-b-2">
-        {repeatCover ? (
+        {coverImage && repeatCover ? (
           <div className="flex relative h-full overflow-hidden">
             {[...Array(2)].map((x, idx) => (
               <div
@@ -38,12 +38,14 @@ const SinglePage = ({
             ))}
           </div>
         ) : (
-          <Image
-            src={coverImage}
-            layout="fill"
-            alt={coverImageAlt}
-            objectFit="cover"
-          />
+          coverImage && (
+            <Image
+              src={coverImage}
+              layout="fill"
+              alt={coverImageAlt}
+              objectFit="cover"
+            />
+          )
         )}
         {withBackButton && (
           <div className="absolute top-4 left-4 md:top-8 md:left-8">

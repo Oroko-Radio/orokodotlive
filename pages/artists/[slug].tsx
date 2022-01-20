@@ -13,16 +13,14 @@ type ArtistProps = {
 };
 
 export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
-  const {
-    name,
-    slug,
-    city,
-    photo: { url: imageUrl },
-    content,
-  } = artist;
+  const { name, slug, city, content } = artist;
 
   return (
-    <SinglePage coverImage={imageUrl} coverImageAlt={name} withBackButton>
+    <SinglePage
+      coverImage={artist.photo && artist.photo.url ? artist.photo.url : null}
+      coverImageAlt={name}
+      withBackButton
+    >
       <TitleBox
         boxText="About the artist"
         title={name}
@@ -36,12 +34,12 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
             {name}
           </h1>
           <div className="inline-block">
-            <Tag text={city.name} color="black" />
+            <Tag text={city && city.name ? city.name : "World"} color="black" />
           </div>
         </div>
       </TitleBox>
       <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
-        {renderRichTextWithImages(content)}
+        {content && renderRichTextWithImages(content)}
       </section>
     </SinglePage>
   );

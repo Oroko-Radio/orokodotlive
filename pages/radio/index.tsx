@@ -1,6 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-
 import { InferGetStaticPropsType } from "next";
 import { getRadioPage } from "../../lib/contentful/pages/radio";
 import AllShows from "../../views/AllShows";

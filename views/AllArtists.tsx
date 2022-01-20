@@ -13,7 +13,11 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-8">
         {allArtists.map(({ name, slug, photo }, idx) => (
           <div key={idx} className="border-black border-2">
-            <Card imageUrl={photo.url} title={name} link={`/artists/${slug}`}>
+            <Card
+              imageUrl={photo && photo.url ? photo.url : null}
+              title={name}
+              link={`/artists/${slug}`}
+            >
               <h1 className="font-heading p-4 text-4xl">{name}</h1>
             </Card>
           </div>

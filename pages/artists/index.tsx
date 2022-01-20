@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { InferGetStaticPropsType } from "next";
 import { getArtistsPage } from "../../lib/contentful/pages/artists";
 import AllArtists from "../../views/AllArtists";
