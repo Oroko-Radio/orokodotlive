@@ -34,9 +34,11 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 mt-6 md:mt-0 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
             {name}
           </h1>
-          <div className="inline-block">
-            <Tag text={city && city.name ? city.name : "World"} color="black" />
-          </div>
+          {city && city.name && (
+            <div className="inline-block">
+              <Tag text={city.name} color="black" />
+            </div>
+          )}
         </div>
       </TitleBox>
       <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
