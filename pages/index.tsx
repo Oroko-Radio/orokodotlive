@@ -21,7 +21,7 @@ export default function HomePage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <main>
-      <Meta title="Oroko Radio | Home" />
+      <Meta title="Home" />
       <Hero />
       <LatestShows shows={latestShows} />
       <FeaturedShows shows={featuredShows} />

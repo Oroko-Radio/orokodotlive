@@ -36,6 +36,7 @@ export default function Article({
       coverImage={coverImage.url}
       coverImageAlt={title}
       withBackButton
+      title={title}
     >
       <TitleBox
         boxText={dayjs(date).format("DD MMM YYYY")}

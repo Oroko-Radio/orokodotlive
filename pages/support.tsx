@@ -24,6 +24,7 @@ export default function Support({
       coverImage={coverImage.url}
       coverImageAlt="View"
       repeatCover={false}
+      title="Support"
     >
       <TitleBox bgColor="green" title={title} slug="support" boxText="Support">
         <div className="container max-w-5xl mx-auto">

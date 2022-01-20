@@ -1,4 +1,5 @@
 import { InferGetStaticPropsType } from "next";
+import Meta from "../../components/Meta";
 import { getRadioPage } from "../../lib/contentful/pages/radio";
 import AllShows from "../../views/AllShows";
 import FeaturedShows from "../../views/FeaturedShows";
@@ -20,6 +21,7 @@ export default function RadioPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
+      <Meta title="Radio" />
       <UpcomingShows shows={upcomingShows} />
       <FeaturedShows shows={featuredShows} />
       <AllShows shows={pastShows} />

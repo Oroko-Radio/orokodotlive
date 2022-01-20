@@ -24,6 +24,7 @@ export default function Partners({
       coverImage={coverImage.url}
       coverImageAlt="View"
       repeatCover={false}
+      title="Partners"
     >
       <TitleBox bgColor="red" title={title} slug="partners" boxText="Partners">
         <div className="container max-w-5xl mx-auto">

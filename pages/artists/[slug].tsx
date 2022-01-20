@@ -20,6 +20,7 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
       coverImage={artist.photo && artist.photo.url ? artist.photo.url : null}
       coverImageAlt={name}
       withBackButton
+      title={name}
     >
       <TitleBox
         boxText="About the artist"

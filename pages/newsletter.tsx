@@ -24,6 +24,7 @@ export default function Newsletter({
       coverImage="/static/newsletter-bg.svg"
       coverImageAlt="Newsletter"
       repeatCover={false}
+      title="Newsletter"
     >
       <TitleBox
         bgColor="orange"

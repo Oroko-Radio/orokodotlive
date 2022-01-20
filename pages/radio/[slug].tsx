@@ -31,6 +31,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
       coverImage={coverImage.url}
       coverImageAlt={title}
       withBackButton
+      title={title}
     >
       <TitleBox
         boxText={dayjs(date).format("DD MMM YY HH:MM") + "H"}

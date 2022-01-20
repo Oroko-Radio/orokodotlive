@@ -7,7 +7,7 @@ type MetaProps = {
 const Meta = ({ title }: MetaProps) => {
   return (
     <Head>
-      <title>{title}</title>
+      <title>Oroko | {title}</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta
         name="description"
