@@ -25,6 +25,7 @@ export default function PlayerDropdown() {
 
   useEffect(() => {
     getNextUp();
+    // eslint-disable-next-line
   }, []);
 
   return (

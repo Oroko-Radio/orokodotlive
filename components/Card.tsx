@@ -31,7 +31,7 @@ const Card = ({
             {
               "xl:h-80": cardWidth === "quarter",
               "xl:h-80 2xl:h-96": artistCard,
-              "lg:h-96 xl:h-[32rem]": cardWidth === "half",
+              "lg:h-96 xl:h-[32rem] 2xl:h-80": cardWidth === "half",
             }
           )}
         >

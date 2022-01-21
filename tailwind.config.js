@@ -36,6 +36,13 @@ module.exports = {
     transitionDuration: {
       DEFAULT: "200ms",
     },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1800px",
+    },
     extend: {
       height: {
         18: "4.5rem",
