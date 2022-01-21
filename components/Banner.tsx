@@ -13,13 +13,14 @@ const colors: any = {
 
 const Banner = ({ color, children }: BannerProps) => {
   return (
-    <div className={`h-full ${colors[color]}`}>
+    <div className={`h-full w-full ${colors[color]}`}>
       <Marquee
         className="marquee-wrapper"
         style={{ height: "100%" }}
         gradient={false}
         speed={40}
       >
+        {children}
         {children}
       </Marquee>
     </div>
