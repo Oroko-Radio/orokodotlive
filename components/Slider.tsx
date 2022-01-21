@@ -10,7 +10,7 @@ interface SliderSubComponents {
 }
 
 const SliderWrapper = ({ children }) => (
-  <div className="mb-8 overflow-hidden relative">{children}</div>
+  <div className="mb-8 xl:mb-12 overflow-hidden relative">{children}</div>
 );
 
 const Slider: React.FunctionComponent & SliderSubComponents = ({

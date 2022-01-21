@@ -1,4 +1,4 @@
-import image from "next/image";
+import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import PlayButton from "./ui/PlayButton";
@@ -9,13 +9,29 @@ interface CardProps {
   link: string;
   mixcloudLink?: string;
   children?: any;
+  cardWidth: "half" | "quarter";
 }
 
-const Card = ({ imageUrl, link, title, mixcloudLink, children }: CardProps) => {
+const Card = ({
+  imageUrl,
+  link,
+  title,
+  mixcloudLink,
+  children,
+  cardWidth = "half",
+}: CardProps) => {
   return (
     <Link href={link} passHref>
       <div className="cursor-pointer">
-        <div className="relative w-full h-80 lg:h-96 border-b-2 border-black">
+        <div
+          className={cn(
+            "relative w-full h-80 md:h-72 border-b-2 border-black",
+            {
+              "xl:h-80": cardWidth === "quarter",
+              "lg:h-96 xl:h-[32rem]": cardWidth === "half",
+            }
+          )}
+        >
           {imageUrl && (
             <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
           )}

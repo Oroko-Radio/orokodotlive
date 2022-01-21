@@ -45,6 +45,7 @@ const SliderCard = ({
             imageUrl={imageUrl}
             title={title}
             link={link}
+            cardWidth={cardWidth}
           >
             {children}
           </Card>
