@@ -20,18 +20,16 @@ const Card = ({
   mixcloudLink,
   children,
   cardWidth = "quarter",
-  artistCard = false,
 }: CardProps) => {
   return (
     <Link href={link} passHref>
       <div className="cursor-pointer">
         <div
           className={cn(
-            "relative w-full h-80 md:h-72 border-b-2 border-black",
+            "relative w-full h-80 md:h-72 2xl:h-96 border-b-2 border-black",
             {
               "xl:h-80": cardWidth === "quarter",
-              "xl:h-80 2xl:h-96": artistCard,
-              "lg:h-96 xl:h-[32rem] 2xl:h-80": cardWidth === "half",
+              "lg:h-96 xl:h-[32rem]": cardWidth === "half",
             }
           )}
         >

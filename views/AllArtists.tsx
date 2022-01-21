@@ -17,7 +17,6 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
               imageUrl={photo && photo.url ? photo.url : null}
               title={name}
               link={`/artists/${slug}`}
-              artistCard
             >
               <h1 className="font-heading p-4 text-4xl">{name}</h1>
             </Card>
