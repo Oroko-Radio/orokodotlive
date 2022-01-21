@@ -130,6 +130,7 @@ export interface ArtistInterface {
   coverImagePosition: CoverImagePosition;
   isResident: boolean;
   content?: Content;
+  linkedFrom?: { showCollection: { items: ShowInterface[] | [] } };
 }
 
 export interface NextUpSection {

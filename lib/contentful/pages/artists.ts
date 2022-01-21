@@ -70,10 +70,11 @@ export async function getArtistsPageSingle(slug: string, preview: boolean) {
             }
           }
           linkedFrom {
-            showCollection(limit: 900) {
+            showCollection(limit: 100) {
               items {
                 slug
                 title
+                mixcloudLink
                 coverImage {
                   sys {
                     id

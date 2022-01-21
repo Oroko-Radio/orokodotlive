@@ -3,23 +3,22 @@ import dayjs from "dayjs";
 
 import Card from "../components/Card";
 import Tag from "../components/Tag";
+import { ShowInterface } from "../types/shared";
 
-const AllShows = ({ shows }) => {
+const RelatedShows = ({
+  shows,
+  city,
+}: {
+  shows: ShowInterface[];
+  city: string;
+}) => {
   return (
     <div className="bg-offBlack" id="all-shows">
-      <h1 className="font-serif text-white text-6xl p-8 pb-0">All Shows</h1>
+      <h1 className="font-serif text-white text-6xl p-8 pb-0">Related Shows</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-8 xl:pb-12">
         {shows.map(
           (
-            {
-              title,
-              date,
-              slug,
-              genresCollection,
-              artistsCollection,
-              coverImage,
-              mixcloudLink,
-            },
+            { title, date, slug, genresCollection, coverImage, mixcloudLink },
             idx
           ) => (
             <div key={idx} className="border-black border-2 bg-white">
@@ -35,11 +34,7 @@ const AllShows = ({ shows }) => {
                   </p>
                   <h1 className="font-heading mb-4 text-4xl">{title}</h1>
                   <div className="flex flex-wrap gap-1 mb-4">
-                    <Tag
-                      text={artistsCollection.items[0].city.name}
-                      color="black"
-                      card
-                    />
+                    <Tag text={city} color="black" card />
                     {genresCollection.items.map(({ name }, idx) => (
                       <Tag key={idx} text={name} transparent card />
                     ))}
@@ -54,4 +49,4 @@ const AllShows = ({ shows }) => {
   );
 };
 
-export default AllShows;
+export default RelatedShows;

@@ -4,6 +4,7 @@ import { getArtistsPageSingle } from "../../lib/contentful/pages/artists";
 import { getArtistPathsToPreRender } from "../../lib/contentful/paths";
 import { renderRichTextWithImages } from "../../lib/rich-text";
 import { ArtistEntry, ShowInterface } from "../../types/shared";
+import RelatedShows from "../../views/RelatedShows";
 import SinglePage from "../../views/SinglePage";
 
 type ArtistProps = {
@@ -44,6 +45,9 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
       <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
         {content && renderRichTextWithImages(content)}
       </section>
+      {relatedShows.length > 0 && (
+        <RelatedShows city={city.name} shows={relatedShows} />
+      )}
     </SinglePage>
   );
 }
