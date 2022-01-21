@@ -26,8 +26,10 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
 
   return (
     <div className="bg-orokoYellow">
-      <div className="flex justify-between p-8">
-        <h1 className="font-serif text-black text-6xl">All Artists</h1>
+      <div className="md:flex justify-between p-8 pb-2 md:pb-8">
+        <h1 className="font-serif text-black text-6xl mb-8 md:mb-0">
+          All Artists
+        </h1>
         <select
           className="appearance-none pr-16 self-center bg-transparent border-black border-2 text-2xl text-black"
           onChange={(e) => setResidentFilter(e.target.value)}
