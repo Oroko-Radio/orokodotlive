@@ -7,8 +7,8 @@ import Tag from "../components/Tag";
 const AllNews = ({ articles, heading = "All News" }) => {
   return (
     <div id="all-news">
-      <h1 className="font-serif text-6xl m-8">{heading}</h1>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 m-8">
+      <h1 className="font-serif text-6xl p-8">{heading}</h1>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-8 xl:pb-12">
         {articles.map(
           (
             { title, date, slug, articleType, city, subtitle, coverImage },
