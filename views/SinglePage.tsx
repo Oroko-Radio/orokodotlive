@@ -27,10 +27,10 @@ const SinglePage = ({
         <div className="relative h-half border-black border-b-2">
           {coverImage && repeatCover ? (
             <div className="flex relative h-full overflow-hidden">
-              {[...Array(2)].map((x, idx) => (
+              {[...Array(3)].map((x, idx) => (
                 <div
                   key={idx}
-                  className="relative w-full lg:w-3/5 flex-shrink-0 lg:border-r-2 border-black"
+                  className="relative w-full lg:w-3/5 xl:w-2/5 flex-shrink-0 lg:border-r-2 border-black"
                 >
                   <Image
                     key={idx}
