@@ -70,15 +70,19 @@ export default function LivePlayer() {
 
   return (
     <>
-      <section
-        className={cn("sticky", {
-          "top-0 z-30 mb-14 md:mb-18": isOnline,
-        })}
-      >
-        <div className="absolute w-full">
-          <div className="relative group">
-            <div className="flex items-center h-14 md:h-18 border-b-2 border-t-2 border-black text-white">
-              {isOnline && (
+      <audio hidden id="oroko-live-player" preload="none" ref={player}>
+        <source ref={source} type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      {isOnline && (
+        <section
+          className={cn("sticky", {
+            "top-0 z-30 mb-14 md:mb-18": isOnline,
+          })}
+        >
+          <div className="absolute w-full">
+            <div className="relative group">
+              <div className="flex items-center h-14 md:h-18 border-b-2 border-t-2 border-black text-white">
                 <div className="px-4 h-full flex bg-orokoYellow text-black border-r-2 border-black">
                   <div className="rounded-full self-center bg-white border-black border-2 h-12 w-12 md:h-16 md:w-16 flex justify-center items-center">
                     <button
@@ -94,9 +98,7 @@ export default function LivePlayer() {
                     </button>
                   </div>
                 </div>
-              )}
 
-              {isOnline ? (
                 <div
                   className="overflow-hidden h-full z-30 cursor-pointer"
                   onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -123,15 +125,8 @@ export default function LivePlayer() {
                     </div>
                   </Banner>
                 </div>
-              ) : null}
-            </div>
+              </div>
 
-            <audio hidden id="oroko-live-player" preload="none" ref={player}>
-              <source ref={source} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-
-            {isOnline && (
               <div
                 className={cn(
                   "hidden md:block absolute transition-all -translate-x-1/2 -translate-y-1/2 left-1/2 z-10",
@@ -146,9 +141,7 @@ export default function LivePlayer() {
                   dropdownOpen={dropdownOpen}
                 />
               </div>
-            )}
 
-            {isOnline && (
               <div
                 className={cn("w-full transition-all", {
                   "h-0 overflow-hidden": !dropdownOpen,
@@ -157,10 +150,10 @@ export default function LivePlayer() {
               >
                 <PlayerDropdown />
               </div>
-            )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }
