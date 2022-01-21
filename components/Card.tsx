@@ -9,7 +9,7 @@ interface CardProps {
   link: string;
   mixcloudLink?: string;
   children?: any;
-  cardWidth: "half" | "quarter";
+  cardWidth?: "half" | "quarter";
 }
 
 const Card = ({
@@ -18,7 +18,7 @@ const Card = ({
   title,
   mixcloudLink,
   children,
-  cardWidth = "half",
+  cardWidth = "quarter",
 }: CardProps) => {
   return (
     <Link href={link} passHref>
