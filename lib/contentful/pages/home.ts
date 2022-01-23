@@ -1,18 +1,12 @@
 import dayjs from "dayjs";
 import { graphql } from "..";
-import {
-  ArticleInterface,
-  HomePageData,
-  NextUpSection,
-  ShowInterface,
-} from "../../../types/shared";
-import { extractCollection, extractPage, sort } from "../../../util";
+import { ArticleInterface, ShowInterface } from "../../../types/shared";
+import { extractCollection, sort } from "../../../util";
 import {
   ArticlePreviewFragment,
   FeaturedArticleFragment,
   ShowPreviewFragment,
 } from "../fragments";
-import { getAllShows } from "./radio";
 
 export async function getHomePage() {
   const HomePageQuery = /* GraphQL */ `
@@ -63,7 +57,8 @@ export async function getHomePage() {
 
   const latestShows = shows
     .sort(sort.date_DESC)
-    .filter((show) => dayjs(show.date).isBefore(today));
+    .filter((show) => dayjs(show.date).isBefore(today))
+    .filter((show) => show.mixcloudLink);
 
   return {
     featuredArticles: extractCollection<ArticleInterface>(
