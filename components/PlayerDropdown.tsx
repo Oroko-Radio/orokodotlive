@@ -1,6 +1,7 @@
+import cn from "classnames";
 import Image from "next/image";
 import dayjs from "dayjs";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { OROKO_LIVE } from "../constants";
 import useRadioCo from "../hooks/useRadioCo";
 import { getAllShows } from "../lib/contentful/pages/radio";
@@ -28,7 +29,15 @@ export default function PlayerDropdown() {
   }, []);
 
   return (
-    <section className="md:grid grid-cols-2 max-w-5xl xl:max-w-6xl mx-auto border-b-2 lg:border-2 lg:border-t-0 border-black shadow-3xl">
+    <section
+      className={cn(
+        "md:grid mx-auto border-b-2 lg:border-2 lg:border-t-0 border-black shadow-3xl",
+        {
+          "grid-cols-2 max-w-5xl xl:max-w-6xl": nextUp,
+          "max-w-3xl md:border-r-2 md:border-l-2": !nextUp,
+        }
+      )}
+    >
       <div className="flex-grow p-4 bg-orokoRed">
         <div className="relative border-2 border-black w-full h-72 xl:h-96 mb-4">
           <Image
