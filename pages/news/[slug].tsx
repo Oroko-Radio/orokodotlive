@@ -55,7 +55,7 @@ export default function Article({
               </p>
             )}
           </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:mr-36 lg:mr-40">
             {title}
           </h1>
           <h2 className="font-serif text-4xl lg:text-6xl">

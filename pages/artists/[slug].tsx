@@ -32,7 +32,7 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
           <p className="hidden md:block mb-4 ml-0.5 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
             About the artist
           </p>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 mt-6 md:mt-0 font-heading md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 mt-6 md:mt-0 font-heading md:mr-36 lg:mr-40">
             {name}
           </h1>
           {city && city.name && (
