@@ -1,14 +1,18 @@
-import dayjs from "dayjs";
-import { InferGetStaticPropsType } from "next";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import dayjs from "dayjs";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { OROKO_LIVE } from "../constants";
 import useRadioCo from "../hooks/useRadioCo";
 import { getAllShows } from "../lib/contentful/pages/radio";
 import { ShowInterface } from "../types/shared";
 import { sort } from "../util";
 
-export default function PlayerDropdown() {
+export default function PlayerDropdown({
+  setDropdownOpen,
+}: {
+  setDropdownOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   const { data } = useRadioCo(OROKO_LIVE);
   const [nextUp, setNextUp] = useState<ShowInterface | null>(null);
 
@@ -29,9 +33,8 @@ export default function PlayerDropdown() {
   }, []);
 
   return (
-    <section className="hidden md:grid grid-cols-2 bg-orokoRed max-w-5xl xl:max-w-6xl mx-auto border-b-2 lg:border-2 lg:border-t-0 border-black shadow-3xl">
-      <div className="flex-grow p-4">
-        <p className="font-sans text-black text-sm mb-2">LIVE</p>
+    <section className="hidden md:grid grid-cols-2 max-w-5xl xl:max-w-6xl mx-auto border-b-2 lg:border-2 lg:border-t-0 border-black shadow-3xl">
+      <div className="flex-grow p-4 bg-orokoRed">
         <div className="relative border-2 border-black w-full h-72 xl:h-96 mb-4">
           <Image
             src={data.current_track.artwork_url_large}
@@ -41,6 +44,9 @@ export default function PlayerDropdown() {
             unoptimized
           />
         </div>
+        <p className="font-sans font-semibold text-black text-sm mb-2">
+          NOW PLAYING
+        </p>
         <h1 className="font-heading text-5xl text-black">
           {data.current_track.title.split(" - ")[1]}
         </h1>
@@ -49,34 +55,44 @@ export default function PlayerDropdown() {
         </h1>
       </div>
       {nextUp && (
-        <div className="bg-orokoBlue p-4 text-black border-l-2 border-black">
-          <p className="font-sans text-sm mb-2">NEXT UP</p>
-          <div className="flex justify-center">
-            <div className="relative border-2 border-black rounded-full overflow-hidden w-72 h-72 xl:w-96 xl:h-96 mb-4">
-              <Image
-                src={nextUp.coverImage.url}
-                alt={nextUp.title}
-                layout="fill"
-                objectFit="cover"
-              />
+        <Link href={`/radio/${nextUp.slug}`} passHref>
+          <div className="bg-white">
+            <div
+              onClick={() => setDropdownOpen(false)}
+              className="bg-orokoBlue hover:opacity-90 cursor-pointer p-4 text-black border-l-2 border-black"
+            >
+              <div className="flex justify-center">
+                <div className="relative border-2 border-black rounded-full overflow-hidden w-72 h-72 xl:w-96 xl:h-96 mb-4">
+                  <Image
+                    src={nextUp.coverImage.url}
+                    alt={nextUp.title}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+              </div>
+              <div className="font-semibold mb-2 flex gap-3">
+                <p className="font-sans text-sm mb-0">NEXT UP</p>
+                <p className="font-sans text-sm mb-0">
+                  {dayjs(nextUp.date).format("DD MMM / HH").toUpperCase() + "H"}
+                </p>
+              </div>
+              <h1 className="font-heading text-5xl">{nextUp.title}</h1>
+              <h2 className="font-serif text-4xl mb-4 lg:mb-10">
+                {" "}
+                With{" "}
+                {nextUp.artistsCollection.items &&
+                  nextUp.artistsCollection.items.map(({ name, slug }, idx) => (
+                    <span key={slug}>
+                      <span>{name}</span>
+                      {idx !== nextUp.artistsCollection.items.length - 1 &&
+                        ", "}
+                    </span>
+                  ))}
+              </h2>
             </div>
           </div>
-          <p className="font-sans mb-2 text-base">
-            {dayjs(nextUp.date).format("DD MMM / HH").toUpperCase() + "H"}
-          </p>
-          <h1 className="font-heading text-5xl">{nextUp.title}</h1>
-          <h2 className="font-serif text-4xl mb-4 lg:mb-10">
-            {" "}
-            With{" "}
-            {nextUp.artistsCollection.items &&
-              nextUp.artistsCollection.items.map(({ name, slug }, idx) => (
-                <span key={slug}>
-                  <span>{name}</span>
-                  {idx !== nextUp.artistsCollection.items.length - 1 && ", "}
-                </span>
-              ))}
-          </h2>
-        </div>
+        </Link>
       )}
     </section>
   );
