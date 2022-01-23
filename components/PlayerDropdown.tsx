@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import dayjs from "dayjs";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { OROKO_LIVE } from "../constants";
@@ -8,11 +7,7 @@ import { getAllShows } from "../lib/contentful/pages/radio";
 import { ShowInterface } from "../types/shared";
 import { sort } from "../util";
 
-export default function PlayerDropdown({
-  setDropdownOpen,
-}: {
-  setDropdownOpen: Dispatch<SetStateAction<boolean>>;
-}) {
+export default function PlayerDropdown() {
   const { data } = useRadioCo(OROKO_LIVE);
   const [nextUp, setNextUp] = useState<ShowInterface | null>(null);
 
@@ -55,44 +50,36 @@ export default function PlayerDropdown({
         </h1>
       </div>
       {nextUp && (
-        <Link href={`/radio/${nextUp.slug}`} passHref>
-          <div className="bg-white">
-            <div
-              onClick={() => setDropdownOpen(false)}
-              className="bg-orokoBlue h-full hover:opacity-90 cursor-pointer p-4 text-black border-l-2 border-black"
-            >
-              <div className="flex justify-center">
-                <div className="relative border-2 border-black rounded-full overflow-hidden w-72 h-72 xl:w-96 xl:h-96 mb-4">
-                  <Image
-                    src={nextUp.coverImage.url}
-                    alt={nextUp.title}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </div>
-              </div>
-              <div className="font-semibold mb-2 flex gap-3">
-                <p className="font-sans text-sm mb-0">NEXT UP</p>
-                <p className="font-sans text-sm mb-0">
-                  {dayjs(nextUp.date).format("DD MMM / HH").toUpperCase() + "H"}
-                </p>
-              </div>
-              <h1 className="font-heading text-5xl">{nextUp.title}</h1>
-              <h2 className="font-serif text-4xl mb-4 lg:mb-10">
-                {" "}
-                With{" "}
-                {nextUp.artistsCollection.items &&
-                  nextUp.artistsCollection.items.map(({ name, slug }, idx) => (
-                    <span key={slug}>
-                      <span>{name}</span>
-                      {idx !== nextUp.artistsCollection.items.length - 1 &&
-                        ", "}
-                    </span>
-                  ))}
-              </h2>
+        <div className="bg-orokoBlue h-full p-4 text-black border-l-2 border-black">
+          <div className="flex justify-center">
+            <div className="relative border-2 border-black rounded-full overflow-hidden w-72 h-72 xl:w-96 xl:h-96 mb-4">
+              <Image
+                src={nextUp.coverImage.url}
+                alt={nextUp.title}
+                layout="fill"
+                objectFit="cover"
+              />
             </div>
           </div>
-        </Link>
+          <div className="font-semibold mb-2 flex gap-3">
+            <p className="font-sans text-sm mb-0">NEXT UP</p>
+            <p className="font-sans text-sm mb-0">
+              {dayjs(nextUp.date).format("DD MMM / HH").toUpperCase() + "H"}
+            </p>
+          </div>
+          <h1 className="font-heading text-5xl">{nextUp.title}</h1>
+          <h2 className="font-serif text-4xl mb-4 lg:mb-10">
+            {" "}
+            With{" "}
+            {nextUp.artistsCollection.items &&
+              nextUp.artistsCollection.items.map(({ name, slug }, idx) => (
+                <span key={slug}>
+                  <span>{name}</span>
+                  {idx !== nextUp.artistsCollection.items.length - 1 && ", "}
+                </span>
+              ))}
+          </h2>
+        </div>
       )}
     </section>
   );

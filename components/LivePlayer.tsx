@@ -148,7 +148,7 @@ export default function LivePlayer() {
                   "h-auto": dropdownOpen,
                 })}
               >
-                <PlayerDropdown setDropdownOpen={setDropdownOpen} />
+                <PlayerDropdown />
               </div>
             </div>
           </div>
