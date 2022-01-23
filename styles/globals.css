@@ -87,7 +87,7 @@
   }
 
   .rich-text a {
-    @apply text-orokoBlue;
+    @apply text-orokoRed underline;
   }
 
   .rich-text video {
