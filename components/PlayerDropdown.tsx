@@ -28,7 +28,7 @@ export default function PlayerDropdown() {
   }, []);
 
   return (
-    <section className="hidden md:grid grid-cols-2 max-w-5xl xl:max-w-6xl mx-auto border-b-2 lg:border-2 lg:border-t-0 border-black shadow-3xl">
+    <section className="md:grid grid-cols-2 max-w-5xl xl:max-w-6xl mx-auto border-b-2 lg:border-2 lg:border-t-0 border-black shadow-3xl">
       <div className="flex-grow p-4 bg-orokoRed">
         <div className="relative border-2 border-black w-full h-72 xl:h-96 mb-4">
           <Image
@@ -42,16 +42,16 @@ export default function PlayerDropdown() {
         <p className="font-sans font-semibold text-black text-sm mb-2">
           NOW PLAYING
         </p>
-        <h1 className="font-heading text-5xl text-black">
+        <h1 className="font-heading text-3xl md:text-5xl text-black">
           {data.current_track.title.split(" - ")[1]}
         </h1>
-        <h1 className="font-serif text-4xl text-black mb-2">
+        <h1 className="font-serif text-2xl md:text-4xl text-black mb-2">
           With {data.current_track.title.split(" - ")[0]}
         </h1>
       </div>
       {nextUp && (
-        <div className="bg-orokoBlue h-full p-4 text-black border-l-2 border-black">
-          <div className="flex justify-center">
+        <div className="bg-orokoBlue h-full p-4 text-black border-t-2 md:border-t-0 md:border-l-2 border-black">
+          <div className="hidden md:flex justify-center">
             <div className="relative border-2 border-black rounded-full overflow-hidden w-72 h-72 xl:w-96 xl:h-96 mb-4">
               <Image
                 src={nextUp.coverImage.url}
@@ -67,8 +67,8 @@ export default function PlayerDropdown() {
               {dayjs(nextUp.date).format("DD MMM / HH").toUpperCase() + "H"}
             </p>
           </div>
-          <h1 className="font-heading text-5xl">{nextUp.title}</h1>
-          <h2 className="font-serif text-4xl mb-4 lg:mb-10">
+          <h1 className="font-heading text-3xl md:text-5xl">{nextUp.title}</h1>
+          <h2 className="font-serif text-2xl md:text-4xl mb-4 lg:mb-10">
             {" "}
             With{" "}
             {nextUp.artistsCollection.items &&
