@@ -59,7 +59,7 @@ export default function PlayerDropdown({
           <div className="bg-white">
             <div
               onClick={() => setDropdownOpen(false)}
-              className="bg-orokoBlue hover:opacity-90 cursor-pointer p-4 text-black border-l-2 border-black"
+              className="bg-orokoBlue h-full hover:opacity-90 cursor-pointer p-4 text-black border-l-2 border-black"
             >
               <div className="flex justify-center">
                 <div className="relative border-2 border-black rounded-full overflow-hidden w-72 h-72 xl:w-96 xl:h-96 mb-4">
