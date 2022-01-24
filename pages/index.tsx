@@ -3,7 +3,7 @@ import Hero from "../components/Hero";
 import Meta from "../components/Meta";
 import NewsletterSection from "../components/NewsletterSection";
 import { getHomePage } from "../lib/contentful/pages/home";
-import FeaturedArticles from "../views/FeaturedArticles";
+import AllNews from "../views/AllNews";
 import FeaturedShows from "../views/FeaturedShows";
 import LatestShows from "../views/LatestShows";
 
@@ -25,7 +25,7 @@ export default function HomePage({
       <Hero />
       <LatestShows shows={latestShows} />
       <FeaturedShows shows={featuredShows} />
-      <FeaturedArticles featuredArticles={featuredArticles} heading="News" />
+      <AllNews articles={featuredArticles} heading="News" bgColor="gray" />
       <NewsletterSection />
     </main>
   );
