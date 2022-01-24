@@ -40,8 +40,8 @@ export default function TitleBox({
             }
           )}
         >
-          <p className="mb-0 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
-            {boxText ? boxText : "-"}
+          <p className="mb-0 font-sans font-semibold tracking-wide text-base">
+            {boxText}
           </p>
         </div>
 

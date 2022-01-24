@@ -50,7 +50,7 @@ export default function Article({
               <Tag text={articleType} transparent />
             </div>
             {date && (
-              <p className="hidden md:inline-block mb-0 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
+              <p className="hidden md:inline-block mb-0 font-sans font-semibold tracking-wide text-lg">
                 {dayjs(date).format("ddd DD MMMM YYYY @ HH") + "H"}
               </p>
             )}

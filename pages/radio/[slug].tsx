@@ -41,7 +41,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
       >
         <div className="container max-w-5xl mx-auto">
           {date && (
-            <p className="hidden md:block mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
+            <p className="hidden md:block mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-lg">
               {dayjs(date).format("ddd DD MMMM YYYY @ HH:mm") + "H"}
             </p>
           )}
