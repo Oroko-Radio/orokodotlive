@@ -7,7 +7,7 @@ const UpcomingShows = ({ shows, heading = "Coming up on OROKO" }) => {
   return (
     <div className="overflow-hidden bg-orokoBlue border-b-2 border-black">
       <div className="flex justify-between p-8">
-        <h1 className="font-serif text-6xl">{heading}</h1>
+        <h1 className="font-serif text-4xl md:text-5xl">{heading}</h1>
         <Link href="/radio#all-shows" passHref>
           <div className="hidden md:block mt-4">
             <DotButton transparent size="large">

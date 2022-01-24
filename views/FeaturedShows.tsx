@@ -13,7 +13,7 @@ const FeaturedShows = ({
 }: FeaturedShowsProps) => {
   return (
     <div className="overflow-hidden bg-orokoOrange border-b-2 border-black">
-      <h1 className="font-serif text-6xl p-8">{heading}</h1>
+      <h1 className="font-serif text-4xl md:text-5xl p-8">{heading}</h1>
 
       <Slider>
         {shows.map((show, idx) => (

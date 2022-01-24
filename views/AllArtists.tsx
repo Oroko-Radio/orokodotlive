@@ -27,7 +27,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
   return (
     <div className="bg-orokoYellow">
       <div className="md:flex justify-between p-8 pb-2 md:pb-8">
-        <h1 className="font-serif text-black text-6xl mb-8 md:mb-0">
+        <h1 className="font-serif text-black text-4xl md:text-5xl mb-8 md:mb-0">
           All Artists
         </h1>
         <select

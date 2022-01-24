@@ -58,7 +58,7 @@ export default function Article({
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:mr-36 lg:mr-40">
             {title}
           </h1>
-          <h2 className="font-serif text-4xl lg:text-6xl">
+          <h2 className="font-serif text-4xl lg:text-5xl">
             By <span className="border-b-2 border-black ">{author.name}</span>
           </h2>
         </div>

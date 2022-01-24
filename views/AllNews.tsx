@@ -20,7 +20,7 @@ const AllNews = ({
         "bg-orokoGray": bgColor === "gray",
       })}
     >
-      <h1 className="font-serif text-6xl p-8">{heading}</h1>
+      <h1 className="font-serif text-4xl md:text-5xl p-8">{heading}</h1>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 p-8 xl:pb-12">
         {articles.map(
           (

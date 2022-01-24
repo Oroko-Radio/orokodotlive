@@ -11,7 +11,7 @@ const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
     <>
       <div className="overflow-hidden">
         <div className="flex justify-between p-8">
-          <h1 className="font-serif text-6xl">{heading}</h1>
+          <h1 className="font-serif text-4xl md:text-5xl">{heading}</h1>
           <Link href="/news#all-news" passHref>
             <div className="hidden md:block mt-4">
               <DotButton transparent size="large">
