@@ -34,7 +34,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
       title={title}
     >
       <TitleBox
-        boxText={dayjs(date).format("DD MMM YY HH:MM") + "H"}
+        boxText={dayjs(date).format("DD MMM YY HH:mm") + "H"}
         mixcloudLink={mixcloudLink}
         title={title}
         slug={`news/${slug}`}
@@ -42,7 +42,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
         <div className="container max-w-5xl mx-auto">
           {date && (
             <p className="hidden md:block mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
-              {dayjs(date).format("ddd DD MMMM YYYY @ HH") + "H"}
+              {dayjs(date).format("ddd DD MMMM YYYY @ HH:mm") + "H"}
             </p>
           )}
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-0 font-heading md:mr-36 lg:mr-40">
