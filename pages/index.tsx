@@ -25,7 +25,7 @@ export default function HomePage({
       <Hero />
       <LatestShows shows={latestShows} />
       <FeaturedShows shows={featuredShows} />
-      <AllNews articles={featuredArticles} heading="News" bgColor="gray" />
+      <AllNews articles={featuredArticles} heading="News" bgColor="gray" home />
       <NewsletterSection />
     </main>
   );

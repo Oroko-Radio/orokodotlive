@@ -1,17 +1,21 @@
 import cn from "classnames";
+import Link from "next/link";
 import dayjs from "dayjs";
 import Card from "../components/Card";
 import Tag from "../components/Tag";
 import { ArticleInterface } from "../types/shared";
+import DotButton from "../components/ui/DotButton";
 
 const AllNews = ({
   articles,
   heading = "All News",
   bgColor = "white",
+  home = false,
 }: {
   articles: ArticleInterface[];
   heading?: string;
   bgColor?: "white" | "gray";
+  home?: boolean;
 }) => {
   return (
     <div
@@ -20,7 +24,18 @@ const AllNews = ({
         "bg-orokoGray": bgColor === "gray",
       })}
     >
-      <h1 className="font-serif text-4xl md:text-5xl p-8">{heading}</h1>
+      <div className="flex justify-between p-8">
+        <h1 className="font-serif text-4xl md:text-5xl">{heading}</h1>
+        {home && (
+          <Link href="/news#all-news" passHref>
+            <div className="hidden md:block mt-4">
+              <DotButton transparent size="large">
+                All News
+              </DotButton>
+            </div>
+          </Link>
+        )}
+      </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 p-8 xl:pb-12">
         {articles.map(
           (
