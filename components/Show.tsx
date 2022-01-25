@@ -27,16 +27,18 @@ export default function Show({ show, cityColor }: ShowProps) {
             </span>
           ))}
       </h2>
-      <div className="flex flex-wrap gap-1 mb-4">
-        <Tag
-          text={artistsCollection.items[0].city.name}
-          color={cityColor}
-          card
-        />
-        {genresCollection.items.map(({ name }, idx) => (
-          <Tag key={idx} text={name} transparent card />
-        ))}
-      </div>
+      {artistsCollection.items[0].city && (
+        <div className="flex flex-wrap gap-1 mb-4">
+          <Tag
+            text={artistsCollection.items[0].city.name}
+            color={cityColor}
+            card
+          />
+          {genresCollection.items.map(({ name }, idx) => (
+            <Tag key={idx} text={name} transparent card />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
