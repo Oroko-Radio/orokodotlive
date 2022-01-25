@@ -6,6 +6,7 @@ import DotButton from "./ui/DotButton";
 import Logo from "../icons/Logo";
 import MenuIcon from "../icons/MenuIcon";
 import CloseIcon from "../icons/CloseIcon";
+import MenuButton from "./ui/MenuButton";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,7 +49,7 @@ const Header = () => {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <div className="hidden md:block">
-          <DotButton size="large">Menu</DotButton>
+          <MenuButton isMenuOpen={isMenuOpen}>Menu</MenuButton>
         </div>
         <div
           className={cx(
