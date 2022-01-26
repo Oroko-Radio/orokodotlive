@@ -24,7 +24,7 @@ const AllNews = ({
         "bg-orokoGray": bgColor === "gray",
       })}
     >
-      <div className="flex justify-between p-8">
+      <div className="flex justify-between p-8 pb-0">
         <h1 className="font-serif text-4xl md:text-5xl">{heading}</h1>
         {home && (
           <Link href="/news#all-news" passHref>
