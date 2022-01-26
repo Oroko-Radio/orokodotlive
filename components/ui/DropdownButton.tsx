@@ -18,10 +18,13 @@ const DropdownButton = ({
     )}
   >
     <div
-      className={cn("relative h-full w-full m-4 transition-transform", {
-        "group-hover:translate-y-0.5": !dropdownOpen,
-        "mb-5": dropdownOpen,
-      })}
+      className={cn(
+        "relative h-full w-full m-4 transition-transform delay-200",
+        {
+          "group-hover:translate-y-0.5": !dropdownOpen,
+          "mb-5": dropdownOpen,
+        }
+      )}
     >
       <Image
         src={dropdownOpen ? chevronUp : chevronDown}
