@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { graphql } from "..";
+import { graphql, LIMITS } from "..";
 import { ArticleInterface, ShowInterface } from "../../../types/shared";
 import { extractCollection, sort } from "../../../util";
 import {
@@ -8,9 +8,9 @@ import {
   ShowPreviewFragment,
 } from "../fragments";
 
-export async function getHomePage() {
+export async function getHomePage(limit = LIMITS.SHOWS) {
   const HomePageQuery = /* GraphQL */ `
-    query HomePageQuery {
+    query HomePageQuery($limit: Int) {
       featuredArticles: articleCollection(
         order: date_DESC
         where: { isFeatured: true }
@@ -27,7 +27,7 @@ export async function getHomePage() {
         }
       }
 
-      allShows: showCollection(limit: 8) {
+      allShows: showCollection(limit: $limit) {
         items {
           ...ShowPreviewFragment
         }
@@ -56,7 +56,8 @@ export async function getHomePage() {
   const latestShows = extractCollection<ShowInterface>(data, "allShows")
     .sort(sort.date_DESC)
     .filter((show) => dayjs(show.date).isBefore(today))
-    .filter((show) => show.mixcloudLink);
+    .filter((show) => show.mixcloudLink)
+    .splice(0, 8);
 
   return {
     featuredArticles: extractCollection<ArticleInterface>(
