@@ -25,6 +25,10 @@ const Meta = ({ title }: MetaProps) => {
         property="og:image"
         content="https://oroko.live/oroko-logo-full.jpg"
       />
+      <meta
+        property="og:image:secure_url"
+        content="https://oroko.live/oroko-logo-full.jpg"
+      />
       <meta property="og:image:width" content="1280" />
       <meta property="og:image:height" content="2537" />
       <meta property="og:image:alt" content="Oroko Radio Logo" />
