@@ -23,7 +23,7 @@ const Meta = ({ title }: MetaProps) => {
       <meta property="og:type" content="website" />
       <meta
         property="og:image"
-        content="https://oroko.live/oroko_logo_full.jpg"
+        content="https://oroko.live/oroko-logo-full.jpg"
       />
       <meta property="og:image:width" content="1000" />
       <meta property="og:image:height" content="1000" />
