@@ -11,15 +11,15 @@
   }
   @font-face {
     font-family: Digitalt;
-    src: url("/fonts/Digitalt-04no.ttf");
+    src: url("/fonts/Digitalt.woff2") format("woff2");
   }
   @font-face {
     font-family: Dozza-Regalic;
-    src: url("/fonts/Dozza-Regalic.otf");
+    src: url("/fonts/Dozza-Regalic.woff2") format("woff2");
   }
   @font-face {
     font-family: Public-Sans;
-    src: url("/fonts/PublicSans-VariableFont_wght.ttf");
+    src: url("/fonts/PublicSans-Regular.woff2") format("woff2");
   }
 
   /* Card width */
