@@ -53,9 +53,7 @@ export async function getHomePage() {
 
   const today = dayjs();
 
-  const shows = extractCollection<ShowInterface>(data, "allShows");
-
-  const latestShows = shows
+  const latestShows = extractCollection<ShowInterface>(data, "allShows")
     .sort(sort.date_DESC)
     .filter((show) => dayjs(show.date).isBefore(today))
     .filter((show) => show.mixcloudLink);

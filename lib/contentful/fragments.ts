@@ -89,6 +89,10 @@ export const AllArtistFragment = /* GraphQL */ `
 
 export const ShowPreviewFragment = /* GraphQL */ `
   fragment ShowPreviewFragment on Show {
+    title
+    slug
+    date
+    mixcloudLink
     coverImage {
       sys {
         id
@@ -99,7 +103,6 @@ export const ShowPreviewFragment = /* GraphQL */ `
       width
       height
     }
-    date
     genresCollection(limit: 9) {
       items {
         name
@@ -113,8 +116,5 @@ export const ShowPreviewFragment = /* GraphQL */ `
         }
       }
     }
-    mixcloudLink
-    slug
-    title
   }
 `;
