@@ -41,7 +41,10 @@ export default function PlayerDropdown() {
       <div className="flex-grow p-4 bg-orokoRed">
         <div className="relative border-2 border-black w-full h-72 xl:h-96 mb-4">
           <Image
-            src={data.current_track.artwork_url_large}
+            src={
+              data.current_track.artwork_url_large ||
+              "https://oroko.live/oroko-logo-full.jpeg"
+            }
             alt={data.current_track.title}
             layout="fill"
             objectFit="cover"

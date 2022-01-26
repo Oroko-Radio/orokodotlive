@@ -112,7 +112,10 @@ export default function LivePlayer() {
                       </h1>
                       <div className="relative h-full w-36 border-r-2 border-l-2 border-black">
                         <Image
-                          src={data.current_track.artwork_url}
+                          src={
+                            data.current_track.artwork_url ||
+                            "https://oroko.live/oroko-logo-full.jpeg"
+                          }
                           alt={data.current_track.title}
                           layout="fill"
                           objectFit="cover"
