@@ -22,10 +22,6 @@ const Meta = ({ title }: MetaProps) => {
       <meta property="og:url" content="https://oroko.live/" />
       <meta property="og:type" content="website" />
       <meta
-        property="og:image"
-        content="https://oroko.live/oroko-logo-full.jpg"
-      />
-      <meta
         property="og:image:secure_url"
         content="https://oroko.live/oroko-logo-full.jpg"
       />
