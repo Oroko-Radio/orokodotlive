@@ -27,6 +27,7 @@ const Meta = ({ title }: MetaProps) => {
       />
       <meta property="og:image:width" content="1280" />
       <meta property="og:image:height" content="2537" />
+      <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:image:alt" content="Oroko Radio Logo" />
     </Head>
   );
