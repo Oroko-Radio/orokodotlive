@@ -27,9 +27,9 @@ type RadioCoResponse = {
   }[];
 };
 
-export default function useRadioCo() {
+export default function useRadioCo(station_id: string) {
   return useSWR<RadioCoResponse>(
-    `https://public.radio.co/stations/${RADIO_CO_STATION_ID}/status`,
+    `https://public.radio.co/stations/${station_id}/status`,
     fetcher,
     {
       refreshInterval: 10 * 60 * 1000,

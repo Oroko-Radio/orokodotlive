@@ -1,40 +1,46 @@
 import Link from "next/link";
 import Image from "next/image";
-import facebook from "../images/socials/facebook-vector-cropped.svg";
-import instagram from "../images/socials/Insta-vector-cropped.svg";
-import tiktok from "../images/socials/TikTok-vector-cropped.svg";
-import twitter from "../images/socials/twitter-vector-cropped.svg";
+import facebook from "../images/socials/Facebook.svg";
+import instagram from "../images/socials/Instagram.svg";
+import tiktok from "../images/socials/TikTok.svg";
+import twitter from "../images/socials/Twitter.svg";
+import discord from "../images/socials/Discord.svg";
 
 const socialsMap: socialsMapType = {
   Facebook: { icon: facebook, link: "https://www.facebook.com/OrokoRadio" },
   Instagram: { icon: instagram, link: "https://www.instagram.com/orokoradio/" },
   TikTok: { icon: tiktok, link: "https://www.tiktok.com/@orokoradio" },
   Twitter: { icon: twitter, link: "https://twitter.com/orokoradio" },
+  Discord: { icon: discord, link: "https://discord.gg/BDSBE6Ey4w" },
+};
+
+type socialType = {
+  icon: StaticImageData;
+  link: string;
 };
 
 type socialsMapType = {
-  Facebook: { icon: StaticImageData; link: string };
-  Instagram: { icon: StaticImageData; link: string };
-  TikTok: { icon: StaticImageData; link: string };
-  Twitter: { icon: StaticImageData; link: string };
+  Facebook: socialType;
+  Instagram: socialType;
+  TikTok: socialType;
+  Twitter: socialType;
+  Discord: socialType;
 };
 
 type SocialIconProps = {
-  social: "Facebook" | "Instagram" | "TikTok" | "Twitter";
+  social: "Facebook" | "Instagram" | "TikTok" | "Twitter" | "Discord";
 };
 
 const SocialIcon = ({ social }: SocialIconProps) => {
   return (
     <Link href={socialsMap[social].link}>
       <a target="_blank">
-        <div className="bg-white group rounded-full h-8 w-8 border-2 border-black flex justify-center">
-          <div className="relative self-center w-4 h-4 group-hover:opacity-60 transition-opacity">
-            <Image
-              src={socialsMap[social].icon}
-              alt={social}
-              layout="responsive"
-            />
-          </div>
+        <div className="w-8 h-8 hover:scale-110 transition-transform">
+          <Image
+            src={socialsMap[social].icon}
+            alt={social}
+            layout="responsive"
+          />
         </div>
       </a>
     </Link>

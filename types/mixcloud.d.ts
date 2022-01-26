@@ -1,4 +1,4 @@
-interface MixcloudPlayerWidget {
+export interface MixcloudPlayerWidget {
   events: {
     buffering: {
       on: (e: any) => void;

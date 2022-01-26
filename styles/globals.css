@@ -11,14 +11,96 @@
   }
   @font-face {
     font-family: Digitalt;
-    src: url("/fonts/Digitalt-04no.ttf");
+    src: url("/fonts/Digitalt.woff2") format("woff2");
   }
   @font-face {
     font-family: Dozza-Regalic;
-    src: url("/fonts/Dozza-Regalic.otf");
+    src: url("/fonts/Dozza-Regalic.woff2") format("woff2");
   }
   @font-face {
     font-family: Public-Sans;
-    src: url("/fonts/PublicSans-VariableFont_wght.ttf");
+    src: url("/fonts/PublicSans-Regular.woff2") format("woff2");
+  }
+
+  /* Card width */
+
+  .card-half,
+  .card-quarter {
+    width: calc(100% - 32px);
+  }
+
+  @media only screen and (min-width: 768px) {
+    .card-half,
+    .card-quarter {
+      width: calc(50% - 16px);
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .card-quarter {
+      width: calc(25% - 8px);
+    }
+  }
+
+  @media only screen and (min-width: 2000px) {
+    .card-half {
+      width: calc(25% - 8px);
+    }
+  }
+
+  /* Rich text styles */
+
+  .rich-text h1 {
+    @apply text-6xl font-bold mb-6;
+  }
+
+  .rich-text h2 {
+    @apply text-4xl font-bold mb-6;
+  }
+
+  .rich-text h3 {
+    @apply text-3xl font-bold mb-6;
+  }
+
+  .rich-text h4 {
+    @apply text-2xl font-bold mb-6;
+  }
+
+  .rich-text h5 {
+    @apply text-xl font-bold mb-6;
+  }
+
+  .rich-text h6 {
+    @apply text-lg font-bold mb-6;
+  }
+
+  .rich-text p {
+    @apply text-2xl font-sans;
+  }
+
+  .rich-text ul {
+    @apply list-disc ml-6 mb-6;
+  }
+
+  .rich-text ul p {
+    @apply mb-0;
+  }
+
+  .rich-text a {
+    @apply text-orokoRed underline font-bold;
+  }
+
+  .rich-text video {
+    @apply mb-6;
+  }
+
+  .rich-text hr {
+    @apply mb-6 border-black;
+  }
+
+  /* Marquee spacing fix */
+
+  .marquee-wrapper .marquee {
+    min-width: 0% !important;
   }
 }

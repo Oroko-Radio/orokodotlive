@@ -9,14 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^15.6.2",
+    "@contentful/rich-text-types": "^15.7.0",
+    "@headlessui/react": "^1.4.2",
     "classnames": "^2.3.1",
+    "dayjs": "^1.10.7",
     "fathom-client": "^3.2.0",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-fast-marquee": "^1.2.1",
-    "react-lottie": "^1.2.3",
     "react-modal": "^3.14.3",
+    "react-ridge-state": "4.1.7",
     "swr": "^1.0.1"
   },
   "devDependencies": {
@@ -24,7 +28,6 @@
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/typography": "^0.4.1",
     "@types/react": "17.0.28",
-    "@types/react-lottie": "^1.2.6",
     "@types/react-modal": "^3.13.1",
     "autoprefixer": "^10.3.7",
     "eslint": "7",

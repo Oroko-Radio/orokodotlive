@@ -3,7 +3,7 @@ import type { FormEvent } from "react";
 import Image from "next/image";
 import DotButton from "../ui/DotButton";
 import Modal from "react-modal";
-import logoSmall from "/public/static/logo-small-outline.svg";
+import logoSmall from "../../images/logo-small-outline.svg";
 import closeIcon from "../../images/ui/close_icon.svg";
 
 const customStyles = {
@@ -61,7 +61,7 @@ export default function NewsletterForm() {
   return (
     <form method="POST" onSubmit={handleSubmit}>
       <input
-        className="xl:text-lg mb-4 mr-4 px-3 py-1 rounded-full border-black border-2 font-serif"
+        className="xl:text-lg lg:w-3/4 mb-4 mr-4 lg:mr-10 px-3 py-1 rounded-full border-black border-2 font-serif"
         autoComplete="email"
         id="email"
         name="email"
@@ -72,7 +72,7 @@ export default function NewsletterForm() {
       />
 
       <button type="submit">
-        <DotButton>Submit</DotButton>
+        <DotButton size="large">Submit</DotButton>
       </button>
 
       <Modal

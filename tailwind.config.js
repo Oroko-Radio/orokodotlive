@@ -30,18 +30,46 @@ module.exports = {
       ],
       heading: ["Digitalt"],
     },
+    container: {
+      padding: "1.2rem",
+    },
     transitionDuration: {
       DEFAULT: "200ms",
     },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "2000px",
+    },
     extend: {
       height: {
+        18: "4.5rem",
         hero: "70vh",
+        half: "50vh",
       },
       zIndex: {
         "-10": -10,
       },
+      spacing: {
+        18: "4.5rem",
+        "-18": "-4.5rem",
+        22: "5.2rem",
+      },
+      boxShadow: {
+        "3xl": "0 20px 30px 0px rgba(0, 0, 0, 0.3)",
+      },
       colors: {
         offBlack: "#2F2726",
+        orokoYellow: "#FFC928",
+        orokoRed: "#FF4948",
+        orokoGray: "#F0F0F0",
+        orokoOrange: "#FF6A37",
+        orokoBlue: "#27ABFE",
+        orokoGreen: "#339D43",
+        orokoTransparentBlack: "rgba(0, 0, 0, 0.3)",
+        orokoLightOrange: "#FFB53E",
       },
     },
   },
