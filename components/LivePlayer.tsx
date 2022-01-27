@@ -114,7 +114,7 @@ export default function LivePlayer() {
                         <Image
                           src={
                             data.current_track.artwork_url ||
-                            "https://oroko.live/oroko-logo-full.jpeg"
+                            "https://oroko.live/OROKO_OG_1200px.png"
                           }
                           alt={data.current_track.title}
                           layout="fill"
