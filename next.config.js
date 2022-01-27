@@ -4,4 +4,7 @@ module.exports = {
     domains: ["images.ctfassets.net"],
   },
   reactStrictMode: true,
+  experimental: {
+    scrollRestoration: true,
+  },
 };
