@@ -36,7 +36,11 @@ const Footer = () => {
         <p className="inline font-sans text-sm xl:text-base">
           Designed by{" "}
           <Link href="https://www.studiopanorama.de/" passHref>
-            <span className="underline tracking-widest">panorama</span>
+            <a target="_blank">
+              <span className="underline tracking-widest cursor-pointer">
+                panorama
+              </span>
+            </a>
           </Link>{" "}
           Powered by
         </p>
