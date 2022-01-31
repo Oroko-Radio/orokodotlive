@@ -12,7 +12,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="grid grid-cols-5 py-2 z-50 bg-black">
+    <div className="grid grid-cols-5 py-2 xl:py-1 z-50 bg-black">
       <Link href="/" passHref>
         <div
           className="flex ml-4 md:ml-8 h-10 w-10 z-50 cursor-pointer self-center"
