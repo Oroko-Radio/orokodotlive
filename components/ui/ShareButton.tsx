@@ -18,7 +18,7 @@ export default function ShareButton({
   const handleOnClick = async () => {
     const shareData: ShareData = {
       text: title,
-      title: "Refuge Worldwide",
+      title: "Oroko Radio",
       url: URL,
     };
 
@@ -32,10 +32,10 @@ export default function ShareButton({
   if (!isServer && navigator.share)
     return (
       <button
-        className="bg-white rounded-full px-4 lg:px-6 py-1.5 border-black border-2 font-semibold text-lg lg:text-xl"
+        className="bg-white rounded-full px-4 lg:px-6 py-1.5 border-black border-2 font-semibold text-base md:text-lg lg:text-xl"
         onClick={handleOnClick}
       >
-        Share
+        <span className="text-sm">Share</span>
       </button>
     );
 

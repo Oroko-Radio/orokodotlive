@@ -23,10 +23,10 @@ const Slider: React.FunctionComponent & SliderSubComponents = ({
   return (
     <SliderContext.Provider value={{ elementRef }}>
       <SliderWrapper>
-        <div>
+        <div className="mx-4 md:mx-8">
           <div
             ref={containerRef}
-            className="flex ml-8 transition-transform"
+            className="flex transition-transform"
             {...slideProps}
           >
             {children}

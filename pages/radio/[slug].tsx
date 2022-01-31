@@ -48,7 +48,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-0 font-heading md:mr-36 lg:mr-40">
             {title}
           </h1>
-          <h2 className="font-serif text-4xl lg:text-5xl mb-6 lg:mb-10">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-6 lg:mb-10">
             {" "}
             With{" "}
             {artistsCollection.items &&
@@ -72,7 +72,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
           </div>
         </div>
       </TitleBox>
-      <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
+      <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8 mb-24">
         {renderRichTextWithImages(content)}
       </section>
     </SinglePage>

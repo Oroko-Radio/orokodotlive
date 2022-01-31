@@ -14,7 +14,7 @@ const NewsletterSection = () => {
       />
       <div className="z-10 flex flex-col items-center text-center justify-center">
         <h3 className="font-bold text-2xl xl:text-3xl mb-8">Newsletter</h3>
-        <h2 className="font-serif text-5xl xl:text-6xl mb-8">
+        <h2 className="font-serif text-5xl xl:text-6xl mb-8 px-4">
           Join the Oroko community!
         </h2>
         <p className="mb-8 max-w-sm xl:max-w-2xl">

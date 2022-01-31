@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import Button from "../components/ui/Button";
-import Artist from "../pages/artists/[slug]";
 import { AllArtistEntry } from "../types/shared";
 
 interface AllArtistsProps {
@@ -9,7 +7,6 @@ interface AllArtistsProps {
 }
 
 const AllArtists = ({ allArtists }: AllArtistsProps) => {
-  const [viewingNumber, setViewingNumber] = useState<number>(50);
   const [residentFilter, setResidentFilter] = useState<string>("all");
   const [filteredArtists, setFilteredArtists] =
     useState<AllArtistEntry[]>(allArtists);
@@ -26,7 +23,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
 
   return (
     <div className="bg-orokoYellow">
-      <div className="md:flex justify-between p-8 pb-2 md:pb-8">
+      <div className="md:flex justify-between py-8 px-4 md:px-8 pb-2 md:pb-8">
         <h1 className="font-serif text-black text-4xl md:text-5xl mb-8 md:mb-0">
           All Artists
         </h1>
@@ -40,28 +37,19 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
         </select>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-8">
-        {filteredArtists
-          .slice(0, viewingNumber)
-          .map(({ name, slug, photo, isResident }, idx) => (
-            <div key={idx} className="border-black border-2">
-              <Card
-                imageUrl={photo && photo.url ? photo.url : null}
-                title={name}
-                link={`/artists/${slug}`}
-              >
-                <h1 className="font-heading p-4 text-4xl">{name}</h1>
-              </Card>
-            </div>
-          ))}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8 px-4 md:px-8">
+        {filteredArtists.map(({ name, slug, photo }, idx) => (
+          <div key={idx} className="border-black border-2">
+            <Card
+              imageUrl={photo && photo.url ? photo.url : null}
+              title={name}
+              link={`/artists/${slug}`}
+            >
+              <h1 className="font-heading p-4 text-4xl">{name}</h1>
+            </Card>
+          </div>
+        ))}
       </div>
-      {viewingNumber < filteredArtists.length && (
-        <div className="pl-8 pt-4 pb-12">
-          <Button onClick={() => setViewingNumber(viewingNumber + 50)}>
-            Load More Artists
-          </Button>
-        </div>
-      )}
     </div>
   );
 };

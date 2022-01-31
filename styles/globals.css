@@ -9,6 +9,9 @@
   p {
     @apply font-serif mb-6 text-base xl:text-2xl xl:leading-8;
   }
+
+  /* Fonts */
+
   @font-face {
     font-family: Digitalt;
     src: url("/fonts/Digitalt.woff2") format("woff2");
@@ -22,60 +25,70 @@
     src: url("/fonts/PublicSans-Regular.woff2") format("woff2");
   }
 
+  .font-heading {
+    line-height: 2.75rem !important;
+  }
+
+  /* Container */
+
+  .container {
+    @apply px-2 md:px-4;
+  }
+
   /* Card width */
 
   .card-half,
   .card-quarter {
-    width: calc(100% - 32px);
+    width: calc(100% - 0px);
   }
 
   @media only screen and (min-width: 768px) {
     .card-half,
     .card-quarter {
-      width: calc(50% - 16px);
+      width: calc(50% - 0px);
     }
   }
 
   @media only screen and (min-width: 1024px) {
     .card-quarter {
-      width: calc(25% - 8px);
+      width: calc(25% - 0px);
     }
   }
 
   @media only screen and (min-width: 2000px) {
     .card-half {
-      width: calc(25% - 8px);
+      width: calc(25% - 0px);
     }
   }
 
   /* Rich text styles */
 
   .rich-text h1 {
-    @apply text-6xl font-bold mb-6;
+    @apply text-4xl md:text-5xl font-bold mb-6;
   }
 
   .rich-text h2 {
-    @apply text-4xl font-bold mb-6;
+    @apply text-3xl md:text-4xl font-bold mb-6;
   }
 
   .rich-text h3 {
-    @apply text-3xl font-bold mb-6;
+    @apply text-2xl md:text-3xl font-bold mb-6;
   }
 
   .rich-text h4 {
-    @apply text-2xl font-bold mb-6;
+    @apply text-xl md:text-2xl font-bold mb-6;
   }
 
   .rich-text h5 {
-    @apply text-xl font-bold mb-6;
+    @apply text-lg md:text-xl font-bold mb-6;
   }
 
   .rich-text h6 {
-    @apply text-lg font-bold mb-6;
+    @apply text-base md:text-lg font-bold mb-6;
   }
 
   .rich-text p {
-    @apply text-2xl font-sans;
+    @apply text-base md:text-xl xl:text-2xl font-sans;
   }
 
   .rich-text ul {

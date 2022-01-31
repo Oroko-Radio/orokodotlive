@@ -24,7 +24,7 @@ const SinglePage = ({
     <>
       <Meta title={title} />
       <article>
-        <div className="relative h-half border-black border-b-2">
+        <div className="relative h-forty md:h-half border-black border-b-2">
           {coverImage && repeatCover ? (
             <div className="flex relative h-full overflow-hidden">
               {[...Array(3)].map((x, idx) => (

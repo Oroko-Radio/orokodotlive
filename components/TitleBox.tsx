@@ -29,12 +29,12 @@ export default function TitleBox({
     >
       <div
         className={cn(
-          "grid auto-rows-fr grid-cols-3 md:grid-cols-1 md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black text-black mb-6 md:mb-0"
+          "grid auto-rows-fr grid-cols-3 md:grid-cols-1 md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black text-black mb-4 md:mb-0"
         )}
       >
         <div
           className={cn(
-            "p-4 ml-0.5 flex md:hidden items-center border-r-2 border-black",
+            "px-2 md:px-4 ml-0.5 flex md:hidden items-center border-r-2 border-black",
             {
               "col-span-2": !mixcloudLink,
             }

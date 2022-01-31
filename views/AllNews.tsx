@@ -24,7 +24,7 @@ const AllNews = ({
         "bg-orokoGray": bgColor === "gray",
       })}
     >
-      <div className="flex justify-between p-8 pb-0">
+      <div className="flex justify-between py-8 px-4 md:px-8 pb-0">
         <h1 className="font-serif text-4xl md:text-5xl">{heading}</h1>
         {home && (
           <Link href="/news#all-news" passHref>
@@ -36,7 +36,7 @@ const AllNews = ({
           </Link>
         )}
       </div>
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 p-8 xl:pb-12">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 p-4 md:p-8 xl:pb-12">
         {articles.map(
           (
             { title, date, slug, articleType, city, subtitle, coverImage },
@@ -58,7 +58,7 @@ const AllNews = ({
                       {dayjs(date).format("DD MMMM YYYY")}
                     </p>
                     <h1 className="font-heading mb-2 text-4xl">{title}</h1>
-                    <p className="mb-4 text-2xl">{subtitle}</p>
+                    <p className="mb-4 text-lg md:text-2xl">{subtitle}</p>
                   </div>
                 </Card>
               </div>

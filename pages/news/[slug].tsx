@@ -55,15 +55,15 @@ export default function Article({
               </p>
             )}
           </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:mr-36 lg:mr-40">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl lg:pt-6 mb-4 font-heading md:mr-36 lg:mr-40">
             {title}
           </h1>
-          <h2 className="font-serif text-4xl lg:text-5xl">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl">
             By <span className="border-b-2 border-black ">{author.name}</span>
           </h2>
         </div>
       </TitleBox>
-      <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
+      <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8 mb-24">
         <p className="font-bold">{subtitle}</p>
         {renderRichTextWithImages(content)}
       </section>

@@ -9,7 +9,7 @@ export default function ShareMenu({ url }: { url: string }) {
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="focus:outline-none">
-          <div className="bg-white rounded-full px-4 lg:px-6 py-1.5 border-black border-2 font-semibold text-lg lg:text-xl">
+          <div className="bg-white rounded-full px-4 lg:px-6 py-1.5 border-black border-2 font-semibold text-base md:text-lg lg:text-xl">
             Share
           </div>
         </Menu.Button>
