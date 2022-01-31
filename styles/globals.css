@@ -25,18 +25,30 @@
     src: url("/fonts/PublicSans-Regular.woff2") format("woff2");
   }
 
-  .font-heading {
+  .heading-leading {
     line-height: 2.75rem !important;
   }
 
-  .reduced-leading {
+  .card-leading {
     line-height: 2.25rem !important;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .heading-leading {
+      line-height: 3rem !important;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .heading-leading {
+      line-height: 3.5rem !important;
+    }
   }
 
   /* Container */
 
   .container {
-    @apply px-2 md:px-4;
+    @apply px-3 md:px-4;
   }
 
   /* Card width */

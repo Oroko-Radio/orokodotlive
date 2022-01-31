@@ -32,7 +32,7 @@ export default function About({
           <p className="hidden md:block mb-4 ml-0.5 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
             About
           </p>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:mr-36">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading heading-leading md:mr-36">
             {title}
           </h1>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl md:mr-36">

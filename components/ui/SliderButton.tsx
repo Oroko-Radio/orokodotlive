@@ -16,8 +16,8 @@ const SliderButton = ({
     className={cn(
       `group absolute cursor-pointer bg-offBlack opacity-70 md:opacity-100 z-20 top-1/2 -translate-y-1/2 rounded-full h-16 w-16 border-black border-2 flex justify-center items-center transition-transform`,
       {
-        "left-2 md:left-4 hover:-translate-x-2": type === "left",
-        "right-2 md:right-4 hover:translate-x-2": type === "right",
+        "left-2 md:left-4 md:hover:-translate-x-2": type === "left",
+        "right-2 md:right-4 md:hover:translate-x-2": type === "right",
       }
     )}
   >

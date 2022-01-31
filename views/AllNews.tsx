@@ -57,7 +57,7 @@ const AllNews = ({
                     <p className="font-sans mb-2 font-medium">
                       {dayjs(date).format("DD MMMM YYYY")}
                     </p>
-                    <h1 className="font-heading reduced-leading mb-2 text-4xl">
+                    <h1 className="font-heading card-leading mb-2 text-4xl">
                       {title}
                     </h1>
                     <p className="mb-4 text-lg md:text-2xl">{subtitle}</p>

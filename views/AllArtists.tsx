@@ -45,7 +45,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
               title={name}
               link={`/artists/${slug}`}
             >
-              <h1 className="font-heading p-4 text-4xl">{name}</h1>
+              <h1 className="font-heading card-leading p-4 text-4xl">{name}</h1>
             </Card>
           </div>
         ))}

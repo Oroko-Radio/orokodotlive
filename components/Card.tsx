@@ -23,7 +23,7 @@ const Card = ({
 }: CardProps) => {
   return (
     <Link href={link} passHref>
-      <div className="cursor-pointer">
+      <div className="cursor-pointer h-full flex flex-col">
         <div
           className={cn(
             "relative w-full h-80 md:h-72 2xl:h-96 border-b-2 border-black",

@@ -43,7 +43,9 @@ const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
                   <p className="font-sans mb-2 font-semibold">
                     {dayjs(date).format("DD MMMM YYYY")}
                   </p>
-                  <h1 className="font-heading mb-1 text-4xl">{title}</h1>
+                  <h1 className="font-heading card-leading mb-1 text-4xl">
+                    {title}
+                  </h1>
                   <p className="mb-4 text-lg md:text-2xl">{subtitle}</p>
                 </div>
               </Slider.Card>
