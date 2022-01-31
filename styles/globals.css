@@ -6,9 +6,6 @@
   html {
     scroll-behavior: auto;
   }
-  p {
-    @apply font-serif mb-6 text-base xl:text-2xl xl:leading-8;
-  }
 
   /* Fonts */
 
@@ -23,6 +20,7 @@
   @font-face {
     font-family: Public-Sans;
     src: url("/fonts/PublicSans-Regular.woff2") format("woff2");
+    font-weight: 400;
   }
 
   .heading-leading {
@@ -104,7 +102,7 @@
   }
 
   .rich-text p {
-    @apply text-base md:text-xl xl:text-2xl font-sans;
+    @apply mb-6 text-base md:text-xl xl:text-2xl font-sans;
   }
 
   .rich-text ul {

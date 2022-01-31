@@ -14,10 +14,10 @@ const RelatedShows = ({
 }) => {
   return (
     <div className="bg-offBlack" id="all-shows">
-      <h1 className="font-serif text-white text-4xl md:text-5xl p-8 pb-0">
+      <h1 className="font-serif text-white text-4xl md:text-5xl pt-8 px-4 md:px-8 pb-0">
         Related Shows
       </h1>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-8 xl:pb-12">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4 md:p-8 xl:pb-12">
         {shows.map(
           (
             { title, date, slug, genresCollection, coverImage, mixcloudLink },
