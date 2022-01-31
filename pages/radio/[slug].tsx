@@ -63,7 +63,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
                 </span>
               ))}
           </h2>
-          <div className="flex gap-1">
+          <div className="flex gap-1 flex-wrap">
             <Tag text={artistsCollection.items[0].city.name} color="black" />
             {genresCollection &&
               genresCollection.items.map(({ name }, idx) => (

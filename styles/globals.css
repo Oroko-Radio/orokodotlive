@@ -43,6 +43,12 @@
     }
   }
 
+  p,
+  li,
+  div {
+    font-weight: 400;
+  }
+
   /* Container */
 
   .container {
