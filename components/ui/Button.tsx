@@ -20,7 +20,7 @@ const Button = ({
         {
           "bg-transparent": transparent,
           "bg-white": !transparent,
-          "w-32 md:w-40 text-center": fixedWidth,
+          "w-32 md:w-44 text-center": fixedWidth,
         }
       )}
     >
