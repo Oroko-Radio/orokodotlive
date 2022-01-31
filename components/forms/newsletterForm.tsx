@@ -71,7 +71,7 @@ export default function NewsletterForm() {
         type="email"
       />
 
-      <button type="submit">
+      <button type="submit" className="py-2">
         <DotButton size="large">Submit</DotButton>
       </button>
 
