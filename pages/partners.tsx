@@ -8,7 +8,7 @@ import { getPartnersPage } from "../lib/contentful/pages/partners";
 export async function getStaticProps({ preview = false }) {
   return {
     props: { preview, ...(await getPartnersPage(preview)) },
-    revalidate: 60 * 60 * 24,
+    revalidate: 60 * 60,
   };
 }
 

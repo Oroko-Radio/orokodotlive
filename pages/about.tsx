@@ -9,7 +9,7 @@ import Meta from "../components/Meta";
 export async function getStaticProps({ preview = false }) {
   return {
     props: { preview, ...(await getAboutPage(preview)) },
-    revalidate: 60 * 60 * 24,
+    revalidate: 60 * 60,
   };
 }
 

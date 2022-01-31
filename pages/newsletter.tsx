@@ -9,7 +9,7 @@ import SinglePage from "../views/SinglePage";
 export async function getStaticProps({ preview = false }) {
   return {
     props: { preview, ...(await getNewsletterPage(preview)) },
-    revalidate: 60 * 60 * 24,
+    revalidate: 60 * 60,
   };
 }
 
