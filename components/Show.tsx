@@ -15,7 +15,7 @@ export default function Show({ show, cityColor }: ShowProps) {
       <p className="font-sans text-sm md:text-base mb-2 font-semibold">
         {dayjs(date).format("DD MMM YYYY HH:mm") + "H"}
       </p>
-      <h1 className="font-heading mb-0 text-4xl">{title}</h1>
+      <h1 className="font-heading reduced-leading text-4xl">{title}</h1>
       <h2 className="font-serif text-2xl lg:text-3xl mb-4">
         {" "}
         With{" "}

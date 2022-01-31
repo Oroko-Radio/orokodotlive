@@ -29,6 +29,10 @@
     line-height: 2.75rem !important;
   }
 
+  .reduced-leading {
+    line-height: 2.25rem !important;
+  }
+
   /* Container */
 
   .container {
