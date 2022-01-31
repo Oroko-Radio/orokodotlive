@@ -28,7 +28,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
           All Artists
         </h1>
         <select
-          className="appearance-none pr-16 self-center bg-transparent border-black border-2 text-2xl text-black"
+          className="appearance-none pr-16 self-center bg-transparent border-black border-2 text-lg md:text-2xl text-black"
           onChange={(e) => setResidentFilter(e.target.value)}
         >
           <option value="all">RESIDENTS & GUESTS</option>
