@@ -29,7 +29,7 @@ export default function TitleBox({
     >
       <div
         className={cn(
-          "grid auto-rows-fr grid-cols-3 md:grid-cols-1 md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black text-black mb-4 md:mb-0"
+          "grid md:flex flex-col justify-evenly auto-rows-fr grid-cols-3 md:absolute right-0 top-0 h-full border-b-2 md:border-b-0 md:border-l-2 border-black text-black mb-4 md:mb-0"
         )}
       >
         <div
@@ -47,7 +47,7 @@ export default function TitleBox({
 
         <div
           className={cn(
-            "border-black justify-center md:order-2 md:border-r-0 flex px-4 md:px-8 xl:px-16 py-2",
+            "border-black flex flex-1 justify-center md:order-2 md:border-r-0 px-4 md:px-8 xl:px-16 py-2",
             {
               "bg-orokoYellow": !bgColor,
               "bg-transparent": bgColor,
@@ -60,7 +60,7 @@ export default function TitleBox({
           </div>
         </div>
         {mixcloudLink && (
-          <div className="border-black md:order-1 bg-orokoBlue md:border-b-2 flex justify-center align-middle xl:px-16">
+          <div className="border-black flex-1 md:order-1 bg-orokoBlue md:border-b-2 flex justify-center align-middle xl:px-16">
             <PlayButton mixcloudLink={mixcloudLink} />
           </div>
         )}
