@@ -19,7 +19,7 @@ export async function getRadioPage(preview: boolean) {
   const upcomingShows = shows
     .sort(sort.date_ASC)
     .filter((show) => dayjs(show.date).isAfter(today))
-    .splice(0, 10);
+    .splice(0, 16);
 
   /**
    * All Past Shows

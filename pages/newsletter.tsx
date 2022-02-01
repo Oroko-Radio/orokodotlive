@@ -9,7 +9,7 @@ import SinglePage from "../views/SinglePage";
 export async function getStaticProps({ preview = false }) {
   return {
     props: { preview, ...(await getNewsletterPage(preview)) },
-    revalidate: 60 * 60 * 24,
+    revalidate: 60 * 60,
   };
 }
 
@@ -36,15 +36,15 @@ export default function Newsletter({
           <p className="hidden md:block mb-4 ml-0.5 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
             Newsletter
           </p>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:mr-36">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading heading-leading md:mr-36">
             {title}
           </h1>
           <h2 className="font-serif text-4xl lg:text-5xl">{subtitle}</h2>
         </div>
       </TitleBox>
-      <div className="border-b-2 border-black py-10">
+      <div className="border-b-2 border-black py-6 md:py-8">
         <section className="container max-w-5xl mx-auto">
-          <p className="mb-8 text-2xl font-sans">
+          <p className="mb-8 text-lg md:text-xl xl:text-2xl font-sans">
             Sign up to the Oroko newsletter to stay up to date with all our
             upcoming events, projects, announcements, residencies and more.
           </p>

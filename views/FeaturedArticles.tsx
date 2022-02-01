@@ -10,7 +10,7 @@ const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
   return (
     <>
       <div className="overflow-hidden">
-        <div className="flex justify-between p-8">
+        <div className="flex justify-between py-8 px-4 md:px-8">
           <h1 className="font-serif text-4xl md:text-5xl">{heading}</h1>
           <Link href="/news#all-news" passHref>
             <div className="hidden md:block mt-4">
@@ -43,8 +43,12 @@ const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
                   <p className="font-sans mb-2 font-semibold">
                     {dayjs(date).format("DD MMMM YYYY")}
                   </p>
-                  <h1 className="font-heading mb-1 text-4xl">{title}</h1>
-                  <p className="mb-4 text-2xl">{subtitle}</p>
+                  <h1 className="font-heading card-leading mb-1 text-4xl">
+                    {title}
+                  </h1>
+                  <p className="font-serif mb-4 text-lg md:text-2xl">
+                    {subtitle}
+                  </p>
                 </div>
               </Slider.Card>
             )

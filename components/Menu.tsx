@@ -35,7 +35,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
           ))}
         </ul>
       </nav>
-      <p className="block text-xl md:text-3xl xl:text-4xl text-center">
+      <p className="font-serif block text-xl md:text-3xl xl:text-4xl text-center">
         Oroko is a not-for-profit independent internet radio station based in
         Accra, Ghana. We aim to connect, inspire and empower through
         conversation, collaboration and community.

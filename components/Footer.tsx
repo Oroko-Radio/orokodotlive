@@ -9,22 +9,26 @@ const Footer = () => {
   return (
     <div className="bg-black p-8">
       <div className="mx-auto text-center text-white">
-        <ul className="flex flex-wrap font-bold text-lg md:text-xl xl:text-2xl justify-center gap-6 md:gap-10 mb-8">
+        <ul className="flex flex-wrap text-lg md:text-xl xl:text-2xl justify-center gap-6 md:gap-10 mb-8">
           {links.map(({ name, url }, idx) => (
             <Link key={idx} href={url} passHref>
-              <li className="cursor-pointer hover:opacity-70 transition-opacity">
+              <li className="font-bold cursor-pointer hover:opacity-70 transition-opacity">
                 {name}
               </li>
             </Link>
           ))}
           <Link href="https://www.patreon.com/orokoradio">
             <a target="_blank">
-              <li className="hover:opacity-70 transition-opacity">Patreon</li>
+              <li className="font-bold hover:opacity-70 transition-opacity">
+                Patreon
+              </li>
             </a>
           </Link>
           <Link href="mailto:info@oroko.live">
             <a>
-              <li className="hover:opacity-70 transition-opacity">Contact</li>
+              <li className="font-bold hover:opacity-70 transition-opacity">
+                Contact
+              </li>
             </a>
           </Link>
         </ul>
@@ -36,7 +40,11 @@ const Footer = () => {
         <p className="inline font-sans text-sm xl:text-base">
           Designed by{" "}
           <Link href="https://www.studiopanorama.de/" passHref>
-            <span className="underline tracking-widest">panorama</span>
+            <a target="_blank">
+              <span className="underline tracking-widest cursor-pointer">
+                panorama
+              </span>
+            </a>
           </Link>{" "}
           Powered by
         </p>

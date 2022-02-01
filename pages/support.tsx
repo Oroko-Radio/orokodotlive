@@ -8,7 +8,7 @@ import { renderRichTextWithImages } from "../lib/rich-text";
 export async function getStaticProps({ preview = false }) {
   return {
     props: { preview, ...(await getSupportPage(preview)) },
-    revalidate: 60 * 60 * 24,
+    revalidate: 60 * 60,
   };
 }
 
@@ -31,15 +31,15 @@ export default function Support({
           <p className="hidden md:block mb-4 ml-0.5 font-sans font-semibold tracking-wide text-xl lg:text-2xl">
             Support
           </p>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading md:mr-36">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading heading-leading md:mr-36">
             {title}
           </h1>
-          <h2 className="font-serif text-4xl lg:text-5xl md:mr-36">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl md:mr-36">
             {subtitle}
           </h2>
         </div>
       </TitleBox>
-      <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
+      <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8 mb-24">
         {renderRichTextWithImages(content)}
       </section>
     </SinglePage>
