@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import Image from "next/image";
 import DotButton from "../ui/DotButton";
@@ -23,10 +23,17 @@ const customStyles = {
 };
 
 export default function NewsletterForm() {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+
+  useEffect(() => {
+    Modal.setAppElement("#__next");
+  }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
 
     const target = event.target as typeof event.target & {
       email: {
@@ -49,6 +56,8 @@ export default function NewsletterForm() {
       });
 
       if (r.ok) {
+        setError(false);
+        setLoading(false);
         setShowModal(true);
         return;
       }
@@ -56,6 +65,9 @@ export default function NewsletterForm() {
       throw new Error((await r.json()).error);
     } catch (error) {
       console.error(error);
+      setError(true);
+      setLoading(false);
+      setShowModal(true);
     }
   };
 
@@ -73,7 +85,7 @@ export default function NewsletterForm() {
       />
 
       <button type="submit" className="py-2">
-        <DotButton size="large">Submit</DotButton>
+        <DotButton size="large">{loading ? "Sending" : "Submit"}</DotButton>
       </button>
 
       <Modal
@@ -93,7 +105,9 @@ export default function NewsletterForm() {
             <Logo className="text-white stroke-current" />
           </div>
           <p className="mt-4 mb-8 font-sans font-medium xl:text-base text-white">
-            Thank you for subscribing!
+            {error
+              ? "We're sorry, something went wrong!"
+              : "Thank you for subscribing!"}
           </p>
         </div>
       </Modal>
