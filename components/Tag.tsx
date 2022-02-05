@@ -4,7 +4,7 @@ import cn from "classnames";
 interface TagProps {
   text: string;
   transparent?: boolean;
-  color?: "black" | "blue" | "orange" | "green" | "gray";
+  color?: "black" | "blue" | "orange" | "green" | "gray" | "yellow";
   card?: boolean;
 }
 
@@ -18,6 +18,7 @@ const Tag = ({ text, transparent, color, card = false }: TagProps) => {
         "bg-black text-orokoOrange": color === "orange",
         "bg-black text-orokoGreen": color === "green",
         "bg-black text-orokoGray": color === "gray",
+        "bg-black text-orokoYellow": color === "yellow",
       })}
     >
       <p

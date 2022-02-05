@@ -73,6 +73,9 @@ export const AllArtistFragment = /* GraphQL */ `
   fragment AllArtistFragment on Artist {
     name
     slug
+    city {
+      name
+    }
     photo {
       sys {
         id
