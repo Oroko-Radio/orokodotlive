@@ -45,7 +45,7 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
         className="md:hidden appearance-none self-center bg-transparent border-black border-2 text-lg md:text-2xl text-black"
         onChange={(e) => setCityFilter(e.target.value)}
       >
-        <option value="all">ALL</option>
+        <option value="all">ALL CITIES</option>
         {cities.map(({ name }, idx) => (
           <option value={name} key={idx}>
             {name.toUpperCase()}
