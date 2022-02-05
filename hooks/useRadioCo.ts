@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import { RADIO_CO_STATION_ID } from "../constants";
 import fetcher from "../lib/fetcher";
 
 type RadioCoResponse = {

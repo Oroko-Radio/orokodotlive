@@ -5,6 +5,7 @@ import DotButton from "../ui/DotButton";
 import Modal from "react-modal";
 import logoSmall from "../../images/logo-small-outline.svg";
 import closeIcon from "../../images/ui/close_icon.svg";
+import Logo from "../../icons/Logo";
 
 const customStyles = {
   content: {
@@ -88,12 +89,9 @@ export default function NewsletterForm() {
           <Image src={closeIcon} alt="Close" height="20" width="20" />
         </button>
         <div className="flex flex-col justify-center mt-6 px-8">
-          <Image
-            src={logoSmall}
-            alt="Oroko logo small"
-            height="50"
-            width="50"
-          />
+          <div className="w-20 self-center">
+            <Logo className="text-white stroke-current" />
+          </div>
           <p className="mt-4 mb-8 font-sans font-medium xl:text-base text-white">
             Thank you for subscribing!
           </p>
