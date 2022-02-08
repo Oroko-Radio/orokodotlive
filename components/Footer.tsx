@@ -48,21 +48,21 @@ const Footer = () => {
           </Link>{" "}
           Powered by
         </p>
-        <div className="relative inline-block translate-y-0.5 h-3 w-16 cursor-pointer">
-          <Link
-            href="https://vercel.com/?utm_source=oroko&utm_campaign=oss"
-            passHref={true}
-          >
-            <a target="_blank">
+        <Link
+          href="https://vercel.com/?utm_source=oroko&utm_campaign=oss"
+          passHref={true}
+        >
+          <a target="_blank">
+            <div className="relative inline-block translate-y-0.5 h-3 w-16 cursor-pointer">
               <Image
                 src={vercelLogo}
                 alt="Vercel logo"
                 layout="fill"
                 objectFit="contain"
               />
-            </a>
-          </Link>
-        </div>
+            </div>
+          </a>
+        </Link>
       </div>
     </div>
   );

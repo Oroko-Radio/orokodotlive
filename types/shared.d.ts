@@ -115,6 +115,9 @@ export type ArtistEntry = {
 export type AllArtistEntry = {
   name: string;
   slug: string;
+  city: {
+    name: string;
+  };
   isResident: boolean;
   photo: CoverImage;
 };

@@ -32,6 +32,7 @@ const Header = () => {
       <div className="col-span-3 flex justify-center">
         <Link href="/" passHref>
           <h1
+            onClick={() => isMenuOpen && setIsMenuOpen(false)}
             className={cx(
               "mb-0 cursor-pointer inline font-heading text-4xl md:text-5xl xl:text-6xl z-50",
               {

@@ -3,6 +3,7 @@ import { graphql } from "..";
 import {
   AllArtistEntry,
   ArtistEntry,
+  GenreInterface,
   ShowInterface,
 } from "../../../types/shared";
 import { extractCollection, extractCollectionItem, sort } from "../../../util";
@@ -16,6 +17,11 @@ export async function getArtistsPage() {
           ...AllArtistFragment
         }
       }
+      cityCollection(order: name_ASC) {
+        items {
+          name
+        }
+      }
     }
 
     ${AllArtistFragment}
@@ -23,7 +29,10 @@ export async function getArtistsPage() {
 
   const data = await graphql(ArtistsPageQuery);
 
-  return extractCollection<AllArtistEntry>(data, "artistCollection");
+  return {
+    allArtists: extractCollection<AllArtistEntry>(data, "artistCollection"),
+    cities: extractCollection<GenreInterface>(data, "cityCollection"),
+  };
 }
 
 export async function getArtistsPageSingle(slug: string, preview: boolean) {

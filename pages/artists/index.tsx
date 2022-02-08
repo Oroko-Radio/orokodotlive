@@ -5,7 +5,7 @@ import AllArtists from "../../views/AllArtists";
 
 export async function getStaticProps({ preview = false }) {
   return {
-    props: { preview, allArtists: await getArtistsPage() },
+    props: { preview, ...(await getArtistsPage()) },
     revalidate: 60 * 5,
   };
 }
@@ -13,11 +13,12 @@ export async function getStaticProps({ preview = false }) {
 export default function ArtistsPage({
   preview,
   allArtists,
+  cities,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Meta title="Artists" />
-      <AllArtists allArtists={allArtists} />
+      <AllArtists allArtists={allArtists} cities={cities} />
     </>
   );
 }
