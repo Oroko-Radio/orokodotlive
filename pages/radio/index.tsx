@@ -22,7 +22,7 @@ export default function RadioPage({
   return (
     <>
       <Meta title="Radio" />
-      <UpcomingShows shows={upcomingShows} />
+      {upcomingShows.length > 0 && <UpcomingShows shows={upcomingShows} />}
       <FeaturedShows shows={featuredShows} />
       <AllShows shows={pastShows} genres={genres} />
     </>

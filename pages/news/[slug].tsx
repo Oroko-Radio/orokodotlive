@@ -65,7 +65,7 @@ export default function Article({
       </TitleBox>
       <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8 mb-24">
         <p className="font-bold">{subtitle}</p>
-        {renderRichTextWithImages(content)}
+        {content && renderRichTextWithImages(content)}
       </section>
     </SinglePage>
   );
