@@ -82,7 +82,7 @@ const Twitter = ({ link, text, active = false }) => (
     rel="noopener noreferrer"
     href={`https://twitter.com/intent/tweet?text=${encodeURI(
       text
-    )}&url=${encodeURI(link)}&via=refugeworldwide`}
+    )}&url=${encodeURI(link)}&via=orokoradio`}
   >
     Twitter
   </a>
