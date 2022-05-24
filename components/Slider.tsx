@@ -24,8 +24,8 @@ const Slider: React.FunctionComponent & SliderSubComponents = ({
     useSliding(width, React.Children.count(children));
 
   const handlers = useSwipeable({
-    onSwipedLeft: () => handleNext(),
-    onSwipedRight: () => handlePrev(),
+    onSwipedLeft: () => hasNext && handleNext(),
+    onSwipedRight: () => hasPrev && handlePrev(),
   });
 
   return (
