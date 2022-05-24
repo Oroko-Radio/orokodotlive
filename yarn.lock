@@ -284,6 +284,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-swipeable@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@types/react-swipeable/-/react-swipeable-5.2.0.tgz#69d6088819f0c03b13eb3fd98bfe995ef311c105"
+  integrity sha512-aQMubLpV45W8fTQufnm5j8yxYVEp/d3JJkqpPr9xcRPQ6Q6MSJUdNpsaR2uogILSIFzrAisC8AqdR1JlvjuZMA==
+  dependencies:
+    react-swipeable "*"
+
 "@types/react@*":
   version "17.0.33"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.33.tgz#e01ae3de7613dac1094569880bb3792732203ad5"
@@ -2988,6 +2995,11 @@ react-ridge-state@4.1.7:
   version "4.1.7"
   resolved "https://registry.yarnpkg.com/react-ridge-state/-/react-ridge-state-4.1.7.tgz#bbb565017311f89b68d579984eb9b734c470c246"
   integrity sha512-rg10ib9xoaXEfsP4Bm/vnGTYDWmuKvGEoINGo46jsKoIl6rsxKcaucu0yU2y5hPdgoYuU+4/OprEkILePqBnqw==
+
+react-swipeable@*, react-swipeable@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-7.0.0.tgz#7a12570ee435d35ac700511de338384aa78d12cd"
+  integrity sha512-NI7KGfQ6gwNFN0Hor3vytYW3iRfMMaivGEuxcADOOfBCx/kqwXE8IfHFxEcxSUkxCYf38COLKYd9EMYZghqaUA==
 
 react@17.0.2:
   version "17.0.2"
