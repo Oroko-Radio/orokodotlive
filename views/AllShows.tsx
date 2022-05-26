@@ -34,8 +34,9 @@ const AllShows = ({
       <h1 className="font-serif text-white text-4xl md:text-5xl py-8">
         All Shows
       </h1>
+
       <select
-        className="md:hidden appearance-none self-center bg-transparent border-white border-2 text-lg md:text-2xl text-white"
+        className="appearance-none self-center bg-transparent border-white border-2 text-lg md:text-2xl text-white"
         value={genreFilter}
         onChange={(e) => setGenreFilter(e.target.value)}
       >
@@ -46,24 +47,6 @@ const AllShows = ({
           </option>
         ))}
       </select>
-
-      <div className="hidden md:flex flex-wrap gap-1">
-        <div className="cursor-pointer" onClick={() => setGenreFilter("all")}>
-          <Tag text="All" color={genreFilter === "all" ? "black" : "white"} />
-        </div>
-        {genres.map((genre, idx) => (
-          <div
-            key={idx}
-            onClick={() => setGenreFilter(genre)}
-            className="cursor-pointer"
-          >
-            <Tag
-              color={genre === genreFilter ? "black" : "white"}
-              text={genre}
-            />
-          </div>
-        ))}
-      </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8 xl:pb-12">
         {filteredShows.slice(0, viewingNumber).map((show, idx) => (
