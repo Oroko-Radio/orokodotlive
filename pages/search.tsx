@@ -10,6 +10,8 @@ import {
 } from "../types/shared";
 import Card from "../components/Card";
 import Show from "../components/Show";
+import dayjs from "dayjs";
+import Tag from "../components/Tag";
 
 interface SearchShowInterface extends ShowInterface {
   type: "SHOW";
@@ -56,7 +58,7 @@ export default function SearchPage({
       return result.filter((el) => el.obj.type === "SHOW").map((el) => el.obj);
     }
 
-    return data.filter((el) => el.type === "SHOW").slice(0, 5);
+    return data.filter((el) => el.type === "SHOW").slice(0, 4);
   }, [result, search, data]);
 
   const articleResults = useMemo(() => {
@@ -66,7 +68,7 @@ export default function SearchPage({
         .map((el) => el.obj);
     }
 
-    return data.filter((el) => el.type === "ARTICLE").slice(0, 5);
+    return data.filter((el) => el.type === "ARTICLE").slice(0, 4);
   }, [result, search, data]);
 
   const artistResults = useMemo(() => {
@@ -76,7 +78,7 @@ export default function SearchPage({
         .map((el) => el.obj);
     }
 
-    return data.filter((el) => el.type === "ARTIST").slice(0, 5);
+    return data.filter((el) => el.type === "ARTIST").slice(0, 4);
   }, [result, search, data]);
 
   const hasNoResults =
@@ -121,14 +123,12 @@ export default function SearchPage({
 
       {showResults.length > 0 && (
         <section className="bg-orokoBlue border-b-2 border-black p-4 py-12">
-          <div className="flex justify-center items-end mb-8">
+          <div className="flex justify-center items-end mb-12">
             <h2 className="font-serif text-4xl md:text-5xl xl:text-6xl mr-2 inline">
               Shows
             </h2>
             {search ? <span>({showResults.length})</span> : null}
           </div>
-
-          <div className="h-5" />
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-10 sm:gap-8">
             {showResults?.map((show: any) => (
@@ -146,46 +146,87 @@ export default function SearchPage({
         </section>
       )}
 
-      {articleResults.length > 0 && (
-        <section>
-          <div className="p-4 sm:p-8">
-            <h2>News</h2>
-
-            <div className="h-5" />
-
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-10 sm:gap-8">
-              {articleResults?.map((article) => (
-                <li key={article.slug}>
-                  <p>{article.title}</p>
-                </li>
-              ))}
-            </ul>
+      {artistResults.length > 0 && (
+        <section className="bg-orokoRed border-b-2 border-black p-4 py-12">
+          <div className="flex justify-center items-end mb-12">
+            <h2 className="font-serif text-4xl md:text-5xl xl:text-6xl mr-2 inline">
+              Artists
+            </h2>
+            {search ? <span>({artistResults.length})</span> : null}
           </div>
+
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-6 sm:gap-8">
+            {artistResults?.map((artist: any) => {
+              const _artist = {
+                ...artist,
+                name: artist.title,
+              };
+              const { slug, photo, name } = _artist;
+
+              return (
+                <li key={slug} className="border-black border-2">
+                  <Card
+                    imageUrl={photo && photo.url ? photo.url : null}
+                    title={name}
+                    link={`/artists/${slug}`}
+                  >
+                    <h1 className="font-heading card-leading p-4 text-4xl">
+                      {name}
+                    </h1>
+                  </Card>
+                </li>
+              );
+            })}
+          </ul>
         </section>
       )}
 
-      {artistResults.length > 0 && (
-        <section>
-          <div className="p-4 sm:p-8">
-            <h2>Artists</h2>
-
-            <div className="h-5" />
-
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-6 sm:gap-8">
-              {artistResults?.map((artist) => {
-                const _artist = {
-                  ...artist,
-                  name: artist.title,
-                };
-
-                return (
-                  <li key={artist.slug}>
-                    <p>{_artist.name}</p>
-                  </li>
-                );
-              })}
-            </ul>
+      {articleResults.length > 0 && (
+        <section className="bg-orokoGray p-4 py-12">
+          <div className="flex justify-center items-end mb-12">
+            <h2 className="font-serif text-4xl md:text-5xl xl:text-6xl mr-2 inline">
+              News
+            </h2>
+            {search ? <span>({articleResults.length})</span> : null}
           </div>
+
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-10 sm:gap-8">
+            {articleResults?.map(
+              ({
+                slug,
+                coverImage,
+                title,
+                city,
+                articleType,
+                date,
+                subtitle,
+              }: any) => (
+                <li key={slug} className="border-black border-2 bg-white">
+                  <Card
+                    imageUrl={coverImage.url}
+                    title={title}
+                    link={`/news/${slug}`}
+                  >
+                    <div className="p-4">
+                      <div className="flex flex-wrap gap-1 mb-6">
+                        {city && <Tag text={city.name} color="black" card />}
+                        <Tag text={articleType} transparent card />
+                      </div>
+                      <p className="font-sans mb-2 font-medium">
+                        {dayjs(date).format("DD MMMM YYYY")}
+                      </p>
+                      <h1 className="font-heading card-leading mb-2 text-4xl">
+                        {title}
+                      </h1>
+                      <p className="font-serif mb-4 text-lg md:text-2xl">
+                        {subtitle}
+                      </p>
+                    </div>
+                  </Card>
+                </li>
+              )
+            )}
+          </ul>
         </section>
       )}
     </>

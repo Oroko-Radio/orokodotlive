@@ -47,13 +47,16 @@ const Header = () => {
           </h1>
         </Link>
       </div>
-      <div className="flex z-50 text-black self-center justify-self-end mr-4">
-        <div className="hidden sm:block mt-1 md:mt-0.5 mr-2">
+      <div
+        className="flex z-50 text-black self-center justify-self-end mr-4"
+        onClick={() => isMenuOpen && setIsMenuOpen(false)}
+      >
+        <div className="mt-1 md:mt-0.5 mr-2 lg:mr-4">
           {router.pathname !== "/search" && (
             <Link href="/search" passHref>
               <div
                 className={cx("cursor-pointer fill-current", {
-                  "text-white": !isMenuOpen,
+                  "text-white hidden sm:block": !isMenuOpen,
                 })}
               >
                 <SearchIcon />

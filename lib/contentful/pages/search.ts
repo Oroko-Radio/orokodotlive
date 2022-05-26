@@ -60,7 +60,11 @@ export async function getSearchPage() {
 
   const ShowDataQuery = /* GraphQL */ `
     query ShowDataQuery($today: DateTime) {
-      showCollection(limit: 100, order: date_DESC, where: { date_lt: $today }) {
+      showCollection(
+        limit: 1500
+        order: date_DESC
+        where: { date_lt: $today }
+      ) {
         items {
           coverImage {
             sys {
