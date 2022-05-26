@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import cx from "classnames";
 import Link from "next/link";
 import Menu from "./Menu";
-import DotButton from "./ui/DotButton";
 import Logo from "../icons/Logo";
 import MenuIcon from "../icons/MenuIcon";
 import CloseIcon from "../icons/CloseIcon";
+import SearchIcon from "../icons/SearchIcon";
 import MenuButton from "./ui/MenuButton";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <div className="grid grid-cols-5 py-2 xl:py-1 z-50 bg-black">
@@ -46,10 +48,26 @@ const Header = () => {
         </Link>
       </div>
       <div
-        className="z-50 text-black self-center justify-self-end mr-4"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="flex z-50 text-black self-center justify-self-end mr-4"
+        onClick={() => isMenuOpen && setIsMenuOpen(false)}
       >
-        <div className="hidden md:block">
+        <div className="mt-1 md:mt-0.5 mr-2 lg:mr-4">
+          {router.pathname !== "/search" && (
+            <Link href="/search" passHref>
+              <div
+                className={cx("cursor-pointer fill-current", {
+                  "text-white hidden sm:block": !isMenuOpen,
+                })}
+              >
+                <SearchIcon />
+              </div>
+            </Link>
+          )}
+        </div>
+        <div
+          className="hidden md:block"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
           <MenuButton isMenuOpen={isMenuOpen}>Menu</MenuButton>
         </div>
         <div
@@ -60,6 +78,7 @@ const Header = () => {
               "text-black": isMenuOpen,
             }
           )}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
         </div>
