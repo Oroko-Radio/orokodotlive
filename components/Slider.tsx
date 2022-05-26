@@ -4,14 +4,17 @@ import SliderButton from "./ui/SliderButton";
 import useSliding from "../hooks/useSliding";
 import useSizeElement from "../hooks/useSizeElement";
 import SliderCard from "./SliderCard";
+import { useSwipeable } from "react-swipeable";
 
 interface SliderSubComponents {
   Card?: typeof SliderCard;
 }
 
-const SliderWrapper = ({ children }) => (
-  <div className="mb-8 xl:mb-12 overflow-hidden relative">{children}</div>
-);
+const SliderWrapper = ({ children }) => {
+  return (
+    <div className="mb-8 xl:mb-12 overflow-hidden relative">{children}</div>
+  );
+};
 
 const Slider: React.FunctionComponent & SliderSubComponents = ({
   children,
@@ -20,10 +23,15 @@ const Slider: React.FunctionComponent & SliderSubComponents = ({
   const { handlePrev, handleNext, slideProps, containerRef, hasNext, hasPrev } =
     useSliding(width, React.Children.count(children));
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => hasNext && handleNext(),
+    onSwipedRight: () => hasPrev && handlePrev(),
+  });
+
   return (
     <SliderContext.Provider value={{ elementRef }}>
       <SliderWrapper>
-        <div className="mx-4 md:mx-8">
+        <div {...handlers} className="mx-4 md:mx-8">
           <div
             ref={containerRef}
             className="flex transition-transform"

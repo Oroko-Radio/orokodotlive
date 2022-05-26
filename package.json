@@ -12,6 +12,7 @@
     "@contentful/rich-text-react-renderer": "^15.6.2",
     "@contentful/rich-text-types": "^15.7.0",
     "@headlessui/react": "^1.4.2",
+    "@types/react-swipeable": "^5.2.0",
     "classnames": "^2.3.1",
     "dayjs": "^1.10.7",
     "fathom-client": "^3.2.0",
@@ -21,6 +22,7 @@
     "react-fast-marquee": "^1.2.1",
     "react-modal": "^3.14.3",
     "react-ridge-state": "4.1.7",
+    "react-swipeable": "^7.0.0",
     "swr": "^1.0.1"
   },
   "devDependencies": {
