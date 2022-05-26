@@ -60,11 +60,7 @@ export async function getSearchPage() {
 
   const ShowDataQuery = /* GraphQL */ `
     query ShowDataQuery($today: DateTime) {
-      showCollection(
-        limit: 1800
-        order: date_DESC
-        where: { date_lt: $today }
-      ) {
+      showCollection(limit: 100, order: date_DESC, where: { date_lt: $today }) {
         items {
           coverImage {
             sys {
@@ -75,6 +71,10 @@ export async function getSearchPage() {
           artistsCollection(limit: 1) {
             items {
               name
+              slug
+              city {
+                name
+              }
             }
           }
           genresCollection(limit: 3) {
