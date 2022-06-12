@@ -14,7 +14,7 @@ export async function getHomePage(limit = LIMITS.SHOWS) {
       featuredArticles: articleCollection(
         order: date_DESC
         where: { isFeatured: true }
-        limit: 3
+        limit: 6
       ) {
         items {
           ...FeaturedArticleFragment
