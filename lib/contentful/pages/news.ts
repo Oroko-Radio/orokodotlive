@@ -23,7 +23,7 @@ export async function getNewsPage(preview: boolean) {
       featuredArticles: articleCollection(
         where: { isFeatured: true }
         order: date_DESC
-        limit: 3
+        limit: 6
         preview: $preview
       ) {
         items {
