@@ -37,7 +37,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
         boxText={dayjs(date).format("DD MMM YY HH:mm") + "H"}
         mixcloudLink={mixcloudLink}
         title={title}
-        slug={`news/${slug}`}
+        slug={`radio/${slug}`}
       >
         <div className="container max-w-5xl mx-auto">
           {date && (
