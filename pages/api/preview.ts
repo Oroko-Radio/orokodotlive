@@ -7,13 +7,7 @@ export default async function preview(
 ) {
   const { secret, slug } = req.query;
 
-  if (secret !== process.env.NEXT_PUBLIC_CONTENFUL_PREVIEW_SECRET || !slug) {
-    console.log(
-      "Secret: ",
-      secret,
-      "Environment variable: ",
-      process.env.NEXT_PUBLIC_CONTENFUL_PREVIEW_SECRET
-    );
+  if (secret !== process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW_SECRET || !slug) {
     return res.status(400).json({ message: "Invalid token" });
   }
 
