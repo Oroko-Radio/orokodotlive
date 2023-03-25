@@ -51,7 +51,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-6 lg:mb-10">
             {" "}
             With{" "}
-            {artistsCollection.items &&
+            {artistsCollection.items[0].slug &&
               artistsCollection.items.map(({ name, slug }, idx) => (
                 <span key={slug}>
                   <Link href={`/artists/${slug}`} passHref>
