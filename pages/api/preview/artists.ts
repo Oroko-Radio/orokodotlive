@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getRadioPageSingle } from "../../lib/contentful/pages/radio";
+import { getArtistsPageSingle } from "../../../lib/contentful/pages/artists";
 
 export default async function preview(
   req: NextApiRequest,
@@ -12,10 +12,10 @@ export default async function preview(
   }
 
   try {
-    const { show } = await getRadioPageSingle(slug as string, true);
+    const { artist } = await getArtistsPageSingle(slug as string, true);
 
     res.setPreviewData({});
-    res.writeHead(307, { Location: `/radio/${show.slug}` });
+    res.writeHead(307, { Location: `/artists/${artist.slug}` });
     res.end();
   } catch (error) {
     console.error(error);
