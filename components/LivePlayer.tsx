@@ -107,21 +107,9 @@ export default function LivePlayer() {
                     <div className="h-full flex align-middle items-center">
                       <div className="border-black border-l-2 h-full"></div>
                       <BroadcastingIndicator status={data?.status} />
-                      <h1 className="font-heading inline text-5xl xl:text-6xl mr-10">
+                      <h1 className="font-heading inline text-5xl xl:text-6xl">
                         {data?.current_track?.title.split(" - ")[1]}
                       </h1>
-                      <div className="relative h-full w-36 border-r-2 border-l-2 border-black">
-                        <Image
-                          src={
-                            data.current_track.artwork_url ||
-                            "https://oroko.live/OROKO_OG_1200px.png"
-                          }
-                          alt={data.current_track.title}
-                          layout="fill"
-                          objectFit="cover"
-                          unoptimized
-                        />
-                      </div>
                       <h1 className="font-serif inline text-4xl xl:text-5xl mx-10">
                         With {data?.current_track?.title.split(" - ")[0]}
                       </h1>
