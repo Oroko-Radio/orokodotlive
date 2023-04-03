@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { LivePlayerLoading } from "../components/LivePlayer";
@@ -17,9 +17,14 @@ const LivePlayer = dynamic(() => import("../components/LivePlayer"), {
 });
 
 function OrokoApp({ Component, pageProps }: AppProps) {
-  // reload page when resizing, to keep correct slider distance
+  // reload page when resizing horizontally, to keep correct slider distance
+  const [prevWidth, setPrevWidth] = useState<Number>(0);
+
   function handleResize() {
-    location.reload();
+    if (prevWidth > 0 && window.innerWidth !== prevWidth) {
+      setPrevWidth(window.innerWidth);
+      location.reload();
+    }
   }
 
   useEffect(() => {
@@ -28,6 +33,10 @@ function OrokoApp({ Component, pageProps }: AppProps) {
       window.removeEventListener("resize", debounce(handleResize, 500));
     };
   });
+
+  useEffect(() => {
+    setPrevWidth(window.innerWidth);
+  }, []);
 
   return (
     <Fragment>
