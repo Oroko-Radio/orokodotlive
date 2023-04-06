@@ -43,3 +43,14 @@ export const getMixcloudKey = (url: string) =>
   url.replace("https://www.mixcloud.com", "");
 
 export const isServer = typeof window === "undefined";
+
+export function debounce(fn, ms) {
+  let timer;
+  return (_) => {
+    clearTimeout(timer);
+    timer = setTimeout((_) => {
+      timer = null;
+      fn.apply(this);
+    }, ms);
+  };
+}

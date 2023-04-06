@@ -1,10 +1,11 @@
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { LivePlayerLoading } from "../components/LivePlayer";
 import "../styles/globals.css";
+import { debounce } from "../util";
 
 const MixcloudPlayer = dynamic(() => import("../components/mixcloudPlayer"), {
   ssr: false,
@@ -16,6 +17,27 @@ const LivePlayer = dynamic(() => import("../components/LivePlayer"), {
 });
 
 function OrokoApp({ Component, pageProps }: AppProps) {
+  // reload page when resizing horizontally, to keep correct slider distance
+  const [prevWidth, setPrevWidth] = useState<number>(0);
+
+  function handleResize() {
+    if (prevWidth > 0 && window.innerWidth !== prevWidth) {
+      setPrevWidth(window.innerWidth);
+      location.reload();
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", debounce(handleResize, 500));
+    return () => {
+      window.removeEventListener("resize", debounce(handleResize, 500));
+    };
+  });
+
+  useEffect(() => {
+    setPrevWidth(window.innerWidth);
+  }, []);
+
   return (
     <Fragment>
       <Header />
