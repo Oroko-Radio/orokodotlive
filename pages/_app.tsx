@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { LivePlayerLoading } from "../components/LivePlayer";
 import "../styles/globals.css";
 import { debounce } from "../util";
+import { Analytics } from "@vercel/analytics/react";
 
 const MixcloudPlayer = dynamic(() => import("../components/mixcloudPlayer"), {
   ssr: false,
@@ -47,6 +48,8 @@ function OrokoApp({ Component, pageProps }: AppProps) {
 
       <MixcloudPlayer />
       <Footer />
+
+      <Analytics />
     </Fragment>
   );
 }
