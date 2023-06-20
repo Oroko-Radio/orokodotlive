@@ -1,3 +1,4 @@
+import { createClient } from "contentful";
 import { ENDPOINT } from "../../constants";
 import type { ErrorPayload } from "../../types/shared";
 
@@ -45,3 +46,8 @@ export async function graphql(
     throw new Error(getErrorMessage(await r.json()));
   }
 }
+
+export const client = createClient({
+  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
+  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
+});

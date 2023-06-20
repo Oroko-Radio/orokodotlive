@@ -2,7 +2,7 @@ import fuzzysort from "fuzzysort";
 import { InferGetStaticPropsType } from "next";
 import { ChangeEvent, useMemo, useState } from "react";
 import Meta from "../components/Meta";
-import { getSearchPage } from "../lib/contentful/pages/search";
+import { getSearchPage, getSearchResult } from "../lib/contentful/pages/search";
 import {
   ArticleInterface,
   ArtistInterface,
@@ -43,48 +43,55 @@ export default function SearchPage({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [search, setSearch] = useState("");
+  const [result, setResult] = useState<ShowInterface[]>([]);
   const searchOnChange = (event: ChangeEvent<HTMLInputElement>) =>
     setSearch(event.target.value?.toLowerCase());
 
-  const result = fuzzysort.go(search ? search.trim() : undefined, data, {
-    keys: ["title", "artist"],
-    allowTypo: true,
-    threshold: -999,
-    limit: 20,
-  });
+  async function onSearch() {
+    const data = await getSearchResult(search);
+    setResult(data.items);
+    console.log(result);
+  }
 
-  const showResults = useMemo(() => {
-    if (search) {
-      return result.filter((el) => el.obj.type === "SHOW").map((el) => el.obj);
-    }
+  // const result = fuzzysort.go(search ? search.trim() : undefined, data, {
+  //   keys: ["title", "artist"],
+  //   allowTypo: true,
+  //   threshold: -999,
+  //   limit: 20,
+  // });
 
-    return data.filter((el) => el.type === "SHOW").slice(0, 4);
-  }, [result, search, data]);
+  // const showResults = useMemo(() => {
+  //   if (search) {
+  //     return result.filter((el) => el.obj.type === "SHOW").map((el) => el.obj);
+  //   }
 
-  const articleResults = useMemo(() => {
-    if (search) {
-      return result
-        .filter((el) => el.obj.type === "ARTICLE")
-        .map((el) => el.obj);
-    }
+  //   return data.filter((el) => el.type === "SHOW").slice(0, 4);
+  // }, [result, search, data]);
 
-    return data.filter((el) => el.type === "ARTICLE").slice(0, 4);
-  }, [result, search, data]);
+  // const articleResults = useMemo(() => {
+  //   if (search) {
+  //     return result
+  //       .filter((el) => el.obj.type === "ARTICLE")
+  //       .map((el) => el.obj);
+  //   }
 
-  const artistResults = useMemo(() => {
-    if (search) {
-      return result
-        .filter((el) => el.obj.type === "ARTIST")
-        .map((el) => el.obj);
-    }
+  //   return data.filter((el) => el.type === "ARTICLE").slice(0, 4);
+  // }, [result, search, data]);
 
-    return data.filter((el) => el.type === "ARTIST").slice(0, 4);
-  }, [result, search, data]);
+  // const artistResults = useMemo(() => {
+  //   if (search) {
+  //     return result
+  //       .filter((el) => el.obj.type === "ARTIST")
+  //       .map((el) => el.obj);
+  //   }
 
-  const hasNoResults =
-    showResults.length === 0 &&
-    artistResults.length === 0 &&
-    articleResults.length === 0;
+  //   return data.filter((el) => el.type === "ARTIST").slice(0, 4);
+  // }, [result, search, data]);
+
+  // const hasNoResults =
+  //   showResults.length === 0 &&
+  //   artistResults.length === 0 &&
+  //   articleResults.length === 0;
 
   return (
     <>
@@ -92,23 +99,39 @@ export default function SearchPage({
 
       <section className="bg-offBlack border-b-2 border-black">
         <div className="p-4 sm:p-8 xl:p-12 text-center">
-          <input
-            autoCapitalize="off"
-            autoComplete="off"
-            autoCorrect="off"
-            autoFocus
-            className="max-w-full bg-offBlack text-white placeholder-white border-r-0 border-t-0 border-b-0 border-l-2 text-4xl xl:text-5xl font-serif border-white focus:ring-white focus:ring-2 focus:border-offBlack"
-            id="search"
-            name="search"
-            onChange={searchOnChange}
-            placeholder="Search Oroko"
-            type="search"
-            value={search}
-          />
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              onSearch();
+            }}
+          >
+            <input
+              autoCapitalize="off"
+              autoComplete="off"
+              autoCorrect="off"
+              autoFocus
+              className="max-w-full bg-offBlack text-white placeholder-white border-r-0 border-t-0 border-b-0 border-l-2 text-4xl xl:text-5xl font-serif border-white focus:ring-white focus:ring-2 focus:border-offBlack"
+              id="search"
+              name="search"
+              onChange={searchOnChange}
+              placeholder="Search Oroko"
+              type="search"
+              value={search}
+            />
+          </form>
         </div>
       </section>
 
-      {hasNoResults && (
+      {result.length > 0
+        ? result.map((show, idx) => (
+            <div key={idx}>
+              <h1>{show.fields.title}</h1>
+              <h1>{show.fields.artists[0].fields.name}</h1>
+            </div>
+          ))
+        : null}
+
+      {/* {hasNoResults && (
         <section className="bg-orokoBlue min-h-[50vh]">
           <div className="p-4 sm:p-8">
             <div className="pt-10">
@@ -228,7 +251,7 @@ export default function SearchPage({
             )}
           </ul>
         </section>
-      )}
+      )} */}
     </>
   );
 }

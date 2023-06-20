@@ -1,11 +1,23 @@
 import dayjs from "dayjs";
-import { graphql } from "..";
+import { client, graphql } from "..";
 import {
   ArticleInterface,
   ArtistInterface,
   ShowInterface,
 } from "../../../types/shared";
 import { extractCollection } from "../../../util";
+
+export async function getSearchResult(query: string, limit = 5) {
+  const result = await client.getEntries({
+    content_type: "show",
+    limit: limit,
+    "fields.title[match]": query,
+
+    select: ["fields.title", "fields.artists"],
+  });
+
+  return result;
+}
 
 export async function getSearchPage() {
   const today = dayjs().format("YYYY-MM-DD");
