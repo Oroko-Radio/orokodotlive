@@ -1,133 +1,80 @@
 import dayjs from "dayjs";
-import { client, graphql } from "..";
-import {
-  ArticleInterface,
-  ArtistInterface,
-  ShowInterface,
-} from "../../../types/shared";
-import { extractCollection } from "../../../util";
+import type {
+  TypeArticle,
+  TypeArticleFields,
+  TypeArtist,
+  TypeArtistFields,
+  TypeShow,
+  TypeShowFields,
+} from "../../../types/contentful";
+import { client } from "../";
 
-export async function getSearchResult(query: string, limit = 5) {
-  const result = await client.getEntries({
-    content_type: "show",
-    limit: limit,
-    "fields.title[match]": query,
-
-    select: ["fields.title", "fields.artists"],
-  });
-
-  return result;
+export interface SearchData {
+  shows: TypeShow[];
+  articles: TypeArticle[];
+  artists: TypeArtist[];
 }
 
-export async function getSearchPage() {
-  const today = dayjs().format("YYYY-MM-DD");
+export async function getSearchData(query: string, limit = 5) {
+  const start = Date.now();
 
-  const ArticleDataQuery = /* GraphQL */ `
-    query ArticleDataQuery {
-      articleCollection(limit: 2500, order: date_DESC) {
-        items {
-          coverImage {
-            sys {
-              id
-            }
-            title
-            description
-            url
-            width
-            height
-          }
-          title
-          slug
-          date
-          articleType
-        }
-      }
-    }
-  `;
+  const [showsCollection, articlesCollection, artistsCollection] =
+    await Promise.all([
+      client.getEntries<TypeShowFields>({
+        content_type: "show",
+        limit: limit,
+        order: "-fields.date,fields.title",
 
-  const articleData = await graphql(ArticleDataQuery);
+        "fields.mixcloudLink[exists]": true,
+        "fields.date[lte]": dayjs().format("YYYY-MM-DD"),
 
-  const ArtistDataQuery = /* GraphQL */ `
-    query ArtistDataQuery {
-      artistCollection(limit: 2500, order: name_ASC) {
-        items {
-          photo {
-            sys {
-              id
-            }
-            title
-            description
-            url
-            width
-            height
-          }
-          title: name
-          slug
-        }
-      }
-    }
-  `;
+        query: query,
 
-  const artistData = await graphql(ArtistDataQuery);
+        // select: [
+        //   "fields.title",
+        //   "fields.slug",
+        //   "fields.date",
+        //   "fields.artists",
+        //   "fields.genres",
+        //   "fields.coverImage",
+        // ],
+      }),
+      client.getEntries<TypeArticleFields>({
+        content_type: "article",
+        limit: limit,
+        order: "-fields.date",
 
-  const ShowDataQuery = /* GraphQL */ `
-    query ShowDataQuery($today: DateTime) {
-      showCollection(
-        limit: 1500
-        order: date_DESC
-        where: { date_lt: $today }
-      ) {
-        items {
-          coverImage {
-            sys {
-              id
-            }
-            url
-          }
-          artistsCollection(limit: 1) {
-            items {
-              name
-              slug
-              city {
-                name
-              }
-            }
-          }
-          genresCollection(limit: 3) {
-            items {
-              name
-            }
-          }
-          title
-          slug
-          date
-        }
-      }
-    }
-  `;
+        "fields.articleType[exists]": true,
 
-  const showData = await graphql(ShowDataQuery, {
-    variables: { today },
-  });
+        "fields.title[match]": query,
 
-  const articleCollection = extractCollection<ArticleInterface>(
-    articleData,
-    "articleCollection"
-  ).map((el) => ({ ...el, type: "ARTICLE" }));
+        select: [
+          "fields.title",
+          "fields.slug",
+          "fields.date",
+          "fields.coverImage",
+          "fields.articleType",
+        ],
+      }),
+      client.getEntries<TypeArtistFields>({
+        content_type: "artist",
+        limit: limit,
+        order: "fields.name",
 
-  const artistCollection = extractCollection<ArtistInterface>(
-    artistData,
-    "artistCollection"
-  ).map((el) => ({ ...el, type: "ARTIST" }));
+        "fields.name[match]": query,
 
-  const showCollection = extractCollection<ShowInterface>(
-    showData,
-    "showCollection"
-  ).map((el) => ({
-    ...el,
-    artist: el.artistsCollection.items[0].name,
-    type: "SHOW",
-  }));
+        select: ["fields.name", "fields.slug", "fields.photo"],
+      }),
+    ]);
 
-  return [...showCollection, ...articleCollection, ...artistCollection];
+  const end = Date.now();
+
+  const { items: shows } = showsCollection;
+  const { items: articles } = articlesCollection;
+  const { items: artists } = artistsCollection;
+
+  return {
+    data: { shows, articles, artists } as SearchData,
+    duration: end - start,
+  };
 }

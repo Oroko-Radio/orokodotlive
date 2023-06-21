@@ -18,10 +18,12 @@ export default function PatreonBanner() {
       )}
     >
       <div className="self-center z-10">
-        <Link href="https://www.patreon.com/orokoradio" passHref>
-          <a target="_blank">
-            <Button fixedWidth>{isHover ? "On Patreon" : "Support Us!"}</Button>
-          </a>
+        <Link
+          href="https://www.patreon.com/orokoradio"
+          target="_blank"
+          passHref
+        >
+          <Button fixedWidth>{isHover ? "On Patreon" : "Support Us!"}</Button>
         </Link>
       </div>
       <div

@@ -33,16 +33,10 @@ type SocialIconProps = {
 
 const SocialIcon = ({ social }: SocialIconProps) => {
   return (
-    <Link href={socialsMap[social].link}>
-      <a target="_blank">
-        <div className="w-8 h-8 hover:scale-110 transition-transform">
-          <Image
-            src={socialsMap[social].icon}
-            alt={social}
-            layout="responsive"
-          />
-        </div>
-      </a>
+    <Link href={socialsMap[social].link} target="_blank" passHref>
+      <div className="w-8 h-8 hover:scale-110 transition-transform">
+        <Image src={socialsMap[social].icon} alt={social} layout="responsive" />
+      </div>
     </Link>
   );
 };

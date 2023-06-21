@@ -17,19 +17,19 @@ const Footer = () => {
               </li>
             </Link>
           ))}
-          <Link href="https://www.patreon.com/orokoradio">
-            <a target="_blank">
-              <li className="font-bold hover:opacity-70 transition-opacity">
-                Patreon
-              </li>
-            </a>
+          <Link
+            href="https://www.patreon.com/orokoradio"
+            target="_blank"
+            passHref
+          >
+            <li className="font-bold hover:opacity-70 transition-opacity">
+              Patreon
+            </li>
           </Link>
-          <Link href="mailto:info@oroko.live">
-            <a>
-              <li className="font-bold hover:opacity-70 transition-opacity">
-                Contact
-              </li>
-            </a>
+          <Link href="mailto:info@oroko.live" passHref>
+            <li className="font-bold hover:opacity-70 transition-opacity">
+              Contact
+            </li>
           </Link>
         </ul>
         <div className="flex justify-center mb-8">
@@ -39,29 +39,26 @@ const Footer = () => {
         <p className="mt-2 mb-8 font-sans xl:text-base">©OROKO 2021</p>
         <p className="inline font-sans text-sm xl:text-base">
           Designed by{" "}
-          <Link href="https://www.studiopanorama.de/" passHref>
-            <a target="_blank">
-              <span className="underline tracking-widest cursor-pointer">
-                panorama
-              </span>
-            </a>
+          <Link href="https://www.studiopanorama.de/" target="_blank" passHref>
+            <span className="underline tracking-widest cursor-pointer">
+              panorama
+            </span>
           </Link>{" "}
           Powered by
         </p>
         <Link
           href="https://vercel.com/?utm_source=oroko&utm_campaign=oss"
-          passHref={true}
+          target="_blank"
+          passHref
         >
-          <a target="_blank">
-            <div className="relative inline-block translate-y-0.5 h-3 w-16 cursor-pointer">
-              <Image
-                src={vercelLogo}
-                alt="Vercel logo"
-                layout="fill"
-                objectFit="contain"
-              />
-            </div>
-          </a>
+          <div className="relative inline-block translate-y-0.5 h-3 w-16 cursor-pointer">
+            <Image
+              src={vercelLogo}
+              alt="Vercel logo"
+              layout="fill"
+              objectFit="contain"
+            />
+          </div>
         </Link>
       </div>
     </div>

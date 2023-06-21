@@ -1,97 +1,39 @@
-import fuzzysort from "fuzzysort";
 import { InferGetStaticPropsType } from "next";
 import { ChangeEvent, useMemo, useState } from "react";
 import Meta from "../components/Meta";
-import { getSearchPage, getSearchResult } from "../lib/contentful/pages/search";
-import {
-  ArticleInterface,
-  ArtistInterface,
-  ShowInterface,
-} from "../types/shared";
 import Card from "../components/Card";
 import Show from "../components/Show";
 import dayjs from "dayjs";
 import Tag from "../components/Tag";
+import { getSearchData } from "../lib/contentful/pages/search";
+import { useDebouncedState } from "@react-hookz/web";
+import useSearchData from "../hooks/useSearch";
+import { isEmpty } from "ts-extras";
 
-interface SearchShowInterface extends ShowInterface {
-  type: "SHOW";
-}
+export async function getStaticProps() {
+  const { data } = await getSearchData("");
 
-interface SearchArtistInterface extends ArtistInterface {
-  type: "ARTIST";
-  title: string;
-}
-
-interface SearchArticleInterface extends ArticleInterface {
-  type: "ARTICLE";
-}
-
-export async function getStaticProps({ preview = false }) {
   return {
     props: {
-      preview,
-      data: (await getSearchPage()) as Array<
-        SearchShowInterface | SearchArtistInterface | SearchArticleInterface
-      >,
+      fallbackData: data,
     },
-    revalidate: 60 * 60,
   };
 }
 
 export default function SearchPage({
-  preview,
-  data,
+  fallbackData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [search, setSearch] = useState("");
-  const [result, setResult] = useState<ShowInterface[]>([]);
-  const searchOnChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setSearch(event.target.value?.toLowerCase());
+  const [query, querySet] = useDebouncedState("", 500);
 
-  async function onSearch() {
-    const data = await getSearchResult(search);
-    setResult(data.items);
-    console.log(result);
-  }
+  const { data, isValidating } = useSearchData(query, { fallbackData });
 
-  // const result = fuzzysort.go(search ? search.trim() : undefined, data, {
-  //   keys: ["title", "artist"],
-  //   allowTypo: true,
-  //   threshold: -999,
-  //   limit: 20,
-  // });
+  const isDataEmpty = isEmpty([
+    ...data.shows,
+    ...data.articles,
+    ...data.artists,
+  ]);
 
-  // const showResults = useMemo(() => {
-  //   if (search) {
-  //     return result.filter((el) => el.obj.type === "SHOW").map((el) => el.obj);
-  //   }
-
-  //   return data.filter((el) => el.type === "SHOW").slice(0, 4);
-  // }, [result, search, data]);
-
-  // const articleResults = useMemo(() => {
-  //   if (search) {
-  //     return result
-  //       .filter((el) => el.obj.type === "ARTICLE")
-  //       .map((el) => el.obj);
-  //   }
-
-  //   return data.filter((el) => el.type === "ARTICLE").slice(0, 4);
-  // }, [result, search, data]);
-
-  // const artistResults = useMemo(() => {
-  //   if (search) {
-  //     return result
-  //       .filter((el) => el.obj.type === "ARTIST")
-  //       .map((el) => el.obj);
-  //   }
-
-  //   return data.filter((el) => el.type === "ARTIST").slice(0, 4);
-  // }, [result, search, data]);
-
-  // const hasNoResults =
-  //   showResults.length === 0 &&
-  //   artistResults.length === 0 &&
-  //   articleResults.length === 0;
+  console.log(data.shows[0].fields);
 
   return (
     <>
@@ -99,69 +41,86 @@ export default function SearchPage({
 
       <section className="bg-offBlack border-b-2 border-black">
         <div className="p-4 sm:p-8 xl:p-12 text-center">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSearch();
-            }}
-          >
-            <input
-              autoCapitalize="off"
-              autoComplete="off"
-              autoCorrect="off"
-              autoFocus
-              className="max-w-full bg-offBlack text-white placeholder-white border-r-0 border-t-0 border-b-0 border-l-2 text-4xl xl:text-5xl font-serif border-white focus:ring-white focus:ring-2 focus:border-offBlack"
-              id="search"
-              name="search"
-              onChange={searchOnChange}
-              placeholder="Search Oroko"
-              type="search"
-              value={search}
-            />
-          </form>
+          <input
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
+            autoFocus
+            className="max-w-full bg-offBlack text-white placeholder-white border-r-0 border-t-0 border-b-0 border-l-2 text-4xl xl:text-5xl font-serif border-white focus:ring-white focus:ring-2 focus:border-offBlack"
+            id="search"
+            name="search"
+            onChange={(e) => querySet(e.target.value)}
+            placeholder="Search Oroko"
+            type="search"
+          />
         </div>
       </section>
 
-      {result.length > 0
-        ? result.map((show, idx) => (
-            <div key={idx}>
-              <h1>{show.fields.title}</h1>
-              <h1>{show.fields.artists[0].fields.name}</h1>
-            </div>
-          ))
-        : null}
-
-      {/* {hasNoResults && (
+      {isDataEmpty && (
         <section className="bg-orokoBlue min-h-[50vh]">
           <div className="p-4 sm:p-8">
             <div className="pt-10">
               <p>
                 No results for{" "}
-                <span className="font-medium">{`"${search}"`}</span>
+                <span className="font-medium">{`"${query}"`}</span>
               </p>
             </div>
           </div>
         </section>
       )}
 
-      {showResults.length > 0 && (
+      {isValidating && (
+        <section className="bg-orokoBlue min-h-[50vh]">
+          <div className="p-4 sm:p-8">
+            <div className="pt-10">
+              <p>Searching...</p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {data.shows.length > 0 && (
         <section className="bg-orokoBlue border-b-2 border-black p-4 py-12">
           <div className="flex justify-center items-end mb-12">
             <h2 className="font-serif text-4xl md:text-5xl xl:text-6xl mr-2 inline">
               Shows
             </h2>
-            {search ? <span>({showResults.length})</span> : null}
+            {query ? <span>({data.shows.length})</span> : null}
           </div>
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-10 sm:gap-8">
-            {showResults?.map((show: any) => (
-              <li key={show.slug} className="border-2 border-black bg-white">
+            {data.shows.map((show) => (
+              <li
+                key={show.fields.slug}
+                className="border-2 border-black bg-white"
+              >
                 <Card
-                  imageUrl={show.coverImage.url}
-                  title={show.name}
-                  link={`/radio/${show.slug}`}
+                  imageUrl={""}
+                  title={show.fields.title}
+                  link={`/radio/${show.fields.slug}`}
                 >
-                  <Show show={show} cityColor="black" />
+                  <div className="p-4 flex flex-col justify-between flex-1">
+                    <div>
+                      <p className="font-sans text-sm md:text-base mb-2 font-semibold">
+                        {dayjs(show.fields.date).format("DD MMM YYYY HH:mm") +
+                          "H"}
+                      </p>
+                      <h1 className="font-heading card-leading text-4xl">
+                        {show.fields.title}
+                      </h1>
+                      <h2 className="font-serif text-2xl lg:text-3xl mb-4">
+                        {" "}
+                        With{" "}
+                        {show.fields.artists &&
+                          show.fields.artists.map((artist, idx) => (
+                            <span key={idx}>
+                              <span>{artist.fields.name}</span>
+                              {idx !== show.fields.artists.length - 1 && ", "}
+                            </span>
+                          ))}
+                      </h2>
+                    </div>
+                  </div>
                 </Card>
               </li>
             ))}
@@ -169,6 +128,7 @@ export default function SearchPage({
         </section>
       )}
 
+      {/* 
       {artistResults.length > 0 && (
         <section className="bg-orokoRed border-b-2 border-black p-4 py-12">
           <div className="flex justify-center items-end mb-12">

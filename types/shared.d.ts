@@ -84,7 +84,6 @@ export interface ShowInterface {
   date: string;
   slug: string;
   coverImage: CoverImage;
-  coverImagePosition: CoverImagePosition;
   isFeatured: boolean;
   artistsCollection: {
     items: ArtistInterface[];
@@ -107,7 +106,6 @@ export type ArtistEntry = {
     name: string;
   };
   photo: CoverImage;
-  coverImagePosition: CoverImagePosition;
   content?: Content;
   linkedFrom?: { showCollection: { items: ShowInterface[] | [] } };
 };
@@ -130,7 +128,6 @@ export interface ArtistInterface {
     name: string;
   };
   photo: CoverImage;
-  coverImagePosition: CoverImagePosition;
   isResident: boolean;
   content?: Content;
   linkedFrom?: { showCollection: { items: ShowInterface[] | [] } };

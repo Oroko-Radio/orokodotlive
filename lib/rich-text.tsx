@@ -37,7 +37,7 @@ export function renderRichTextWithImages(content: Content) {
           if (uri.includes("oroko.live")) {
             return (
               <Link href={uri.replace("https://oroko.live", "")}>
-                <a>{children}</a>
+                {children}
               </Link>
             );
           }
