@@ -1,6 +1,6 @@
 import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import usePlayerState from "../hooks/usePlayerState";
 import useRadioCo from "../hooks/useRadioCo";
 import Banner from "./Banner";

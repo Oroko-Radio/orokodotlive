@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import DotButton from "../ui/DotButton";
 import Modal from "react-modal";
 import logoSmall from "../../images/logo-small-outline.svg";

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import facebook from "../images/socials/Facebook.svg";
 import instagram from "../images/socials/Instagram.svg";
 import tiktok from "../images/socials/TikTok.svg";
