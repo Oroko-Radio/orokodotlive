@@ -92,7 +92,7 @@ export default function SearchPage({
                 className="border-2 border-black bg-white"
               >
                 <Card
-                  imageUrl={""}
+                  imageUrl={show.fields.coverImage.fields.file.url}
                   title={show.fields.title}
                   link={`/radio/${show.fields.slug}`}
                 >
