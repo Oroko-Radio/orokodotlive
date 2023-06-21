@@ -1,29 +1,12 @@
 import dayjs from "dayjs";
-import type {
-  TypeArticle,
-  TypeArticleFields,
-  TypeArtist,
-  TypeArtistFields,
-  TypeShow,
-  TypeShowFields,
-} from "../../../types/contentful";
 import { client } from "../";
 
-export interface SearchData {
-  shows: TypeShow[];
-  articles: TypeArticle[];
-  artists: TypeArtist[];
-}
-
 export async function getSearchData(query: string, limit = 5) {
-  const start = Date.now();
-
   const [showsCollection, articlesCollection, artistsCollection] =
     await Promise.all([
-      client.getEntries<TypeShowFields>({
+      client.getEntries({
         content_type: "show",
         limit: limit,
-        order: "-fields.date,fields.title",
 
         "fields.mixcloudLink[exists]": true,
         "fields.date[lte]": dayjs().format("YYYY-MM-DD"),
@@ -39,10 +22,9 @@ export async function getSearchData(query: string, limit = 5) {
         //   "fields.coverImage",
         // ],
       }),
-      client.getEntries<TypeArticleFields>({
+      client.getEntries({
         content_type: "article",
         limit: limit,
-        order: "-fields.date",
 
         "fields.articleType[exists]": true,
 
@@ -56,10 +38,9 @@ export async function getSearchData(query: string, limit = 5) {
           "fields.articleType",
         ],
       }),
-      client.getEntries<TypeArtistFields>({
+      client.getEntries({
         content_type: "artist",
         limit: limit,
-        order: "fields.name",
 
         "fields.name[match]": query,
 
@@ -67,14 +48,11 @@ export async function getSearchData(query: string, limit = 5) {
       }),
     ]);
 
-  const end = Date.now();
-
   const { items: shows } = showsCollection;
   const { items: articles } = articlesCollection;
   const { items: artists } = artistsCollection;
 
   return {
-    data: { shows, articles, artists } as SearchData,
-    duration: end - start,
+    data: { shows, articles, artists },
   };
 }

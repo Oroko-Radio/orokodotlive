@@ -1,10 +1,7 @@
 import { InferGetStaticPropsType } from "next";
-import { ChangeEvent, useMemo, useState } from "react";
 import Meta from "../components/Meta";
 import Card from "../components/Card";
-import Show from "../components/Show";
 import dayjs from "dayjs";
-import Tag from "../components/Tag";
 import { getSearchData } from "../lib/contentful/pages/search";
 import { useDebouncedState } from "@react-hookz/web";
 import useSearchData from "../hooks/useSearch";
