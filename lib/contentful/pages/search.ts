@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { client } from "../";
 
-export async function getSearchData(query: string, limit = 5) {
+export async function getSearchData(query: string, limit = 8) {
   const [showsCollection, articlesCollection, artistsCollection] =
     await Promise.all([
       client.getEntries({
