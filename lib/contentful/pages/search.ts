@@ -13,14 +13,14 @@ export async function getSearchData(query: string, limit = 8) {
 
         query: query,
 
-        // select: [
-        //   "fields.title",
-        //   "fields.slug",
-        //   "fields.date",
-        //   "fields.artists",
-        //   "fields.genres",
-        //   "fields.coverImage",
-        // ],
+        select: [
+          "fields.title",
+          "fields.slug",
+          "fields.date",
+          "fields.artists",
+          "fields.genres",
+          "fields.coverImage",
+        ],
       }),
       client.getEntries({
         content_type: "article",
@@ -36,6 +36,7 @@ export async function getSearchData(query: string, limit = 8) {
           "fields.date",
           "fields.coverImage",
           "fields.articleType",
+          "fields.city",
         ],
       }),
       client.getEntries({
