@@ -5,9 +5,11 @@ type MetaProps = {
 };
 
 const Meta = ({ title }: MetaProps) => {
+  const concatenatedTitle = "Oroko | " + title;
+
   return (
     <Head>
-      <title>Oroko | {title}</title>
+      <title>{concatenatedTitle}</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta
         name="description"
