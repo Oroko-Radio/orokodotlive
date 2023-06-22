@@ -16,7 +16,7 @@
     "@types/react-swipeable": "^5.2.0",
     "@vercel/analytics": "^1.0.0",
     "classnames": "^2.3.1",
-    "contentful": "^10.0.0-beta-v10.8",
+    "contentful": "^10.3.0",
     "dayjs": "^1.10.7",
     "fathom-client": "^3.2.0",
     "fuzzysort": "1.2",

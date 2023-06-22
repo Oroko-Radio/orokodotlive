@@ -123,90 +123,78 @@ export default function SearchPage({
         </section>
       )}
 
-      {/* 
-      {artistResults.length > 0 && (
+      {data.artists.length > 0 && (
         <section className="bg-orokoRed border-b-2 border-black p-4 py-12">
           <div className="flex justify-center items-end mb-12">
             <h2 className="font-serif text-4xl md:text-5xl xl:text-6xl mr-2 inline">
               Artists
             </h2>
-            {search ? <span>({artistResults.length})</span> : null}
+            {query ? <span>({data.artists.length})</span> : null}
           </div>
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-6 sm:gap-8">
-            {artistResults?.map((artist: any) => {
-              const _artist = {
-                ...artist,
-                name: artist.title,
-              };
-              const { slug, photo, name } = _artist;
-
-              return (
-                <li key={slug} className="border-black border-2">
-                  <Card
-                    imageUrl={photo && photo.url ? photo.url : null}
-                    title={name}
-                    link={`/artists/${slug}`}
-                  >
-                    <h1 className="font-heading card-leading p-4 text-4xl">
-                      {name}
-                    </h1>
-                  </Card>
-                </li>
-              );
-            })}
+            {data.artists.map((artist: any) => (
+              <li key={artist.fields.slug} className="border-black border-2">
+                <Card
+                  imageUrl={
+                    artist.fields && artist.fields.photo.fields.file.url
+                      ? "http:" + artist.fields.photo.fields.file.url
+                      : null
+                  }
+                  title={artist.fields.name}
+                  link={`/artists/${artist.fields.slug}`}
+                >
+                  <h1 className="font-heading card-leading p-4 text-4xl">
+                    {artist.fields.name}
+                  </h1>
+                </Card>
+              </li>
+            ))}
           </ul>
         </section>
       )}
 
-      {articleResults.length > 0 && (
+      {data.articles.length > 0 && (
         <section className="bg-orokoGray p-4 py-12">
           <div className="flex justify-center items-end mb-12">
             <h2 className="font-serif text-4xl md:text-5xl xl:text-6xl mr-2 inline">
               News
             </h2>
-            {search ? <span>({articleResults.length})</span> : null}
+            {query ? <span>({data.articles.length})</span> : null}
           </div>
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-10 sm:gap-8">
-            {articleResults?.map(
-              ({
-                slug,
-                coverImage,
-                title,
-                city,
-                articleType,
-                date,
-                subtitle,
-              }: any) => (
-                <li key={slug} className="border-black border-2 bg-white">
-                  <Card
-                    imageUrl={coverImage.url}
-                    title={title}
-                    link={`/news/${slug}`}
-                  >
-                    <div className="p-4">
-                      <div className="flex flex-wrap gap-1 mb-6">
+            {data.articles.map((article) => (
+              <li
+                key={article.fields.slug}
+                className="border-black border-2 bg-white"
+              >
+                <Card
+                  imageUrl={"http:" + article.fields.coverImage.fields.file.url}
+                  title={article.fields.title}
+                  link={`/news/${article.fields.slug}`}
+                >
+                  <div className="p-4">
+                    {/* <div className="flex flex-wrap gap-1 mb-6">
                         {city && <Tag text={city.name} color="black" card />}
                         <Tag text={articleType} transparent card />
-                      </div>
-                      <p className="font-sans mb-2 font-medium">
-                        {dayjs(date).format("DD MMMM YYYY")}
-                      </p>
-                      <h1 className="font-heading card-leading mb-2 text-4xl">
-                        {title}
-                      </h1>
-                      <p className="font-serif mb-4 text-lg md:text-2xl">
-                        {subtitle}
-                      </p>
-                    </div>
-                  </Card>
-                </li>
-              )
-            )}
+                      </div> */}
+                    <p className="font-sans mb-2 font-medium">
+                      {dayjs(article.fields.date).format("DD MMMM YYYY")}
+                    </p>
+                    <h1 className="font-heading card-leading mb-2 text-4xl">
+                      {article.fields.title}
+                    </h1>
+                    <p className="font-serif mb-4 text-lg md:text-2xl">
+                      {article.fields.subtitle}
+                    </p>
+                  </div>
+                </Card>
+              </li>
+            ))}
           </ul>
         </section>
-      )} */}
+      )}
     </>
   );
 }
