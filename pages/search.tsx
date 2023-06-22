@@ -30,8 +30,6 @@ export default function SearchPage({
     ...data.artists,
   ]);
 
-  console.log(data.shows[0].fields);
-
   return (
     <>
       <Meta title="Search" />
