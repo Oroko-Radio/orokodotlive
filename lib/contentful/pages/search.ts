@@ -1,10 +1,24 @@
 import dayjs from "dayjs";
 import { client } from "../";
+import {
+  TypeArticle,
+  TypeArticleFields,
+  TypeArtist,
+  TypeArtistFields,
+  TypeShow,
+  TypeShowFields,
+} from "../../../types/contentful";
+
+export interface SearchData {
+  shows: TypeShow[];
+  articles: TypeArticle[];
+  artists: TypeArtist[];
+}
 
 export async function getSearchData(query: string, limit = 8) {
   const [showsCollection, articlesCollection, artistsCollection] =
     await Promise.all([
-      client.getEntries({
+      client.getEntries<TypeShowFields>({
         content_type: "show",
         limit: limit,
 
@@ -22,7 +36,7 @@ export async function getSearchData(query: string, limit = 8) {
         //   "fields.coverImage",
         // ],
       }),
-      client.getEntries({
+      client.getEntries<TypeArticleFields>({
         content_type: "article",
         limit: limit,
 
@@ -38,7 +52,7 @@ export async function getSearchData(query: string, limit = 8) {
           "fields.articleType",
         ],
       }),
-      client.getEntries({
+      client.getEntries<TypeArtistFields>({
         content_type: "artist",
         limit: limit,
 
@@ -53,6 +67,6 @@ export async function getSearchData(query: string, limit = 8) {
   const { items: artists } = artistsCollection;
 
   return {
-    data: { shows, articles, artists },
+    data: { shows, articles, artists } as SearchData,
   };
 }
