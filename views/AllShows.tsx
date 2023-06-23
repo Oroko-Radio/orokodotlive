@@ -1,32 +1,30 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import Card from "../components/Card";
 import Show from "../components/Show";
 import Tag from "../components/Tag";
 import Button from "../components/ui/Button";
-import { ShowInterface } from "../types/shared";
+import { GenreCategoryInterface, ShowInterface } from "../types/shared";
 
 const AllShows = ({
   shows,
   genres,
 }: {
   shows: ShowInterface[];
-  genres: string[];
+  genres: GenreCategoryInterface[];
 }) => {
   const [viewingNumber, setViewingNumber] = useState<number>(25);
-  const [filteredShows, setFilteredShows] = useState<ShowInterface[]>(shows);
   const [genreFilter, setGenreFilter] = useState<string>("all");
 
-  useEffect(() => {
-    setFilteredShows(
-      shows.filter((show) => {
-        if (genreFilter === "all") return show;
-        const currentGenres = [];
-        show.genresCollection.items.forEach(({ name }) => {
-          currentGenres.push(name);
-        });
-        if (currentGenres.includes(genreFilter)) return show;
-      })
-    );
+  const filteredShows = useMemo(() => {
+    return shows.filter((show) => {
+      if (genreFilter === "all") return show;
+
+      const genreCategories = show.genresCollection.items.map((genre) => {
+        if (genre.genreCategory) return genre.genreCategory.name;
+      });
+
+      if (genreCategories.includes(genreFilter)) return show;
+    });
   }, [genreFilter, shows]);
 
   return (
@@ -35,18 +33,20 @@ const AllShows = ({
         All Shows
       </h1>
 
-      <select
-        className="appearance-none self-center bg-transparent border-white border-2 text-lg md:text-2xl text-white"
-        value={genreFilter}
-        onChange={(e) => setGenreFilter(e.target.value)}
-      >
-        <option value="all">ALL GENRES</option>
-        {genres.map((genre, idx) => (
-          <option value={genre} key={idx}>
-            {genre.toUpperCase()}
-          </option>
+      <div className="flex gap-2">
+        <div className="cursor-pointer" onClick={() => setGenreFilter("all")}>
+          <Tag text={"all"} color="white" borderColor="white" />
+        </div>
+        {genres.map(({ name }, idx) => (
+          <div
+            key={idx}
+            className="cursor-pointer"
+            onClick={() => setGenreFilter(name)}
+          >
+            <Tag text={name} color="white" borderColor="white" />
+          </div>
         ))}
-      </select>
+      </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8 xl:pb-12">
         {filteredShows.slice(0, viewingNumber).map((show, idx) => (

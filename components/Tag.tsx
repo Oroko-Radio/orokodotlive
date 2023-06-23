@@ -5,13 +5,20 @@ interface TagProps {
   text: string;
   transparent?: boolean;
   color?: "black" | "blue" | "orange" | "green" | "gray" | "yellow" | "white";
+  borderColor?: "black" | "white";
   card?: boolean;
 }
 
-const Tag = ({ text, transparent, color, card = false }: TagProps) => {
+const Tag = ({
+  text,
+  transparent,
+  color,
+  borderColor = "black",
+  card = false,
+}: TagProps) => {
   return (
     <div
-      className={cn("flex-shrink-0 border-2 border-black", {
+      className={cn("flex-shrink-0 border-2", {
         "text-black": transparent,
         "bg-black text-white": color === "black",
         "bg-black text-orokoBlue": color === "blue",
@@ -20,6 +27,8 @@ const Tag = ({ text, transparent, color, card = false }: TagProps) => {
         "bg-black text-orokoGray": color === "gray",
         "bg-black text-orokoYellow": color === "yellow",
         "text-white": color === "white",
+        "border-black": borderColor === "black",
+        "border-white": borderColor === "white",
       })}
     >
       <p

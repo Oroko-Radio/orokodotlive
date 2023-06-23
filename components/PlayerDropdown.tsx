@@ -15,7 +15,7 @@ export default function PlayerDropdown() {
   const today = dayjs();
 
   async function getNextUp() {
-    const shows = await getAllShows(false);
+    const { shows } = await getAllShows(false);
     const upcomingShows = shows
       .sort(sort.date_ASC)
       .filter((show) => dayjs(show.date).isAfter(today));

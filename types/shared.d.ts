@@ -96,6 +96,11 @@ export interface ShowInterface {
 
 export interface GenreInterface {
   name: string;
+  genreCategory: GenreCategoryInterface;
+}
+
+export interface GenreCategoryInterface {
+  name: string;
 }
 
 export type ArtistEntry = {

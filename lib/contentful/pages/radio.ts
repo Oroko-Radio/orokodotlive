@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { graphql, LIMITS } from "..";
-import { ShowInterface } from "../../../types/shared";
+import { GenreCategoryInterface, ShowInterface } from "../../../types/shared";
 import {
   extractCollection,
   extractCollectionItem,
@@ -11,7 +11,7 @@ import {
 export async function getRadioPage(preview: boolean) {
   const today = dayjs();
 
-  const shows = await getAllShows(preview);
+  const { shows, genreCategories } = await getAllShows(preview);
 
   /**
    * Upcoming & Featured
@@ -43,7 +43,7 @@ export async function getRadioPage(preview: boolean) {
   return {
     upcomingShows,
     pastShows,
-    genres,
+    genres: genreCategories,
     featuredShows,
   };
 }
@@ -120,7 +120,7 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
 
   const entryGenres = entry.genresCollection.items.map((genre) => genre.name);
 
-  const allShows = await getAllShows(preview);
+  const { shows: allShows } = await getAllShows(preview);
 
   const relatedShows = allShows.filter((filterShow) => {
     const currentShowGenres = filterShow.genresCollection.items.map(
@@ -178,9 +178,12 @@ export async function getAllShows(preview: boolean, limit = LIMITS.SHOWS) {
               }
             }
           }
-          genresCollection(limit: 9) {
+          genresCollection(limit: 5) {
             items {
               name
+              genreCategory {
+                name
+              }
             }
           }
           content {
@@ -191,10 +194,30 @@ export async function getAllShows(preview: boolean, limit = LIMITS.SHOWS) {
     }
   `;
 
-  const data = await graphql(AllShowsQuery, {
+  const shows = await graphql(AllShowsQuery, {
     variables: { preview, limit },
     preview,
   });
 
-  return extractCollection<ShowInterface>(data, "showCollection");
+  const GenreCategoriesQuery = /* GraphQL */ `
+    query AllGenreCategoriesQuery {
+      genreCategoryCollection {
+        items {
+          name
+        }
+      }
+    }
+  `;
+
+  const genreCategories = await graphql(GenreCategoriesQuery, {
+    preview,
+  });
+
+  return {
+    shows: extractCollection<ShowInterface>(shows, "showCollection"),
+    genreCategories: extractCollection<GenreCategoryInterface>(
+      genreCategories,
+      "genreCategoryCollection"
+    ),
+  };
 }
