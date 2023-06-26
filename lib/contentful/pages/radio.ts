@@ -28,16 +28,6 @@ export async function getRadioPage(preview: boolean) {
     .sort(sort.date_DESC)
     .filter((show) => dayjs(show.date).isBefore(today));
 
-  /**
-   * All Past Show Genres
-   */
-  const pastShowGenres = pastShows
-    .flatMap((show) => show.genresCollection.items)
-    .filter((genre) => Boolean(genre?.name))
-    .map((genre) => genre.name);
-
-  const genres = uniq(pastShowGenres).sort(sort.alpha);
-
   const featuredShows = shows.filter((show) => show.isFeatured);
 
   return {
