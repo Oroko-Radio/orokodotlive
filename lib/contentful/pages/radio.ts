@@ -211,3 +211,71 @@ export async function getAllShows(preview: boolean, limit = LIMITS.SHOWS) {
     ),
   };
 }
+
+export async function getShowsByGenreCategory(
+  preview: boolean,
+  genre: string,
+  skip = 0
+) {
+  const showsByGenreCategoryQuery = /* GraphQL */ `
+    query ShowsByGenreCategoryQuery(
+      $preview: Boolean
+      $genre: String
+      $skip: Int
+    ) {
+      genreCategoryCollection(
+        preview: $preview
+        limit: 1
+        where: { name: $genre }
+      ) {
+        items {
+          name
+          linkedFrom {
+            genresCollection(limit: 100) {
+              items {
+                name
+                linkedFrom {
+                  showCollection(limit: 8, skip: $skip) {
+                    items {
+                      title
+                      date
+                      slug
+                      mixcloudLink
+                      isFeatured
+                      coverImage {
+                        sys {
+                          id
+                        }
+                        title
+                        url
+                        width
+                        height
+                      }
+                      artistsCollection(limit: 4) {
+                        items {
+                          name
+                        }
+                      }
+                      genresCollection(limit: 4) {
+                        items {
+                          name
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const shows = await graphql(showsByGenreCategoryQuery, {
+    variables: { preview, genre, skip },
+    preview,
+  });
+
+  return shows;
+}
