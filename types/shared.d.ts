@@ -97,10 +97,12 @@ export interface ShowInterface {
 export interface GenreInterface {
   name: string;
   genreCategory: GenreCategoryInterface;
+  linkedFrom?: { showCollection: { items: ShowInterface[] | [] } };
 }
 
 export interface GenreCategoryInterface {
   name: string;
+  linkedFrom?: { genresCollection: { items: GenreInterface[] | [] } };
 }
 
 export type ArtistEntry = {

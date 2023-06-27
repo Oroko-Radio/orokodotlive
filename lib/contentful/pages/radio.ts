@@ -1,12 +1,17 @@
 import dayjs from "dayjs";
 import { graphql, LIMITS } from "..";
-import { GenreCategoryInterface, ShowInterface } from "../../../types/shared";
+import {
+  GenreCategoryInterface,
+  GenreInterface,
+  ShowInterface,
+} from "../../../types/shared";
 import {
   extractCollection,
   extractCollectionItem,
   sort,
   uniq,
 } from "../../../util";
+import { title } from "process";
 
 export async function getRadioPage(preview: boolean) {
   const today = dayjs();
@@ -235,7 +240,7 @@ export async function getShowsByGenreCategory(
               items {
                 name
                 linkedFrom {
-                  showCollection(limit: 8, skip: $skip) {
+                  showCollection(limit: 8, skip: $skip, order: date_DESC) {
                     items {
                       title
                       date
@@ -272,10 +277,21 @@ export async function getShowsByGenreCategory(
     }
   `;
 
-  const shows = await graphql(showsByGenreCategoryQuery, {
+  const { data } = (await graphql(showsByGenreCategoryQuery, {
     variables: { preview, genre, skip },
     preview,
-  });
+  })) as {
+    data: { genreCategoryCollection: { items: GenreCategoryInterface[] } };
+  };
 
-  return shows;
+  const flattenedShows =
+    data.genreCategoryCollection.items[0].linkedFrom.genresCollection.items.flatMap(
+      (genre: GenreInterface) => {
+        return genre.linkedFrom.showCollection.items.map(
+          (show: ShowInterface) => show
+        );
+      }
+    );
+
+  return flattenedShows;
 }

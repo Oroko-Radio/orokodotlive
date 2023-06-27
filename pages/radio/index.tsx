@@ -11,8 +11,6 @@ import UpcomingShows from "../../views/UpcomingShows";
 export async function getStaticProps({ preview = false }) {
   const data = await getShowsByGenreCategory(preview, "Club");
 
-  console.log("Shows by genre:", data);
-
   return {
     props: { preview, ...(await getRadioPage(preview)) },
     revalidate: 60 * 5,
