@@ -240,7 +240,7 @@ export async function getShowsByGenreCategory(
               items {
                 name
                 linkedFrom {
-                  showCollection(limit: 8, skip: $skip, order: date_DESC) {
+                  showCollection(limit: 4, skip: $skip, order: date_DESC) {
                     items {
                       title
                       date
