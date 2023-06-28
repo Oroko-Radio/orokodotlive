@@ -1,17 +1,7 @@
 import dayjs from "dayjs";
-import { graphql, LIMITS } from "..";
-import {
-  GenreCategoryInterface,
-  GenreInterface,
-  ShowInterface,
-} from "../../../types/shared";
-import {
-  extractCollection,
-  extractCollectionItem,
-  sort,
-  uniq,
-} from "../../../util";
-import { title } from "process";
+import { graphql } from "..";
+import { GenreCategoryInterface, ShowInterface } from "../../../types/shared";
+import { extractCollection, extractCollectionItem, sort } from "../../../util";
 
 export async function getRadioPage(preview: boolean) {
   const today = dayjs();
@@ -29,15 +19,15 @@ export async function getRadioPage(preview: boolean) {
   /**
    * All Past Shows
    */
-  const pastShows = shows
-    .sort(sort.date_DESC)
-    .filter((show) => dayjs(show.date).isBefore(today));
+  // const pastShows = shows
+  //   .sort(sort.date_DESC)
+  //   .filter((show) => dayjs(show.date).isBefore(today));
 
   const featuredShows = shows.filter((show) => show.isFeatured);
 
   return {
     upcomingShows,
-    pastShows,
+    allShows: shows,
     genres: genreCategories,
     featuredShows,
   };
@@ -139,14 +129,19 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
   };
 }
 
-export async function getAllShows(preview: boolean, limit = LIMITS.SHOWS) {
+export async function getAllShows(
+  preview: boolean,
+  limit = 100,
+  skip?: number
+) {
   const AllShowsQuery = /* GraphQL */ `
-    query AllShowsQuery($preview: Boolean, $limit: Int) {
+    query AllShowsQuery($preview: Boolean, $limit: Int, $skip: Int) {
       showCollection(
         order: date_DESC
         where: { artistsCollection_exists: true }
         preview: $preview
         limit: $limit
+        skip: $skip
       ) {
         items {
           title
@@ -190,7 +185,7 @@ export async function getAllShows(preview: boolean, limit = LIMITS.SHOWS) {
   `;
 
   const shows = await graphql(AllShowsQuery, {
-    variables: { preview, limit },
+    variables: { preview, limit, skip },
     preview,
   });
 
@@ -215,83 +210,4 @@ export async function getAllShows(preview: boolean, limit = LIMITS.SHOWS) {
       "genreCategoryCollection"
     ),
   };
-}
-
-export async function getShowsByGenreCategory(
-  preview: boolean,
-  genre: string,
-  skip = 0
-) {
-  const showsByGenreCategoryQuery = /* GraphQL */ `
-    query ShowsByGenreCategoryQuery(
-      $preview: Boolean
-      $genre: String
-      $skip: Int
-    ) {
-      genreCategoryCollection(
-        preview: $preview
-        limit: 1
-        where: { name: $genre }
-      ) {
-        items {
-          name
-          linkedFrom {
-            genresCollection(limit: 100) {
-              items {
-                name
-                linkedFrom {
-                  showCollection(limit: 4, skip: $skip, order: date_DESC) {
-                    items {
-                      title
-                      date
-                      slug
-                      mixcloudLink
-                      isFeatured
-                      coverImage {
-                        sys {
-                          id
-                        }
-                        title
-                        url
-                        width
-                        height
-                      }
-                      artistsCollection(limit: 4) {
-                        items {
-                          name
-                        }
-                      }
-                      genresCollection(limit: 4) {
-                        items {
-                          name
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const { data } = (await graphql(showsByGenreCategoryQuery, {
-    variables: { preview, genre, skip },
-    preview,
-  })) as {
-    data: { genreCategoryCollection: { items: GenreCategoryInterface[] } };
-  };
-
-  const flattenedShows =
-    data.genreCategoryCollection.items[0].linkedFrom.genresCollection.items.flatMap(
-      (genre: GenreInterface) => {
-        return genre.linkedFrom.showCollection.items.map(
-          (show: ShowInterface) => show
-        );
-      }
-    );
-
-  return flattenedShows;
 }
