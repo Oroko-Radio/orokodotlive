@@ -5,6 +5,7 @@ import Tag from "../components/Tag";
 import Button from "../components/ui/Button";
 import { GenreCategoryInterface, ShowInterface } from "../types/shared";
 import { getAllShows } from "../lib/contentful/pages/radio";
+import { LIMITS } from "../lib/contentful";
 
 const AllShows = ({
   shows,
@@ -13,9 +14,10 @@ const AllShows = ({
   shows: ShowInterface[];
   genreCategories: GenreCategoryInterface[];
 }) => {
-  const [skip, setSkip] = useState<number>(64);
+  const [skip, setSkip] = useState<number>(LIMITS.SHOWS);
   const [genreFilter, setGenreFilter] = useState<string>("all");
   const [allShows, setAllShows] = useState<ShowInterface[]>(shows);
+  const [more, setMore] = useState(true);
 
   const filteredShows = useMemo(() => {
     return allShows
@@ -32,10 +34,14 @@ const AllShows = ({
   }, [genreFilter, allShows]);
 
   async function handleLoadMoreShows() {
-    const { shows: moreShows } = await getAllShows(false, 32, skip);
+    const moreShows = await getAllShows(false, LIMITS.SKIP, skip);
+    if (moreShows.length < LIMITS.SKIP) {
+      setMore(false);
+      return;
+    }
     const concatenatedShows = filteredShows.concat(moreShows);
     setAllShows(concatenatedShows);
-    setSkip(skip + 32);
+    setSkip(skip + LIMITS.SKIP);
   }
 
   return (
@@ -74,9 +80,11 @@ const AllShows = ({
         ))}
       </div>
 
-      <div className="pl-4 md:pl-8 pt-4 pb-12">
-        <Button onClick={handleLoadMoreShows}>Load More Shows</Button>
-      </div>
+      {more ? (
+        <div className="pl-4 md:pl-8 pt-4 pb-12">
+          <Button onClick={handleLoadMoreShows}>Load More Shows</Button>
+        </div>
+      ) : null}
     </div>
   );
 };

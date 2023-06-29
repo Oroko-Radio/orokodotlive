@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { OROKO_LIVE } from "../constants";
 import useRadioCo from "../hooks/useRadioCo";
-import { getAllShows } from "../lib/contentful/pages/radio";
+import { getAllShows, getUpcomingShows } from "../lib/contentful/pages/radio";
 import { ShowInterface } from "../types/shared";
 import { sort } from "../util";
 
@@ -12,14 +12,8 @@ export default function PlayerDropdown() {
   const { data } = useRadioCo(OROKO_LIVE);
   const [nextUp, setNextUp] = useState<ShowInterface | null>(null);
 
-  const today = dayjs();
-
   async function getNextUp() {
-    const { shows } = await getAllShows(false);
-    const upcomingShows = shows
-      .sort(sort.date_ASC)
-      .filter((show) => dayjs(show.date).isAfter(today));
-
+    const upcomingShows = await getUpcomingShows(false);
     setNextUp(upcomingShows[0]);
   }
 

@@ -3,7 +3,8 @@ import { ENDPOINT } from "../../constants";
 import type { ErrorPayload } from "../../types/shared";
 
 export const LIMITS = {
-  SHOWS: 550,
+  SHOWS: 64,
+  SKIP: 32,
   ARTISTS: 2000,
   ARTICLES: 100,
 };

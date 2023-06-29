@@ -1,19 +1,21 @@
 import dayjs from "dayjs";
-import { graphql } from "..";
+import { LIMITS, graphql } from "..";
 import { GenreCategoryInterface, ShowInterface } from "../../../types/shared";
 import { extractCollection, extractCollectionItem, sort } from "../../../util";
 
 export async function getRadioPage(preview: boolean) {
-  const today = dayjs();
+  // const shows = await getAllShows(preview);
 
-  const { shows, genreCategories } = await getAllShows(preview);
+  // const upcomingShows = await getUpcomingShows(preview);
+  // const featuredShows = await getFeaturedShows(preview);
 
-  const upcomingShows = shows
-    .sort(sort.date_ASC)
-    .filter((show) => dayjs(show.date).isAfter(today))
-    .splice(0, 16);
-
-  const featuredShows = await getFeaturedShows(preview);
+  const [shows, genreCategories, upcomingShows, featuredShows] =
+    await Promise.all([
+      getAllShows(preview),
+      getGenreCategories(preview),
+      getUpcomingShows(preview),
+      getFeaturedShows(preview),
+    ]).then((values) => values);
 
   return {
     shows,
@@ -23,7 +25,11 @@ export async function getRadioPage(preview: boolean) {
   };
 }
 
-export async function getAllShows(preview: boolean, limit = 64, skip?: number) {
+export async function getAllShows(
+  preview: boolean,
+  limit = LIMITS.SHOWS,
+  skip?: number
+) {
   const AllShowsQuery = /* GraphQL */ `
     query AllShowsQuery($preview: Boolean, $limit: Int, $skip: Int) {
       showCollection(
@@ -82,6 +88,10 @@ export async function getAllShows(preview: boolean, limit = 64, skip?: number) {
     preview,
   });
 
+  return extractCollection<ShowInterface>(shows, "showCollection");
+}
+
+export async function getGenreCategories(preview: boolean) {
   const GenreCategoriesQuery = /* GraphQL */ `
     query AllGenreCategoriesQuery {
       genreCategoryCollection {
@@ -96,19 +106,16 @@ export async function getAllShows(preview: boolean, limit = 64, skip?: number) {
     preview,
   });
 
-  return {
-    shows: extractCollection<ShowInterface>(shows, "showCollection"),
-    genreCategories: extractCollection<GenreCategoryInterface>(
-      genreCategories,
-      "genreCategoryCollection"
-    ),
-  };
+  return extractCollection<GenreCategoryInterface>(
+    genreCategories,
+    "genreCategoryCollection"
+  );
 }
 
 export async function getFeaturedShows(preview: boolean) {
   const query = /* GraphQL */ `
     query FeaturedShowsQuery {
-      showCollection(limit: 8, where: { isFeatured: true }, order: date_DESC) {
+      showCollection(limit: 16, order: date_DESC) {
         items {
           title
           date
@@ -147,6 +154,68 @@ export async function getFeaturedShows(preview: boolean) {
   const shows = await graphql(query, { preview });
 
   return extractCollection<ShowInterface>(shows, "showCollection");
+}
+
+export async function getUpcomingShows(preview: boolean) {
+  const query = /* GraphQL */ `
+    query UpcomingShowsQuery {
+      showCollection(
+        limit: 30, 
+        where: { 
+          isFeatured: true,
+          date_gt: "${dayjs().format("YYYY-MM-DD")}"
+        },
+        order: date_DESC) {
+        items {
+          title
+          date
+          slug
+          mixcloudLink
+          isFeatured
+          coverImage {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+          }
+          artistsCollection(limit: 4) {
+            items {
+              name
+              slug
+              city {
+                name
+              }
+            }
+          }
+          genresCollection(limit: 5) {
+            items {
+              name
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const shows = await graphql(query, { preview });
+
+  const extractedShows = extractCollection<ShowInterface>(
+    shows,
+    "showCollection"
+  );
+
+  const today = dayjs();
+
+  const upcomingShows = extractedShows
+    .sort(sort.date_ASC)
+    .filter((show) => dayjs(show.date).isAfter(today))
+    .splice(0, 16);
+
+  return upcomingShows;
 }
 
 export async function getRadioPageSingle(slug: string, preview: boolean) {
@@ -221,7 +290,7 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
 
   const entryGenres = entry.genresCollection.items.map((genre) => genre.name);
 
-  const { shows: allShows } = await getAllShows(preview);
+  const allShows = await getAllShows(preview);
 
   const relatedShows = allShows.filter((filterShow) => {
     const currentShowGenres = filterShow.genresCollection.items.map(
