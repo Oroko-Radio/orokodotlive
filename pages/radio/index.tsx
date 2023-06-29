@@ -13,7 +13,7 @@ export async function getStaticProps({ preview = false }) {
 }
 
 export default function RadioPage({
-  genres,
+  genreCategories,
   allShows,
   preview,
   upcomingShows,
@@ -24,7 +24,7 @@ export default function RadioPage({
       <Meta title="Radio" />
       {upcomingShows.length > 0 && <UpcomingShows shows={upcomingShows} />}
       <FeaturedShows shows={featuredShows} />
-      <AllShows shows={allShows} genres={genres} />
+      <AllShows shows={allShows} genreCategories={genreCategories} />
     </>
   );
 }

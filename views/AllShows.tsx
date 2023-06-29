@@ -8,10 +8,10 @@ import { getAllShows } from "../lib/contentful/pages/radio";
 
 const AllShows = ({
   shows,
-  genres,
+  genreCategories,
 }: {
   shows: ShowInterface[];
-  genres: GenreCategoryInterface[];
+  genreCategories: GenreCategoryInterface[];
 }) => {
   const [skip, setSkip] = useState<number>(64);
   const [genreFilter, setGenreFilter] = useState<string>("all");
@@ -48,7 +48,7 @@ const AllShows = ({
         <div className="cursor-pointer" onClick={() => setGenreFilter("all")}>
           <Tag text={"all"} color="white" borderColor="white" />
         </div>
-        {genres.map(({ name }, idx) => (
+        {genreCategories.map(({ name }, idx) => (
           <div
             key={idx}
             className="cursor-pointer"
