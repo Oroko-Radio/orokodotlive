@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Card from "../components/Card";
 import Show from "../components/Show";
 import Tag from "../components/Tag";

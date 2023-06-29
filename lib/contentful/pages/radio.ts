@@ -4,11 +4,6 @@ import { GenreCategoryInterface, ShowInterface } from "../../../types/shared";
 import { extractCollection, extractCollectionItem, sort } from "../../../util";
 
 export async function getRadioPage(preview: boolean) {
-  // const shows = await getAllShows(preview);
-
-  // const upcomingShows = await getUpcomingShows(preview);
-  // const featuredShows = await getFeaturedShows(preview);
-
   const [shows, genreCategories, upcomingShows, featuredShows] =
     await Promise.all([
       getAllShows(preview),

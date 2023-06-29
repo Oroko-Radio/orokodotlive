@@ -4,9 +4,8 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { OROKO_LIVE } from "../constants";
 import useRadioCo from "../hooks/useRadioCo";
-import { getAllShows, getUpcomingShows } from "../lib/contentful/pages/radio";
+import { getUpcomingShows } from "../lib/contentful/pages/radio";
 import { ShowInterface } from "../types/shared";
-import { sort } from "../util";
 
 export default function PlayerDropdown() {
   const { data } = useRadioCo(OROKO_LIVE);
