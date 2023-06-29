@@ -16,10 +16,10 @@ export async function getRadioPage(preview: boolean) {
   const featuredShows = await getFeaturedShows(preview);
 
   return {
+    shows,
     upcomingShows,
-    allShows: shows,
-    genreCategories,
     featuredShows,
+    genreCategories,
   };
 }
 
