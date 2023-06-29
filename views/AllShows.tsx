@@ -13,7 +13,7 @@ const AllShows = ({
   shows: ShowInterface[];
   genres: GenreCategoryInterface[];
 }) => {
-  const [skip, setSkip] = useState<number>(100);
+  const [skip, setSkip] = useState<number>(64);
   const [genreFilter, setGenreFilter] = useState<string>("all");
   const [allShows, setAllShows] = useState<ShowInterface[]>(shows);
 
@@ -32,10 +32,10 @@ const AllShows = ({
   }, [genreFilter, allShows]);
 
   async function handleLoadMoreShows() {
-    const { shows: moreShows } = await getAllShows(false, 32);
+    const { shows: moreShows } = await getAllShows(false, 32, skip);
     const concatenatedShows = filteredShows.concat(moreShows);
     setAllShows(concatenatedShows);
-    setSkip(skip + 8);
+    setSkip(skip + 32);
   }
 
   return (

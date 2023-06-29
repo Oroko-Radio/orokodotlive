@@ -129,11 +129,7 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
   };
 }
 
-export async function getAllShows(
-  preview: boolean,
-  limit = 100,
-  skip?: number
-) {
+export async function getAllShows(preview: boolean, limit = 64, skip?: number) {
   const AllShowsQuery = /* GraphQL */ `
     query AllShowsQuery($preview: Boolean, $limit: Int, $skip: Int) {
       showCollection(
