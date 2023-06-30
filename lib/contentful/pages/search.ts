@@ -1,5 +1,11 @@
 import dayjs from "dayjs";
 import { client } from "../";
+import {
+  ArtistEntry,
+  Asset,
+  Content,
+  ShowInterface,
+} from "../../../types/shared";
 
 export async function getSearchData(query: string, limit = 8) {
   const [showsCollection, articlesCollection, artistsCollection] =
@@ -20,6 +26,9 @@ export async function getSearchData(query: string, limit = 8) {
           "fields.artists",
           "fields.genres",
           "fields.coverImage",
+          "fields.mixcloudLink",
+          "fields.isFeatured",
+          "fields.content",
         ],
       }),
       client.getEntries({
@@ -52,6 +61,20 @@ export async function getSearchData(query: string, limit = 8) {
   const { items: shows } = showsCollection;
   const { items: articles } = articlesCollection;
   const { items: artists } = artistsCollection;
+
+  const mappedShows: ShowInterface[] = shows.map((show) => {
+    return {
+      title: show.fields.title as string,
+      slug: show.fields.slug as string,
+      date: show.fields.date as string,
+      artistsCollection: show.fields.artists as any,
+      coverImage: show.fields.coverImage as any,
+      mixcloudLink: show.fields.mixcloudLink as string,
+      isFeatured: show.fields.isFeatured as boolean,
+      genresCollection: show.fields.genres as any,
+      content: show.fields.content as any,
+    };
+  });
 
   return {
     data: { shows, articles, artists },

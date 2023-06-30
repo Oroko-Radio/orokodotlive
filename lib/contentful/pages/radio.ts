@@ -110,7 +110,7 @@ export async function getGenreCategories(preview: boolean) {
 export async function getFeaturedShows(preview: boolean) {
   const query = /* GraphQL */ `
     query FeaturedShowsQuery {
-      showCollection(limit: 16, order: date_DESC) {
+      showCollection(limit: 16, order: date_DESC, where: { isFeatured: true }) {
         items {
           title
           date
@@ -157,7 +157,6 @@ export async function getUpcomingShows(preview: boolean) {
       showCollection(
         limit: 30, 
         where: { 
-          isFeatured: true,
           date_gt: "${dayjs().format("YYYY-MM-DD")}"
         },
         order: date_DESC) {
