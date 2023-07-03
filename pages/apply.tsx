@@ -42,6 +42,7 @@ const Apply = () => {
             <Link
               href="https://forms.gle/a4RTQhGMNDZvXgma9"
               target="_blank"
+              rel="noopener nofollow noreferrer"
               passHref
             >
               <DotButton size="large">Apply Now (EN)</DotButton>
@@ -49,6 +50,7 @@ const Apply = () => {
             <Link
               href="https://forms.gle/nwS9GJ8wcBaYaMZn9"
               target="_blank"
+              rel="noopener nofollow noreferrer"
               passHref
             >
               <DotButton size="large">Apply Now (FR)</DotButton>

@@ -43,7 +43,7 @@ export function renderRichTextWithImages(content: Content) {
           }
 
           return (
-            <a target="_blank" rel="noreferrer" href={uri}>
+            <a target="_blank" rel="noopener nofollow noreferrer" href={uri}>
               {children}
             </a>
           );

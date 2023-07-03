@@ -34,7 +34,12 @@ type SocialIconProps = {
 
 const SocialIcon = ({ social }: SocialIconProps) => {
   return (
-    <Link href={socialsMap[social].link} target="_blank" passHref>
+    <Link
+      href={socialsMap[social].link}
+      target="_blank"
+      rel="noopener nofollow noreferrer"
+      passHref
+    >
       <div className="w-8 h-8 hover:scale-110 transition-transform">
         <Image src={socialsMap[social].icon} alt={social} layout="responsive" />
       </div>

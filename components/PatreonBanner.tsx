@@ -21,6 +21,7 @@ export default function PatreonBanner() {
         <Link
           href="https://www.patreon.com/orokoradio"
           target="_blank"
+          rel="noopener nofollow noreferrer"
           passHref
         >
           <Button fixedWidth>{isHover ? "On Patreon" : "Support Us!"}</Button>
