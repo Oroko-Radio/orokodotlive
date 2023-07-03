@@ -38,35 +38,52 @@ const Footer = () => {
         </div>
         <Logo className="stroke-current stroke-2 text-white w-10 h-10 lg:w-14 lg:h-14 inline-block mb-4" />
         <p className="mt-2 mb-8 font-sans xl:text-base">©OROKO 2021</p>
-        <p className="inline font-sans text-sm xl:text-base">
-          Designed by{" "}
-          <Link
-            href="https://www.studiopanorama.de/"
-            target="_blank"
-            rel="noopener nofollow noreferrer"
-            passHref
-          >
-            <span className="underline tracking-widest cursor-pointer">
-              panorama
-            </span>
-          </Link>{" "}
-          Powered by
-        </p>
-        <Link
-          href="https://vercel.com/?utm_source=oroko&utm_campaign=oss"
-          target="_blank"
-          rel="noopener nofollow noreferrer"
-          passHref
-        >
-          <div className="relative inline-block translate-y-0.5 h-3 w-16 cursor-pointer">
-            <Image
-              src={vercelLogo}
-              alt="Vercel logo"
-              layout="fill"
-              objectFit="contain"
-            />
+        <div className="flex flex-col md:flex-row justify-center gap-2 font-sans text-sm xl:text-base">
+          <div>
+            Designed by{" "}
+            <Link
+              href="https://www.studiopanorama.de/"
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+              passHref
+            >
+              <span className="underline tracking-widest cursor-pointer">
+                panorama
+              </span>
+            </Link>{" "}
           </div>
-        </Link>
+          <div>
+            Developed by{" "}
+            <Link
+              href="https://github.com/je-boska"
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+              passHref
+            >
+              <span className="underline tracking-widest cursor-pointer">
+                je boska
+              </span>
+            </Link>{" "}
+          </div>
+          <div>
+            Powered by
+            <Link
+              href="https://vercel.com/?utm_source=oroko&utm_campaign=oss"
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+              passHref
+            >
+              <div className="relative inline-block translate-y-0.5 h-3 w-16 cursor-pointer">
+                <Image
+                  src={vercelLogo}
+                  alt="Vercel logo"
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </div>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
