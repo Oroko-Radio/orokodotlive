@@ -39,7 +39,7 @@ const AllShows = ({
       setMore(false);
       return;
     }
-    const concatenatedShows = filteredShows.concat(moreShows);
+    const concatenatedShows = allShows.concat(moreShows);
     setAllShows(concatenatedShows);
     setSkip(skip + LIMITS.SKIP);
   }
