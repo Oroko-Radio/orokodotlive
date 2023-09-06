@@ -53,10 +53,10 @@ export default function SearchPage({
       </section>
 
       {isDataEmpty && (
-        <section className="bg-orokoBlue min-h-[50vh]">
+        <section className="bg-orokoBlue min-h-[70vh]">
           <div className="p-4 sm:p-8">
             <div className="pt-10">
-              <p>
+              <p className="text-4xl xl:text-5xl font-serif">
                 No results for{" "}
                 <span className="font-medium">{`"${query}"`}</span>
               </p>
@@ -66,10 +66,10 @@ export default function SearchPage({
       )}
 
       {isValidating && (
-        <section className="bg-orokoBlue min-h-[50vh]">
+        <section className="bg-orokoBlue min-h-[200px]">
           <div className="p-4 sm:p-8">
             <div className="pt-10">
-              <p>Searching...</p>
+              <p className="text-4xl xl:text-5xl font-serif">Searching...</p>
             </div>
           </div>
         </section>
