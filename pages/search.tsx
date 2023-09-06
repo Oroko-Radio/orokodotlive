@@ -65,7 +65,7 @@ export default function SearchPage({
         </section>
       )}
 
-      {isValidating && (
+      {query && isValidating && (
         <section className="bg-orokoBlue min-h-[200px]">
           <div className="p-4 sm:p-8">
             <div className="pt-10">
