@@ -71,7 +71,6 @@ export default function ThumbnailGenerator() {
             })}
           >
             <h2 className="text-2xl">{title}</h2>
-            <p>{format}</p>
           </div>
         </div>
       </div>
