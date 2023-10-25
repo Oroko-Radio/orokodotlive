@@ -36,6 +36,7 @@
     "@tailwindcss/aspect-ratio": "^0.3.0",
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/typography": "^0.4.1",
+    "@types/dom-to-image": "^2.6.6",
     "@types/node": "20.3.1",
     "@types/react": "17.0.28",
     "@types/react-modal": "^3.13.1",
