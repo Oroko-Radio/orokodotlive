@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import domtoimage from "dom-to-image";
 import cx from "classnames";
 import Meta from "../components/Meta";
 import Button from "../components/ui/Button";
+import NextImage from "next/image";
 
 export default function ThumbnailGenerator() {
   const thumbnail = useRef<HTMLDivElement | null>(null);
@@ -12,7 +13,9 @@ export default function ThumbnailGenerator() {
     "square"
   );
   const [bgFile, setBgFile] = useState<File | null>(null);
-  const [bgPreview, setBgPreview] = useState<string>("");
+  const [bgPreview, setBgPreview] = useState<string | null>("");
+  const [bgHeight, setBgHeight] = useState<number>(0);
+  const [bgWidth, setBgWidth] = useState<number>(0);
 
   function download() {
     domtoimage
@@ -28,6 +31,24 @@ export default function ThumbnailGenerator() {
         link.click();
       });
   }
+
+  const getMeta = async (url) => {
+    const img = new Image();
+    img.src = url;
+    await img.decode();
+    return img;
+  };
+
+  useEffect(() => {
+    async function setBgSize() {
+      if (!bgPreview) return;
+      const img = await getMeta(bgPreview);
+      setBgHeight(img.naturalHeight);
+      setBgWidth(img.naturalWidth);
+    }
+
+    setBgSize();
+  }, [bgPreview]);
 
   useEffect(() => {
     if (!bgFile) {
@@ -111,7 +132,15 @@ export default function ThumbnailGenerator() {
             })}
           >
             <h2 className="text-2xl">{title}</h2>
-            <img src={bgPreview} alt="" />
+            {bgPreview ? (
+              <NextImage
+                className="absolute w-full h-full object-cover"
+                src={bgPreview}
+                alt=""
+                height={bgHeight}
+                width={bgWidth}
+              />
+            ) : null}
           </div>
         </div>
       </div>
