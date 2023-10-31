@@ -1,9 +1,31 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import domtoimage from "dom-to-image";
 import cx from "classnames";
 import Meta from "../components/Meta";
 import Button from "../components/ui/Button";
 import NextImage from "next/image";
+
+const getMeta = async (url: string) => {
+  const img = new Image();
+  img.src = url;
+  await img.decode();
+  return img;
+};
+
+function download(element: HTMLDivElement) {
+  domtoimage
+    .toJpeg(element, {
+      style: {
+        transform: "scale(1)",
+      },
+    })
+    .then((dataUrl) => {
+      const link = document.createElement("a");
+      link.download = "my-image-name.jpeg";
+      link.href = dataUrl;
+      link.click();
+    });
+}
 
 export default function ThumbnailGenerator() {
   const thumbnail = useRef<HTMLDivElement | null>(null);
@@ -16,28 +38,6 @@ export default function ThumbnailGenerator() {
   const [bgPreview, setBgPreview] = useState<string | null>("");
   const [bgHeight, setBgHeight] = useState<number>(0);
   const [bgWidth, setBgWidth] = useState<number>(0);
-
-  function download() {
-    domtoimage
-      .toJpeg(thumbnail.current, {
-        style: {
-          transform: "scale(1)",
-        },
-      })
-      .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = "my-image-name.jpeg";
-        link.href = dataUrl;
-        link.click();
-      });
-  }
-
-  const getMeta = async (url) => {
-    const img = new Image();
-    img.src = url;
-    await img.decode();
-    return img;
-  };
 
   useEffect(() => {
     async function setBgSize() {
@@ -120,7 +120,9 @@ export default function ThumbnailGenerator() {
                 <label htmlFor="portrait">Portrait</label>
               </div>
             </fieldset>
-            <Button onClick={download}>Download Jpeg</Button>
+            <Button onClick={() => download(thumbnail.current)}>
+              Download Jpeg
+            </Button>
           </form>
         </div>
         <div className="grid justify-center bg-black">
