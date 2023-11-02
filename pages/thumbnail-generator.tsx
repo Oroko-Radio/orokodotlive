@@ -4,6 +4,7 @@ import cx from "classnames";
 import Meta from "../components/Meta";
 import Button from "../components/ui/Button";
 import NextImage from "next/image";
+import dayjs from "dayjs";
 
 const getMeta = async (url: string) => {
   const img = new Image();
@@ -31,6 +32,7 @@ export default function ThumbnailGenerator() {
   const thumbnail = useRef<HTMLDivElement | null>(null);
 
   const [title, setTitle] = useState<string>("");
+  const [dateTime, setDateTime] = useState<Date | null>(null);
   const [aspectRatio, setAspectRatio] = useState<"square" | "portrait">(
     "square"
   );
@@ -70,12 +72,24 @@ export default function ThumbnailGenerator() {
             <label htmlFor="title" className="block">
               Title
             </label>
-
             <input
               id="title"
               className="border-black border mb-4 block"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+            />
+
+            <label htmlFor="date-time" className="block">
+              Date and time
+            </label>
+            <input
+              className="mb-4"
+              id="date-time"
+              type="datetime-local"
+              onChange={(e) => {
+                const date = new Date(e.target.value);
+                setDateTime(date);
+              }}
             />
 
             <label htmlFor="image" className="block">
@@ -125,7 +139,7 @@ export default function ThumbnailGenerator() {
             </Button>
           </form>
         </div>
-        <div className="grid justify-center bg-black">
+        <div className="relative grid justify-center bg-black">
           <div
             ref={thumbnail}
             className={cx("bg-white scale-50", {
@@ -133,7 +147,18 @@ export default function ThumbnailGenerator() {
               "h-[1920px] w-[1080px]": aspectRatio === "portrait",
             })}
           >
-            <h2 className="text-2xl">{title}</h2>
+            <div className="absolute bottom-20 left-20 text-white z-10 grid grid-cols-2 max-w-6xl">
+              <p className="text-5xl pr-5">{title}</p>
+              {dateTime ? (
+                <div className="text-white text-2xl uppercase">
+                  <p>{dayjs(dateTime).format("ddd DD MMMM YYYY")}</p>
+                  <p>
+                    {dayjs(dateTime).format("h:mmA")} -{" "}
+                    {dayjs(dateTime).add(1, "h").format("h:mmA")} GMT
+                  </p>
+                </div>
+              ) : null}
+            </div>
             {bgPreview ? (
               <NextImage
                 className="absolute w-full h-full object-cover"
