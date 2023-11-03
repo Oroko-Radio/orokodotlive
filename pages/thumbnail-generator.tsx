@@ -30,6 +30,7 @@ function download(element: HTMLDivElement) {
 
 export default function ThumbnailGenerator() {
   const thumbnail = useRef<HTMLDivElement | null>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   const [title, setTitle] = useState<string>("");
   const [dateTime, setDateTime] = useState<Date | null>(null);
@@ -40,6 +41,7 @@ export default function ThumbnailGenerator() {
   const [bgPreview, setBgPreview] = useState<string | null>("");
   const [bgHeight, setBgHeight] = useState<number>(0);
   const [bgWidth, setBgWidth] = useState<number>(0);
+  const [zoom, setZoom] = useState<string>("100");
 
   useEffect(() => {
     async function setBgSize() {
@@ -62,6 +64,12 @@ export default function ThumbnailGenerator() {
     setBgPreview(imageUrl);
     return () => URL.revokeObjectURL(imageUrl);
   }, [bgFile]);
+
+  useEffect(() => {
+    if (imageRef.current) {
+      imageRef.current.style.height = zoom + "%";
+    }
+  }, [zoom]);
 
   return (
     <>
@@ -105,6 +113,22 @@ export default function ThumbnailGenerator() {
               }}
             />
 
+            <label htmlFor="zoom" className="block">
+              Zoom:
+            </label>
+            <input
+              className="mb-4"
+              id="zoom"
+              type="range"
+              min="100"
+              max="200"
+              step="1"
+              onChange={(e) => {
+                setZoom(e.target.value);
+                console.log(zoom);
+              }}
+            />
+
             <fieldset className="pb-4">
               <legend>Aspect ratio</legend>
               <div className="flex items-center">
@@ -142,7 +166,7 @@ export default function ThumbnailGenerator() {
         <div className="relative grid justify-center bg-black">
           <div
             ref={thumbnail}
-            className={cx("bg-white scale-50", {
+            className={cx("bg-white overflow-hidden scale-50", {
               "h-[1080px] w-[1080px]": aspectRatio === "square",
               "h-[1920px] w-[1080px]": aspectRatio === "portrait",
             })}
@@ -160,13 +184,15 @@ export default function ThumbnailGenerator() {
               ) : null}
             </div>
             {bgPreview ? (
-              <NextImage
-                className="absolute w-full h-full object-cover"
-                src={bgPreview}
-                alt=""
-                height={bgHeight}
-                width={bgWidth}
-              />
+              <div ref={imageRef} className={`absolute h-full w-full`}>
+                <NextImage
+                  className={`absolute h-full w-full object-cover object-center`}
+                  src={bgPreview}
+                  alt=""
+                  height={bgHeight}
+                  width={bgWidth}
+                />
+              </div>
             ) : null}
           </div>
         </div>
