@@ -82,7 +82,7 @@ export default function ThumbnailGenerator() {
             </label>
             <input
               id="title"
-              className="border-black border mb-4 block"
+              className="border-black border px-4 py-2 mb-4 block"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
