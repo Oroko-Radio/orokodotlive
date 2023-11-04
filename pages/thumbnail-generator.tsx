@@ -114,7 +114,7 @@ export default function ThumbnailGenerator() {
             />
 
             <label htmlFor="zoom" className="block">
-              Zoom:
+              Zoom: {zoom}%
             </label>
             <input
               className="mb-4"
@@ -125,7 +125,6 @@ export default function ThumbnailGenerator() {
               step="1"
               onChange={(e) => {
                 setZoom(e.target.value);
-                console.log(zoom);
               }}
             />
 
@@ -184,14 +183,21 @@ export default function ThumbnailGenerator() {
               ) : null}
             </div>
             {bgPreview ? (
-              <div ref={imageRef} className={`absolute h-full w-full`}>
-                <NextImage
-                  className={`absolute h-full w-full object-cover object-center`}
-                  src={bgPreview}
-                  alt=""
-                  height={bgHeight}
-                  width={bgWidth}
-                />
+              <div className={`absolute h-full w-full overflow-hidden`}>
+                <div className="relative h-full">
+                  <div
+                    ref={imageRef}
+                    className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-full w-full`}
+                  >
+                    <NextImage
+                      className={`h-full w-full object-cover`}
+                      src={bgPreview}
+                      alt=""
+                      height={bgHeight}
+                      width={bgWidth}
+                    />
+                  </div>
+                </div>
               </div>
             ) : null}
           </div>
