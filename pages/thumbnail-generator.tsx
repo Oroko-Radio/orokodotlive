@@ -5,6 +5,7 @@ import Meta from "../components/Meta";
 import Button from "../components/ui/Button";
 import NextImage from "next/image";
 import dayjs from "dayjs";
+import Logo from "../icons/Logo";
 
 const getMeta = async (url: string) => {
   const img = new Image();
@@ -22,7 +23,7 @@ function download(element: HTMLDivElement) {
     })
     .then((dataUrl) => {
       const link = document.createElement("a");
-      link.download = "my-image-name.jpeg";
+      link.download = "oroko-thumbnail.jpeg";
       link.href = dataUrl;
       link.click();
     });
@@ -76,6 +77,8 @@ export default function ThumbnailGenerator() {
       <Meta title="Thumbnail Generator" />
       <div className="grid md:grid-cols-[1fr,3fr]">
         <div className="grid items-center">
+          {/* Editor */}
+
           <form className="p-4">
             <label htmlFor="title" className="block">
               Title
@@ -162,6 +165,9 @@ export default function ThumbnailGenerator() {
             </Button>
           </form>
         </div>
+
+        {/* Viewer */}
+
         <div className="relative grid justify-center bg-black">
           <div
             ref={thumbnail}
@@ -170,17 +176,27 @@ export default function ThumbnailGenerator() {
               "h-[1920px] w-[1080px]": aspectRatio === "portrait",
             })}
           >
-            <div className="absolute bottom-20 left-20 text-white z-10 grid grid-cols-2 max-w-6xl">
-              <p className="text-5xl pr-5">{title}</p>
-              {dateTime ? (
-                <div className="text-white text-2xl uppercase">
-                  <p>{dayjs(dateTime).format("ddd DD MMMM YYYY")}</p>
-                  <p>
-                    {dayjs(dateTime).format("h:mmA")} -{" "}
-                    {dayjs(dateTime).add(1, "h").format("h:mmA")} GMT
-                  </p>
-                </div>
-              ) : null}
+            <div className="absolute bottom-20 left-20 text-white z-10 grid max-w-2xl">
+              <div className="grid grid-cols-2 text-white border-white border-b-2 pb-4 mb-4">
+                <Logo className="w-40 stroke-current" />
+                <p className="text-8xl font-heading">
+                  Oroko
+                  <br />
+                  Radio
+                </p>
+              </div>
+              <div className="grid grid-cols-2">
+                <p className="text-5xl pr-5">{title}</p>
+                {dateTime ? (
+                  <div className="text-white text-2xl uppercase">
+                    <p>{dayjs(dateTime).format("ddd DD MMMM YYYY")}</p>
+                    <p>
+                      {dayjs(dateTime).format("h:mmA")} -{" "}
+                      {dayjs(dateTime).add(1, "h").format("h:mmA")} GMT
+                    </p>
+                  </div>
+                ) : null}
+              </div>
             </div>
             {bgPreview ? (
               <div className={`absolute h-full w-full overflow-hidden`}>
