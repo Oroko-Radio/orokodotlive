@@ -176,19 +176,19 @@ export default function ThumbnailGenerator() {
               "h-[1920px] w-[1080px]": aspectRatio === "portrait",
             })}
           >
-            <div className="absolute bottom-20 left-20 text-white z-10 grid max-w-2xl">
-              <div className="grid grid-cols-2 text-white border-white border-b-2 pb-4 mb-4">
-                <Logo className="w-40 stroke-current" />
-                <p className="text-8xl font-heading">
+            <div className="absolute bottom-40 left-20 text-white z-10 grid max-w-sm">
+              <div className="flex text-white border-white border-b-2 pb-4 mb-4">
+                <Logo className="w-40 pr-4 stroke-current" />
+                <p className="text-9xl leading-[110px] font-heading">
                   Oroko
                   <br />
                   Radio
                 </p>
               </div>
               <div className="grid grid-cols-2">
-                <p className="text-5xl pr-5">{title}</p>
+                <p className="text-2xl uppercase pr-12 max-w-sm">{title}</p>
                 {dateTime ? (
-                  <div className="text-white text-2xl uppercase">
+                  <div className="justify-self-end text-white text-base uppercase">
                     <p>{dayjs(dateTime).format("ddd DD MMMM YYYY")}</p>
                     <p>
                       {dayjs(dateTime).format("h:mmA")} -{" "}
