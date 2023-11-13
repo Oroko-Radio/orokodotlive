@@ -43,6 +43,7 @@ export default function ThumbnailGenerator() {
   const [bgHeight, setBgHeight] = useState<number>(0);
   const [bgWidth, setBgWidth] = useState<number>(0);
   const [zoom, setZoom] = useState<string>("100");
+  const [color, setColor] = useState<"black" | "white">("white");
 
   useEffect(() => {
     async function setBgSize() {
@@ -75,10 +76,10 @@ export default function ThumbnailGenerator() {
   return (
     <>
       <Meta title="Thumbnail Generator" />
-      <div className="grid md:grid-cols-[1fr,3fr]">
-        <div className="grid items-center">
-          {/* Editor */}
+      <div className="grid md:grid-cols-[1fr,3fr] max-w-full overflow-hidden">
+        {/* Editor */}
 
+        <div className="grid">
           <form className="p-4">
             <label htmlFor="title" className="block">
               Title
@@ -102,6 +103,36 @@ export default function ThumbnailGenerator() {
                 setDateTime(date);
               }}
             />
+
+            <fieldset className="mb-4">
+              <legend>Text color</legend>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="white"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setColor("white");
+                    }
+                  }}
+                  checked={color === "white"}
+                />
+                <label htmlFor="white">White</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="black"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setColor("black");
+                    }
+                  }}
+                  checked={color === "black"}
+                />
+                <label htmlFor="black">Black</label>
+              </div>
+            </fieldset>
 
             <label htmlFor="image" className="block">
               Image
@@ -160,6 +191,7 @@ export default function ThumbnailGenerator() {
                 <label htmlFor="portrait">Portrait</label>
               </div>
             </fieldset>
+
             <Button onClick={() => download(thumbnail.current)}>
               Download Jpeg
             </Button>
@@ -168,16 +200,29 @@ export default function ThumbnailGenerator() {
 
         {/* Viewer */}
 
-        <div className="relative grid justify-center bg-black">
+        <div className="relative grid justify-center bg-black max-h-screen">
           <div
             ref={thumbnail}
-            className={cx("bg-white overflow-hidden scale-50", {
-              "h-[1080px] w-[1080px]": aspectRatio === "square",
-              "h-[1920px] w-[1080px]": aspectRatio === "portrait",
-            })}
+            className={cx(
+              "bg-white overflow-hidden scale-50 origin-top-left m-4 md:m-20",
+              {
+                "h-[1080px] w-[1080px]": aspectRatio === "square",
+                "h-[1920px] w-[1080px]": aspectRatio === "portrait",
+              }
+            )}
           >
-            <div className="absolute bottom-40 left-20 text-white z-10 grid max-w-sm">
-              <div className="flex text-white border-white border-b-2 pb-4 mb-4">
+            <div
+              className={cx("absolute bottom-40 left-20 z-10 grid max-w-sm", {
+                "text-white": color === "white",
+                "text-black": color === "black",
+              })}
+            >
+              <div
+                className={cx("flex border-b-2 pb-4 mb-4", {
+                  "border-white": color === "white",
+                  "border-black": color === "black",
+                })}
+              >
                 <Logo className="w-40 pr-4 stroke-current" />
                 <p className="text-9xl leading-[110px] font-heading">
                   Oroko
@@ -188,7 +233,12 @@ export default function ThumbnailGenerator() {
               <div className="grid grid-cols-2">
                 <p className="text-2xl uppercase pr-12 max-w-sm">{title}</p>
                 {dateTime ? (
-                  <div className="justify-self-end text-white text-base uppercase">
+                  <div
+                    className={cx("justify-self-end text-base uppercase", {
+                      "text-white": color === "white",
+                      "text-black": color === "black",
+                    })}
+                  >
                     <p>{dayjs(dateTime).format("ddd DD MMMM YYYY")}</p>
                     <p>
                       {dayjs(dateTime).format("h:mmA")} -{" "}
