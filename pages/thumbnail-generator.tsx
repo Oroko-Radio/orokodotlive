@@ -1,33 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import domtoimage from "dom-to-image";
 import cx from "classnames";
 import Meta from "../components/Meta";
 import Button from "../components/ui/Button";
 import NextImage from "next/image";
 import dayjs from "dayjs";
 import Logo from "../icons/Logo";
-
-const getMeta = async (url: string) => {
-  const img = new Image();
-  img.src = url;
-  await img.decode();
-  return img;
-};
-
-function download(element: HTMLDivElement) {
-  domtoimage
-    .toJpeg(element, {
-      style: {
-        transform: "scale(1)",
-      },
-    })
-    .then((dataUrl) => {
-      const link = document.createElement("a");
-      link.download = "oroko-thumbnail.jpeg";
-      link.href = dataUrl;
-      link.click();
-    });
-}
+import { download, getMeta } from "../util";
 
 export default function ThumbnailGenerator() {
   const thumbnail = useRef<HTMLDivElement | null>(null);
@@ -200,16 +178,13 @@ export default function ThumbnailGenerator() {
 
         {/* Viewer */}
 
-        <div className="relative grid justify-center bg-black max-h-screen">
+        <div className="relative grid justify-center bg-black max-h-screen p-4 md:p-20">
           <div
             ref={thumbnail}
-            className={cx(
-              "bg-white overflow-hidden scale-50 origin-top-left m-4 md:m-20",
-              {
-                "h-[1080px] w-[1080px]": aspectRatio === "square",
-                "h-[1920px] w-[1080px]": aspectRatio === "portrait",
-              }
-            )}
+            className={cx("bg-white overflow-hidden scale-50 origin-top-left", {
+              "h-[1080px] w-[1080px]": aspectRatio === "square",
+              "h-[1920px] w-[1080px]": aspectRatio === "portrait",
+            })}
           >
             <div
               className={cx("absolute bottom-40 left-20 z-10 grid max-w-sm", {
