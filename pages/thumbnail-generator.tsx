@@ -21,7 +21,7 @@ export default function ThumbnailGenerator() {
   const [bgHeight, setBgHeight] = useState<number>(0);
   const [bgWidth, setBgWidth] = useState<number>(0);
   const [zoom, setZoom] = useState<string>("100");
-  const [color, setColor] = useState<"black" | "white">("white");
+  const [color, setColor] = useState<"black" | "white">("black");
 
   useEffect(() => {
     async function setBgSize() {

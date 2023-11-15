@@ -22,7 +22,11 @@ function OrokoApp({ Component, pageProps }: AppProps) {
   const [prevWidth, setPrevWidth] = useState<number>(0);
 
   function handleResize() {
-    if (prevWidth > 0 && window.innerWidth !== prevWidth) {
+    if (
+      prevWidth > 0 &&
+      window.innerWidth !== prevWidth &&
+      location.pathname !== "/thumbnail-generator"
+    ) {
       setPrevWidth(window.innerWidth);
       location.reload();
     }
