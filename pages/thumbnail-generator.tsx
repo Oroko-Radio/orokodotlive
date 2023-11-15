@@ -138,6 +138,7 @@ export default function ThumbnailGenerator() {
               onChange={(e) => {
                 setZoom(e.target.value);
               }}
+              value={zoom}
             />
 
             <fieldset className="pb-4">

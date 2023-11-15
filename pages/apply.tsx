@@ -3,7 +3,6 @@ import Link from "next/link";
 import TitleBox from "../components/TitleBox";
 import SinglePage from "../views/SinglePage";
 import DotButton from "../components/ui/DotButton";
-import Meta from "../components/Meta";
 
 const Apply = () => {
   return (

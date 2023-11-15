@@ -4,7 +4,6 @@ import TitleBox from "../components/TitleBox";
 import { InferGetStaticPropsType } from "next";
 import { renderRichTextWithImages } from "../lib/rich-text";
 import { getAboutPage } from "../lib/contentful/pages/about";
-import Meta from "../components/Meta";
 
 export async function getStaticProps({ preview = false }) {
   return {
