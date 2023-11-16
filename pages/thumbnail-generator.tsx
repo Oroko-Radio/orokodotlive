@@ -57,14 +57,14 @@ export default function ThumbnailGenerator() {
       <div className="grid md:grid-cols-[1fr,3fr] max-w-full overflow-hidden">
         {/* Editor */}
 
-        <div className="grid">
+        <div className="bg-offBlack text-white grid">
           <form className="p-4">
             <label htmlFor="title" className="block">
               Title
             </label>
             <input
               id="title"
-              className="border-black border px-4 py-2 mb-4 block"
+              className="text-black border-black border px-4 py-2 mb-4 block"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -73,7 +73,7 @@ export default function ThumbnailGenerator() {
               Date and time
             </label>
             <input
-              className="mb-4"
+              className="mb-4 text-black"
               id="date-time"
               type="datetime-local"
               onChange={(e) => {
@@ -171,9 +171,11 @@ export default function ThumbnailGenerator() {
               </div>
             </fieldset>
 
-            <Button onClick={() => download(thumbnail.current)}>
-              Download Jpeg
-            </Button>
+            <div className="text-black">
+              <Button onClick={() => download(thumbnail.current)}>
+                Download Jpeg
+              </Button>
+            </div>
           </form>
         </div>
 
