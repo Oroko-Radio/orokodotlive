@@ -190,10 +190,13 @@ export default function ThumbnailGenerator() {
             })}
           >
             <div
-              className={cx("absolute bottom-40 left-20 z-10 grid max-w-sm", {
-                "text-white": color === "white",
-                "text-black": color === "black",
-              })}
+              className={cx(
+                "absolute bottom-40 left-20 z-10 grid max-w-[600px]",
+                {
+                  "text-white": color === "white",
+                  "text-black": color === "black",
+                }
+              )}
             >
               <div
                 className={cx("flex border-b-2 pb-4 mb-4", {
@@ -208,16 +211,16 @@ export default function ThumbnailGenerator() {
                   Radio
                 </p>
               </div>
-              <div className="grid grid-cols-2">
-                <p className="text-2xl uppercase pr-12 max-w-sm">{title}</p>
+              <div className="grid grid-cols-[2fr,1fr]">
+                <p className="text-2xl break-words uppercase pr-8">{title}</p>
                 {dateTime ? (
                   <div
-                    className={cx("justify-self-end text-base uppercase", {
+                    className={cx("justify-self-end text-lg uppercase", {
                       "text-white": color === "white",
                       "text-black": color === "black",
                     })}
                   >
-                    <p>{dayjs(dateTime).format("ddd DD MMMM YYYY")}</p>
+                    <p>{dayjs(dateTime).format("ddd DD MMM YYYY")}</p>
                     <p>
                       {dayjs(dateTime).format("h:mmA")} -{" "}
                       {dayjs(dateTime).add(1, "h").format("h:mmA")} GMT
