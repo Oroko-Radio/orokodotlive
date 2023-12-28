@@ -92,6 +92,13 @@ export async function getGenreCategories(preview: boolean) {
       genreCategoryCollection {
         items {
           name
+          linkedFrom {
+            genresCollection {
+              items {
+                name
+              }
+            }
+          }
         }
       }
     }

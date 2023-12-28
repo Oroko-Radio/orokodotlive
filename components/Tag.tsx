@@ -4,7 +4,15 @@ import cn from "classnames";
 interface TagProps {
   text: string;
   transparent?: boolean;
-  color?: "black" | "blue" | "orange" | "green" | "gray" | "yellow" | "white";
+  color?:
+    | "black"
+    | "blue"
+    | "orange"
+    | "green"
+    | "gray"
+    | "yellow"
+    | "white"
+    | "selected";
   borderColor?: "black" | "white";
   card?: boolean;
 }
@@ -20,6 +28,7 @@ const Tag = ({
     <div
       className={cn("flex-shrink-0 border-2", {
         "text-black": transparent,
+        "bg-white text-black": color === "selected",
         "bg-black text-white": color === "black",
         "bg-black text-orokoBlue": color === "blue",
         "bg-black text-orokoOrange": color === "orange",
