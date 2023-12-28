@@ -68,7 +68,13 @@ const AllShows = ({
       </h1>
 
       <div className="flex flex-wrap gap-2 mb-4">
-        <div className="cursor-pointer" onClick={() => setGenreFilter("all")}>
+        <div
+          className="cursor-pointer"
+          onClick={() => {
+            setGenreFilter("all");
+            setGenres([]);
+          }}
+        >
           <Tag
             text={"all"}
             color={genreFilter === "all" ? "selected" : "white"}
