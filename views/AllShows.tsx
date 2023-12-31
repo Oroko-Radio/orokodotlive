@@ -73,6 +73,7 @@ const AllShows = ({
             setCategoryFilter("all");
             setMore(true);
             setGenres([]);
+            setAllShows(shows);
           }}
         >
           <Tag
