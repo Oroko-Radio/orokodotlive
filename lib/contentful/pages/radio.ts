@@ -319,13 +319,21 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
   };
 }
 
-export async function getShowsByGenre(genre: string) {
+export async function getShowsByGenre(
+  genre: string,
+  limit: number,
+  skip: number
+) {
   const ShowsByGenreQuery = /* GRAPHQL */ `
-  query ShowsByGenreQuery ($genre: String) {
+  query ShowsByGenreQuery ($genre: String, $limit: Int, $skip: Int) {
     genresCollection (where: {name: $genre}, limit: 1) {
       items {
         linkedFrom {
-          showCollection (limit: 50) {
+          showCollection (
+            limit: $limit
+            skip: $skip
+            order: date_DESC
+            ) {
             items {
               title
               date
@@ -365,7 +373,7 @@ export async function getShowsByGenre(genre: string) {
   `;
 
   const data = await graphql(ShowsByGenreQuery, {
-    variables: { genre },
+    variables: { genre, limit, skip },
   });
 
   const extractedGenre = extractCollection<GenreInterface>(
@@ -373,7 +381,5 @@ export async function getShowsByGenre(genre: string) {
     "genresCollection"
   );
 
-  return {
-    shows: extractedGenre[0].linkedFrom.showCollection.items,
-  };
+  return extractedGenre[0].linkedFrom.showCollection.items;
 }

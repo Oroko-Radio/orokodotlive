@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import Show from "../components/Show";
 import Tag from "../components/Tag";
@@ -20,6 +20,8 @@ const AllShows = ({
 }) => {
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [genres, setGenres] = useState<GenreInterface[]>([]);
+  const [genre, setGenre] = useState<string | null>(null);
+  const [genreSkip, setGenreSkip] = useState<number>(LIMITS.SHOWS);
   const [allShows, setAllShows] = useState<ShowInterface[]>(shows);
   const [skip, setSkip] = useState<number>(LIMITS.SHOWS);
   const [more, setMore] = useState(true);
@@ -27,14 +29,25 @@ const AllShows = ({
 
   async function handleLoadMoreShows() {
     setLoading(true);
-    const moreShows = await getAllShows(false, LIMITS.SKIP, skip);
-    if (moreShows.length < LIMITS.SKIP) {
-      setMore(false);
-      return;
+    if (categoryFilter === "all") {
+      const moreShows = await getAllShows(false, LIMITS.SKIP, skip);
+      if (moreShows.length < LIMITS.SKIP) {
+        setMore(false);
+        return;
+      }
+      const concatenatedShows = allShows.concat(moreShows);
+      setAllShows(concatenatedShows);
+      setSkip(skip + LIMITS.SKIP);
+    } else {
+      const moreShows = await getShowsByGenre(genre, LIMITS.SKIP, genreSkip);
+      if (moreShows.length < LIMITS.SKIP) {
+        setMore(false);
+        return;
+      }
+      const concatenatedShows = allShows.concat(moreShows);
+      setAllShows(concatenatedShows);
+      setGenreSkip(genreSkip + LIMITS.SKIP);
     }
-    const concatenatedShows = allShows.concat(moreShows);
-    setAllShows(concatenatedShows);
-    setSkip(skip + LIMITS.SKIP);
     setLoading(false);
   }
 
@@ -58,6 +71,7 @@ const AllShows = ({
           className="cursor-pointer"
           onClick={() => {
             setCategoryFilter("all");
+            setMore(true);
             setGenres([]);
           }}
         >
@@ -85,17 +99,22 @@ const AllShows = ({
 
       <div>
         <div className="text-white flex flex-wrap gap-2">
-          {genres.map((genre, idx) => (
+          {genres.map((g, idx) => (
             <div
               key={idx}
               className="cursor-pointer"
               onClick={async () => {
-                const data = await getShowsByGenre(genre.name);
-                console.log(data);
-                setAllShows(data.shows);
+                setGenre(g.name);
+                setMore(true);
+                setGenreSkip(LIMITS.SHOWS);
+                const shows = await getShowsByGenre(g.name, LIMITS.SHOWS, 0);
+                if (shows.length < LIMITS.SHOWS) {
+                  setMore(false);
+                }
+                setAllShows(shows);
               }}
             >
-              <Tag text={genre.name} />
+              <Tag text={g.name} color={genre === g.name ? "selected" : null} />
             </div>
           ))}
         </div>
@@ -103,7 +122,7 @@ const AllShows = ({
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8 xl:pb-12">
         {allShows.length < 1 ? (
-          <div className="text-white">No recent shows in this genre</div>
+          <div className="text-white">No shows in this genre</div>
         ) : (
           allShows.map((show, idx) => (
             <div key={idx} className="border-black border-2 bg-white">
