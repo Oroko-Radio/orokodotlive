@@ -1,6 +1,10 @@
 import dayjs from "dayjs";
 import { LIMITS, graphql } from "..";
-import { GenreCategoryInterface, ShowInterface } from "../../../types/shared";
+import {
+  GenreCategoryInterface,
+  GenreInterface,
+  ShowInterface,
+} from "../../../types/shared";
 import { extractCollection, extractCollectionItem, sort } from "../../../util";
 
 export async function getRadioPage(preview: boolean) {
@@ -312,5 +316,64 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
   return {
     show: entry,
     relatedShows,
+  };
+}
+
+export async function getShowsByGenre(genre: string) {
+  const ShowsByGenreQuery = /* GRAPHQL */ `
+  query ShowsByGenreQuery ($genre: String) {
+    genresCollection (where: {name: $genre}, limit: 1) {
+      items {
+        linkedFrom {
+          showCollection (limit: 50) {
+            items {
+              title
+              date
+              slug
+              mixcloudLink
+              isFeatured
+              coverImage {
+                sys {
+                  id
+                }
+                title
+                description
+                url
+                width
+                height
+              }
+              artistsCollection(limit: 9) {
+                items {
+                  name
+                  slug
+                  city {
+                    name
+                  }
+                }
+              }
+              genresCollection(limit: 9) {
+                items {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `;
+
+  const data = await graphql(ShowsByGenreQuery, {
+    variables: { genre },
+  });
+
+  const extractedGenre = extractCollection<GenreInterface>(
+    data,
+    "genresCollection"
+  );
+
+  return {
+    shows: extractedGenre[0].linkedFrom.showCollection.items,
   };
 }

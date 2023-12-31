@@ -8,7 +8,7 @@ import {
   GenreInterface,
   ShowInterface,
 } from "../types/shared";
-import { getAllShows } from "../lib/contentful/pages/radio";
+import { getAllShows, getShowsByGenre } from "../lib/contentful/pages/radio";
 import { LIMITS } from "../lib/contentful";
 
 const AllShows = ({
@@ -18,26 +18,12 @@ const AllShows = ({
   shows: ShowInterface[];
   genreCategories: GenreCategoryInterface[];
 }) => {
-  const [skip, setSkip] = useState<number>(LIMITS.SHOWS);
-  const [genreFilter, setGenreFilter] = useState<string>("all");
-  const [allShows, setAllShows] = useState<ShowInterface[]>(shows);
-  const [more, setMore] = useState(true);
+  const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [genres, setGenres] = useState<GenreInterface[]>([]);
+  const [allShows, setAllShows] = useState<ShowInterface[]>(shows);
+  const [skip, setSkip] = useState<number>(LIMITS.SHOWS);
+  const [more, setMore] = useState(true);
   const [loading, setLoading] = useState(false);
-
-  const filteredShows = useMemo(() => {
-    return allShows
-      .filter((show) => {
-        if (genreFilter === "all") return show;
-
-        const genreCategories = show.genresCollection.items.map((genre) => {
-          if (genre.genreCategory) return genre.genreCategory.name;
-        });
-
-        if (genreCategories.includes(genreFilter)) return show;
-      })
-      .sort((a, b) => (a.date > b.date ? -1 : 1));
-  }, [genreFilter, allShows]);
 
   async function handleLoadMoreShows() {
     setLoading(true);
@@ -53,13 +39,13 @@ const AllShows = ({
   }
 
   useEffect(() => {
-    if (genreFilter === "all") return;
+    if (categoryFilter === "all") return;
     const category = genreCategories.find(
-      (category) => category.name === genreFilter
+      (category) => category.name === categoryFilter
     );
     const genres = category.linkedFrom.genresCollection.items;
     setGenres(genres);
-  }, [genreFilter, genreCategories]);
+  }, [categoryFilter, genreCategories]);
 
   return (
     <div className="bg-offBlack px-4 md:px-8" id="all-shows">
@@ -71,14 +57,14 @@ const AllShows = ({
         <div
           className="cursor-pointer"
           onClick={() => {
-            setGenreFilter("all");
+            setCategoryFilter("all");
             setGenres([]);
           }}
         >
           <Tag
             text={"all"}
-            color={genreFilter === "all" ? "selected" : "white"}
-            borderColor={genreFilter === "all" ? "white" : null}
+            color={categoryFilter === "all" ? "selected" : "white"}
+            borderColor={categoryFilter === "all" ? "white" : null}
           />
         </div>
 
@@ -86,12 +72,12 @@ const AllShows = ({
           <div
             key={idx}
             className="cursor-pointer"
-            onClick={() => setGenreFilter(name)}
+            onClick={() => setCategoryFilter(name)}
           >
             <Tag
               text={name}
-              color={genreFilter === name ? "selected" : "white"}
-              borderColor={genreFilter === name ? "white" : null}
+              color={categoryFilter === name ? "selected" : "white"}
+              borderColor={categoryFilter === name ? "white" : null}
             />
           </div>
         ))}
@@ -100,16 +86,26 @@ const AllShows = ({
       <div>
         <div className="text-white flex flex-wrap gap-2">
           {genres.map((genre, idx) => (
-            <Tag key={idx} text={genre.name} />
+            <div
+              key={idx}
+              className="cursor-pointer"
+              onClick={async () => {
+                const data = await getShowsByGenre(genre.name);
+                console.log(data);
+                setAllShows(data.shows);
+              }}
+            >
+              <Tag text={genre.name} />
+            </div>
           ))}
         </div>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8 xl:pb-12">
-        {filteredShows.length < 1 ? (
+        {allShows.length < 1 ? (
           <div className="text-white">No recent shows in this genre</div>
         ) : (
-          filteredShows.map((show, idx) => (
+          allShows.map((show, idx) => (
             <div key={idx} className="border-black border-2 bg-white">
               <Card
                 imageUrl={show.coverImage.url}
