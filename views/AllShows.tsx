@@ -10,7 +10,7 @@ import {
 } from "../types/shared";
 import { getAllShows, getShowsByGenre } from "../lib/contentful/pages/radio";
 import { LIMITS } from "../lib/contentful";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const AllShows = ({
@@ -21,7 +21,6 @@ const AllShows = ({
   genreCategories: GenreCategoryInterface[];
 }) => {
   const [genres, setGenres] = useState<GenreInterface[]>([]);
-  const [genre, setGenre] = useState<string | null>(null);
   const [genreSkip, setGenreSkip] = useState<number>(LIMITS.SHOWS);
   const [allShows, setAllShows] = useState<ShowInterface[]>(shows);
   const [skip, setSkip] = useState<number>(LIMITS.SHOWS);
@@ -30,6 +29,9 @@ const AllShows = ({
 
   const searchParams = useSearchParams()!;
   const pathname = usePathname();
+
+  const category = searchParams.get("category") || "all";
+  const genre = searchParams.get("genre");
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -41,7 +43,36 @@ const AllShows = ({
     [searchParams]
   );
 
-  const category = searchParams.get("category") || "all";
+  /* Change category */
+  useEffect(() => {
+    if (category === "all") {
+      setMore(true);
+      setGenres([]);
+      setAllShows(shows);
+      return;
+    }
+    setAllShows([]);
+    const cat = genreCategories.find((c) => c.name === category);
+    const genres = cat.linkedFrom.genresCollection.items;
+    setGenres(genres);
+  }, [category, genreCategories, shows]);
+
+  /* Change genre */
+  useEffect(() => {
+    if (!genre) return;
+    setGenreSkip(LIMITS.SHOWS);
+
+    async function getShows() {
+      const shows = await getShowsByGenre(genre, LIMITS.SHOWS, 0);
+      if (shows.length >= LIMITS.SHOWS) {
+        setMore(true);
+      } else {
+        setMore(false);
+      }
+      setAllShows(shows);
+    }
+    getShows();
+  }, [genre]);
 
   async function handleLoadMoreShows() {
     setLoading(true);
@@ -67,17 +98,6 @@ const AllShows = ({
     setLoading(false);
   }
 
-  /* Get genres beloging to selected category */
-  useEffect(() => {
-    if (category === "all") {
-      setGenres([]);
-      return;
-    }
-    const cat = genreCategories.find((c) => c.name === category);
-    const genres = cat.linkedFrom.genresCollection.items;
-    setGenres(genres);
-  }, [category, genreCategories]);
-
   return (
     <div className="bg-offBlack px-4 md:px-8" id="all-shows">
       <h1 className="font-serif text-white text-4xl md:text-5xl py-8">
@@ -85,16 +105,7 @@ const AllShows = ({
       </h1>
 
       <div className="flex flex-wrap gap-2 mb-4">
-        <Link
-          // onClick={() => {
-          //   setMore(true);
-          //   setGenres([]);
-          //   setAllShows(shows);
-          // }}
-          href={pathname + "?" + createQueryString("category", "all")}
-          passHref
-          scroll={false}
-        >
+        <Link href={pathname} passHref scroll={false}>
           <Tag
             text={"all"}
             color={category === "all" ? "selected" : "white"}
@@ -121,23 +132,14 @@ const AllShows = ({
       <div>
         <div className="text-white flex flex-wrap gap-2">
           {genres.map((g, idx) => (
-            <div
+            <Link
               key={idx}
-              className="cursor-pointer"
-              onClick={async () => {
-                setGenre(g.name);
-                setGenreSkip(LIMITS.SHOWS);
-                const shows = await getShowsByGenre(g.name, LIMITS.SHOWS, 0);
-                if (shows.length >= LIMITS.SHOWS) {
-                  setMore(true);
-                } else {
-                  setMore(false);
-                }
-                setAllShows(shows);
-              }}
+              href={pathname + "?" + createQueryString("genre", g.name)}
+              passHref
+              scroll={false}
             >
               <Tag text={g.name} color={genre === g.name ? "selected" : null} />
-            </div>
+            </Link>
           ))}
         </div>
       </div>
