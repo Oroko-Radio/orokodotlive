@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Card from "../components/Card";
 import Show from "../components/Show";
 import Tag from "../components/Tag";
@@ -10,6 +10,8 @@ import {
 } from "../types/shared";
 import { getAllShows, getShowsByGenre } from "../lib/contentful/pages/radio";
 import { LIMITS } from "../lib/contentful";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const AllShows = ({
   shows,
@@ -18,7 +20,6 @@ const AllShows = ({
   shows: ShowInterface[];
   genreCategories: GenreCategoryInterface[];
 }) => {
-  const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [genres, setGenres] = useState<GenreInterface[]>([]);
   const [genre, setGenre] = useState<string | null>(null);
   const [genreSkip, setGenreSkip] = useState<number>(LIMITS.SHOWS);
@@ -27,9 +28,24 @@ const AllShows = ({
   const [more, setMore] = useState(true);
   const [loading, setLoading] = useState(false);
 
+  const searchParams = useSearchParams()!;
+  const pathname = usePathname();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  const category = searchParams.get("category") || "all";
+
   async function handleLoadMoreShows() {
     setLoading(true);
-    if (categoryFilter === "all") {
+    if (category === "all") {
       const moreShows = await getAllShows(false, LIMITS.SKIP, skip);
       if (moreShows.length < LIMITS.SKIP) {
         setMore(false);
@@ -51,14 +67,16 @@ const AllShows = ({
     setLoading(false);
   }
 
+  /* Get genres beloging to selected category */
   useEffect(() => {
-    if (categoryFilter === "all") return;
-    const category = genreCategories.find(
-      (category) => category.name === categoryFilter
-    );
-    const genres = category.linkedFrom.genresCollection.items;
+    if (category === "all") {
+      setGenres([]);
+      return;
+    }
+    const cat = genreCategories.find((c) => c.name === category);
+    const genres = cat.linkedFrom.genresCollection.items;
     setGenres(genres);
-  }, [categoryFilter, genreCategories]);
+  }, [category, genreCategories]);
 
   return (
     <div className="bg-offBlack px-4 md:px-8" id="all-shows">
@@ -67,34 +85,36 @@ const AllShows = ({
       </h1>
 
       <div className="flex flex-wrap gap-2 mb-4">
-        <div
-          className="cursor-pointer"
-          onClick={() => {
-            setCategoryFilter("all");
-            setMore(true);
-            setGenres([]);
-            setAllShows(shows);
-          }}
+        <Link
+          // onClick={() => {
+          //   setMore(true);
+          //   setGenres([]);
+          //   setAllShows(shows);
+          // }}
+          href={pathname + "?" + createQueryString("category", "all")}
+          passHref
+          scroll={false}
         >
           <Tag
             text={"all"}
-            color={categoryFilter === "all" ? "selected" : "white"}
-            borderColor={categoryFilter === "all" ? "white" : null}
+            color={category === "all" ? "selected" : "white"}
+            borderColor={category === "all" ? "white" : null}
           />
-        </div>
+        </Link>
 
         {genreCategories.map(({ name }, idx) => (
-          <div
+          <Link
             key={idx}
-            className="cursor-pointer"
-            onClick={() => setCategoryFilter(name)}
+            href={pathname + "?" + createQueryString("category", name)}
+            scroll={false}
+            passHref
           >
             <Tag
               text={name}
-              color={categoryFilter === name ? "selected" : "white"}
-              borderColor={categoryFilter === name ? "white" : null}
+              color={category === name ? "selected" : "white"}
+              borderColor={category === name ? "white" : null}
             />
-          </div>
+          </Link>
         ))}
       </div>
 
