@@ -106,10 +106,11 @@ const AllShows = ({
               className="cursor-pointer"
               onClick={async () => {
                 setGenre(g.name);
-                setMore(true);
                 setGenreSkip(LIMITS.SHOWS);
                 const shows = await getShowsByGenre(g.name, LIMITS.SHOWS, 0);
-                if (shows.length < LIMITS.SHOWS) {
+                if (shows.length >= LIMITS.SHOWS) {
+                  setMore(true);
+                } else {
                   setMore(false);
                 }
                 setAllShows(shows);
