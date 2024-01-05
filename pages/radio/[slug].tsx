@@ -66,8 +66,14 @@ export default function Show({ show, relatedShows, preview }: Props) {
           <div className="flex gap-1 flex-wrap">
             <Tag text={artistsCollection.items[0].city.name} color="black" />
             {genresCollection &&
-              genresCollection.items.map(({ name }, idx) => (
-                <Tag text={name} transparent key={idx} />
+              genresCollection.items.map(({ name, genreCategory }, idx) => (
+                <Link
+                  href={`/radio?category=${genreCategory.name}&genre=${name}#all-shows`}
+                  passHref
+                  key={idx}
+                >
+                  <Tag text={name} transparent />
+                </Link>
               ))}
           </div>
         </div>

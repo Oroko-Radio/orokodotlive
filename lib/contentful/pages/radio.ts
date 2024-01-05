@@ -257,6 +257,9 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
           genresCollection(limit: 9) {
             items {
               name
+              genreCategory {
+                name
+              }
             }
           }
           content {

@@ -24,7 +24,7 @@ export default function RadioPage({
       <Meta title="Radio" />
       {upcomingShows.length > 0 && <UpcomingShows shows={upcomingShows} />}
       <FeaturedShows shows={featuredShows} />
-      <AllShows shows={shows} genreCategories={genreCategories} />
+      <AllShows initialShows={shows} genreCategories={genreCategories} />
     </>
   );
 }

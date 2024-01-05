@@ -14,15 +14,15 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const AllShows = ({
-  shows,
+  initialShows,
   genreCategories,
 }: {
-  shows: ShowInterface[];
+  initialShows: ShowInterface[];
   genreCategories: GenreCategoryInterface[];
 }) => {
   const [genres, setGenres] = useState<GenreInterface[]>([]);
   const [genreSkip, setGenreSkip] = useState<number>(LIMITS.SHOWS);
-  const [allShows, setAllShows] = useState<ShowInterface[]>(shows);
+  const [shows, setShows] = useState<ShowInterface[]>(initialShows);
   const [skip, setSkip] = useState<number>(LIMITS.SHOWS);
   const [more, setMore] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -31,12 +31,16 @@ const AllShows = ({
   const pathname = usePathname();
 
   const category = searchParams.get("category") || "all";
-  const genre = searchParams.get("genre");
+  const genre = searchParams.get("genre") || null;
 
   const createQueryString = useCallback(
-    (name: string, value: string) => {
+    (name: string, value: string, purgeGenre = false) => {
       const params = new URLSearchParams(searchParams.toString());
       params.set(name, value);
+
+      if (purgeGenre) {
+        params.delete("genre");
+      }
 
       return params.toString();
     },
@@ -48,14 +52,15 @@ const AllShows = ({
     if (category === "all") {
       setMore(true);
       setGenres([]);
-      setAllShows(shows);
+      setShows(initialShows);
       return;
     }
-    setAllShows([]);
+    setShows([]);
+    setMore(false);
     const cat = genreCategories.find((c) => c.name === category);
     const genres = cat.linkedFrom.genresCollection.items;
     setGenres(genres);
-  }, [category, genreCategories, shows]);
+  }, [category, genreCategories, initialShows]);
 
   /* Change genre */
   useEffect(() => {
@@ -63,39 +68,43 @@ const AllShows = ({
     setGenreSkip(LIMITS.SHOWS);
 
     async function getShows() {
+      setLoading(true);
       const shows = await getShowsByGenre(genre, LIMITS.SHOWS, 0);
       if (shows.length >= LIMITS.SHOWS) {
         setMore(true);
       } else {
         setMore(false);
       }
-      setAllShows(shows);
+      setShows(shows);
+      setLoading(false);
     }
     getShows();
   }, [genre]);
 
   async function handleLoadMoreShows() {
-    setLoading(true);
     if (category === "all") {
+      setLoading(true);
       const moreShows = await getAllShows(false, LIMITS.SKIP, skip);
+      setLoading(false);
       if (moreShows.length < LIMITS.SKIP) {
         setMore(false);
         return;
       }
-      const concatenatedShows = allShows.concat(moreShows);
-      setAllShows(concatenatedShows);
+      const concatenatedShows = shows.concat(moreShows);
+      setShows(concatenatedShows);
       setSkip(skip + LIMITS.SKIP);
     } else {
+      setLoading(true);
       const moreShows = await getShowsByGenre(genre, LIMITS.SKIP, genreSkip);
+      setLoading(false);
       if (moreShows.length < LIMITS.SKIP) {
         setMore(false);
         return;
       }
-      const concatenatedShows = allShows.concat(moreShows);
-      setAllShows(concatenatedShows);
+      const concatenatedShows = shows.concat(moreShows);
+      setShows(concatenatedShows);
       setGenreSkip(genreSkip + LIMITS.SKIP);
     }
-    setLoading(false);
   }
 
   return (
@@ -116,7 +125,7 @@ const AllShows = ({
         {genreCategories.map(({ name }, idx) => (
           <Link
             key={idx}
-            href={pathname + "?" + createQueryString("category", name)}
+            href={pathname + "?" + createQueryString("category", name, true)}
             scroll={false}
             passHref
           >
@@ -144,32 +153,49 @@ const AllShows = ({
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8 xl:pb-12">
-        {allShows.length < 1 ? (
-          <div className="text-white">No shows in this genre</div>
-        ) : (
-          allShows.map((show, idx) => (
-            <div key={idx} className="border-black border-2 bg-white">
-              <Card
-                imageUrl={show.coverImage.url}
-                title={show.title}
-                link={`/radio/${show.slug}`}
-                mixcloudLink={show.mixcloudLink}
-              >
-                <Show show={show} cityColor="black" />
-              </Card>
-            </div>
-          ))
-        )}
-      </div>
+      <ShowList shows={shows} genre={genre} loading={loading} />
 
       {more ? (
-        <div className="pl-4 md:pl-8 pt-4 pb-12">
-          <Button onClick={handleLoadMoreShows}>
-            {loading ? "Loading" : "Load More Shows"}
+        <div className="pt-4 pb-12">
+          <Button onClick={handleLoadMoreShows} disabled={loading}>
+            Load More Shows
           </Button>
         </div>
       ) : null}
+    </div>
+  );
+};
+
+const ShowList = ({
+  shows,
+  genre,
+  loading,
+}: {
+  shows: ShowInterface[];
+  genre?: string;
+  loading: boolean;
+}) => {
+  if (!genre && shows.length < 1) return <div className="py-8" />;
+
+  if (!loading && shows.length < 1) {
+    return <div className="text-white py-8">No shows in this genre</div>;
+  }
+
+  return (
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8 xl:pb-12">
+      {shows.map((show, idx) => (
+        <div key={idx} className="border-black border-2 bg-white">
+          <Card
+            imageUrl={show.coverImage.url}
+            title={show.title}
+            link={`/radio/${show.slug}`}
+            mixcloudLink={show.mixcloudLink}
+          >
+            <Show show={show} cityColor="black" />
+          </Card>
+        </div>
+      ))}
+      {loading && <div className="text-white">Loading</div>}
     </div>
   );
 };
