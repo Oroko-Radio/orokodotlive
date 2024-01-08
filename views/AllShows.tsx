@@ -21,7 +21,6 @@ const AllShows = ({
   genreCategories: GenreCategoryInterface[];
 }) => {
   const [genres, setGenres] = useState<GenreInterface[]>([]);
-  const [genreSkip, setGenreSkip] = useState<number>(LIMITS.SHOWS);
   const [shows, setShows] = useState<ShowInterface[]>(initialShows);
   const [skip, setSkip] = useState<number>(LIMITS.SHOWS);
   const [more, setMore] = useState(true);
@@ -65,7 +64,7 @@ const AllShows = ({
   /* Change genre */
   useEffect(() => {
     if (!genre) return;
-    setGenreSkip(LIMITS.SHOWS);
+    setSkip(LIMITS.SHOWS);
 
     async function getShows() {
       setLoading(true);
@@ -82,29 +81,21 @@ const AllShows = ({
   }, [genre]);
 
   async function handleLoadMoreShows() {
+    setLoading(true);
+    let moreShows: ShowInterface[] = [];
     if (category === "all") {
-      setLoading(true);
-      const moreShows = await getAllShows(false, LIMITS.SKIP, skip);
-      setLoading(false);
-      if (moreShows.length < LIMITS.SKIP) {
-        setMore(false);
-        return;
-      }
-      const concatenatedShows = shows.concat(moreShows);
-      setShows(concatenatedShows);
-      setSkip(skip + LIMITS.SKIP);
+      moreShows = await getAllShows(false, LIMITS.SKIP, skip);
     } else {
-      setLoading(true);
-      const moreShows = await getShowsByGenre(genre, LIMITS.SKIP, genreSkip);
-      setLoading(false);
-      if (moreShows.length < LIMITS.SKIP) {
-        setMore(false);
-        return;
-      }
-      const concatenatedShows = shows.concat(moreShows);
-      setShows(concatenatedShows);
-      setGenreSkip(genreSkip + LIMITS.SKIP);
+      moreShows = await getShowsByGenre(genre, LIMITS.SKIP, skip);
     }
+    setLoading(false);
+    if (moreShows.length < LIMITS.SKIP) {
+      setMore(false);
+      return;
+    }
+    const concatenatedShows = shows.concat(moreShows);
+    setShows(concatenatedShows);
+    setSkip(skip + LIMITS.SKIP);
   }
 
   return (
