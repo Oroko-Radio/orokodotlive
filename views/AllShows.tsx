@@ -166,7 +166,7 @@ const ShowList = ({
   genre?: string;
   loading: boolean;
 }) => {
-  if (!genre && shows.length < 1) return <div className="py-8" />;
+  if (!genre && shows.length < 1) return <div className="py-8 min-h-[568px]" />;
 
   if (!loading && shows.length < 1) {
     return (
