@@ -169,7 +169,11 @@ const ShowList = ({
   if (!genre && shows.length < 1) return <div className="py-8" />;
 
   if (!loading && shows.length < 1) {
-    return <div className="text-white py-8">No shows in this genre</div>;
+    return (
+      <div className="text-white py-8 min-h-[568px]">
+        No shows in this genre
+      </div>
+    );
   }
 
   return (
@@ -186,7 +190,7 @@ const ShowList = ({
           </Card>
         </div>
       ))}
-      {loading && <div className="text-white">Loading</div>}
+      {loading && <div className="text-white min-h-[568px]">Loading</div>}
     </div>
   );
 };
