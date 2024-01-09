@@ -89,10 +89,7 @@ const AllShows = ({
       moreShows = await getShowsByGenre(genre, LIMITS.SKIP, skip);
     }
     setLoading(false);
-    if (moreShows.length < LIMITS.SKIP) {
-      setMore(false);
-      return;
-    }
+    if (moreShows.length < LIMITS.SKIP) setMore(false);
     const concatenatedShows = shows.concat(moreShows);
     setShows(concatenatedShows);
     setSkip(skip + LIMITS.SKIP);
