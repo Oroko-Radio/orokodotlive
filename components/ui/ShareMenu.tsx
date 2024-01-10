@@ -49,7 +49,7 @@ const WhatsApp = ({ link, text, active = false }) => (
       active ? "text-social-whatsapp" : ""
     )}
     target="_blank"
-    rel="noopener noreferrer"
+    rel="noopener nofollow noreferrer"
     href={`https://wa.me/?text=${encodeURI(`${text} ${link}`)}`}
   >
     WhatsApp
@@ -64,7 +64,7 @@ const Facebook = ({ link, active = false }) => (
       active ? "text-social-facebook" : ""
     )}
     target="_blank"
-    rel="noopener noreferrer"
+    rel="noopener nofollow noreferrer"
     href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURI(link)}`}
   >
     Facebook
@@ -79,7 +79,7 @@ const Twitter = ({ link, text, active = false }) => (
       active ? "text-social-twitter" : ""
     )}
     target="_blank"
-    rel="noopener noreferrer"
+    rel="noopener nofollow noreferrer"
     href={`https://twitter.com/intent/tweet?text=${encodeURI(
       text
     )}&url=${encodeURI(link)}&via=orokoradio`}
@@ -96,7 +96,7 @@ const Telegram = ({ link, text, active = false }) => (
       active ? "text-social-telegram" : ""
     )}
     target="_blank"
-    rel="noopener noreferrer"
+    rel="noopener nofollow noreferrer"
     href={`https://telegram.me/share/url?url=${encodeURI(
       link
     )}&text=${encodeURI(text)}`}

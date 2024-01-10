@@ -1,5 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
+import { StaticImageData } from "next/image";
 import facebook from "../images/socials/Facebook.svg";
 import instagram from "../images/socials/Instagram.svg";
 import tiktok from "../images/socials/TikTok.svg";
@@ -33,16 +34,15 @@ type SocialIconProps = {
 
 const SocialIcon = ({ social }: SocialIconProps) => {
   return (
-    <Link href={socialsMap[social].link}>
-      <a target="_blank">
-        <div className="w-8 h-8 hover:scale-110 transition-transform">
-          <Image
-            src={socialsMap[social].icon}
-            alt={social}
-            layout="responsive"
-          />
-        </div>
-      </a>
+    <Link
+      href={socialsMap[social].link}
+      target="_blank"
+      rel="noopener nofollow noreferrer"
+      passHref
+    >
+      <div className="w-8 h-8 hover:scale-110 transition-transform">
+        <Image src={socialsMap[social].icon} alt={social} layout="responsive" />
+      </div>
     </Link>
   );
 };

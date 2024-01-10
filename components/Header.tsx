@@ -14,29 +14,26 @@ const Header = () => {
   const router = useRouter();
 
   return (
-    <div className="grid grid-cols-5 py-2 xl:py-1 z-50 bg-black">
-      <Link href="/" passHref>
+    <div className="grid grid-cols-5 items-center py-2 xl:py-1 z-50 bg-black">
+      <Link href="/" passHref className="z-50">
         <div
-          className="flex ml-4 md:ml-8 h-10 w-10 z-50 cursor-pointer self-center"
+          className="flex ml-4 md:ml-8 h-10 w-10"
           onClick={() => isMenuOpen && setIsMenuOpen(false)}
         >
           <Logo
-            className={cx(
-              "stroke-current stroke-2 self-center w-8 h-8 md:w-10 md:h-10",
-              {
-                "text-black": isMenuOpen,
-                "text-white": !isMenuOpen,
-              }
-            )}
+            className={cx("stroke-current stroke-2 w-8 h-8 md:w-10 md:h-10", {
+              "text-black": isMenuOpen,
+              "text-white": !isMenuOpen,
+            })}
           />
         </div>
       </Link>
       <div className="col-span-3 flex justify-center">
-        <Link href="/" passHref>
+        <Link href="/" passHref className="z-50">
           <h1
             onClick={() => isMenuOpen && setIsMenuOpen(false)}
             className={cx(
-              "mb-0 cursor-pointer inline font-heading text-4xl md:text-5xl xl:text-6xl z-50",
+              "mb-0 inline font-heading text-4xl md:text-5xl xl:text-6xl",
               {
                 "text-black": isMenuOpen,
                 "text-white": !isMenuOpen,
@@ -48,7 +45,7 @@ const Header = () => {
         </Link>
       </div>
       <div
-        className="flex z-50 text-black self-center justify-self-end mr-4"
+        className="flex z-50 text-black justify-self-end mr-4"
         onClick={() => isMenuOpen && setIsMenuOpen(false)}
       >
         <div className="mt-1 md:mt-0.5 mr-2 lg:mr-4">

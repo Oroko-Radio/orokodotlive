@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -37,13 +37,13 @@ export function renderRichTextWithImages(content: Content) {
           if (uri.includes("oroko.live")) {
             return (
               <Link href={uri.replace("https://oroko.live", "")}>
-                <a>{children}</a>
+                {children}
               </Link>
             );
           }
 
           return (
-            <a target="_blank" rel="noreferrer" href={uri}>
+            <a target="_blank" rel="noopener nofollow noreferrer" href={uri}>
               {children}
             </a>
           );

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getRadioPageSingle } from "../../lib/contentful/pages/radio";
 import { getShowPathsToPreRender } from "../../lib/contentful/paths";
-import { ShowInterface } from "../../types/shared";
+import { GenreInterface, ShowInterface } from "../../types/shared";
 import SinglePage from "../../views/SinglePage";
 import dayjs from "dayjs";
 import Tag from "../../components/Tag";
@@ -66,8 +66,8 @@ export default function Show({ show, relatedShows, preview }: Props) {
           <div className="flex gap-1 flex-wrap">
             <Tag text={artistsCollection.items[0].city.name} color="black" />
             {genresCollection &&
-              genresCollection.items.map(({ name }, idx) => (
-                <Tag text={name} transparent key={idx} />
+              genresCollection.items.map((genre, idx) => (
+                <GenreTag genre={genre} key={idx} />
               ))}
           </div>
         </div>
@@ -78,6 +78,22 @@ export default function Show({ show, relatedShows, preview }: Props) {
     </SinglePage>
   );
 }
+
+const GenreTag = ({ genre }: { genre: GenreInterface }) => {
+  const { name, genreCategory } = genre;
+
+  if (!genreCategory || !genreCategory.name)
+    return <Tag text={name} transparent />;
+
+  return (
+    <Link
+      href={`/radio?category=${genreCategory.name}&genre=${name}#all-shows`}
+      passHref
+    >
+      <Tag text={name} transparent />
+    </Link>
+  );
+};
 
 export async function getStaticProps({ params, preview = false }) {
   const data = await getRadioPageSingle(params.slug, preview);

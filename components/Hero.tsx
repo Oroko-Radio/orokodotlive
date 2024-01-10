@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import hero from "../images/Hero-Banner-BG-Nico2b.png";
 import logo from "../images/logo-full-color-notext.svg";
 import SocialSection from "./SocialSection";

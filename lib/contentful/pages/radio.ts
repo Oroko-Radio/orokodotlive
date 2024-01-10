@@ -1,51 +1,226 @@
 import dayjs from "dayjs";
-import { graphql, LIMITS } from "..";
-import { ShowInterface } from "../../../types/shared";
+import { LIMITS, graphql } from "..";
 import {
-  extractCollection,
-  extractCollectionItem,
-  sort,
-  uniq,
-} from "../../../util";
+  GenreCategoryInterface,
+  GenreInterface,
+  ShowInterface,
+} from "../../../types/shared";
+import { extractCollection, extractCollectionItem, sort } from "../../../util";
 
 export async function getRadioPage(preview: boolean) {
+  const [shows, genreCategories, upcomingShows, featuredShows] =
+    await Promise.all([
+      getAllShows(preview),
+      getGenreCategories(preview),
+      getUpcomingShows(preview),
+      getFeaturedShows(preview),
+    ]).then((values) => values);
+
+  return {
+    shows,
+    upcomingShows,
+    featuredShows,
+    genreCategories,
+  };
+}
+
+export async function getAllShows(
+  preview: boolean,
+  limit = LIMITS.SHOWS,
+  skip?: number
+) {
+  const AllShowsQuery = /* GraphQL */ `
+    query AllShowsQuery($preview: Boolean, $limit: Int, $skip: Int) {
+      showCollection(
+        order: date_DESC
+        where: { 
+          artistsCollection_exists: true, 
+          date_lte: "${dayjs().format("YYYY-MM-DD")}" 
+        }
+        preview: $preview
+        limit: $limit
+        skip: $skip
+      ) {
+        items {
+          title
+          date
+          slug
+          mixcloudLink
+          isFeatured
+          coverImage {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+          }
+          artistsCollection(limit: 4) {
+            items {
+              name
+              slug
+              city {
+                name
+              }
+            }
+          }
+          genresCollection(limit: 5) {
+            items {
+              name
+              genreCategory {
+                name
+              }
+            }
+          }
+          content {
+            json
+          }
+        }
+      }
+    }
+  `;
+
+  const shows = await graphql(AllShowsQuery, {
+    variables: { preview, limit, skip },
+    preview,
+  });
+
+  return extractCollection<ShowInterface>(shows, "showCollection");
+}
+
+export async function getGenreCategories(preview: boolean) {
+  const GenreCategoriesQuery = /* GraphQL */ `
+    query AllGenreCategoriesQuery {
+      genreCategoryCollection {
+        items {
+          name
+          linkedFrom {
+            genresCollection {
+              items {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const genreCategories = await graphql(GenreCategoriesQuery, {
+    preview,
+  });
+
+  return extractCollection<GenreCategoryInterface>(
+    genreCategories,
+    "genreCategoryCollection"
+  );
+}
+
+export async function getFeaturedShows(preview: boolean) {
+  const query = /* GraphQL */ `
+    query FeaturedShowsQuery {
+      showCollection(limit: 16, order: date_DESC, where: { isFeatured: true }) {
+        items {
+          title
+          date
+          slug
+          mixcloudLink
+          isFeatured
+          coverImage {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+          }
+          artistsCollection(limit: 4) {
+            items {
+              name
+              slug
+              city {
+                name
+              }
+            }
+          }
+          genresCollection(limit: 5) {
+            items {
+              name
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const shows = await graphql(query, { preview });
+
+  return extractCollection<ShowInterface>(shows, "showCollection");
+}
+
+export async function getUpcomingShows(preview: boolean) {
+  const query = /* GraphQL */ `
+    query UpcomingShowsQuery {
+      showCollection(
+        limit: 30, 
+        where: { 
+          date_gt: "${dayjs().format("YYYY-MM-DD")}"
+        },
+        order: date_DESC) {
+        items {
+          title
+          date
+          slug
+          mixcloudLink
+          isFeatured
+          coverImage {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+          }
+          artistsCollection(limit: 4) {
+            items {
+              name
+              slug
+              city {
+                name
+              }
+            }
+          }
+          genresCollection(limit: 5) {
+            items {
+              name
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const shows = await graphql(query, { preview });
+
+  const extractedShows = extractCollection<ShowInterface>(
+    shows,
+    "showCollection"
+  );
+
   const today = dayjs();
 
-  const shows = await getAllShows(preview);
-
-  /**
-   * Upcoming & Featured
-   */
-  const upcomingShows = shows
+  const upcomingShows = extractedShows
     .sort(sort.date_ASC)
     .filter((show) => dayjs(show.date).isAfter(today))
     .splice(0, 16);
 
-  /**
-   * All Past Shows
-   */
-  const pastShows = shows
-    .sort(sort.date_DESC)
-    .filter((show) => dayjs(show.date).isBefore(today));
-
-  /**
-   * All Past Show Genres
-   */
-  const pastShowGenres = pastShows
-    .flatMap((show) => show.genresCollection.items)
-    .filter((genre) => Boolean(genre?.name))
-    .map((genre) => genre.name);
-
-  const genres = uniq(pastShowGenres).sort(sort.alpha);
-
-  const featuredShows = shows.filter((show) => show.isFeatured);
-
-  return {
-    upcomingShows,
-    pastShows,
-    genres,
-    featuredShows,
-  };
+  return upcomingShows;
 }
 
 export async function getRadioPageSingle(slug: string, preview: boolean) {
@@ -82,6 +257,9 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
           genresCollection(limit: 9) {
             items {
               name
+              genreCategory {
+                name
+              }
             }
           }
           content {
@@ -144,57 +322,67 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
   };
 }
 
-export async function getAllShows(preview: boolean, limit = LIMITS.SHOWS) {
-  const AllShowsQuery = /* GraphQL */ `
-    query AllShowsQuery($preview: Boolean, $limit: Int) {
-      showCollection(
-        order: date_DESC
-        where: { artistsCollection_exists: true }
-        preview: $preview
-        limit: $limit
-      ) {
-        items {
-          title
-          date
-          slug
-          mixcloudLink
-          isFeatured
-          coverImage {
-            sys {
-              id
-            }
-            title
-            description
-            url
-            width
-            height
-          }
-          artistsCollection(limit: 4) {
+export async function getShowsByGenre(
+  genre: string,
+  limit: number,
+  skip: number
+) {
+  const ShowsByGenreQuery = /* GRAPHQL */ `
+  query ShowsByGenreQuery ($genre: String, $limit: Int, $skip: Int) {
+    genresCollection (where: {name: $genre}, limit: 1) {
+      items {
+        linkedFrom {
+          showCollection (
+            limit: $limit
+            skip: $skip
+            order: date_DESC
+            ) {
             items {
-              name
+              title
+              date
               slug
-              city {
-                name
+              mixcloudLink
+              isFeatured
+              coverImage {
+                sys {
+                  id
+                }
+                title
+                description
+                url
+                width
+                height
+              }
+              artistsCollection(limit: 9) {
+                items {
+                  name
+                  slug
+                  city {
+                    name
+                  }
+                }
+              }
+              genresCollection(limit: 9) {
+                items {
+                  name
+                }
               }
             }
-          }
-          genresCollection(limit: 9) {
-            items {
-              name
-            }
-          }
-          content {
-            json
           }
         }
       }
     }
+  }
   `;
 
-  const data = await graphql(AllShowsQuery, {
-    variables: { preview, limit },
-    preview,
+  const data = await graphql(ShowsByGenreQuery, {
+    variables: { genre, limit, skip },
   });
 
-  return extractCollection<ShowInterface>(data, "showCollection");
+  const extractedGenre = extractCollection<GenreInterface>(
+    data,
+    "genresCollection"
+  );
+
+  return extractedGenre[0].linkedFrom.showCollection.items;
 }

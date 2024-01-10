@@ -39,15 +39,21 @@ const Apply = () => {
             accepted in English and French.
           </p>
           <div className="flex gap-4">
-            <Link href="https://forms.gle/a4RTQhGMNDZvXgma9">
-              <a target="_blank">
-                <DotButton size="large">Apply Now (EN)</DotButton>
-              </a>
+            <Link
+              href="https://forms.gle/a4RTQhGMNDZvXgma9"
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+              passHref
+            >
+              <DotButton size="large">Apply Now (EN)</DotButton>
             </Link>
-            <Link href="https://forms.gle/nwS9GJ8wcBaYaMZn9">
-              <a target="_blank">
-                <DotButton size="large">Apply Now (FR)</DotButton>
-              </a>
+            <Link
+              href="https://forms.gle/nwS9GJ8wcBaYaMZn9"
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+              passHref
+            >
+              <DotButton size="large">Apply Now (FR)</DotButton>
             </Link>
           </div>
         </section>
