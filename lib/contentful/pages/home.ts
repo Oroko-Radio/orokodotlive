@@ -21,7 +21,10 @@ export async function getHomePage(limit = LIMITS.SHOWS) {
         }
       }
 
-      featuredShows: showCollection(where: { isFeatured: true }) {
+      featuredShows: showCollection(
+        where: { isFeatured: true }
+        order: date_DESC
+      ) {
         items {
           ...ShowPreviewFragment
         }
