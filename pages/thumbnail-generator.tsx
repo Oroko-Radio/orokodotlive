@@ -4,7 +4,7 @@ import Meta from "../components/Meta";
 import Button from "../components/ui/Button";
 import NextImage from "next/image";
 import dayjs from "dayjs";
-import Logo from "../icons/Logo";
+import ColorLogo from "../icons/ColorLogo";
 import { download, getMeta } from "../util";
 
 export default function ThumbnailGenerator() {
@@ -204,7 +204,7 @@ export default function ThumbnailGenerator() {
                   "border-black": color === "black",
                 })}
               >
-                <Logo className="w-40 pr-4 stroke-current" />
+                <ColorLogo className="w-40 pr-4 stroke-current" />
                 <p className="text-9xl leading-[110px] font-heading">
                   Oroko
                   <br />
