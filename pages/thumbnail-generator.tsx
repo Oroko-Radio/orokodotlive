@@ -13,6 +13,8 @@ export default function ThumbnailGenerator() {
 
   const [title, setTitle] = useState<string>("");
   const [dateTime, setDateTime] = useState<Date | null>(null);
+  const [durationHr, setDurationHr] = useState<number>(1);
+  const [durationMin, setDurationMin] = useState<number>(0);
   const [aspectRatio, setAspectRatio] = useState<"square" | "portrait">(
     "square"
   );
@@ -81,6 +83,32 @@ export default function ThumbnailGenerator() {
                 setDateTime(date);
               }}
             />
+
+            <label htmlFor="durationHr" className="block">
+              Duration
+            </label>
+            <input
+              id="durationHr"
+              className="text-black border-black border w-18 mb-4"
+              type="number"
+              value={durationHr}
+              onChange={(e) => setDurationHr(Number(e.target.value))}
+              min={0}
+              max={12}
+            />
+            <span className="mr-2">Hr</span>
+
+            <input
+              id="durationMin"
+              className="text-black border-black border w-18 mb-4"
+              type="number"
+              value={durationMin}
+              onChange={(e) => setDurationMin(Number(e.target.value))}
+              step={5}
+              min={0}
+              max={55}
+            />
+            <span>Mins</span>
 
             <fieldset className="mb-4">
               <legend>Text color</legend>
@@ -223,7 +251,11 @@ export default function ThumbnailGenerator() {
                     <p>{dayjs(dateTime).format("ddd DD MMM YYYY")}</p>
                     <p>
                       {dayjs(dateTime).format("h:mmA")} -{" "}
-                      {dayjs(dateTime).add(1, "h").format("h:mmA")} GMT
+                      {dayjs(dateTime)
+                        .add(durationHr, "h")
+                        .add(durationMin, "m")
+                        .format("h:mmA")}{" "}
+                      GMT
                     </p>
                   </div>
                 ) : null}
