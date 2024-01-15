@@ -212,10 +212,13 @@ export default function ThumbnailGenerator() {
         <div className="relative grid justify-center bg-black max-h-screen p-4 md:p-20">
           <div
             ref={thumbnail}
-            className={cx("bg-white overflow-hidden scale-50 origin-top-left", {
-              "h-[1080px] w-[1080px]": aspectRatio === "square",
-              "h-[1920px] w-[1080px]": aspectRatio === "portrait",
-            })}
+            className={cx(
+              "bg-white overflow-hidden scale-[0.4] md:scale-50 origin-top-left",
+              {
+                "h-[1080px] w-[1080px]": aspectRatio === "square",
+                "h-[1920px] w-[1080px]": aspectRatio === "portrait",
+              }
+            )}
           >
             <div
               className={cx(
