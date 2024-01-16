@@ -74,6 +74,8 @@ export function download(element: HTMLDivElement) {
       const link = document.createElement("a");
       link.download = "oroko-thumbnail.jpeg";
       link.href = dataUrl;
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
     });
 }
