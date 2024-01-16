@@ -66,7 +66,7 @@ export default function ThumbnailGenerator() {
             </label>
             <input
               id="title"
-              className="text-black border-black border px-4 py-2 mb-4 block"
+              className="text-black border-black border px-4 py-2 mb-4 min-w-full block"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -75,7 +75,7 @@ export default function ThumbnailGenerator() {
               Date and time
             </label>
             <input
-              className="mb-4 text-black"
+              className="mb-4 text-black min-w-full"
               id="date-time"
               type="datetime-local"
               onChange={(e) => {
@@ -96,7 +96,7 @@ export default function ThumbnailGenerator() {
               min={0}
               max={12}
             />
-            <span className="mr-2">Hr</span>
+            <span className="ml-2 mr-4">Hr</span>
 
             <input
               id="durationMin"
@@ -108,7 +108,7 @@ export default function ThumbnailGenerator() {
               min={0}
               max={55}
             />
-            <span>Mins</span>
+            <span className="ml-2">Mins</span>
 
             <fieldset className="mb-4">
               <legend>Text color</legend>
@@ -157,7 +157,7 @@ export default function ThumbnailGenerator() {
               Zoom: {zoom}%
             </label>
             <input
-              className="mb-4"
+              className="mb-4 min-w-full"
               id="zoom"
               type="range"
               min="100"
