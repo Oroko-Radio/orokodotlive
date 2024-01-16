@@ -213,7 +213,7 @@ export default function ThumbnailGenerator() {
           <div
             ref={thumbnail}
             className={cx(
-              "bg-white overflow-hidden scale-[0.4] md:scale-50 origin-top-left",
+              "bg-white overflow-hidden scale-[0.3] md:scale-50 origin-top-left",
               {
                 "h-[1080px] w-[1080px]": aspectRatio === "square",
                 "h-[1920px] w-[1080px]": aspectRatio === "portrait",

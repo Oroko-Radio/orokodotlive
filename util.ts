@@ -71,6 +71,7 @@ export function download(element: HTMLDivElement) {
       },
     })
     .then((dataUrl) => {
+      // A hack which makes this work on iPhone
       domtoimage
         .toJpeg(element, {
           style: {
