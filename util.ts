@@ -71,11 +71,17 @@ export function download(element: HTMLDivElement) {
       },
     })
     .then((dataUrl) => {
-      const link = document.createElement("a");
-      link.download = "oroko-thumbnail.jpeg";
-      link.href = dataUrl;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      domtoimage
+        .toJpeg(element, {
+          style: {
+            transform: "scale(1)",
+          },
+        })
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.download = "oroko-thumbnail.jpeg";
+          link.href = dataUrl;
+          link.click();
+        });
     });
 }
