@@ -209,7 +209,7 @@ export default function ThumbnailGenerator() {
 
         {/* Viewer */}
 
-        <div className="relative grid justify-center bg-black max-h-screen p-4 md:p-20">
+        <div className="relative grid justify-center bg-black p-4 md:p-20">
           <div
             ref={thumbnail}
             className={cx(
