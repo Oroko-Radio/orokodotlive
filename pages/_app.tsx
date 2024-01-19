@@ -25,7 +25,7 @@ function OrokoApp({ Component, pageProps }: AppProps) {
     if (
       prevWidth > 0 &&
       window.innerWidth !== prevWidth &&
-      location.pathname !== "/thumbnail-generator"
+      location.pathname !== "/artwork-generator"
     ) {
       setPrevWidth(window.innerWidth);
       location.reload();

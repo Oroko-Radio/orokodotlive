@@ -55,7 +55,7 @@ export default function ThumbnailGenerator() {
 
   return (
     <>
-      <Meta title="Thumbnail Generator" noIndex />
+      <Meta title="Artwork Generator" noIndex />
       <div className="grid md:grid-cols-[1fr,3fr] max-w-full overflow-hidden">
         {/* Editor */}
 
