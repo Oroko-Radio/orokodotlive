@@ -1,5 +1,6 @@
 import { ShowInterface } from "./types/shared";
 import dayjs from "dayjs";
+import domtoimage from "dom-to-image";
 
 interface PageResponse {
   data: {
@@ -53,4 +54,35 @@ export function debounce(fn, ms) {
       fn.apply(this);
     }, ms);
   };
+}
+
+export const getMeta = async (url: string) => {
+  const img = new Image();
+  img.src = url;
+  await img.decode();
+  return img;
+};
+
+export function download(element: HTMLDivElement) {
+  domtoimage
+    .toJpeg(element, {
+      style: {
+        transform: "scale(1)",
+      },
+    })
+    .then((dataUrl) => {
+      // A hack which makes this work on iPhone
+      domtoimage
+        .toJpeg(element, {
+          style: {
+            transform: "scale(1)",
+          },
+        })
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.download = "oroko-thumbnail.jpeg";
+          link.href = dataUrl;
+          link.click();
+        });
+    });
 }

@@ -2,9 +2,10 @@ import Head from "next/head";
 
 type MetaProps = {
   title: string;
+  noIndex?: boolean;
 };
 
-const Meta = ({ title }: MetaProps) => {
+const Meta = ({ title, noIndex = false }: MetaProps) => {
   const concatenatedTitle = "Oroko | " + title;
 
   return (
@@ -35,6 +36,7 @@ const Meta = ({ title }: MetaProps) => {
       <meta property="og:image:height" content="627" />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:alt" content="Oroko Radio Logo" />
+      {noIndex && <meta name="robots" content="noindex" />}
     </Head>
   );
 };

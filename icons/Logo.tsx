@@ -1,4 +1,4 @@
-const Logo = ({ className }) => {
+const Logo = ({ className }: { className?: string }) => {
   return (
     <svg
       className={className}
