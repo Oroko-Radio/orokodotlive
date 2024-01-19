@@ -16,6 +16,7 @@ const Button = ({
 }) => {
   return (
     <button
+      type="button"
       disabled={disabled}
       onClick={onClick}
       className={cn(
