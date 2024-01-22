@@ -23,6 +23,7 @@ export default function ThumbnailGenerator() {
   const [bgHeight, setBgHeight] = useState<number>(0);
   const [bgWidth, setBgWidth] = useState<number>(0);
   const [zoom, setZoom] = useState<string>("100");
+  const [align, setAlign] = useState<"center" | "top" | "bottom">("center");
   const [color, setColor] = useState<"black" | "white">("black");
 
   useEffect(() => {
@@ -199,6 +200,49 @@ export default function ThumbnailGenerator() {
               </div>
             </fieldset>
 
+            <fieldset className="pb-4">
+              <legend>Alignment</legend>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="top"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setAlign("top");
+                    }
+                  }}
+                  checked={align === "top"}
+                />
+                <label htmlFor="top">Top</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="center"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setAlign("center");
+                    }
+                  }}
+                  checked={align === "center"}
+                />
+                <label htmlFor="center">Center</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="bottom"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setAlign("bottom");
+                    }
+                  }}
+                  checked={align === "bottom"}
+                />
+                <label htmlFor="bottom">Bottom</label>
+              </div>
+            </fieldset>
+
             <div className="text-black">
               <Button onClick={() => download(thumbnail.current)}>
                 Download Jpeg
@@ -269,7 +313,14 @@ export default function ThumbnailGenerator() {
                 <div className="relative h-full">
                   <div
                     ref={imageRef}
-                    className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-full w-full`}
+                    className={cx(
+                      `absolute left-1/2 -translate-x-1/2 h-full w-full`,
+                      {
+                        "top-1/2 -translate-y-1/2": align === "center",
+                        "top-0": align === "top",
+                        "bottom-0": align === "bottom",
+                      }
+                    )}
                   >
                     <NextImage
                       className={`h-full w-full object-cover`}
