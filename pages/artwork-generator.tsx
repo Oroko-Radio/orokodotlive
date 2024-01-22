@@ -24,6 +24,7 @@ export default function ThumbnailGenerator() {
   const [bgWidth, setBgWidth] = useState<number>(0);
   const [zoom, setZoom] = useState<string>("100");
   const [align, setAlign] = useState<"center" | "top" | "bottom">("center");
+  const [justify, setJustify] = useState<"center" | "left" | "right">("center");
   const [color, setColor] = useState<"black" | "white">("black");
 
   useEffect(() => {
@@ -218,7 +219,7 @@ export default function ThumbnailGenerator() {
               <div className="flex items-center">
                 <input
                   type="radio"
-                  id="center"
+                  id="align-center"
                   onChange={(e) => {
                     if (e.target.value === "on") {
                       setAlign("center");
@@ -226,7 +227,7 @@ export default function ThumbnailGenerator() {
                   }}
                   checked={align === "center"}
                 />
-                <label htmlFor="center">Center</label>
+                <label htmlFor="align-center">Center</label>
               </div>
               <div className="flex items-center">
                 <input
@@ -240,6 +241,49 @@ export default function ThumbnailGenerator() {
                   checked={align === "bottom"}
                 />
                 <label htmlFor="bottom">Bottom</label>
+              </div>
+            </fieldset>
+
+            <fieldset className="pb-4">
+              <legend>Justify</legend>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="left"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setJustify("left");
+                    }
+                  }}
+                  checked={justify === "left"}
+                />
+                <label htmlFor="left">Left</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="justify-center"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setJustify("center");
+                    }
+                  }}
+                  checked={justify === "center"}
+                />
+                <label htmlFor="justify-center">Center</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="right"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setJustify("right");
+                    }
+                  }}
+                  checked={justify === "right"}
+                />
+                <label htmlFor="right">Right</label>
               </div>
             </fieldset>
 
@@ -323,7 +367,10 @@ export default function ThumbnailGenerator() {
                     )}
                   >
                     <NextImage
-                      className={`h-full w-full object-cover`}
+                      className={cx(`h-full w-full object-cover`, {
+                        "object-left": justify === "left",
+                        "object-right": justify === "right",
+                      })}
                       src={bgPreview}
                       alt=""
                       height={bgHeight}
