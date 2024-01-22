@@ -292,7 +292,7 @@ export default function ThumbnailGenerator() {
                 Download Jpeg
               </Button>
             </div>
-            <p>
+            <p className="max-w-xs">
               Download might not work on some mobile browsers. For best support
               use Chrome on mobile.
             </p>
