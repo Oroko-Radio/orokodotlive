@@ -287,11 +287,15 @@ export default function ThumbnailGenerator() {
               </div>
             </fieldset>
 
-            <div className="text-black">
+            <div className="text-black mb-4">
               <Button onClick={() => download(thumbnail.current)}>
                 Download Jpeg
               </Button>
             </div>
+            <p>
+              Download might not work on some mobile browsers. For best support
+              use Chrome on mobile.
+            </p>
           </form>
         </div>
 
