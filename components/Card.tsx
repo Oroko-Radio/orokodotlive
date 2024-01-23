@@ -15,26 +15,28 @@ const Card = ({
   if (cardWidth === "featured") {
     return (
       <Link href={link} passHref>
-        <div className="grid grid-cols-2 p-8">
-          <div className="relative h-80 lg:h-full border-2 border-black">
-            {imageUrl && (
-              <Image
-                src={imageUrl}
-                alt={title}
-                layout="fill"
-                objectFit="cover"
-              />
-            )}
-            {mixcloudLink && (
-              <div className="absolute z-10 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
-                <PlayButton
-                  colorScheme="transparent"
-                  mixcloudLink={mixcloudLink}
+        <div className="grid xl:grid-cols-2 h-full xl:min-h-[600px]">
+          <div className="p-8 pb-0 xl:pb-8">
+            <div className="relative h-80 xl:h-full border-2 border-black self-center">
+              {imageUrl && (
+                <Image
+                  src={imageUrl}
+                  alt={title}
+                  layout="fill"
+                  objectFit="cover"
                 />
-              </div>
-            )}
+              )}
+              {mixcloudLink && (
+                <div className="absolute z-10 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                  <PlayButton
+                    colorScheme="transparent"
+                    mixcloudLink={mixcloudLink}
+                  />
+                </div>
+              )}
+            </div>
           </div>
-          <div className="p-8">{children}</div>
+          <div className="p-4 pt-0 xl:p-8 xl:pl-0">{children}</div>
         </div>
       </Link>
     );
