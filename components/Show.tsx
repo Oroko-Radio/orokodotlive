@@ -10,17 +10,19 @@ interface ShowProps {
 }
 
 export default function Show({ show, featured = false, cityColor }: ShowProps) {
-  const { date, title, artistsCollection, genresCollection, content } = show;
+  const { date, title, artistsCollection, genresCollection } = show;
 
   return (
     <div className="p-4 flex flex-col justify-between flex-1">
       <div>
-        <div className="flex items-center mb-4 pl-1">
-          <ConcentricCircles />
-          <p className="font-sans text-sm md:text-base font-semibold uppercase">
-            Featured Show
-          </p>
-        </div>
+        {featured && (
+          <div className="flex items-center mb-4 pl-1">
+            <ConcentricCircles />
+            <p className="font-sans text-sm md:text-base font-semibold uppercase">
+              Featured Show
+            </p>
+          </div>
+        )}
         <p className="font-sans text-sm md:text-base mb-2 font-semibold">
           {dayjs(date).format("DD MMM YYYY HH:mm") + "H"}
         </p>
