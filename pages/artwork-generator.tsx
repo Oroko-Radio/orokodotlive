@@ -23,6 +23,8 @@ export default function ThumbnailGenerator() {
   const [bgHeight, setBgHeight] = useState<number>(0);
   const [bgWidth, setBgWidth] = useState<number>(0);
   const [zoom, setZoom] = useState<string>("100");
+  const [align, setAlign] = useState<"center" | "top" | "bottom">("center");
+  const [justify, setJustify] = useState<"center" | "left" | "right">("center");
   const [color, setColor] = useState<"black" | "white">("black");
 
   useEffect(() => {
@@ -199,11 +201,103 @@ export default function ThumbnailGenerator() {
               </div>
             </fieldset>
 
-            <div className="text-black">
+            <div className="flex gap-16">
+              <fieldset className="pb-4">
+                <legend>Align</legend>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="top"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setAlign("top");
+                      }
+                    }}
+                    checked={align === "top"}
+                  />
+                  <label htmlFor="top">Top</label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="align-center"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setAlign("center");
+                      }
+                    }}
+                    checked={align === "center"}
+                  />
+                  <label htmlFor="align-center">Center</label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="bottom"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setAlign("bottom");
+                      }
+                    }}
+                    checked={align === "bottom"}
+                  />
+                  <label htmlFor="bottom">Bottom</label>
+                </div>
+              </fieldset>
+
+              <fieldset className="pb-4">
+                <legend>Justify</legend>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="left"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setJustify("left");
+                      }
+                    }}
+                    checked={justify === "left"}
+                  />
+                  <label htmlFor="left">Left</label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="justify-center"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setJustify("center");
+                      }
+                    }}
+                    checked={justify === "center"}
+                  />
+                  <label htmlFor="justify-center">Center</label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="right"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setJustify("right");
+                      }
+                    }}
+                    checked={justify === "right"}
+                  />
+                  <label htmlFor="right">Right</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div className="text-black mb-4">
               <Button onClick={() => download(thumbnail.current)}>
                 Download Jpeg
               </Button>
             </div>
+            <p className="max-w-xs">
+              Download might not work on some mobile browsers. For best support
+              use Chrome on mobile.
+            </p>
           </form>
         </div>
 
@@ -269,10 +363,20 @@ export default function ThumbnailGenerator() {
                 <div className="relative h-full">
                   <div
                     ref={imageRef}
-                    className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-full w-full`}
+                    className={cx(
+                      `absolute left-1/2 -translate-x-1/2 h-full w-full`,
+                      {
+                        "top-1/2 -translate-y-1/2": align === "center",
+                        "top-0": align === "top",
+                        "bottom-0": align === "bottom",
+                      }
+                    )}
                   >
                     <NextImage
-                      className={`h-full w-full object-cover`}
+                      className={cx(`h-full w-full object-cover`, {
+                        "object-left": justify === "left",
+                        "object-right": justify === "right",
+                      })}
                       src={bgPreview}
                       alt=""
                       height={bgHeight}
