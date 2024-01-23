@@ -15,15 +15,11 @@ export async function getStaticProps({ preview = false }) {
 export default function RadioPage({
   preview,
   shows,
-  upcomingShows,
-  featuredShows,
   genreCategories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Meta title="Radio" />
-      {upcomingShows.length > 0 && <UpcomingShows shows={upcomingShows} />}
-      <FeaturedShows shows={featuredShows} />
       <AllShows initialShows={shows} genreCategories={genreCategories} />
     </>
   );

@@ -2,7 +2,11 @@ import { useState, useRef, useEffect } from "react";
 
 const PADDINGS = 0;
 
-const useSliding = (elementWidth, countElements) => {
+const useSliding = (
+  elementWidth: number,
+  countElements: number,
+  slideByElementWidth = false
+) => {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [distance, setDistance] = useState(0);
@@ -17,11 +21,19 @@ const useSliding = (elementWidth, countElements) => {
   }, [containerRef, elementWidth]);
 
   const handlePrev = () => {
+    if (slideByElementWidth) {
+      setDistance(distance + elementWidth);
+      return;
+    }
     setViewed(viewed - totalInViewport);
     setDistance(distance + containerWidth);
   };
 
   const handleNext = () => {
+    if (slideByElementWidth) {
+      setDistance(distance - elementWidth);
+      return;
+    }
     setViewed(viewed + totalInViewport);
     setDistance(distance - containerWidth);
   };

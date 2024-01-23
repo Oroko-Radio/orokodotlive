@@ -10,18 +10,24 @@ interface SliderSubComponents {
   Card?: typeof SliderCard;
 }
 
+interface SliderProps {
+  children?: React.ReactNode;
+  slideByElementWidth?: boolean;
+}
+
 const SliderWrapper = ({ children }) => {
   return (
     <div className="mb-8 xl:mb-12 overflow-hidden relative">{children}</div>
   );
 };
 
-const Slider: React.FunctionComponent & SliderSubComponents = ({
+const Slider: React.FC<SliderProps> & SliderSubComponents = ({
+  slideByElementWidth,
   children,
 }) => {
   const { width, elementRef } = useSizeElement();
   const { handlePrev, handleNext, slideProps, containerRef, hasNext, hasPrev } =
-    useSliding(width, React.Children.count(children));
+    useSliding(width, React.Children.count(children), slideByElementWidth);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => hasNext && handleNext(),

@@ -119,5 +119,8 @@ export const ShowPreviewFragment = /* GraphQL */ `
         }
       }
     }
+    content {
+      json
+    }
   }
 `;

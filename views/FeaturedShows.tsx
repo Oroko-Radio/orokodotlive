@@ -17,9 +17,10 @@ const FeaturedShows = ({
         {heading}
       </h1>
 
-      <Slider>
+      <Slider slideByElementWidth>
         {shows.map((show, idx) => (
           <Slider.Card
+            cardWidth="featured"
             imageUrl={show.coverImage.url}
             title={show.title}
             link={`/radio/${show.slug}`}
@@ -27,7 +28,7 @@ const FeaturedShows = ({
             idx={idx}
             mixcloudLink={show.mixcloudLink}
           >
-            <Show show={show} cityColor="orange" />
+            <Show show={show} cityColor="orange" featured />
           </Slider.Card>
         ))}
       </Slider>

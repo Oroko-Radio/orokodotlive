@@ -172,3 +172,15 @@ export interface SinglePageData {
   coverImage: CoverImage;
   content: Content;
 }
+
+export interface CardProps {
+  imageUrl: string;
+  title: string;
+  link: string;
+  idx?: number;
+  children?: any;
+  cardWidth?: "half" | "quarter" | "featured";
+  playButton?: boolean;
+  mixcloudLink?: string;
+  bgColor?: "gray" | "white";
+}

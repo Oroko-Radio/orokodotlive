@@ -2,18 +2,7 @@ import React from "react";
 import cn from "classnames";
 import SliderContext from "./contexts/sliderContext";
 import Card from "./Card";
-
-interface CardProps {
-  imageUrl: string;
-  title: string;
-  link: string;
-  idx?: number;
-  children?: any;
-  cardWidth?: "half" | "quarter";
-  playButton?: boolean;
-  mixcloudLink?: string;
-  bgColor?: "gray" | "white";
-}
+import { CardProps } from "../types/shared";
 
 const SliderCard = ({
   imageUrl,
@@ -37,6 +26,7 @@ const SliderCard = ({
               "card-half": cardWidth === "half",
               "card-quarter": cardWidth === "quarter",
               "bg-orokoGray": bgColor === "gray",
+              "card-featured": cardWidth === "featured",
             }
           )}
         >

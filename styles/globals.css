@@ -57,26 +57,31 @@
   /* Card width */
 
   .card-half,
-  .card-quarter {
-    width: calc(100% - 0px);
+  .card-quarter,
+  .card-featured {
+    width: 100%;
   }
 
   @media only screen and (min-width: 768px) {
     .card-half,
     .card-quarter {
-      width: calc(50% - 0px);
+      width: 50%;
     }
   }
 
   @media only screen and (min-width: 1024px) {
     .card-quarter {
-      width: calc(25% - 0px);
+      width: 25%;
+    }
+
+    .card-featured {
+      width: 80%;
     }
   }
 
   @media only screen and (min-width: 2000px) {
     .card-half {
-      width: calc(25% - 0px);
+      width: 25%;
     }
   }
 
