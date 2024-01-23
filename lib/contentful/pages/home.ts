@@ -36,6 +36,46 @@ export async function getHomePage(limit = LIMITS.SHOWS) {
         }
       }
 
+      upcomingShows: showCollection(
+        limit: 30, 
+        where: { 
+          date_gt: "${dayjs().format("YYYY-MM-DD")}"
+        },
+        order: date_DESC
+      ) {
+        items {
+          title
+          date
+          slug
+          mixcloudLink
+          isFeatured
+          coverImage {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+          }
+          artistsCollection(limit: 4) {
+            items {
+              name
+              slug
+              city {
+                name
+              }
+            }
+          }
+          genresCollection(limit: 5) {
+            items {
+              name
+            }
+          }
+        }
+      }
+
       latestArticles: articleCollection(
         order: date_DESC
         where: { isFeatured: false }
@@ -69,6 +109,7 @@ export async function getHomePage(limit = LIMITS.SHOWS) {
     ),
     featuredShows: extractCollection<ShowInterface>(data, "featuredShows"),
     latestShows,
+    upcomingShows: extractCollection<ShowInterface>(data, "upcomingShows"),
     latestArticles: extractCollection<ArticleInterface>(data, "latestArticles"),
   };
 }

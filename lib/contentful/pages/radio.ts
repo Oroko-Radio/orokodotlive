@@ -170,7 +170,8 @@ export async function getUpcomingShows(preview: boolean) {
         where: { 
           date_gt: "${dayjs().format("YYYY-MM-DD")}"
         },
-        order: date_DESC) {
+        order: date_DESC
+      ) {
         items {
           title
           date

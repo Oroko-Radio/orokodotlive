@@ -13,7 +13,7 @@ export default function PatreonBanner() {
         "relative flex overflow-hidden justify-center h-20 xl:h-24 border-b-2 border-black",
         {
           "bg-orokoLightOrange": isHover,
-          "bg-orokoGreen": !isHover,
+          "bg-orokoGray": !isHover,
         }
       )}
     >
