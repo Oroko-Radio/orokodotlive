@@ -201,91 +201,93 @@ export default function ThumbnailGenerator() {
               </div>
             </fieldset>
 
-            <fieldset className="pb-4">
-              <legend>Alignment</legend>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="top"
-                  onChange={(e) => {
-                    if (e.target.value === "on") {
-                      setAlign("top");
-                    }
-                  }}
-                  checked={align === "top"}
-                />
-                <label htmlFor="top">Top</label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="align-center"
-                  onChange={(e) => {
-                    if (e.target.value === "on") {
-                      setAlign("center");
-                    }
-                  }}
-                  checked={align === "center"}
-                />
-                <label htmlFor="align-center">Center</label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="bottom"
-                  onChange={(e) => {
-                    if (e.target.value === "on") {
-                      setAlign("bottom");
-                    }
-                  }}
-                  checked={align === "bottom"}
-                />
-                <label htmlFor="bottom">Bottom</label>
-              </div>
-            </fieldset>
+            <div className="flex gap-16">
+              <fieldset className="pb-4">
+                <legend>Align</legend>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="top"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setAlign("top");
+                      }
+                    }}
+                    checked={align === "top"}
+                  />
+                  <label htmlFor="top">Top</label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="align-center"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setAlign("center");
+                      }
+                    }}
+                    checked={align === "center"}
+                  />
+                  <label htmlFor="align-center">Center</label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="bottom"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setAlign("bottom");
+                      }
+                    }}
+                    checked={align === "bottom"}
+                  />
+                  <label htmlFor="bottom">Bottom</label>
+                </div>
+              </fieldset>
 
-            <fieldset className="pb-4">
-              <legend>Justify</legend>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="left"
-                  onChange={(e) => {
-                    if (e.target.value === "on") {
-                      setJustify("left");
-                    }
-                  }}
-                  checked={justify === "left"}
-                />
-                <label htmlFor="left">Left</label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="justify-center"
-                  onChange={(e) => {
-                    if (e.target.value === "on") {
-                      setJustify("center");
-                    }
-                  }}
-                  checked={justify === "center"}
-                />
-                <label htmlFor="justify-center">Center</label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="right"
-                  onChange={(e) => {
-                    if (e.target.value === "on") {
-                      setJustify("right");
-                    }
-                  }}
-                  checked={justify === "right"}
-                />
-                <label htmlFor="right">Right</label>
-              </div>
-            </fieldset>
+              <fieldset className="pb-4">
+                <legend>Justify</legend>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="left"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setJustify("left");
+                      }
+                    }}
+                    checked={justify === "left"}
+                  />
+                  <label htmlFor="left">Left</label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="justify-center"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setJustify("center");
+                      }
+                    }}
+                    checked={justify === "center"}
+                  />
+                  <label htmlFor="justify-center">Center</label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="right"
+                    onChange={(e) => {
+                      if (e.target.value === "on") {
+                        setJustify("right");
+                      }
+                    }}
+                    checked={justify === "right"}
+                  />
+                  <label htmlFor="right">Right</label>
+                </div>
+              </fieldset>
+            </div>
 
             <div className="text-black mb-4">
               <Button onClick={() => download(thumbnail.current)}>
