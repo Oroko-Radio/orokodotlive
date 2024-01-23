@@ -5,11 +5,11 @@ import ConcentricCircles from "./ui/ConcentricCircles";
 
 interface ShowProps {
   show: ShowInterface;
-  featured: boolean;
+  featured?: boolean;
   cityColor?: "black" | "blue" | "orange" | "green" | "gray";
 }
 
-export default function Show({ show, featured, cityColor }: ShowProps) {
+export default function Show({ show, featured = false, cityColor }: ShowProps) {
   const { date, title, artistsCollection, genresCollection, content } = show;
 
   return (
