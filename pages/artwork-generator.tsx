@@ -332,7 +332,7 @@ export default function ThumbnailGenerator() {
           >
             <div
               className={cx(
-                "absolute bottom-40 left-20 z-10 grid max-w-[600px]",
+                "absolute bottom-40 left-20 z-10 grid max-w-[500px]",
                 {
                   "text-white": color === "white",
                   "text-black": color === "black",
@@ -340,16 +340,16 @@ export default function ThumbnailGenerator() {
               )}
             >
               <div
-                className={cx("flex border-b-2 pb-4 mb-4", {
+                className={cx("flex border-b-4 pb-4 mb-4", {
                   "border-white": color === "white",
                   "border-black": color === "black",
                 })}
               >
-                <ColorLogo className="w-40 pr-4 stroke-current" />
-                <p className="text-9xl leading-[110px] font-heading">
+                <ColorLogo className="w-[9.5rem] pr-4 stroke-current" />
+                <p className="text-[9rem] leading-[95px] font-heading">
                   Oroko
                   <br />
-                  Radio
+                  <span className="tracking-wider">Radio</span>
                 </p>
               </div>
               <div className="grid grid-cols-[2fr,1fr]">
@@ -367,7 +367,7 @@ export default function ThumbnailGenerator() {
                       {dayjs(dateTime).format("ddd DD MMM YYYY")}
                     </p>
                     <p className="font-semibold">
-                      {dayjs(dateTime).format("h:mmA")} -{" "}
+                      {dayjs(dateTime).format("h:mm")} -{" "}
                       {dayjs(dateTime)
                         .add(durationHr, "h")
                         .add(durationMin, "m")
