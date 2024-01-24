@@ -63,6 +63,26 @@ export default function ThumbnailGenerator() {
 
         <div className="bg-offBlack text-white grid">
           <form className="p-4">
+            <div className="p-2 mb-4 max-w-xs lg:max-w-sm text-sm lg:text-base text-white bg-red-600 border-red-400 border rounded-md">
+              <p className="uppercase mb-2">
+                For the title, please stick to one of the following formats:
+              </p>
+              <p className="mb-2">
+                1. [Show name] w/ [Artist name]
+                <br />
+                EXAMPLE: The Jinan Show w/ Jinan
+              </p>
+              <p className="mb-2">
+                2. [Show name]: [Artist name] invites [Guest]
+                <br />
+                EXAMPLE: The Jinan Show: Jinan invites Nico, Kike & Ben
+              </p>
+              <hr className="mb-2" />
+              <p>
+                Download might not work on some mobile browsers. For best
+                support use Chrome if you’re on mobile.
+              </p>
+            </div>
             <label htmlFor="title" className="block">
               Title
             </label>
@@ -294,10 +314,6 @@ export default function ThumbnailGenerator() {
                 Download Jpeg
               </Button>
             </div>
-            <p className="max-w-xs">
-              Download might not work on some mobile browsers. For best support
-              use Chrome on mobile.
-            </p>
           </form>
         </div>
 
