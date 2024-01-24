@@ -45,7 +45,7 @@ const Slider: React.FC<SliderProps> & SliderSubComponents = ({
 
   return (
     <SliderContext.Provider value={{ elementRef }}>
-      <SliderWrapper fullSize>
+      <SliderWrapper fullSize={fullSize}>
         <div
           {...handlers}
           className={cx("", {

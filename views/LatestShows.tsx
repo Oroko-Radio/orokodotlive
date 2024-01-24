@@ -2,8 +2,15 @@ import Link from "next/link";
 import Slider from "../components/Slider";
 import DotButton from "../components/ui/DotButton";
 import Show from "../components/Show";
+import { ShowInterface } from "../types/shared";
 
-const LatestShows = ({ shows, heading = "Latest Shows" }) => {
+const LatestShows = ({
+  shows,
+  heading = "Latest Shows",
+}: {
+  shows: ShowInterface[];
+  heading: string;
+}) => {
   return (
     <div className="overflow-hidden bg-orokoGreen border-b-2 border-black">
       <div className="flex justify-between py-8 px-4 md:px-8">
