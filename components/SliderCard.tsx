@@ -19,16 +19,14 @@ const SliderCard = ({
       return (
         <div
           ref={elementRef}
-          className={cn(
-            `inline-block flex-shrink-0 cursor-pointer border-2 border-black`,
-            {
-              "border-l-0": idx !== 0,
-              "card-half": cardWidth === "half",
-              "card-quarter": cardWidth === "quarter",
-              "bg-orokoGray": bgColor === "gray",
-              "card-featured": cardWidth === "featured",
-            }
-          )}
+          className={cn(`inline-block flex-shrink-0 cursor-pointer`, {
+            "border-l-0": idx !== 0,
+            "card-half": cardWidth === "half",
+            "card-quarter": cardWidth === "quarter",
+            "bg-orokoGray": bgColor === "gray",
+            "card-featured": cardWidth === "featured",
+            "border-2 border-black": cardWidth !== "featured",
+          })}
         >
           <Card
             mixcloudLink={mixcloudLink}

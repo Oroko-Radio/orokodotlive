@@ -7,17 +7,10 @@ interface FeaturedShowsProps {
   heading?: string;
 }
 
-const FeaturedShows = ({
-  shows,
-  heading = "Featured Shows",
-}: FeaturedShowsProps) => {
+const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
   return (
     <div className="overflow-hidden bg-orokoOrange border-b-2 border-black">
-      <h1 className="font-serif text-4xl md:text-5xl py-8 px-4 md:px-8">
-        {heading}
-      </h1>
-
-      <Slider slideByElementWidth>
+      <Slider slideByElementWidth fullSize>
         {shows.map((show, idx) => (
           <Slider.Card
             cardWidth="featured"
