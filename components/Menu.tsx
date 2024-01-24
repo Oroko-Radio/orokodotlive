@@ -20,7 +20,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
       )}
     >
       <nav className="mb-10">
-        <ul className="hidden sm:flex flex-col flex-wrap sm:flex-row xl:gap-8 justify-center items-center sm:space-x-2 space-y-4 sm:space-y-0">
+        <ul className="hidden sm:flex flex-col flex-wrap sm:flex-row xl:gap-6 justify-center items-center sm:space-x-2 space-y-4 sm:space-y-0">
           {links.map(({ name, url }, idx) => (
             <Link key={idx} href={url} passHref>
               <li
