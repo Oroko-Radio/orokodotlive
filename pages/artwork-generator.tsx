@@ -63,7 +63,7 @@ export default function ThumbnailGenerator() {
 
         <div className="bg-offBlack text-white grid">
           <form className="p-4">
-            <div className="p-2 mb-4 max-w-sm text-white bg-red-600 border-red-400 border rounded-md">
+            <div className="p-2 mb-4 max-w-xs lg:max-w-sm text-sm lg:text-base text-white bg-red-600 border-red-400 border rounded-md">
               <p className="uppercase mb-2">
                 For the title, please stick to one of the following formats:
               </p>
