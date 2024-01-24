@@ -353,7 +353,9 @@ export default function ThumbnailGenerator() {
                 </p>
               </div>
               <div className="grid grid-cols-[2fr,1fr]">
-                <p className="text-2xl break-words uppercase pr-8">{title}</p>
+                <p className="text-2xl font-semibold break-words uppercase pr-8">
+                  {title}
+                </p>
                 {dateTime ? (
                   <div
                     className={cx("justify-self-end text-lg uppercase", {
@@ -361,8 +363,10 @@ export default function ThumbnailGenerator() {
                       "text-black": color === "black",
                     })}
                   >
-                    <p>{dayjs(dateTime).format("ddd DD MMM YYYY")}</p>
-                    <p>
+                    <p className="font-semibold">
+                      {dayjs(dateTime).format("ddd DD MMM YYYY")}
+                    </p>
+                    <p className="font-semibold">
                       {dayjs(dateTime).format("h:mmA")} -{" "}
                       {dayjs(dateTime)
                         .add(durationHr, "h")
