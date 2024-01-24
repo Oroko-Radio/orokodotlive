@@ -9,7 +9,7 @@ const LatestShows = ({
   heading = "Latest Shows",
 }: {
   shows: ShowInterface[];
-  heading: string;
+  heading?: string;
 }) => {
   return (
     <div className="overflow-hidden bg-orokoGreen border-b-2 border-black">
