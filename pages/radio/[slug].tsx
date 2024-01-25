@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import Tag from "../../components/Tag";
 import { renderRichTextWithImages } from "../../lib/rich-text";
 import TitleBox from "../../components/TitleBox";
+import { GenreTag } from "../../components/GenreTag";
 
 type Props = {
   show: ShowInterface;
@@ -78,22 +79,6 @@ export default function Show({ show, relatedShows, preview }: Props) {
     </SinglePage>
   );
 }
-
-const GenreTag = ({ genre }: { genre: GenreInterface }) => {
-  const { name, genreCategory } = genre;
-
-  if (!genreCategory || !genreCategory.name)
-    return <Tag text={name} transparent />;
-
-  return (
-    <Link
-      href={`/radio?category=${genreCategory.name}&genre=${name}#all-shows`}
-      passHref
-    >
-      <Tag text={name} transparent />
-    </Link>
-  );
-};
 
 export async function getStaticProps({ params, preview = false }) {
   const data = await getRadioPageSingle(params.slug, preview);

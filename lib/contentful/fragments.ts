@@ -109,6 +109,9 @@ export const ShowPreviewFragment = /* GraphQL */ `
     genresCollection(limit: 9) {
       items {
         name
+        genreCategory {
+          name
+        }
       }
     }
     artistsCollection(limit: 5) {

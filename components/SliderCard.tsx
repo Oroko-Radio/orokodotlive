@@ -19,13 +19,13 @@ const SliderCard = ({
       return (
         <div
           ref={elementRef}
-          className={cn(`inline-block flex-shrink-0 cursor-pointer`, {
+          className={cn(`inline-block flex-shrink-0`, {
             "border-l-0": idx !== 0,
             "card-half": cardWidth === "half",
             "card-quarter": cardWidth === "quarter",
             "bg-orokoGray": bgColor === "gray",
             "card-featured": cardWidth === "featured",
-            "border-2 border-black": cardWidth !== "featured",
+            "border-2 border-black cursor-pointer": cardWidth !== "featured",
           })}
         >
           <Card
