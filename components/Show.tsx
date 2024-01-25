@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import Tag from "./Tag";
 import { ShowInterface } from "../types/shared";
+import FeaturedTag from "./FeaturedTag";
 
 interface ShowProps {
   show: ShowInterface;
@@ -8,7 +9,7 @@ interface ShowProps {
 }
 
 export default function Show({ show, cityColor }: ShowProps) {
-  const { date, title, artistsCollection, genresCollection } = show;
+  const { date, title, isFeatured, artistsCollection, genresCollection } = show;
 
   return (
     <div className="p-4 flex flex-col justify-between flex-1">
@@ -16,6 +17,7 @@ export default function Show({ show, cityColor }: ShowProps) {
         <p className="font-sans text-sm md:text-base mb-2 font-semibold">
           {dayjs(date).format("DD MMM YYYY HH:mm") + "H"}
         </p>
+        {isFeatured && <FeaturedTag />}
         <h1 className="font-heading card-leading text-4xl">{title}</h1>
         <h2 className="font-serif text-2xl lg:text-3xl mb-4">
           {" "}

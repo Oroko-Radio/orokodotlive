@@ -79,8 +79,8 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
                     <GenreTag genre={genre} key={idx} />
                   ))}
                 </div>
-                <div>
-                  <p className="hidden md:block mb-4">
+                <div className="hidden md:block">
+                  <p className="mb-4">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
                     eius quos enim ex ab debitis, deleniti natus molestiae
                     nihil! Aperiam doloribus dolore voluptate enim, aut

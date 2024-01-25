@@ -8,6 +8,7 @@ import Tag from "../../components/Tag";
 import { renderRichTextWithImages } from "../../lib/rich-text";
 import TitleBox from "../../components/TitleBox";
 import { GenreTag } from "../../components/GenreTag";
+import FeaturedTag from "../../components/FeaturedTag";
 
 type Props = {
   show: ShowInterface;
@@ -21,6 +22,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
     title,
     slug,
     date,
+    isFeatured,
     content,
     artistsCollection,
     genresCollection,
@@ -42,10 +44,11 @@ export default function Show({ show, relatedShows, preview }: Props) {
       >
         <div className="container max-w-5xl mx-auto">
           {date && (
-            <p className="hidden md:block mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-lg">
+            <p className="hidden md:block mb-4 font-sans font-semibold tracking-wide text-lg">
               {dayjs(date).format("ddd DD MMMM YYYY @ HH:mm") + "H"}
             </p>
           )}
+          {isFeatured && <FeaturedTag />}
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-0 font-heading md:mr-36 lg:mr-40">
             {title}
           </h1>
