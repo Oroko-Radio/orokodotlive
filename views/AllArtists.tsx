@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import Card from "../components/Card";
 import Tag from "../components/Tag";
 import { AllArtistEntry, CityInterface } from "../types/shared";
@@ -11,19 +11,17 @@ interface AllArtistsProps {
 const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
   const [residentFilter, setResidentFilter] = useState<string>("all");
   const [cityFilter, setCityFilter] = useState<string>("all");
-  const [filteredArtists, setFilteredArtists] =
-    useState<AllArtistEntry[]>(allArtists);
 
-  useEffect(() => {
-    setFilteredArtists(
-      allArtists.filter((artist) => {
-        if (cityFilter === "all" || cityFilter === artist.city.name) {
-          if (residentFilter === "all") return artist;
-          if (residentFilter === "residents") return artist.isResident;
-          if (residentFilter === "guests") return !artist.isResident;
-        }
-      })
-    );
+  const filteredArtists = useMemo<AllArtistEntry[]>(() => {
+    return allArtists.filter((artist) => {
+      if (cityFilter === "all" || cityFilter === artist.city.name) {
+        if (residentFilter === "all") return artist;
+        if (residentFilter === "former residents")
+          return artist.isFormerResident;
+        if (residentFilter === "residents") return artist.isResident;
+        if (residentFilter === "guests") return !artist.isResident;
+      }
+    });
   }, [cityFilter, residentFilter, allArtists]);
 
   return (
@@ -35,10 +33,12 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
         <select
           className="appearance-none pr-16 self-center bg-transparent border-black border-2 text-lg md:text-2xl text-black"
           onChange={(e) => setResidentFilter(e.target.value)}
+          value={residentFilter}
         >
           <option value="all">RESIDENTS & GUESTS</option>
           <option value="residents">RESIDENTS</option>
           <option value="guests">GUESTS</option>
+          <option value="former residents">FORMER RESIDENTS</option>
         </select>
       </div>
       <select

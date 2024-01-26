@@ -125,6 +125,7 @@ export type AllArtistEntry = {
     name: string;
   };
   isResident: boolean;
+  isFormerResident: boolean;
   photo: CoverImage;
 };
 
