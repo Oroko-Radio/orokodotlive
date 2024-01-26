@@ -24,13 +24,17 @@ export async function getHomePage(limit = LIMITS.SHOWS) {
       featuredShows: showCollection(
         where: { isFeatured: true }
         order: date_DESC
+        limit: 8
       ) {
         items {
           ...ShowPreviewFragment
         }
       }
 
-      allShows: showCollection(limit: $limit) {
+      allShows: showCollection(
+        order: date_DESC
+        limit: $limit
+      ) {
         items {
           ...ShowPreviewFragment
         }

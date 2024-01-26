@@ -23,6 +23,7 @@ const useSliding = (
   const handlePrev = () => {
     if (slideByElementWidth) {
       setDistance(distance + elementWidth);
+      setViewed(viewed - 1);
       return;
     }
     setViewed(viewed - totalInViewport);
@@ -32,6 +33,7 @@ const useSliding = (
   const handleNext = () => {
     if (slideByElementWidth) {
       setDistance(distance - elementWidth);
+      setViewed(viewed + 1);
       return;
     }
     setViewed(viewed + totalInViewport);
