@@ -7,6 +7,7 @@ import { LivePlayerLoading } from "../components/LivePlayer";
 import "../styles/globals.css";
 import { debounce } from "../util";
 import { Analytics } from "@vercel/analytics/react";
+import SocialSection from "../components/SocialSection";
 
 const MixcloudPlayer = dynamic(() => import("../components/mixcloudPlayer"), {
   ssr: false,
@@ -51,6 +52,8 @@ function OrokoApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
 
       <MixcloudPlayer />
+
+      <SocialSection className="fixed bottom-4 right-8" />
       <Footer />
 
       <Analytics />
