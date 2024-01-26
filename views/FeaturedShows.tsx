@@ -67,10 +67,17 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
                 </div>
                 <div className="flex flex-wrap gap-1 mb-4">
                   {artistsCollection.items[0].city && (
-                    <Tag
-                      text={artistsCollection.items[0].city.name}
-                      color="orange"
-                    />
+                    <Link
+                      href={
+                        "/artists?city=" + artistsCollection.items[0].city.name
+                      }
+                      passHref
+                    >
+                      <Tag
+                        text={artistsCollection.items[0].city.name}
+                        color="orange"
+                      />
+                    </Link>
                   )}
                   {genresCollection.items.map((genre, idx) => (
                     <GenreTag genre={genre} key={idx} />

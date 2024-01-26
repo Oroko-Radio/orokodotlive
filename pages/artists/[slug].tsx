@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Tag from "../../components/Tag";
 import TitleBox from "../../components/TitleBox";
 import { getArtistsPageSingle } from "../../lib/contentful/pages/artists";
@@ -37,7 +38,9 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
           </h1>
           {city && city.name && (
             <div className="inline-block">
-              <Tag text={city.name} color="black" />
+              <Link href={"/artists?city=" + city.name} passHref>
+                <Tag text={city.name} color="black" />
+              </Link>
             </div>
           )}
         </div>

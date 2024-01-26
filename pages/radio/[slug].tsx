@@ -68,7 +68,12 @@ export default function Show({ show, relatedShows, preview }: Props) {
               ))}
           </h2>
           <div className="flex gap-1 flex-wrap">
-            <Tag text={artistsCollection.items[0].city.name} color="black" />
+            <Link
+              href={"/artists?city=" + artistsCollection.items[0].city.name}
+              passHref
+            >
+              <Tag text={artistsCollection.items[0].city.name} color="black" />
+            </Link>
             {genresCollection &&
               genresCollection.items.map((genre, idx) => (
                 <GenreTag genre={genre} key={idx} />
