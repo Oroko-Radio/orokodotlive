@@ -16,21 +16,13 @@ const Header = () => {
 
   return (
     <div className="flex items-center justify-between py-2 xl:py-1 z-50 bg-black">
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-2 md:gap-6">
         <Link href="/" passHref className="z-50">
           <div
             className="flex ml-4 md:ml-8 h-10 w-10"
             onClick={() => isMenuOpen && setIsMenuOpen(false)}
           >
-            <ColorLogo
-              className={cx(
-                "text-black stroke-current stroke-1 w-8 h-8 md:w-10 md:h-10",
-                {
-                  "text-black": isMenuOpen,
-                  "text-white": !isMenuOpen,
-                }
-              )}
-            />
+            <ColorLogo className="text-black stroke-current stroke-1 mt-1 md:mt-0 w-8 h-8 md:w-10 md:h-10" />
           </div>
         </Link>
         <div className="flex justify-start">
@@ -54,7 +46,7 @@ const Header = () => {
         className="flex items-center gap-4 z-50 text-black justify-self-end mr-4"
         onClick={() => isMenuOpen && setIsMenuOpen(false)}
       >
-        <div className="mt-1 md:mt-0.5 mr-2">
+        <div className="mt-0.5 mr-2">
           {router.pathname !== "/search" && (
             <Link href="/search" passHref>
               <div
