@@ -42,7 +42,7 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
               <div className="p-4 flex flex-col justify-between flex-1">
                 <div>
                   <FeaturedTag />
-                  <p className="font-sans text-sm md:text-base mb-2 font-semibold">
+                  <p className="font-sans text-sm md:text-base pb-2 lg:pt-2 lg:pb-4 font-semibold">
                     {dayjs(date).format("DD MMM YYYY HH:mm") + "H"}
                   </p>
                   <Link href={"/radio/" + slug} passHref>

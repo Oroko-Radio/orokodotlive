@@ -18,7 +18,8 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
         if (residentFilter === "all") return artist;
         if (residentFilter === "former residents")
           return artist.isFormerResident;
-        if (residentFilter === "residents") return artist.isResident;
+        if (residentFilter === "residents")
+          return artist.isResident && !artist.isFormerResident;
         if (residentFilter === "guests") return !artist.isResident;
       }
     });
