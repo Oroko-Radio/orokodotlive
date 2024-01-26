@@ -81,7 +81,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
       </div>
       <select
         className="md:hidden appearance-none self-center bg-transparent border-black border-2 text-lg md:text-2xl text-black"
-        value={filter}
+        value={city}
         onChange={(e) => {
           router.push(
             pathname + "?" + createQueryString("city", e.target.value)
