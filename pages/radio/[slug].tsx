@@ -85,12 +85,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
       <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8 mb-24">
         {content && renderRichTextWithImages(content)}
       </section>
-      {relatedShows.length > 0 && (
-        <RelatedShows
-          city={artistsCollection.items[0].city.name}
-          shows={relatedShows}
-        />
-      )}
+      {relatedShows.length > 0 && <RelatedShows shows={relatedShows} />}
     </SinglePage>
   );
 }

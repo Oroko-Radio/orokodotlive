@@ -48,9 +48,7 @@ export default function Artist({ artist, relatedShows, preview }: ArtistProps) {
       <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
         {content && renderRichTextWithImages(content)}
       </section>
-      {relatedShows.length > 0 && (
-        <RelatedShows city={city.name} shows={relatedShows} />
-      )}
+      {relatedShows.length > 0 && <RelatedShows shows={relatedShows} />}
     </SinglePage>
   );
 }
