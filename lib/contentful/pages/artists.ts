@@ -79,7 +79,7 @@ export async function getArtistsPageSingle(slug: string, preview: boolean) {
             }
           }
           linkedFrom {
-            showCollection(limit: 100) {
+            showCollection {
               items {
                 slug
                 title
@@ -98,6 +98,13 @@ export async function getArtistsPageSingle(slug: string, preview: boolean) {
                 genresCollection(limit: 9) {
                   items {
                     name
+                  }
+                }
+                artistsCollection(limit: 1) {
+                  items {
+                    city {
+                      name
+                    }
                   }
                 }
               }
