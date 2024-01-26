@@ -87,7 +87,7 @@ export const AllArtistFragment = /* GraphQL */ `
       height
     }
     isResident
-    isFormerResident
+    isAlumni
   }
 `;
 

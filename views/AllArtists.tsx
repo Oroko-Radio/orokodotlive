@@ -17,7 +17,7 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
   const router = useRouter();
 
   const city = searchParams.get("city") || "all";
-  const filter = searchParams.get("resident-filter") || "all";
+  const filter = searchParams.get("filter") || "all";
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -33,9 +33,9 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
     return allArtists.filter((artist) => {
       if (city === "all" || city === artist.city.name) {
         if (filter === "all") return artist;
-        if (filter === "former residents") return artist.isFormerResident;
+        if (filter === "alumni") return artist.isAlumni;
         if (filter === "residents")
-          return artist.isResident && !artist.isFormerResident;
+          return artist.isResident && !artist.isAlumni;
         if (filter === "guests") return !artist.isResident;
       }
     });
@@ -51,16 +51,14 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
           className="appearance-none pr-16 self-center bg-transparent border-black border-2 text-lg md:text-2xl text-black"
           onChange={(e) => {
             router.push(
-              pathname +
-                "?" +
-                createQueryString("resident-filter", e.target.value)
+              pathname + "?" + createQueryString("filter", e.target.value)
             );
           }}
         >
           <option value="all">RESIDENTS & GUESTS</option>
           <option value="residents">RESIDENTS</option>
           <option value="guests">GUESTS</option>
-          <option value="former residents">FORMER RESIDENTS</option>
+          <option value="alumni">ALUMNI</option>
         </select>
       </div>
       <select
