@@ -59,7 +59,7 @@ const Header = () => {
             <Link href="/search" passHref>
               <div
                 className={cx("cursor-pointer fill-current", {
-                  "text-white hidden sm:block": !isMenuOpen,
+                  "text-white": !isMenuOpen,
                 })}
               >
                 <SearchIcon />
@@ -68,7 +68,7 @@ const Header = () => {
           )}
         </div>
         {!isMenuOpen && (
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             <Link href="/radio" passHref>
               <Button size="sm" white transparent>
                 Shows
