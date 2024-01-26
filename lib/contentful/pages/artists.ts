@@ -108,6 +108,7 @@ export async function getArtistsPageSingle(slug: string, preview: boolean) {
                     }
                   }
                 }
+                isFeatured
               }
             }
           }
