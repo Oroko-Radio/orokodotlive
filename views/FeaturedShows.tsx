@@ -5,6 +5,7 @@ import ConcentricCircles from "../components/ui/ConcentricCircles";
 import Tag from "../components/Tag";
 import Link from "next/link";
 import { GenreTag } from "../components/GenreTag";
+import FeaturedTag from "../components/FeaturedTag";
 
 interface FeaturedShowsProps {
   shows: ShowInterface[];
@@ -21,6 +22,7 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
               title,
               slug,
               date,
+              lead,
               coverImage,
               mixcloudLink,
               artistsCollection,
@@ -39,12 +41,7 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
             >
               <div className="p-4 flex flex-col justify-between flex-1">
                 <div>
-                  <div className="flex items-center mb-4 pl-1">
-                    <ConcentricCircles />
-                    <p className="font-sans text-sm md:text-base font-semibold uppercase">
-                      Featured Show
-                    </p>
-                  </div>
+                  <FeaturedTag />
                   <p className="font-sans text-sm md:text-base mb-2 font-semibold">
                     {dayjs(date).format("DD MMM YYYY HH:mm") + "H"}
                   </p>
@@ -79,20 +76,14 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
                     <GenreTag genre={genre} key={idx} />
                   ))}
                 </div>
-                <div className="hidden md:block">
-                  <p className="mb-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                    eius quos enim ex ab debitis, deleniti natus molestiae
-                    nihil! Aperiam doloribus dolore voluptate enim, aut
-                    reiciendis, cum ipsam veritatis eligendi iure molestias,
-                    minima ea unde soluta earum recusandae molestiae praesentium
-                    facilis deleniti esse? Corrupti repellendus temporibus
-                    voluptates! Alias, tempore natus?
-                  </p>
-                  <Link href={"/radio/" + slug} className="underline">
-                    Read more
-                  </Link>
-                </div>
+                {lead && (
+                  <div className="hidden md:block">
+                    <p className="mb-4">{lead}</p>
+                    <Link href={"/radio/" + slug} className="underline">
+                      Read more
+                    </Link>
+                  </div>
+                )}
               </div>
             </Slider.Card>
           )

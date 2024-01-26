@@ -85,6 +85,7 @@ export interface ShowInterface {
   slug: string;
   coverImage: CoverImage;
   isFeatured: boolean;
+  lead: string;
   artistsCollection: {
     items: ArtistInterface[];
   };

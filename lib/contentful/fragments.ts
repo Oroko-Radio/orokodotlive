@@ -95,6 +95,8 @@ export const ShowPreviewFragment = /* GraphQL */ `
     title
     slug
     date
+    isFeatured
+    lead
     mixcloudLink
     coverImage {
       sys {
@@ -121,9 +123,6 @@ export const ShowPreviewFragment = /* GraphQL */ `
           name
         }
       }
-    }
-    content {
-      json
     }
   }
 `;
