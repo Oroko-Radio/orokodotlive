@@ -53,7 +53,7 @@ function OrokoApp({ Component, pageProps }: AppProps) {
 
       <MixcloudPlayer />
 
-      <SocialSection className="fixed bottom-4 right-8" />
+      <SocialSection className="hidden lg:flex fixed bottom-4 right-8" />
       <Footer />
 
       <Analytics />

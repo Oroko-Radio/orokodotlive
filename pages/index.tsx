@@ -7,6 +7,7 @@ import AllNews from "../views/AllNews";
 import FeaturedShows from "../views/FeaturedShows";
 import LatestShows from "../views/LatestShows";
 import UpcomingShows from "../views/UpcomingShows";
+import SocialSection from "../components/SocialSection";
 
 export async function getStaticProps({ preview = false }) {
   return {
@@ -25,6 +26,7 @@ export default function HomePage({
     <main>
       <Meta title="Home" />
       <FeaturedShows shows={featuredShows} />
+      <SocialSection className="justify-center bg-orokoGreen py-4 border-b-2 border-black lg:hidden" />
       <LatestShows shows={latestShows} />
       <UpcomingShows shows={upcomingShows} />
       <PatreonBanner />
