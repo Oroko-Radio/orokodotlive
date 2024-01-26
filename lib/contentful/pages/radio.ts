@@ -299,23 +299,25 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
 
   const entryGenres = entry.genresCollection.items.map((genre) => genre.name);
 
-  const allShows = await getAllShows(preview);
+  const allShows = await getAllShows(preview, 500);
 
-  const relatedShows = allShows.filter((filterShow) => {
-    const currentShowGenres = filterShow.genresCollection.items.map(
-      (genre) => genre.name
-    );
+  const relatedShows = allShows
+    .filter((filterShow) => {
+      const currentShowGenres = filterShow.genresCollection.items.map(
+        (genre) => genre.name
+      );
 
-    const isRelatedShowFilter =
-      currentShowGenres.filter((genre) => entryGenres.includes(genre)).length >
-      0;
+      const isRelatedShowFilter =
+        currentShowGenres.filter((genre) => entryGenres.includes(genre))
+          .length > 0;
 
-    const isNotOwnShow = filterShow.slug !== slug;
+      const isNotOwnShow = filterShow.slug !== slug;
 
-    const isPastFilter = dayjs(filterShow.date).isBefore(today);
+      const isPastFilter = dayjs(filterShow.date).isBefore(today);
 
-    return isNotOwnShow && isRelatedShowFilter && isPastFilter;
-  });
+      return isNotOwnShow && isRelatedShowFilter && isPastFilter;
+    })
+    .slice(0, 8);
 
   return {
     show: entry,
