@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Card from "../components/Card";
 import Tag from "../components/Tag";
 import { AllArtistEntry, CityInterface } from "../types/shared";
@@ -11,7 +11,7 @@ interface AllArtistsProps {
   cities: CityInterface[];
 }
 
-const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
+const AllArtists = ({ allArtists }: AllArtistsProps) => {
   const searchParams = useSearchParams()!;
   const pathname = usePathname();
   const router = useRouter();
@@ -31,15 +31,32 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
 
   const filteredArtists = useMemo<AllArtistEntry[]>(() => {
     return allArtists.filter((artist) => {
-      if (city === "all" || city === artist.city.name) {
-        if (filter === "all") return artist;
-        if (filter === "alumni") return artist.isAlumni;
-        if (filter === "residents")
-          return artist.isResident && !artist.isAlumni;
-        if (filter === "guests") return !artist.isResident;
-      }
+      if (filter === "all") return artist;
+      if (filter === "alumni") return artist.isAlumni;
+      if (filter === "residents") return artist.isResident && !artist.isAlumni;
+      if (filter === "guests") return !artist.isResident;
     });
-  }, [city, filter, allArtists]);
+  }, [filter, allArtists]);
+
+  const cities = useMemo<string[]>(() => {
+    const allCities = filteredArtists
+      .map(({ city }) => city.name)
+      .filter((value, index, self) => self.indexOf(value) === index);
+
+    return allCities;
+  }, [filteredArtists]);
+
+  const artists = useMemo(() => {
+    return filteredArtists.filter(
+      (artist) => artist.city.name === city || city === "all"
+    );
+  }, [filteredArtists, city]);
+
+  useEffect(() => {
+    if (city !== "all" && !cities.includes(city)) {
+      router.push(pathname + "?" + createQueryString("city", "all"));
+    }
+  }, [filter, cities, city, router, pathname, createQueryString]);
 
   return (
     <div className="bg-orokoYellow px-4 md:px-8">
@@ -49,13 +66,14 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
         </h1>
         <select
           className="appearance-none pr-16 self-center bg-transparent border-black border-2 text-lg md:text-2xl text-black"
+          value={filter}
           onChange={(e) => {
             router.push(
               pathname + "?" + createQueryString("filter", e.target.value)
             );
           }}
         >
-          <option value="all">RESIDENTS & GUESTS</option>
+          <option value="all">ALL</option>
           <option value="residents">RESIDENTS</option>
           <option value="guests">GUESTS</option>
           <option value="alumni">ALUMNI</option>
@@ -63,15 +81,15 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
       </div>
       <select
         className="md:hidden appearance-none self-center bg-transparent border-black border-2 text-lg md:text-2xl text-black"
+        value={filter}
         onChange={(e) => {
           router.push(
             pathname + "?" + createQueryString("city", e.target.value)
           );
         }}
-        // value={cityFilter}
       >
         <option value="all">ALL CITIES</option>
-        {cities.map(({ name }, idx) => (
+        {cities.map((name, idx) => (
           <option value={name} key={idx}>
             {name.toUpperCase()}
           </option>
@@ -81,12 +99,11 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
         <Link href={pathname + "?" + createQueryString("city", "all")} passHref>
           <Tag text="All" color={city === "all" ? "yellow" : null} />
         </Link>
-        {cities.map(({ name }, idx) => (
+        {cities.map((name, idx) => (
           <Link
             href={pathname + "?" + createQueryString("city", name)}
             passHref
             key={idx}
-            // onClick={() => setCityFilter(name)}
             className="cursor-pointer"
           >
             <Tag color={name === city ? "yellow" : null} text={name} />
@@ -95,7 +112,7 @@ const AllArtists = ({ allArtists, cities }: AllArtistsProps) => {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8">
-        {filteredArtists.map(({ name, slug, photo }, idx) => (
+        {artists.map(({ name, slug, photo }, idx) => (
           <div key={idx} className="border-black border-2">
             <Card
               imageUrl={photo && photo.url ? photo.url : null}
