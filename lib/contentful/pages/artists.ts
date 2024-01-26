@@ -100,8 +100,9 @@ export async function getArtistsPageSingle(slug: string, preview: boolean) {
                     name
                   }
                 }
-                artistsCollection(limit: 1) {
+                artistsCollection(limit: 5) {
                   items {
+                    name
                     city {
                       name
                     }
