@@ -38,6 +38,7 @@ export default function PlayerDropdown() {
               data.current_track.artwork_url_large ||
               "https://oroko.live/OROKO_OG_1200px.png"
             }
+            priority
             alt={data.current_track.title}
             layout="fill"
             objectFit="cover"
@@ -59,6 +60,8 @@ export default function PlayerDropdown() {
           <div className="hidden md:flex justify-center">
             <div className="relative border-2 border-black rounded-full overflow-hidden w-72 h-72 xl:w-96 xl:h-96 mb-4">
               <Image
+                quality={50}
+                priority
                 src={nextUp.coverImage.url}
                 alt={nextUp.title}
                 layout="fill"
