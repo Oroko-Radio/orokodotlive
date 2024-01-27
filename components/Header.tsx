@@ -15,7 +15,7 @@ const Header = () => {
   const router = useRouter();
 
   return (
-    <div className="flex items-center justify-between py-2 xl:py-1 z-50 bg-black">
+    <div className="grid grid-cols-3 lg:grid-cols-[100px,1fr,1fr] items-center py-2 xl:py-1 z-50 bg-black">
       <div className="flex items-center gap-2 md:gap-6">
         <Link href="/" passHref className="z-50">
           <div
@@ -25,22 +25,22 @@ const Header = () => {
             <ColorLogo className="text-black stroke-current stroke-1 mt-1 md:mt-0 w-8 h-8 md:w-10 md:h-10" />
           </div>
         </Link>
-        <div className="flex justify-start">
-          <Link href="/" passHref className="z-50">
-            <h1
-              onClick={() => isMenuOpen && setIsMenuOpen(false)}
-              className={cx(
-                "mb-0 inline font-heading text-4xl md:text-5xl xl:text-6xl",
-                {
-                  "text-black": isMenuOpen,
-                  "text-white": !isMenuOpen,
-                }
-              )}
-            >
-              Oroko Radio
-            </h1>
-          </Link>
-        </div>
+      </div>
+      <div className="flex justify-self-center lg:justify-self-start">
+        <Link href="/" passHref className="z-50">
+          <h1
+            onClick={() => isMenuOpen && setIsMenuOpen(false)}
+            className={cx(
+              "mb-0 whitespace-nowrap inline font-heading text-4xl md:text-5xl xl:text-6xl",
+              {
+                "text-black": isMenuOpen,
+                "text-white": !isMenuOpen,
+              }
+            )}
+          >
+            Oroko Radio
+          </h1>
+        </Link>
       </div>
       <div
         className="flex items-center gap-4 z-50 text-black justify-self-end mr-4"
