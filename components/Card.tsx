@@ -19,6 +19,7 @@ const Card = ({
           <div className="relative h-80 xl:h-full border-2 border-black self-center">
             {imageUrl && (
               <Image
+                quality={50}
                 src={imageUrl}
                 alt={title}
                 layout="fill"
@@ -53,7 +54,13 @@ const Card = ({
           )}
         >
           {imageUrl && (
-            <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
+            <Image
+              quality={50}
+              src={imageUrl}
+              alt={title}
+              layout="fill"
+              objectFit="cover"
+            />
           )}
           {mixcloudLink && (
             <div className="absolute z-10 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
