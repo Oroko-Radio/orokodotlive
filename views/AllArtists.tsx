@@ -41,7 +41,8 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
   const cities = useMemo<string[]>(() => {
     const allCities = filteredArtists
       .map(({ city }) => city.name)
-      .filter((value, index, self) => self.indexOf(value) === index);
+      .filter((value, index, self) => self.indexOf(value) === index)
+      .sort((a, b) => (a.toUpperCase() > b.toUpperCase() ? 1 : -1));
 
     return allCities;
   }, [filteredArtists]);
