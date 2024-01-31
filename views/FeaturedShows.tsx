@@ -39,7 +39,7 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
               idx={idx}
               mixcloudLink={mixcloudLink}
             >
-              <div className="p-4 flex flex-col justify-between flex-1">
+              <div className="py-4 lg:p-4 flex flex-col justify-between flex-1">
                 <div>
                   <FeaturedTag />
                   <p className="font-sans text-sm md:text-base pb-2 lg:pt-2 lg:pb-4 font-semibold">

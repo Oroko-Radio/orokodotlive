@@ -14,8 +14,8 @@ const Card = ({
 }: CardProps) => {
   if (cardWidth === "featured") {
     return (
-      <div className="grid xl:grid-cols-2 h-full xl:min-h-[600px] lg:border-r-2 border-black">
-        <div className="p-8 pb-0 xl:pb-8">
+      <div className="xl:grid xl:grid-cols-2 h-full xl:min-h-[600px] lg:border-r-2 border-black">
+        <div className="p-4 lg:p-8 pb-0 xl:pb-8">
           <div className="relative h-80 xl:h-full border-2 border-black self-center">
             {imageUrl && (
               <Image
