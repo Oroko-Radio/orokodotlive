@@ -46,7 +46,7 @@ const Header = () => {
         className="flex items-center gap-4 z-50 text-black justify-self-end mr-4"
         onClick={() => isMenuOpen && setIsMenuOpen(false)}
       >
-        <div className="mt-0.5 mr-2">
+        <div className="lg:mr-2">
           {router.pathname !== "/search" && (
             <Link href="/search" passHref>
               <div

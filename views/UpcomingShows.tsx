@@ -6,7 +6,7 @@ import { ShowInterface } from "../types/shared";
 
 const UpcomingShows = ({
   shows,
-  heading = "Coming up on OROKO",
+  heading = "Coming up",
 }: {
   shows: ShowInterface[];
   heading?: string;

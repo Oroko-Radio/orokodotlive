@@ -26,10 +26,10 @@ export default function HomePage({
     <main>
       <Meta title="Home" />
       <FeaturedShows shows={featuredShows} />
+      <PatreonBanner />
       <SocialSection className="justify-center bg-orokoGreen py-4 border-b-2 border-black lg:hidden" />
       <LatestShows shows={latestShows} />
       <UpcomingShows shows={upcomingShows} />
-      <PatreonBanner />
       <AllNews articles={featuredArticles} heading="News" bgColor="gray" home />
       <NewsletterSection />
     </main>

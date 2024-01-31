@@ -10,10 +10,10 @@ export default function PatreonBanner() {
     <div
       ref={element}
       className={cx(
-        "relative flex overflow-hidden justify-center h-20 xl:h-24 border-b-2 border-black",
+        "relative flex overflow-hidden bg-orokoLightOrange justify-center h-20 xl:h-24 border-b-2 border-black",
         {
           "bg-orokoLightOrange": isHover,
-          "bg-orokoGray": !isHover,
+          // "bg-orokoGray": !isHover,
         }
       )}
     >

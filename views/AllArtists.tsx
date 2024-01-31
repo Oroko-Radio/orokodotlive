@@ -74,7 +74,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
             );
           }}
         >
-          <option value="all">ALL</option>
+          <option value="all">RESIDENTS & GUESTS</option>
           <option value="residents">RESIDENTS</option>
           <option value="guests">GUESTS</option>
           <option value="alumni">ALUMNI</option>
