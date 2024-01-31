@@ -7,6 +7,9 @@ import dayjs from "dayjs";
 import Tag from "../../components/Tag";
 import { renderRichTextWithImages } from "../../lib/rich-text";
 import TitleBox from "../../components/TitleBox";
+import { GenreTag } from "../../components/GenreTag";
+import FeaturedTag from "../../components/FeaturedTag";
+import RelatedShows from "../../views/RelatedShows";
 
 type Props = {
   show: ShowInterface;
@@ -20,6 +23,7 @@ export default function Show({ show, relatedShows, preview }: Props) {
     title,
     slug,
     date,
+    isFeatured,
     content,
     artistsCollection,
     genresCollection,
@@ -41,10 +45,11 @@ export default function Show({ show, relatedShows, preview }: Props) {
       >
         <div className="container max-w-5xl mx-auto">
           {date && (
-            <p className="hidden md:block mb-4 lg:mb-8 font-sans font-semibold tracking-wide text-lg">
+            <p className="hidden md:block mb-4 font-sans font-semibold tracking-wide text-lg">
               {dayjs(date).format("ddd DD MMMM YYYY @ HH:mm") + "H"}
             </p>
           )}
+          {isFeatured && <FeaturedTag />}
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-0 font-heading md:mr-36 lg:mr-40">
             {title}
           </h1>
@@ -64,7 +69,12 @@ export default function Show({ show, relatedShows, preview }: Props) {
               ))}
           </h2>
           <div className="flex gap-1 flex-wrap">
-            <Tag text={artistsCollection.items[0].city.name} color="black" />
+            <Link
+              href={"/artists?city=" + artistsCollection.items[0].city.name}
+              passHref
+            >
+              <Tag text={artistsCollection.items[0].city.name} color="black" />
+            </Link>
             {genresCollection &&
               genresCollection.items.map((genre, idx) => (
                 <GenreTag genre={genre} key={idx} />
@@ -75,25 +85,10 @@ export default function Show({ show, relatedShows, preview }: Props) {
       <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8 mb-24">
         {content && renderRichTextWithImages(content)}
       </section>
+      {relatedShows.length > 0 && <RelatedShows shows={relatedShows} />}
     </SinglePage>
   );
 }
-
-const GenreTag = ({ genre }: { genre: GenreInterface }) => {
-  const { name, genreCategory } = genre;
-
-  if (!genreCategory || !genreCategory.name)
-    return <Tag text={name} transparent />;
-
-  return (
-    <Link
-      href={`/radio?category=${genreCategory.name}&genre=${name}#all-shows`}
-      passHref
-    >
-      <Tag text={name} transparent />
-    </Link>
-  );
-};
 
 export async function getStaticProps({ params, preview = false }) {
   const data = await getRadioPageSingle(params.slug, preview);

@@ -57,6 +57,7 @@ export function renderRichTextWithImages(content: Content) {
             return (
               <div className="mb-6">
                 <Image
+                  quality={50}
                   src={asset.url}
                   alt={asset.title}
                   width={asset.width}

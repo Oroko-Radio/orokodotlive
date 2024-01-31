@@ -87,6 +87,7 @@ export const AllArtistFragment = /* GraphQL */ `
       height
     }
     isResident
+    isAlumni
   }
 `;
 
@@ -95,6 +96,8 @@ export const ShowPreviewFragment = /* GraphQL */ `
     title
     slug
     date
+    isFeatured
+    lead
     mixcloudLink
     coverImage {
       sys {
@@ -109,6 +112,9 @@ export const ShowPreviewFragment = /* GraphQL */ `
     genresCollection(limit: 9) {
       items {
         name
+        genreCategory {
+          name
+        }
       }
     }
     artistsCollection(limit: 5) {

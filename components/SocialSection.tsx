@@ -1,8 +1,8 @@
 import SocialIcon from "./SocialIcon";
 
-const SocialSection = () => {
+const SocialSection = ({ className }: { className?: string }) => {
   return (
-    <div className="flex gap-2">
+    <div className={className + " flex gap-2 z-20"}>
       <SocialIcon social="Instagram" />
       <SocialIcon social="TikTok" />
       <SocialIcon social="Twitter" />

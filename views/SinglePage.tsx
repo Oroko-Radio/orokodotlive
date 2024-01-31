@@ -33,6 +33,7 @@ const SinglePage = ({
                   className="relative w-full lg:w-3/5 xl:w-2/5 flex-shrink-0 lg:border-r-2 border-black"
                 >
                   <Image
+                    quality={50}
                     key={idx}
                     alt={coverImageAlt}
                     src={coverImage}
@@ -45,6 +46,7 @@ const SinglePage = ({
           ) : (
             coverImage && (
               <Image
+                quality={50}
                 src={coverImage}
                 layout="fill"
                 alt={coverImageAlt}

@@ -1,5 +1,4 @@
 import type { InferGetStaticPropsType } from "next";
-import Hero from "../components/Hero";
 import Meta from "../components/Meta";
 import NewsletterSection from "../components/NewsletterSection";
 import PatreonBanner from "../components/PatreonBanner";
@@ -7,6 +6,8 @@ import { getHomePage } from "../lib/contentful/pages/home";
 import AllNews from "../views/AllNews";
 import FeaturedShows from "../views/FeaturedShows";
 import LatestShows from "../views/LatestShows";
+import UpcomingShows from "../views/UpcomingShows";
+import SocialSection from "../components/SocialSection";
 
 export async function getStaticProps({ preview = false }) {
   return {
@@ -19,14 +20,16 @@ export default function HomePage({
   featuredArticles,
   featuredShows,
   latestShows,
+  upcomingShows,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <main>
       <Meta title="Home" />
-      <Hero />
-      <PatreonBanner />
-      <LatestShows shows={latestShows} />
       <FeaturedShows shows={featuredShows} />
+      <PatreonBanner />
+      <SocialSection className="justify-center bg-orokoGreen py-4 border-b-2 border-black lg:hidden" />
+      <LatestShows shows={latestShows} />
+      <UpcomingShows shows={upcomingShows} />
       <AllNews articles={featuredArticles} heading="News" bgColor="gray" home />
       <NewsletterSection />
     </main>

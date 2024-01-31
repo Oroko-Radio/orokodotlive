@@ -1,35 +1,100 @@
 import Slider from "../components/Slider";
 import { ShowInterface } from "../types/shared";
-import Show from "../components/Show";
+import dayjs from "dayjs";
+import ConcentricCircles from "../components/ui/ConcentricCircles";
+import Tag from "../components/Tag";
+import Link from "next/link";
+import { GenreTag } from "../components/GenreTag";
+import FeaturedTag from "../components/FeaturedTag";
 
 interface FeaturedShowsProps {
   shows: ShowInterface[];
   heading?: string;
 }
 
-const FeaturedShows = ({
-  shows,
-  heading = "Featured Shows",
-}: FeaturedShowsProps) => {
+const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
   return (
     <div className="overflow-hidden bg-orokoOrange border-b-2 border-black">
-      <h1 className="font-serif text-4xl md:text-5xl py-8 px-4 md:px-8">
-        {heading}
-      </h1>
-
-      <Slider>
-        {shows.map((show, idx) => (
-          <Slider.Card
-            imageUrl={show.coverImage.url}
-            title={show.title}
-            link={`/radio/${show.slug}`}
-            key={idx}
-            idx={idx}
-            mixcloudLink={show.mixcloudLink}
-          >
-            <Show show={show} cityColor="orange" />
-          </Slider.Card>
-        ))}
+      <Slider slideByElementWidth fullSize>
+        {shows.map(
+          (
+            {
+              title,
+              slug,
+              date,
+              lead,
+              coverImage,
+              mixcloudLink,
+              artistsCollection,
+              genresCollection,
+            },
+            idx
+          ) => (
+            <Slider.Card
+              cardWidth="featured"
+              imageUrl={coverImage.url}
+              title={title}
+              link={`/radio/${slug}`}
+              key={idx}
+              idx={idx}
+              mixcloudLink={mixcloudLink}
+            >
+              <div className="py-4 lg:p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <FeaturedTag />
+                  <p className="font-sans text-sm md:text-base pb-2 lg:pt-2 lg:pb-4 font-semibold">
+                    {dayjs(date).format("DD MMM YYYY HH:mm") + "H"}
+                  </p>
+                  <Link href={"/radio/" + slug} passHref>
+                    <div>
+                      <h1 className="font-heading card-leading text-4xl lg:text-5xl mb-2">
+                        {title}
+                      </h1>
+                      <h2 className="font-serif text-2xl lg:text-3xl mb-4">
+                        {" "}
+                        With{" "}
+                        {artistsCollection.items &&
+                          artistsCollection.items.map(({ name }, idx) => (
+                            <span key={idx}>
+                              <span>{name}</span>
+                              {idx !== artistsCollection.items.length - 1 &&
+                                ", "}
+                            </span>
+                          ))}
+                      </h2>
+                    </div>
+                  </Link>
+                </div>
+                <div className="flex flex-wrap gap-1 mb-4">
+                  {artistsCollection.items[0].city && (
+                    <Link
+                      href={
+                        "/artists?city=" + artistsCollection.items[0].city.name
+                      }
+                      passHref
+                    >
+                      <Tag
+                        text={artistsCollection.items[0].city.name}
+                        color="orange"
+                      />
+                    </Link>
+                  )}
+                  {genresCollection.items.map((genre, idx) => (
+                    <GenreTag genre={genre} key={idx} />
+                  ))}
+                </div>
+                {lead && (
+                  <div className="hidden md:block">
+                    <p className="mb-4">{lead}</p>
+                    <Link href={"/radio/" + slug} className="underline">
+                      Read more
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </Slider.Card>
+          )
+        )}
       </Slider>
     </div>
   );

@@ -85,6 +85,7 @@ export interface ShowInterface {
   slug: string;
   coverImage: CoverImage;
   isFeatured: boolean;
+  lead: string;
   artistsCollection: {
     items: ArtistInterface[];
   };
@@ -124,6 +125,7 @@ export type AllArtistEntry = {
     name: string;
   };
   isResident: boolean;
+  isAlumni: boolean;
   photo: CoverImage;
 };
 
@@ -171,4 +173,16 @@ export interface SinglePageData {
   subtitle: string;
   coverImage: CoverImage;
   content: Content;
+}
+
+export interface CardProps {
+  imageUrl: string;
+  title: string;
+  link: string;
+  idx?: number;
+  children?: any;
+  cardWidth?: "half" | "quarter" | "featured";
+  playButton?: boolean;
+  mixcloudLink?: string;
+  bgColor?: "gray" | "white";
 }

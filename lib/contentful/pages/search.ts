@@ -1,11 +1,6 @@
 import dayjs from "dayjs";
 import { client } from "../";
-import {
-  ArtistEntry,
-  Asset,
-  Content,
-  ShowInterface,
-} from "../../../types/shared";
+import { ShowInterface } from "../../../types/shared";
 
 export async function getSearchData(query: string, limit = 8) {
   const [showsCollection, articlesCollection, artistsCollection] =
@@ -71,6 +66,7 @@ export async function getSearchData(query: string, limit = 8) {
       coverImage: show.fields.coverImage as any,
       mixcloudLink: show.fields.mixcloudLink as string,
       isFeatured: show.fields.isFeatured as boolean,
+      lead: show.fields.lead as string,
       genresCollection: show.fields.genres as any,
       content: show.fields.content as any,
     };
