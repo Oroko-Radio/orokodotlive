@@ -45,7 +45,7 @@ export async function getHomePage(limit = LIMITS.SHOWS) {
         where: { 
           date_gt: "${dayjs().format("YYYY-MM-DD")}"
         },
-        order: date_ASC
+        order: date_DESC
       ) {
         items {
           title

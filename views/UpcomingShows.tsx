@@ -11,7 +11,23 @@ const UpcomingShows = ({
   shows: ShowInterface[];
   heading?: string;
 }) => {
-  if (shows.length < 1) return;
+  // Get the current date
+  const currentDate = new Date();
+
+  // Filter out past shows
+  const upcomingShows = shows.filter((show) => {
+    const showDate = new Date(show.date);
+    return showDate > currentDate;
+  });
+
+  // Sort upcoming shows in ascending order
+  upcomingShows.sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    return dateA - dateB;
+  });
+
+  if (upcomingShows.length < 1) return;
 
   return (
     <div className="overflow-hidden bg-orokoBlue border-b-2 border-black">
@@ -27,7 +43,7 @@ const UpcomingShows = ({
       </div>
 
       <Slider>
-        {shows.map((show, idx) => (
+        {upcomingShows.map((show, idx) => (
           <Slider.Card
             imageUrl={show.coverImage.url}
             title={show.title}
