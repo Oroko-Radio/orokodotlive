@@ -106,6 +106,11 @@ export async function getHomePage(limit = LIMITS.SHOWS) {
     .filter((show) => show.mixcloudLink)
     .splice(0, 8);
 
+  const upcomingShows = extractCollection<ShowInterface>(data, "upcomingShows")
+    .sort(sort.date_ASC)
+    .filter((show) => dayjs(show.date).isAfter(today))
+    .splice(0, 16);
+
   return {
     featuredArticles: extractCollection<ArticleInterface>(
       data,
@@ -113,7 +118,7 @@ export async function getHomePage(limit = LIMITS.SHOWS) {
     ),
     featuredShows: extractCollection<ShowInterface>(data, "featuredShows"),
     latestShows,
-    upcomingShows: extractCollection<ShowInterface>(data, "upcomingShows"),
+    upcomingShows,
     latestArticles: extractCollection<ArticleInterface>(data, "latestArticles"),
   };
 }
