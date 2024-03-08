@@ -12,7 +12,7 @@ import SocialSection from "../components/SocialSection";
 export async function getStaticProps({ preview = false }) {
   return {
     props: await getHomePage(),
-    revalidate: 60 * 60,
+    revalidate: 60 * 5,
   };
 }
 
