@@ -72,12 +72,7 @@ export default function ThumbnailGenerator() {
               <p className="mb-2">
                 1. [Show name] with [Artist name]
                 <br />
-                EXAMPLE: The Radio Show with Jinan
-              </p>
-              <p className="mb-2">
-                2. [Show name]: [Artist name] invites [Guest]
-                <br />
-                EXAMPLE: The Radio Show: Jinan invites Nico, Kike & Ben
+                EXAMPLE: The Radio Show with Jinan, Nico and Kike
               </p>
               <hr className="mb-2" />
               <p>
