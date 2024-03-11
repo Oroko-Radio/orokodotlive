@@ -27,6 +27,7 @@ export default function ThumbnailGenerator() {
   const [align, setAlign] = useState<"center" | "top" | "bottom">("center");
   const [justify, setJustify] = useState<"center" | "left" | "right">("center");
   const [color, setColor] = useState<"black" | "white">("black");
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function setBgSize() {
@@ -55,6 +56,15 @@ export default function ThumbnailGenerator() {
       imageRef.current.style.height = zoom + "%";
     }
   }, [zoom]);
+
+  function handleDownload() {
+    if (!title || !artists) {
+      setError("Both Title and Artists fields are required");
+      return;
+    }
+    setError(null);
+    download(thumbnail.current);
+  }
 
   return (
     <>
@@ -86,7 +96,7 @@ export default function ThumbnailGenerator() {
               </p>
             </div>
             <label htmlFor="title" className="block">
-              Title
+              Title*
             </label>
             <input
               id="title"
@@ -96,7 +106,7 @@ export default function ThumbnailGenerator() {
             />
 
             <label htmlFor="artists" className="block">
-              Artists
+              Artists*
             </label>
             <input
               id="artists"
@@ -322,9 +332,13 @@ export default function ThumbnailGenerator() {
             </div>
 
             <div className="text-black mb-4">
-              <Button onClick={() => download(thumbnail.current)}>
-                Download Jpeg
-              </Button>
+              <Button onClick={handleDownload}>Download Jpeg</Button>
+              <p className="text-white mt-4">* Required field</p>
+              {error && (
+                <p className="text-white bg-red-600 border-red-400 border rounded-md p-2 mt-4">
+                  {error}
+                </p>
+              )}
             </div>
           </form>
         </div>
