@@ -67,12 +67,17 @@ export default function ThumbnailGenerator() {
             <div className="p-2 mb-4 max-w-xs lg:max-w-sm text-sm lg:text-base text-white bg-red-600 border-red-400 border rounded-md">
               <p className="uppercase mb-2">
                 Put the name of the show as the Title, and use the Artists field
-                to list artists and guests:
+                to list artists and guests. Use one of the following formats:
               </p>
               <p className="mb-2">
                 1. [Show name] with [Artist name]
                 <br />
                 EXAMPLE: The Radio Show with Jinan, Nico and Kike
+              </p>
+              <p className="mb-2">
+                2. [Show name] invites [Artist name]
+                <br />
+                EXAMPLE: The Radio Show invites Jinan, Nico and Kike
               </p>
               <hr className="mb-2" />
               <p>
@@ -361,7 +366,7 @@ export default function ThumbnailGenerator() {
               </div>
               <div className="grid grid-cols-[9fr,5fr]">
                 <p className="text-2xl font-semibold break-words uppercase pr-2">
-                  {title} with {artists}
+                  {title} {artists}
                 </p>
                 {dateTime ? (
                   <div
