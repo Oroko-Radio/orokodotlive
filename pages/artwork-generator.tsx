@@ -12,6 +12,7 @@ export default function ThumbnailGenerator() {
   const imageRef = useRef<HTMLDivElement>(null);
 
   const [title, setTitle] = useState<string>("");
+  const [artists, setArtists] = useState<string>("");
   const [dateTime, setDateTime] = useState<Date | null>(null);
   const [durationHr, setDurationHr] = useState<number>(1);
   const [durationMin, setDurationMin] = useState<number>(0);
@@ -26,6 +27,7 @@ export default function ThumbnailGenerator() {
   const [align, setAlign] = useState<"center" | "top" | "bottom">("center");
   const [justify, setJustify] = useState<"center" | "left" | "right">("center");
   const [color, setColor] = useState<"black" | "white">("black");
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function setBgSize() {
@@ -55,6 +57,15 @@ export default function ThumbnailGenerator() {
     }
   }, [zoom]);
 
+  function handleDownload() {
+    if (!title || !artists) {
+      setError("Both Title and Artists fields are required");
+      return;
+    }
+    setError(null);
+    download(thumbnail.current);
+  }
+
   return (
     <>
       <Meta title="Artwork Generator" noIndex />
@@ -65,17 +76,18 @@ export default function ThumbnailGenerator() {
           <form className="p-4">
             <div className="p-2 mb-4 max-w-xs lg:max-w-sm text-sm lg:text-base text-white bg-red-600 border-red-400 border rounded-md">
               <p className="uppercase mb-2">
-                For the title, please stick to one of the following formats:
+                Put the name of the show as the Title, and use the Artists field
+                to list artists and guests. Use one of the following formats:
               </p>
               <p className="mb-2">
-                1. [Show name] w/ [Artist name]
+                1. [Show name] with [Artist name]
                 <br />
-                EXAMPLE: The Radio Show w/ Jinan
+                EXAMPLE: The Radio Show with Jinan, Nico and Kike
               </p>
               <p className="mb-2">
-                2. [Show name]: [Artist name] invites [Guest]
+                2. [Show name] invites [Artist name]
                 <br />
-                EXAMPLE: The Radio Show: Jinan invites Nico, Kike & Ben
+                EXAMPLE: The Radio Show invites Jinan, Nico and Kike
               </p>
               <hr className="mb-2" />
               <p>
@@ -84,13 +96,23 @@ export default function ThumbnailGenerator() {
               </p>
             </div>
             <label htmlFor="title" className="block">
-              Title
+              Title*
             </label>
             <input
               id="title"
               className="text-black border-black border px-4 py-2 mb-4 w-80 block"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+            />
+
+            <label htmlFor="artists" className="block">
+              Artists*
+            </label>
+            <input
+              id="artists"
+              className="text-black border-black border px-4 py-2 mb-4 w-80 block"
+              value={artists}
+              onChange={(e) => setArtists(e.target.value)}
             />
 
             <label htmlFor="date-time" className="block">
@@ -310,9 +332,13 @@ export default function ThumbnailGenerator() {
             </div>
 
             <div className="text-black mb-4">
-              <Button onClick={() => download(thumbnail.current)}>
-                Download Jpeg
-              </Button>
+              <Button onClick={handleDownload}>Download Jpeg</Button>
+              <p className="text-white mt-4">* Required field</p>
+              {error && (
+                <p className="text-white bg-red-600 border-red-400 border rounded-md p-2 mt-4">
+                  {error}
+                </p>
+              )}
             </div>
           </form>
         </div>
@@ -352,9 +378,9 @@ export default function ThumbnailGenerator() {
                   <span className="tracking-wider">Radio</span>
                 </p>
               </div>
-              <div className="grid grid-cols-[2fr,1fr]">
-                <p className="text-2xl font-semibold break-words uppercase pr-8">
-                  {title}
+              <div className="grid grid-cols-[9fr,5fr]">
+                <p className="text-2xl font-semibold break-words uppercase pr-2">
+                  {title} {artists}
                 </p>
                 {dateTime ? (
                   <div

@@ -6,7 +6,7 @@ import AllArtists from "../../views/AllArtists";
 export async function getStaticProps({ preview = false }) {
   return {
     props: { preview, ...(await getArtistsPage()) },
-    revalidate: 60 * 5,
+    revalidate: 60 * 60,
   };
 }
 
