@@ -58,8 +58,8 @@ export default function ThumbnailGenerator() {
   }, [zoom]);
 
   function handleDownload() {
-    if (!title || !artists) {
-      setError("Both Title and Artists fields are required");
+    if (!title || !artists || !dateTime) {
+      setError("The fields Title, Artists and Date and Time are required");
       return;
     }
     setError(null);
@@ -116,7 +116,7 @@ export default function ThumbnailGenerator() {
             />
 
             <label htmlFor="date-time" className="block">
-              Date and time
+              Date and time*
             </label>
             <input
               className="mb-4 text-black w-80"
