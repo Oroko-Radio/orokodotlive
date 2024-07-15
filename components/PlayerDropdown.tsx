@@ -2,13 +2,13 @@ import cn from "classnames";
 import Image from "next/legacy/image";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { OROKO_LIVE } from "../constants";
-import useRadioCo from "../hooks/useRadioCo";
+import { RADIO_CULT_STATION_ID } from "../constants";
+import useRadioCult from "../hooks/useRadioCult";
 import { getUpcomingShows } from "../lib/contentful/pages/radio";
 import { ShowInterface } from "../types/shared";
 
 export default function PlayerDropdown() {
-  const { data } = useRadioCo(OROKO_LIVE);
+  const { data } = useRadioCult(RADIO_CULT_STATION_ID);
   const [nextUp, setNextUp] = useState<ShowInterface | null>(null);
 
   async function getNextUp() {

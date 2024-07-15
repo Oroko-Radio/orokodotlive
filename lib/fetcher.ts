@@ -1,7 +1,8 @@
 export default async function fetcher<T>(
-  ...args: [RequestInfo, RequestInit]
+  url: string,
+  apiKey: string
 ): Promise<T> {
-  const r = await fetch(...args);
+  const r = await fetch(url, { headers: { "x-api-key": apiKey } });
 
   if (r.ok) {
     return r.json();
