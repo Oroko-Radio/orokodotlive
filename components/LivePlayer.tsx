@@ -38,9 +38,7 @@ export default function LivePlayer() {
 
   const { data } = useRadioCult(RADIO_CULT_STATION_ID);
 
-  console.log("DATA:", data);
-
-  const isOnline = data.success && data.result.status !== "offAir";
+  const isOnline = data?.success && data?.result.status !== "offAir";
 
   const player = useRef<HTMLAudioElement>(null);
   const source = useRef<HTMLSourceElement>(null);
