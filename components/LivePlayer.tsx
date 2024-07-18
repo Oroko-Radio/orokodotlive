@@ -38,8 +38,6 @@ export default function LivePlayer() {
 
   const { data } = useRadioCult(RADIO_CULT_STATION_ID);
 
-  console.log(data);
-
   const isOnline = data?.success && data?.result.status !== "offAir";
 
   const player = useRef<HTMLAudioElement>(null);
@@ -113,6 +111,9 @@ export default function LivePlayer() {
                       <div className="border-black border-l-2 h-full"></div>
                       <BroadcastingIndicator status={data.result.status} />
                       <h2 className="font-heading inline text-5xl xl:text-6xl">
+                        {isOnline && data.result.status === "defaultPlaylist"
+                          ? "(R) "
+                          : null}
                         {isOnline && data.result.metadata.title}
                       </h2>
                       <h2 className="font-serif inline text-4xl xl:text-5xl mx-10">
