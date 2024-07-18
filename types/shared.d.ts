@@ -213,11 +213,35 @@ export interface EventInterface {
       };
 }
 
+export interface MetadataInterface {
+  title: string;
+  duration: number;
+  album: string | undefined;
+  artist: string | undefined;
+  playoutStartUnixTimestamp: string;
+  playoutStartUnixIsoTimestamp: string;
+  artwork:
+    | {
+        original?: string;
+        default?: string;
+        "32x32"?: string;
+        "64x64"?: string;
+        "128x128"?: string;
+        "256x256"?: string;
+        "512x512"?: string;
+      }
+    | undefined;
+}
+
 export interface SuccessfulRadioCultResponse {
   success: true;
   result:
-    | { status: "schedule"; content: EventInterface }
-    | { status: "offAir"; content: "Off Air" }
+    | {
+        status: "schedule";
+        content: EventInterface;
+        metadata: MetadataInterface;
+      }
+    | { status: "offAir"; content: "Off Air"; metadata: MetadataInterface }
     | {
         status: "defaultPlaylist";
         content: {
@@ -225,6 +249,7 @@ export interface SuccessfulRadioCultResponse {
           numberOfSongs: number;
           duration: number;
         };
+        metadata: MetadataInterface;
       };
 }
 

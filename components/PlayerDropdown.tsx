@@ -33,27 +33,27 @@ export default function PlayerDropdown() {
     >
       <div className="flex-grow p-4 bg-orokoRed">
         <div className="relative border-2 border-black w-full h-72 xl:h-96 mb-4">
-          {/* <Image
+          <Image
             src={
-              data.current_track.artwork_url_large ||
+              (data.success && data.result.metadata.artwork["512x512"]) ||
               "https://oroko.live/OROKO_OG_1200px.png"
             }
             priority
-            alt={data.current_track.title}
+            alt={data.success && data.result.metadata.title}
             layout="fill"
             objectFit="cover"
             unoptimized
-          /> */}
+          />
         </div>
         <p className="font-sans font-semibold text-black text-sm mb-2">
           NOW PLAYING
         </p>
-        {/* <h1 className="font-heading text-3xl md:text-5xl text-black">
-          {data.current_track.title.split(" - ")[1]}
+        <h1 className="font-heading text-3xl md:text-5xl text-black">
+          {data.success && data.result.metadata.title}
         </h1>
         <h1 className="font-serif text-2xl md:text-4xl text-black mb-2">
-          With {data.current_track.title.split(" - ")[0]}
-        </h1> */}
+          With {data.success && data.result.metadata.artist}
+        </h1>
       </div>
       {nextUp && (
         <div className="bg-orokoBlue h-full p-4 text-black border-t-2 md:border-t-0 md:border-l-2 border-black">

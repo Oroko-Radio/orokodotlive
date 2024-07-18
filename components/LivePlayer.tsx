@@ -15,7 +15,7 @@ const BroadcastingIndicator = ({
 }: {
   status: "schedule" | "offAir" | "defaultPlaylist";
 }) => {
-  if (status === "schedule")
+  if (status !== "offAir")
     return (
       <div className="flex-grow-0 flex items-center">
         <div className="pl-10 pr-4">
@@ -38,6 +38,8 @@ export default function LivePlayer() {
 
   const { data } = useRadioCult(RADIO_CULT_STATION_ID);
 
+  console.log(data);
+
   const isOnline = data?.success && data?.result.status !== "offAir";
 
   const player = useRef<HTMLAudioElement>(null);
@@ -55,18 +57,18 @@ export default function LivePlayer() {
     if (
       "mediaSession" in navigator &&
       data?.success &&
-      data.result.status === "schedule"
+      data?.result.status !== "offAir"
     ) {
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: data.result.content.title,
+        title: data.result.metadata.title,
         artist: "Oroko Radio",
-        // artwork: [
-        //   {
-        //     src: data.current_track.artwork_url,
-        //     sizes: "1024x1024",
-        //     type: "image/png",
-        //   },
-        // ],
+        artwork: [
+          {
+            src: data.result.metadata.artwork["512x512"],
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
       });
     }
   }, [data]);
@@ -110,17 +112,12 @@ export default function LivePlayer() {
                     <div className="h-full flex align-middle items-center">
                       <div className="border-black border-l-2 h-full"></div>
                       <BroadcastingIndicator status={data.result.status} />
-                      <h1 className="font-heading inline text-5xl xl:text-6xl">
-                        {isOnline && data.result.status === "schedule"
-                          ? data.result.content.title.split(" - ")[1]
-                          : null}
-                      </h1>
-                      <h1 className="font-serif inline text-4xl xl:text-5xl mx-10">
-                        With{" "}
-                        {isOnline && data.result.status === "schedule"
-                          ? data.result.content.title.split(" - ")[0]
-                          : null}
-                      </h1>
+                      <h2 className="font-heading inline text-5xl xl:text-6xl">
+                        {isOnline && data.result.metadata.title}
+                      </h2>
+                      <h2 className="font-serif inline text-4xl xl:text-5xl mx-10">
+                        With {isOnline && data.result.metadata.artist}
+                      </h2>
                     </div>
                   </Banner>
                 </div>
