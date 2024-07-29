@@ -52,11 +52,7 @@ export default function LivePlayer() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (
-      "mediaSession" in navigator &&
-      data?.success &&
-      data?.result.status !== "offAir"
-    ) {
+    if ("mediaSession" in navigator && isOnline) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: data.result.metadata.title,
         artist: "Oroko Radio",
@@ -69,7 +65,7 @@ export default function LivePlayer() {
         ],
       });
     }
-  }, [data]);
+  }, [data, isOnline]);
 
   return (
     <>
