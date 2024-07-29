@@ -39,11 +39,16 @@ export default function PlayerDropdown() {
         <div className="relative border-2 border-black w-full h-72 xl:h-96 mb-4">
           <Image
             src={
-              data.result.metadata.artwork["512x512"] ||
-              "https://oroko.live/OROKO_OG_1200px.png"
+              data.result.metadata.artwork
+                ? data.result.metadata.artwork["512x512"]
+                : "https://oroko.live/OROKO_OG_1200px.png"
             }
             priority
-            alt={data.result.metadata.title}
+            alt={
+              data.result.status === "schedule"
+                ? data.result.content.title
+                : data.result.metadata.title
+            }
             layout="fill"
             objectFit="cover"
             unoptimized
@@ -54,7 +59,9 @@ export default function PlayerDropdown() {
         </p>
         <h1 className="font-heading text-3xl md:text-5xl text-black">
           {data.result.status === "defaultPlaylist" ? "(R) " : null}
-          {data.result.metadata.title}
+          {data.result.status === "schedule"
+            ? data.result.content.title
+            : data.result.metadata.title}
         </h1>
         <h1 className="font-serif text-2xl md:text-4xl text-black mb-2">
           With {data.result.metadata.artist}

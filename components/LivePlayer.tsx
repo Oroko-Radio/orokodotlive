@@ -58,7 +58,9 @@ export default function LivePlayer() {
         artist: "Oroko Radio",
         artwork: [
           {
-            src: data.result.metadata.artwork["512x512"],
+            src: data.result.metadata.artwork
+              ? data.result.metadata.artwork["512x512"]
+              : "https://oroko.live/OROKO_OG_1200px.png",
             sizes: "512x512",
             type: "image/png",
           },
@@ -110,7 +112,9 @@ export default function LivePlayer() {
                         {isOnline && data.result.status === "defaultPlaylist"
                           ? "(R) "
                           : null}
-                        {isOnline && data.result.metadata.title}
+                        {isOnline && data.result.status === "schedule"
+                          ? data.result.content.title
+                          : data.result.metadata.title}
                       </h2>
                       <h2 className="font-serif inline text-4xl xl:text-5xl mx-10">
                         With {isOnline && data.result.metadata.artist}
