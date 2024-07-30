@@ -37,8 +37,10 @@ export default function LivePlayer() {
   const AUDIO_SRC = "https://oroko-radio.radiocult.fm/stream";
 
   const { data } = useRadioCult(RADIO_CULT_STATION_ID);
+  const live = data?.live;
+  const artist = data?.artist;
 
-  const isOnline = data?.success && data?.result.status !== "offAir";
+  const isOnline = live?.success && live?.result.status !== "offAir";
 
   const player = useRef<HTMLAudioElement>(null);
   const source = useRef<HTMLSourceElement>(null);
@@ -54,12 +56,12 @@ export default function LivePlayer() {
   useEffect(() => {
     if ("mediaSession" in navigator && isOnline) {
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: data.result.metadata.title,
+        title: live.result.metadata.title,
         artist: "Oroko Radio",
         artwork: [
           {
-            src: data.result.metadata.artwork
-              ? data.result.metadata.artwork["512x512"]
+            src: live.result.metadata.artwork
+              ? live.result.metadata.artwork["512x512"]
               : "https://oroko.live/OROKO_OG_1200px.png",
             sizes: "512x512",
             type: "image/png",
@@ -67,7 +69,7 @@ export default function LivePlayer() {
         ],
       });
     }
-  }, [data, isOnline]);
+  }, [live, isOnline]);
 
   return (
     <>
@@ -105,19 +107,21 @@ export default function LivePlayer() {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                 >
                   <Banner color="red">
-                    <div className="h-full flex align-middle items-center">
-                      <div className="border-black border-l-2 h-full"></div>
-                      <BroadcastingIndicator status={data.result.status} />
+                    <div className="h-full flex align-middle items-center border-black border-l-2">
+                      <BroadcastingIndicator status={live.result.status} />
                       <h2 className="font-heading inline text-5xl xl:text-6xl">
-                        {isOnline && data.result.status === "defaultPlaylist"
+                        {isOnline && live.result.status === "defaultPlaylist"
                           ? "(R) "
                           : null}
-                        {isOnline && data.result.status === "schedule"
-                          ? data.result.content.title
-                          : data.result.metadata.title}
+                        {isOnline && live.result.status === "schedule"
+                          ? live.result.content.title
+                          : live.result.metadata.title}
                       </h2>
                       <h2 className="font-serif inline text-4xl xl:text-5xl mx-10">
-                        With {isOnline && data.result.metadata.artist}
+                        With{" "}
+                        {isOnline && live.result.status === "schedule"
+                          ? artist
+                          : live.result.metadata.artist}
                       </h2>
                     </div>
                   </Banner>

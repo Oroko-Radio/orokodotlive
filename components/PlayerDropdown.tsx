@@ -9,6 +9,9 @@ import { ShowInterface } from "../types/shared";
 
 export default function PlayerDropdown() {
   const { data } = useRadioCult(RADIO_CULT_STATION_ID);
+  const live = data?.live;
+  const artist = data?.artist;
+
   const [nextUp, setNextUp] = useState<ShowInterface | null>(null);
 
   async function getNextUp() {
@@ -21,7 +24,7 @@ export default function PlayerDropdown() {
     // eslint-disable-next-line
   }, []);
 
-  if (!data.success) {
+  if (!live.success) {
     return;
   }
 
@@ -39,15 +42,15 @@ export default function PlayerDropdown() {
         <div className="relative border-2 border-black w-full h-72 xl:h-96 mb-4">
           <Image
             src={
-              data.result.metadata.artwork
-                ? data.result.metadata.artwork["512x512"]
+              live.result.metadata.artwork
+                ? live.result.metadata.artwork["512x512"]
                 : "https://oroko.live/OROKO_OG_1200px.png"
             }
             priority
             alt={
-              data.result.status === "schedule"
-                ? data.result.content.title
-                : data.result.metadata.title
+              live.result.status === "schedule"
+                ? live.result.content.title
+                : live.result.metadata.title
             }
             layout="fill"
             objectFit="cover"
@@ -58,13 +61,16 @@ export default function PlayerDropdown() {
           NOW PLAYING
         </p>
         <h1 className="font-heading text-3xl md:text-5xl text-black">
-          {data.result.status === "defaultPlaylist" ? "(R) " : null}
-          {data.result.status === "schedule"
-            ? data.result.content.title
-            : data.result.metadata.title}
+          {live.result.status === "defaultPlaylist" ? "(R) " : null}
+          {live.result.status === "schedule"
+            ? live.result.content.title
+            : live.result.metadata.title}
         </h1>
         <h1 className="font-serif text-2xl md:text-4xl text-black mb-2">
-          With {data.result.metadata.artist}
+          With{" "}
+          {live.result.status === "schedule"
+            ? artist
+            : live.result.metadata.artist}
         </h1>
       </div>
       {nextUp && (
