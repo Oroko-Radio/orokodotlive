@@ -1,22 +1,21 @@
 import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/legacy/image";
 import usePlayerState from "../hooks/usePlayerState";
-import useRadioCo from "../hooks/useRadioCo";
+import useRadioCult from "../hooks/useRadioCult";
 import Banner from "./Banner";
 import Logo from "../icons/Logo";
 import PauseIcon from "../icons/PauseIcon";
 import PlayIcon from "../icons/PlayIcon";
 import DropdownButton from "./ui/DropdownButton";
 import PlayerDropdown from "./PlayerDropdown";
-import { OROKO_LIVE } from "../constants";
+import { RADIO_CULT_STATION_ID } from "../constants";
 
 const BroadcastingIndicator = ({
   status,
 }: {
-  status: "online" | "offline" | undefined;
+  status: "schedule" | "offAir" | "defaultPlaylist";
 }) => {
-  if (status === "online")
+  if (status !== "offAir")
     return (
       <div className="flex-grow-0 flex items-center">
         <div className="pl-10 pr-4">
@@ -35,11 +34,13 @@ const BroadcastingIndicator = ({
 };
 
 export default function LivePlayer() {
-  const AUDIO_SRC = `https://s5.radio.co/${OROKO_LIVE}/listen`;
+  const AUDIO_SRC = "https://oroko-radio.radiocult.fm/stream";
 
-  const { data } = useRadioCo(OROKO_LIVE);
+  const { data } = useRadioCult(RADIO_CULT_STATION_ID);
+  const live = data?.live;
+  const artist = data?.artist;
 
-  const isOnline = data?.status === "online";
+  const isOnline = live?.success && live?.result.status !== "offAir";
 
   const player = useRef<HTMLAudioElement>(null);
   const source = useRef<HTMLSourceElement>(null);
@@ -53,20 +54,22 @@ export default function LivePlayer() {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if ("mediaSession" in navigator && data?.current_track) {
+    if ("mediaSession" in navigator && isOnline) {
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: data.current_track.title,
+        title: live.result.metadata.title,
         artist: "Oroko Radio",
         artwork: [
           {
-            src: data.current_track.artwork_url,
-            sizes: "1024x1024",
+            src: live.result.metadata.artwork
+              ? live.result.metadata.artwork["512x512"]
+              : "https://oroko.live/OROKO_OG_1200px.png",
+            sizes: "512x512",
             type: "image/png",
           },
         ],
       });
     }
-  }, [data]);
+  }, [live, isOnline]);
 
   return (
     <>
@@ -104,15 +107,22 @@ export default function LivePlayer() {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                 >
                   <Banner color="red">
-                    <div className="h-full flex align-middle items-center">
-                      <div className="border-black border-l-2 h-full"></div>
-                      <BroadcastingIndicator status={data?.status} />
-                      <h1 className="font-heading inline text-5xl xl:text-6xl">
-                        {data?.current_track?.title.split(" - ")[1]}
-                      </h1>
-                      <h1 className="font-serif inline text-4xl xl:text-5xl mx-10">
-                        With {data?.current_track?.title.split(" - ")[0]}
-                      </h1>
+                    <div className="h-full flex align-middle items-center border-black border-l-2">
+                      <BroadcastingIndicator status={live.result.status} />
+                      <h2 className="font-heading inline text-5xl xl:text-6xl">
+                        {isOnline && live.result.status === "defaultPlaylist"
+                          ? "(R) "
+                          : null}
+                        {isOnline && live.result.status === "schedule"
+                          ? live.result.content.title
+                          : live.result.metadata.title}
+                      </h2>
+                      <h2 className="font-serif inline text-4xl xl:text-5xl mx-10">
+                        With{" "}
+                        {isOnline && live.result.status === "schedule"
+                          ? artist
+                          : live.result.metadata.artist}
+                      </h2>
                     </div>
                   </Banner>
                 </div>
