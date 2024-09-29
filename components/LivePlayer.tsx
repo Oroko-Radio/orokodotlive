@@ -35,7 +35,6 @@ const BroadcastingIndicator = ({
 
 export default function LivePlayer() {
   const AUDIO_SRC = "https://oroko-radio.radiocult.fm/stream";
-  const STREAM_AUDIO_SRC = "http://stream.radiojar.com/78cxy6wkxtzuv";
 
   const { data } = useRadioCult(RADIO_CULT_STATION_ID);
   const live = data?.live;
@@ -49,7 +48,7 @@ export default function LivePlayer() {
   const { isPlaying, play, pause } = usePlayerState({
     audioRef: player,
     sourceRef: source,
-    url: STREAM_AUDIO_SRC,
+    url: AUDIO_SRC,
   });
 
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
