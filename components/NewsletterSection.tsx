@@ -1,8 +1,28 @@
 import Image from "next/legacy/image";
-import NewsletterForm from "./forms/newsletterForm";
 import newsletterBG from "/public/static/newsletter-bg.svg";
+import useScript from "../hooks/useScript";
+import { useEffect } from "react";
 
 const NewsletterSection = () => {
+  useScript("https://substackapi.com/widget.js");
+
+  useEffect(() => {
+    if (window) {
+      window.CustomSubstackWidget = {
+        substackUrl: "orokoradio.substack.com",
+        placeholder: "example@gmail.com",
+        buttonText: "Subscribe",
+        theme: "custom",
+        colors: {
+          primary: "#FFFFFF",
+          input: "#FFFFFF",
+          email: "#000000",
+          text: "#000000",
+        },
+      };
+    }
+  }, []);
+
   return (
     <div className="relative py-20 flex items-center justify-center border-t-2 border-black">
       <Image
@@ -23,12 +43,7 @@ const NewsletterSection = () => {
         </p>
         <div className="w-full flex justify-center">
           <div className="md:w-96">
-            <iframe
-              className="border-2 border-black"
-              src="https://orokoradio.substack.com/embed"
-              width="100%"
-              height="160"
-            />
+            <div id="custom-substack-embed" />
           </div>
         </div>
       </div>
