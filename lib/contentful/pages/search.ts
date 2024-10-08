@@ -3,55 +3,75 @@ import { client } from "../";
 import { ShowInterface } from "../../../types/shared";
 
 export async function getSearchData(query: string, limit = 8) {
-  const [showsCollection, articlesCollection, artistsCollection] =
-    await Promise.all([
-      client.getEntries({
-        content_type: "show",
-        limit: limit,
+  const [
+    showsCollection,
+    showsByArtistCollection,
+    articlesCollection,
+    artistsCollection,
+  ] = await Promise.all([
+    client.getEntries({
+      content_type: "show",
+      limit: limit,
 
-        "fields.mixcloudLink[exists]": true,
-        "fields.date[lte]": dayjs().format("YYYY-MM-DD"),
+      "fields.date[lte]": dayjs().format("YYYY-MM-DD"),
+      "fields.title[match]": query,
 
-        query: query,
+      select: [
+        "fields.title",
+        "fields.slug",
+        "fields.date",
+        "fields.artists",
+        "fields.genres",
+        "fields.coverImage",
+        "fields.mixcloudLink",
+        "fields.isFeatured",
+        "fields.content",
+      ],
+    }),
+    client.getEntries({
+      content_type: "show",
+      limit: limit,
+      "fields.artists.sys.contentType.sys.id": "artist",
+      "fields.artists.fields.name[match]": query,
 
-        select: [
-          "fields.title",
-          "fields.slug",
-          "fields.date",
-          "fields.artists",
-          "fields.genres",
-          "fields.coverImage",
-          "fields.mixcloudLink",
-          "fields.isFeatured",
-          "fields.content",
-        ],
-      }),
-      client.getEntries({
-        content_type: "article",
-        limit: limit,
+      select: [
+        "fields.title",
+        "fields.slug",
+        "fields.date",
+        "fields.artists",
+        "fields.genres",
+        "fields.coverImage",
+        "fields.mixcloudLink",
+        "fields.isFeatured",
+        "fields.content",
+      ],
+    }),
+    client.getEntries({
+      content_type: "article",
+      limit: limit,
 
-        "fields.articleType[exists]": true,
+      "fields.articleType[exists]": true,
 
-        "fields.title[match]": query,
+      "fields.title[match]": query,
 
-        select: [
-          "fields.title",
-          "fields.slug",
-          "fields.date",
-          "fields.coverImage",
-          "fields.articleType",
-          "fields.city",
-        ],
-      }),
-      client.getEntries({
-        content_type: "artist",
-        limit: limit,
+      select: [
+        "fields.title",
+        "fields.slug",
+        "fields.date",
+        "fields.coverImage",
+        "fields.articleType",
+        "fields.city",
+      ],
+    }),
+    client.getEntries({
+      content_type: "artist",
+      limit: limit,
 
-        "fields.name[match]": query,
+      "fields.name[match]": query,
 
-        select: ["fields.name", "fields.slug", "fields.photo"],
-      }),
-    ]);
+      select: ["fields.name", "fields.slug", "fields.photo"],
+    }),
+  ]);
 
   const { items: shows } = showsCollection;
   const { items: articles } = articlesCollection;
