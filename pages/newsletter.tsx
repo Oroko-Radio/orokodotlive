@@ -48,7 +48,11 @@ export default function Newsletter({
             Sign up to the Oroko newsletter to stay up to date with all our
             upcoming events, projects, announcements, residencies and more.
           </p>
-          <NewsletterForm />
+          <iframe
+            src="https://orokoradio.substack.com/embed"
+            width="100%"
+            height="150"
+          />
         </section>
       </div>
       {content && (
