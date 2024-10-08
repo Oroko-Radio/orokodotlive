@@ -1,11 +1,15 @@
 import { useEffect } from "react";
-import useScript from "../hooks/useScript";
 
 export default function NewsletterWidget() {
-  useScript("https://substackapi.com/widget.js");
-
   useEffect(() => {
-    if (window) {
+    const script = document.createElement("script");
+    script.src = "https://substackapi.com/widget.js";
+    script.async = true;
+    script.defer = true;
+
+    document.body.appendChild(script);
+
+    if (window !== undefined) {
       window.CustomSubstackWidget = {
         substackUrl: "orokoradio.substack.com",
         placeholder: "example@gmail.com",
@@ -19,6 +23,10 @@ export default function NewsletterWidget() {
         },
       };
     }
+
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
 
   return <div id="custom-substack-embed" />;

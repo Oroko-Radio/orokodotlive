@@ -164,6 +164,10 @@
 
 /* Custom Substack embed */
 
+#custom-substack-embed {
+  @apply h-28;
+}
+
 #custom-substack-embed form {
   @apply border-0 font-sans px-2 sm:px-0;
 }
