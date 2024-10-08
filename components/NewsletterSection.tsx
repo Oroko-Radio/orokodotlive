@@ -21,8 +21,13 @@ const NewsletterSection = () => {
           Sign up to the Oroko newsletter to stay up to date with all our
           upcoming events, projects, announcements, residencies and more.
         </p>
-        <div className="w-full">
-          <NewsletterForm />
+        <div className="w-full flex justify-center">
+          <iframe
+            className="rounded-xl border-2 border-black"
+            src="https://orokoradio.substack.com/embed"
+            width="400"
+            height="160"
+          />
         </div>
       </div>
     </div>
