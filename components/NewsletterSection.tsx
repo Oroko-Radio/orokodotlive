@@ -22,12 +22,14 @@ const NewsletterSection = () => {
           upcoming events, projects, announcements, residencies and more.
         </p>
         <div className="w-full flex justify-center">
-          <iframe
-            className="rounded-xl border-2 border-black"
-            src="https://orokoradio.substack.com/embed"
-            width="400"
-            height="160"
-          />
+          <div className="md:w-96">
+            <iframe
+              className="border-2 border-black"
+              src="https://orokoradio.substack.com/embed"
+              width="100%"
+              height="160"
+            />
+          </div>
         </div>
       </div>
     </div>
