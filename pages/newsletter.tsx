@@ -1,10 +1,9 @@
 import { InferGetStaticPropsType } from "next";
-import React from "react";
-import NewsletterForm from "../components/forms/newsletterForm";
 import TitleBox from "../components/TitleBox";
 import { getNewsletterPage } from "../lib/contentful/pages/newsletter";
 import { renderRichTextWithImages } from "../lib/rich-text";
 import SinglePage from "../views/SinglePage";
+import NewsletterWidget from "../components/NewsletterWidget";
 
 export async function getStaticProps({ preview = false }) {
   return {
@@ -16,7 +15,6 @@ export async function getStaticProps({ preview = false }) {
 export default function Newsletter({
   title,
   subtitle,
-  coverImage,
   content,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
@@ -48,11 +46,9 @@ export default function Newsletter({
             Sign up to the Oroko newsletter to stay up to date with all our
             upcoming events, projects, announcements, residencies and more.
           </p>
-          <iframe
-            src="https://orokoradio.substack.com/embed"
-            width="100%"
-            height="150"
-          />
+          <div className="flex justify-center md:block">
+            <NewsletterWidget />
+          </div>
         </section>
       </div>
       {content && (
