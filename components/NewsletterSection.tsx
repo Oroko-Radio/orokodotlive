@@ -1,6 +1,6 @@
 import Image from "next/legacy/image";
-import NewsletterForm from "./forms/newsletterForm";
 import newsletterBG from "/public/static/newsletter-bg.svg";
+import NewsletterWidget from "./NewsletterWidget";
 
 const NewsletterSection = () => {
   return (
@@ -21,8 +21,10 @@ const NewsletterSection = () => {
           Sign up to the Oroko newsletter to stay up to date with all our
           upcoming events, projects, announcements, residencies and more.
         </p>
-        <div className="w-full">
-          <NewsletterForm />
+        <div className="w-full flex justify-center">
+          <div className="md:w-96">
+            <NewsletterWidget />
+          </div>
         </div>
       </div>
     </div>

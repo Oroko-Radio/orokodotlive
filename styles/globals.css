@@ -161,3 +161,27 @@
     display: none;
   }
 }
+
+/* Custom Substack embed */
+
+#custom-substack-embed {
+  @apply h-28;
+}
+
+#custom-substack-embed form {
+  @apply border-0 font-sans px-2 sm:px-0;
+}
+
+#custom-substack-embed button {
+  @apply rounded-full text-base md:text-lg lg:text-xl;
+  border: black 2px solid !important;
+}
+
+#custom-substack-embed input {
+  @apply rounded-full mr-2;
+  border: black 2px solid !important;
+}
+
+#custom-substack-embed p {
+  @apply text-black;
+}

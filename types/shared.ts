@@ -1,5 +1,11 @@
 import { Document } from "@contentful/rich-text-types";
 
+declare global {
+  interface Window {
+    CustomSubstackWidget: any;
+  }
+}
+
 export interface CoverImage {
   sys: { id: string };
   title: string;
@@ -41,7 +47,7 @@ export type ErrorPayload = {
 export interface ArticleInterface {
   title: string;
   subtitle?: string;
-  articleType: ArticleType;
+  articleType: "News" | "Blog" | "Event";
   city: CityInterface;
   author?: {
     name: string;
@@ -49,7 +55,6 @@ export interface ArticleInterface {
   date: string;
   slug: string;
   coverImage: CoverImage;
-  coverImagePosition: CoverImagePosition;
   content: Content;
 }
 

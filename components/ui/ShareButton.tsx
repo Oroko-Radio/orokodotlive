@@ -1,5 +1,6 @@
-import { isServer } from "../../util";
+import { isServer, mobileCheck } from "../../util";
 import dynamic from "next/dynamic";
+import Button from "./Button";
 
 const ShareMenu = dynamic(() => import("./ShareMenu"));
 
@@ -29,15 +30,17 @@ export default function ShareButton({
     }
   };
 
-  if (!isServer && navigator.share)
-    return (
-      <button
-        className="bg-white rounded-full px-4 lg:px-6 py-1.5 border-black border-2 font-semibold text-base md:text-lg lg:text-xl"
-        onClick={handleOnClick}
-      >
-        <span className="text-sm">Share</span>
-      </button>
-    );
+  if (!isServer && navigator.share) {
+    const isMobile = mobileCheck();
+
+    if (isMobile) {
+      return (
+        <Button onClick={handleOnClick}>
+          <span>Share</span>
+        </Button>
+      );
+    }
+  }
 
   return <ShareMenu url={URL} />;
 }
