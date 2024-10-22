@@ -45,9 +45,11 @@ const Apply = ({
       </TitleBox>
       <div className="bg-orokoYellow pt-6 md:pt-8 pb-16">
         <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8">
-          {applicationsOpen
-            ? "We are currently accepting applications to become an Oroko Radio resident - fill in the forms below to apply. Applications are accepted in English and French."
-            : "We are currently not accepting applications to become an Oroko Radio resident."}
+          <p className="mb-8 text-lg md:text-xl xl:text-2xl font-sans">
+            {applicationsOpen
+              ? "We are currently accepting applications to become an Oroko Radio resident - fill in the forms below to apply. Applications are accepted in English and French."
+              : "We are currently not accepting applications to become an Oroko Radio resident."}
+          </p>
         </section>
         {applicationsOpen && (
           <section className="container max-w-5xl mx-auto">
