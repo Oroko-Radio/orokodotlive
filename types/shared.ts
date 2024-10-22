@@ -266,3 +266,7 @@ export interface UnsuccessfulRadioCultResponse {
 export type RadioCultResponse =
   | SuccessfulRadioCultResponse
   | UnsuccessfulRadioCultResponse;
+
+export interface SettingsInterface {
+  applicationsOpen: boolean;
+}

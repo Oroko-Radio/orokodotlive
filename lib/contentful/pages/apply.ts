@@ -1,36 +1,17 @@
 import { graphql } from "..";
-import { SinglePageData } from "../../../types/shared";
+import { SettingsInterface } from "../../../types/shared";
 import { extractPage } from "../../../util";
 
-export async function getApplyPage(preview: boolean) {
-  const ApplyPageQuery = /* GraphQL */ `
-    query ApplyPageQuery($preview: Boolean) {
-      page(id: "2G4JeWoZo9wEbpnJ0H3Sa9", preview: $preview) {
-        title
-        subtitle
-        content {
-          json
-          links {
-            assets {
-              block {
-                sys {
-                  id
-                }
-                contentType
-                title
-                url
-              }
-            }
-          }
-        }
+export async function getApplyPage() {
+  const SettingsQuery = /* GraphQL */ `
+    query SettingsQuery {
+      settings(id: "24RpL8uS7lPDmThpVwOnOf") {
+        applicationsOpen
       }
     }
   `;
 
-  const data = await graphql(ApplyPageQuery, {
-    variables: { preview },
-    preview,
-  });
+  const data = await graphql(SettingsQuery);
 
-  return extractPage<SinglePageData>(data, "page");
+  return extractPage<SettingsInterface>(data, "settings");
 }

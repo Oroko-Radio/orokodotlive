@@ -5,19 +5,16 @@ import SinglePage from "../views/SinglePage";
 import DotButton from "../components/ui/DotButton";
 import { InferGetStaticPropsType } from "next";
 import { getApplyPage } from "../lib/contentful/pages/apply";
-import { renderRichTextWithImages } from "../lib/rich-text";
 
-export async function getStaticProps({ preview = false }) {
+export async function getStaticProps() {
   return {
-    props: { preview, ...(await getApplyPage(preview)) },
+    props: { ...(await getApplyPage()) },
     revalidate: 60 * 60,
   };
 }
 
 const Apply = ({
-  title,
-  subtitle,
-  content,
+  applicationsOpen,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <SinglePage
@@ -37,37 +34,43 @@ const Apply = ({
             Apply
           </p>
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 font-heading heading-leading md:mr-36">
-            {title}
+            Radio Residencies
           </h1>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl">
-            {subtitle}
+            {applicationsOpen
+              ? "Applications are now open!"
+              : "Applications are closed"}
           </h2>
         </div>
       </TitleBox>
       <div className="bg-orokoYellow pt-6 md:pt-8 pb-16">
         <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8">
-          {renderRichTextWithImages(content)}
+          {applicationsOpen
+            ? "We are currently accepting applications to become an Oroko Radio resident - fill in the forms below to apply. Applications are accepted in English and French."
+            : "We are currently not accepting applications to become an Oroko Radio resident."}
         </section>
-        <section className="container max-w-5xl mx-auto">
-          <div className="flex gap-4">
-            <Link
-              href="https://forms.gle/a4RTQhGMNDZvXgma9"
-              target="_blank"
-              rel="noopener nofollow noreferrer"
-              passHref
-            >
-              <DotButton size="large">Apply Now (EN)</DotButton>
-            </Link>
-            <Link
-              href="https://forms.gle/nwS9GJ8wcBaYaMZn9"
-              target="_blank"
-              rel="noopener nofollow noreferrer"
-              passHref
-            >
-              <DotButton size="large">Apply Now (FR)</DotButton>
-            </Link>
-          </div>
-        </section>
+        {applicationsOpen && (
+          <section className="container max-w-5xl mx-auto">
+            <div className="flex gap-4">
+              <Link
+                href="https://forms.gle/a4RTQhGMNDZvXgma9"
+                target="_blank"
+                rel="noopener nofollow noreferrer"
+                passHref
+              >
+                <DotButton size="large">Apply Now (EN)</DotButton>
+              </Link>
+              <Link
+                href="https://forms.gle/nwS9GJ8wcBaYaMZn9"
+                target="_blank"
+                rel="noopener nofollow noreferrer"
+                passHref
+              >
+                <DotButton size="large">Apply Now (FR)</DotButton>
+              </Link>
+            </div>
+          </section>
+        )}
       </div>
     </SinglePage>
   );
