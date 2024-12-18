@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Image from "next/legacy/image";
-import vercelLogo from "../images/vercel-logotype-light.png";
 import SocialSection from "./SocialSection";
 import Logo from "../icons/Logo";
 import { links } from "../menuPaths";
@@ -64,24 +62,6 @@ const Footer = () => {
                 je boska
               </span>
             </Link>{" "}
-          </div>
-          <div>
-            Powered by
-            <Link
-              href="https://vercel.com/?utm_source=oroko&utm_campaign=oss"
-              target="_blank"
-              rel="noopener nofollow noreferrer"
-              passHref
-            >
-              <div className="relative inline-block translate-y-0.5 h-3 w-16 cursor-pointer">
-                <Image
-                  src={vercelLogo}
-                  alt="Vercel logo"
-                  layout="fill"
-                  objectFit="contain"
-                />
-              </div>
-            </Link>
           </div>
         </div>
       </div>
