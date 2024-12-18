@@ -14,6 +14,10 @@ export const links: LinkInterface[] = [
     url: "/news",
   },
   {
+    name: "Shop",
+    url: "https://shop.oroko.live",
+  },
+  {
     name: "Support",
     url: "/support",
   },
