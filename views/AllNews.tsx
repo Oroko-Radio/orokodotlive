@@ -36,7 +36,7 @@ const AllNews = ({
           </Link>
         )}
       </div>
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 p-4 md:p-8 pb-10 md:pb-12">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6 p-4 md:p-8 pb-10 md:pb-12">
         {articles.map(
           (
             { title, date, slug, articleType, city, subtitle, coverImage },

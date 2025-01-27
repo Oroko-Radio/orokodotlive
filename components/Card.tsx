@@ -46,7 +46,7 @@ const Card = ({
       <div className="cursor-pointer h-full flex flex-col">
         <div
           className={cn(
-            "relative w-full h-80 md:h-72 2xl:h-96 border-b-2 border-black",
+            "relative w-full h-80 md:h-72 3xl:h-96 border-b-2 border-black",
             {
               "xl:h-80": cardWidth === "quarter",
               "lg:h-96 xl:h-[32rem]": cardWidth === "half",

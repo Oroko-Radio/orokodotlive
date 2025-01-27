@@ -19,12 +19,12 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
         }
       )}
     >
-      <nav className="mb-10">
-        <ul className="hidden sm:flex flex-col flex-wrap sm:flex-row xl:gap-6 justify-center items-center sm:space-x-2 space-y-4 sm:space-y-0">
+      <nav className="mt-4 mb-10 md:flex md:justify-center">
+        <ul className="hidden sm:flex flex-wrap justify-center max-w-[1000px] 2xl:max-w-none gap-4 xl:gap-6">
           {links.map(({ name, url }, idx) => (
             <Link key={idx} href={url} passHref>
               <li
-                className="flex-shrink-0 sm:my-6 xl:my-0"
+                className="flex-shrink-0 pb-4"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <DotButton size="large" transparent>

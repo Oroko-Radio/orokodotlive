@@ -15,7 +15,7 @@ const Header = () => {
   const router = useRouter();
 
   return (
-    <div className="grid grid-cols-3 lg:grid-cols-[100px,1fr,1fr] items-center py-2 xl:py-1 z-50 bg-black">
+    <div className="relative flex items-center justify-between py-2 xl:py-1 z-50 bg-black">
       <div className="flex items-center gap-2 md:gap-6">
         <Link href="/" passHref className="z-50">
           <div
@@ -25,22 +25,22 @@ const Header = () => {
             <ColorLogo className="text-black stroke-current stroke-1 mt-1 md:mt-0 w-8 h-8 md:w-10 md:h-10" />
           </div>
         </Link>
-      </div>
-      <div className="flex justify-self-center lg:justify-self-start">
-        <Link href="/" passHref className="z-50">
-          <h1
-            onClick={() => isMenuOpen && setIsMenuOpen(false)}
-            className={cx(
-              "mb-0 whitespace-nowrap inline font-heading text-4xl md:text-5xl xl:text-6xl",
-              {
-                "text-black": isMenuOpen,
-                "text-white": !isMenuOpen,
-              }
-            )}
-          >
-            Oroko Radio
-          </h1>
-        </Link>
+        <div className="absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:-translate-x-0">
+          <Link href="/" passHref className="z-50">
+            <h1
+              onClick={() => isMenuOpen && setIsMenuOpen(false)}
+              className={cx(
+                "mb-0 whitespace-nowrap inline font-heading text-4xl md:text-5xl xl:text-6xl",
+                {
+                  "text-black": isMenuOpen,
+                  "text-white": !isMenuOpen,
+                }
+              )}
+            >
+              Oroko Radio
+            </h1>
+          </Link>
+        </div>
       </div>
       <div
         className="flex items-center gap-4 z-50 text-black justify-self-end mr-4"
@@ -74,6 +74,11 @@ const Header = () => {
             <Link href="/news" passHref>
               <Button size="sm" white transparent>
                 News
+              </Button>
+            </Link>
+            <Link href="https://shop.oroko.live" passHref>
+              <Button size="sm" white transparent>
+                Shop
               </Button>
             </Link>
           </div>
