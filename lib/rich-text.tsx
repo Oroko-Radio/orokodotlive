@@ -74,6 +74,21 @@ export function renderRichTextWithImages(content: Content) {
 
           return null;
         },
+        [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
+          if (node.data.target.sys.contentType.sys.id === "youtubeEmbed") {
+            return (
+              <div className="youtube-iframe-container">
+                <iframe
+                  src={`https://www.youtube.com/embed/${node.data.target.fields.shareLink.slice(
+                    -11
+                  )}`}
+                  allowFullScreen
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                />
+              </div>
+            );
+          }
+        },
       },
     });
   }
