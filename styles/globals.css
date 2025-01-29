@@ -185,3 +185,15 @@
 #custom-substack-embed p {
   @apply text-black;
 }
+
+/* Custom YouTube embed */
+
+.youtube-iframe-container {
+  @apply my-8;
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.youtube-iframe-container iframe {
+  @apply absolute w-full h-full top-0 left-0;
+}
