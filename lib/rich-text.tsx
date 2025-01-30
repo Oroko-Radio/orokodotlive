@@ -13,8 +13,8 @@ const getEntryById = (id: string, entries: Entry[]) =>
 
 export function renderRichTextWithImages(content: Content) {
   if (content.links) {
-    const blockAssets = content.links.assets.block;
-    const entryAssets = content.links.entries.block;
+    const blockAssets = content.links.assets?.block || [];
+    const entryAssets = content.links.entries?.block || [];
 
     return documentToReactComponents(content.json, {
       renderNode: {
