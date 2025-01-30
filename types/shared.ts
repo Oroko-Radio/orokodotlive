@@ -19,6 +19,9 @@ export interface Links {
   assets: {
     block: Asset[];
   };
+  entries: {
+    block: Entry[];
+  };
 }
 
 export interface Content {
@@ -70,6 +73,13 @@ export interface Asset {
   url: string;
   width: number;
   height: number;
+}
+
+export interface Entry {
+  sys: { id: string };
+  __typename: string;
+  title?: string;
+  shareLink?: string;
 }
 
 export interface Links {

@@ -3,24 +3,18 @@ import Link from "next/link";
 
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Block, Inline, BLOCKS, INLINES } from "@contentful/rich-text-types";
-import { Asset, Content } from "../types/shared";
-
-interface EmbeddedAssetBlock extends Block {
-  data: {
-    target: {
-      sys: {
-        id: string;
-      };
-    };
-  };
-}
+import { Asset, Content, Entry } from "../types/shared";
 
 const getAssetById = (id: string, assets: Asset[]) =>
   assets.filter((asset) => asset.sys.id === id).pop();
 
+const getEntryById = (id: string, entries: Entry[]) =>
+  entries.filter((entry) => entry.sys.id === id).pop();
+
 export function renderRichTextWithImages(content: Content) {
   if (content.links) {
     const blockAssets = content.links.assets.block;
+    const entryAssets = content.links.entries.block;
 
     return documentToReactComponents(content.json, {
       renderNode: {
@@ -75,11 +69,13 @@ export function renderRichTextWithImages(content: Content) {
           return null;
         },
         [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
-          if (node.data.target.sys.contentType.sys.id === "youtubeEmbed") {
+          const entry = getEntryById(node.data.target.sys.id, entryAssets);
+
+          if (entry.__typename === "YouTubeEmbed") {
             return (
               <div className="youtube-iframe-container">
                 <iframe
-                  src={`https://www.youtube.com/embed/${node.data.target.fields.shareLink.slice(
+                  src={`https://www.youtube.com/embed/${entry.shareLink.slice(
                     -11
                   )}`}
                   allowFullScreen
