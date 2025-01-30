@@ -96,6 +96,18 @@ export async function getNewsPageSingle(slug: string, preview: boolean) {
                   height
                 }
               }
+              entries {
+                block {
+                  sys {
+                    id
+                  }
+                  __typename
+                  ... on YouTubeEmbed {
+                    title
+                    shareLink
+                  }
+                }
+              }
             }
           }
         }
