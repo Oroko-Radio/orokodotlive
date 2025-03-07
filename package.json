@@ -27,6 +27,7 @@
     "react-fast-marquee": "^1.6.0",
     "react-modal": "^3.16.1",
     "react-ridge-state": "4.1.7",
+    "react-spinners": "^0.15.0",
     "react-swipeable": "^7.0.0",
     "sharp": "^0.32.1",
     "swr": "^2.2.2",

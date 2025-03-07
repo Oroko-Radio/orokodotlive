@@ -7,6 +7,7 @@ import { useDebouncedState } from "@react-hookz/web";
 import useSearchData from "../hooks/useSearch";
 import { isEmpty } from "ts-extras";
 import Tag from "../components/Tag";
+import { ScaleLoader } from "react-spinners";
 
 export async function getStaticProps() {
   const { data } = await getSearchData("");
@@ -66,10 +67,10 @@ export default function SearchPage({
       )}
 
       {query && isValidating && (
-        <section className="bg-orokoBlue min-h-[200px]">
+        <section className="bg-orokoBlue">
           <div className="p-4 sm:p-8">
-            <div className="pt-10">
-              <p className="text-4xl xl:text-5xl font-serif">Searching...</p>
+            <div className="flex justify-center items-center min-h-[400px] pt-10">
+              <ScaleLoader />
             </div>
           </div>
         </section>
