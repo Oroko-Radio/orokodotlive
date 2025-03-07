@@ -2496,6 +2496,11 @@ react-ridge-state@4.1.7:
   resolved "https://registry.yarnpkg.com/react-ridge-state/-/react-ridge-state-4.1.7.tgz#bbb565017311f89b68d579984eb9b734c470c246"
   integrity sha512-rg10ib9xoaXEfsP4Bm/vnGTYDWmuKvGEoINGo46jsKoIl6rsxKcaucu0yU2y5hPdgoYuU+4/OprEkILePqBnqw==
 
+react-spinners@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.15.0.tgz#bb9536a3839ab4e1513bb98847d79cc1fc930b93"
+  integrity sha512-ZO3/fNB9Qc+kgpG3SfdlMnvTX6LtLmTnOogb3W6sXIaU/kZ1ydEViPfZ06kSOaEsor58C/tzXw2wROGQu3X2pA==
+
 react-swipeable@*, react-swipeable@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-7.0.0.tgz#7a12570ee435d35ac700511de338384aa78d12cd"
