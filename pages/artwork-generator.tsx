@@ -5,7 +5,7 @@ import Button from "../components/ui/Button";
 import NextImage from "next/image";
 import dayjs from "dayjs";
 import ColorLogo from "../icons/ColorLogo";
-import { download, getMeta } from "../util";
+import { domElToImage, getMeta } from "../util";
 
 export default function ThumbnailGenerator() {
   const thumbnail = useRef<HTMLDivElement | null>(null);
@@ -57,13 +57,17 @@ export default function ThumbnailGenerator() {
     }
   }, [zoom]);
 
-  function handleDownload() {
+  function handleImageDownload(artists: string, title: string, dateTime: Date) {
     if (!title || !artists || !dateTime) {
       setError("The fields Title, Artists and Date and Time are required");
       return;
     }
     setError(null);
-    download(thumbnail.current);
+
+    const fileName = [title, artists].join("_") + "-"
+    + dayjs(dateTime).format("DDMMYYYY") + "-" + aspectRatio
+
+    domElToImage(thumbnail.current, fileName)
   }
 
   return (
@@ -332,7 +336,7 @@ export default function ThumbnailGenerator() {
             </div>
 
             <div className="text-black mb-4">
-              <Button onClick={handleDownload}>Download Jpeg</Button>
+              <Button onClick={() => handleImageDownload(artists, title, dateTime)}>Download</Button>
               <p className="text-white mt-4">* Required field</p>
               {error && (
                 <p className="text-white bg-red-600 border-red-400 border rounded-md p-2 mt-4">
