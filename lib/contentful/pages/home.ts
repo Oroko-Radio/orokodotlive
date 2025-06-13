@@ -7,6 +7,7 @@ import {
   FeaturedArticleFragment,
   ShowPreviewFragment,
 } from "../fragments";
+import { getProducts } from "./products";
 
 export async function getHomePage(limit = LIMITS.SHOWS) {
   const HomePageQuery = /* GraphQL */ `
@@ -111,6 +112,10 @@ export async function getHomePage(limit = LIMITS.SHOWS) {
     .filter((show) => dayjs(show.date).isAfter(today))
     .splice(0, 16);
 
+  const [products] = await Promise.all([
+    getProducts(3),
+  ]);
+
   return {
     featuredArticles: extractCollection<ArticleInterface>(
       data,
@@ -120,5 +125,6 @@ export async function getHomePage(limit = LIMITS.SHOWS) {
     latestShows,
     upcomingShows,
     latestArticles: extractCollection<ArticleInterface>(data, "latestArticles"),
+    products,
   };
 }

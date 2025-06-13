@@ -280,3 +280,10 @@ export type RadioCultResponse =
 export interface SettingsInterface {
   applicationsOpen: boolean;
 }
+
+export interface Product {
+  title: string;
+  price: number;
+  link: string;
+  image: CoverImage;
+}
