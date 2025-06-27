@@ -2,6 +2,7 @@ import Link from "next/link";
 import Card from "../components/Card";
 import DotButton from "../components/ui/DotButton";
 import type { Product } from "../types/shared";
+import Slider from "../components/Slider";
 
 interface ProductsProps {
   products: Product[];
@@ -23,21 +24,24 @@ export default function Products({ products }: ProductsProps) {
         </Link>
       </div>
 
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 px-4 md:px-8 pb-10 md:pb-12">
+      <div>
+          <Slider >
         {products.map((product, idx) => (
-          <div key={product.link || idx} className="border-black border-2 bg-transparent">
-            <Card
+            <Slider.Card
+            key={product.link || idx}
               imageUrl={product.image?.url || ""}
               title={product.title}
               link={product.link}
+              idx={idx}
+              cardWidth="third"
             >
               <div className="p-4 bg-transparent">
                 <h3 className="font-heading text-4xl mb-2">{product.title}</h3>
-                <p className="font-sans text-xl font-semibold">€{product.price}</p>
+                <p className="font-sans text-xl font-medium">€{product.price}</p>
               </div>
-            </Card>
-          </div>
+            </Slider.Card>
         ))}
+          </Slider>
       </div>
     </div>
   );

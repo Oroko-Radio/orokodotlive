@@ -196,7 +196,7 @@ export interface CardProps {
   link: string;
   idx?: number;
   children?: any;
-  cardWidth?: "half" | "quarter" | "featured";
+  cardWidth?: "half" | "third" | "quarter" | "featured";
   playButton?: boolean;
   mixcloudLink?: string;
   bgColor?: "gray" | "white";
