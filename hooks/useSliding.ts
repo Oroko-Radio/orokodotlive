@@ -18,6 +18,10 @@ const useSliding = (
 
     setContainerWidth(containerWidth);
     setTotalInViewport(Math.floor(containerWidth / elementWidth));
+    
+    // Reset position when width changes (window resize)
+    setDistance(0);
+    setViewed(0);
   }, [containerRef, elementWidth]);
 
   const handlePrev = () => {

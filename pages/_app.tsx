@@ -20,6 +20,7 @@ const LivePlayer = dynamic(() => import("../components/LivePlayer"), {
 
 function OrokoApp({ Component, pageProps }: AppProps) {
   // reload page when resizing horizontally, to keep correct slider distance
+  /*
   const [prevWidth, setPrevWidth] = useState<number>(0);
 
   function handleResize() {
@@ -43,7 +44,7 @@ function OrokoApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     setPrevWidth(window.innerWidth);
   }, []);
-
+  */
   return (
     <Fragment>
       <Header />
