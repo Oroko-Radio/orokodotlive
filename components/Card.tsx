@@ -61,6 +61,7 @@ const Card = ({
               alt={title}
               layout="fill"
               objectFit="cover"
+              sizes={`(max-width: 768px) 100vw, (min-width: 769px) 50vw, (min-width: 1024px) ${cardWidth === "third" ? '33vw' : '25vw'}`}
             />
           )}
           {mixcloudLink && (
