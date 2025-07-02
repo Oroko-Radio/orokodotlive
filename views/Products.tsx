@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Card from "../components/Card";
 import DotButton from "../components/ui/DotButton";
 import type { Product } from "../types/shared";
 import Slider from "../components/Slider";
@@ -14,7 +13,7 @@ export default function Products({ products }: ProductsProps) {
   return (
     <div className="bg-orokoYellow border-b-2 border-black">
       <div className="flex justify-between py-8 px-4 md:px-8">
-        <h1 className="font-serif text-4xl md:text-5xl">Products</h1>
+        <h1 className="font-serif text-4xl md:text-5xl">Merch</h1>
         <Link href="https://shop.oroko.live/" target="_blank" rel="noopener noreferrer" passHref>
           <div className="hidden md:block mt-4">
             <DotButton transparent size="large">
@@ -25,7 +24,7 @@ export default function Products({ products }: ProductsProps) {
       </div>
 
       <div>
-          <Slider >
+          <Slider>
         {products.map((product, idx) => (
             <Slider.Card
             key={product.link || idx}
