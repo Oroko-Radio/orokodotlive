@@ -30,9 +30,9 @@ export default function HomePage({
       <FeaturedShows shows={featuredShows} />
       <PatreonBanner />
       <SocialSection className="justify-center bg-orokoGreen py-4 border-b-2 border-black lg:hidden" />
-      <LatestShows shows={latestShows} />
-      <Products products={products} />
       <UpcomingShows shows={upcomingShows} />
+      <Products products={products} />
+      <LatestShows shows={latestShows} />
       <AllNews articles={featuredArticles} heading="News" bgColor="gray" home />
       <NewsletterSection />
     </main>
