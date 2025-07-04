@@ -8,7 +8,7 @@ import DotButton from "../components/ui/DotButton";
 
 const AllActivations = ({
   activations,
-  heading = "All Activations",
+  heading = "Oroko Activations",
   home = false,
 }: {
   activations: ActivationInterface[];
@@ -20,17 +20,8 @@ const AllActivations = ({
       id="all-activations"
       className={cn("bg-offBlack")}
     >
-      <div className="flex justify-between py-8 px-4 md:px-8 pb-0">
+      <div className="py-8 px-4 md:px-8 pb-0">
         <h1 className="font-serif text-4xl md:text-5xl text-white">{heading}</h1>
-        {home && (
-          <Link href="/activations#all-activations" passHref>
-            <div className="hidden md:block mt-4">
-              <DotButton transparent size="large">
-                All Activations
-              </DotButton>
-            </div>
-          </Link>
-        )}
       </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6 p-4 md:p-8 pb-10 md:pb-12">
         {activations.map(
