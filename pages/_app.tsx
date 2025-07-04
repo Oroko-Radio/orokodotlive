@@ -1,11 +1,10 @@
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { LivePlayerLoading } from "../components/LivePlayer";
 import "../styles/globals.css";
-import { debounce } from "../util";
 import { Analytics } from "@vercel/analytics/react";
 import SocialSection from "../components/SocialSection";
 
