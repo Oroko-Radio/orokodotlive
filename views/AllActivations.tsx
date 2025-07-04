@@ -9,23 +9,19 @@ import DotButton from "../components/ui/DotButton";
 const AllActivations = ({
   activations,
   heading = "All Activations",
-  bgColor = "white",
   home = false,
 }: {
   activations: ActivationInterface[];
   heading?: string;
-  bgColor?: "white" | "gray";
   home?: boolean;
 }) => {
   return (
     <div
       id="all-activations"
-      className={cn("", {
-        "bg-orokoGray": bgColor === "gray",
-      })}
+      className={cn("bg-offBlack")}
     >
       <div className="flex justify-between py-8 px-4 md:px-8 pb-0">
-        <h1 className="font-serif text-4xl md:text-5xl">{heading}</h1>
+        <h1 className="font-serif text-4xl md:text-5xl text-white">{heading}</h1>
         {home && (
           <Link href="/activations#all-activations" passHref>
             <div className="hidden md:block mt-4">
@@ -50,12 +46,12 @@ const AllActivations = ({
                   link={`/activations/${slug}`}
                 >
                   <div className="p-4">
-                    <div className="flex flex-wrap gap-1 mb-6">
+                    <div className="flex flex-wrap items-center gap-1 mb-6">
                       {city && <Tag text={city.name} color="black" card />}
-                    </div>
-                    <p className="font-sans mb-2 font-medium">
+                    <p className="font-sans text-sm md:text-base ml-2 font-semibold">
                       {dayjs(year).format("YYYY")}
                     </p>
+                    </div>
                     <h1 className="font-heading card-leading mb-2 text-4xl">
                       {title}
                     </h1>
