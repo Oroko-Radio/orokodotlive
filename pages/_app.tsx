@@ -19,32 +19,6 @@ const LivePlayer = dynamic(() => import("../components/LivePlayer"), {
 });
 
 function OrokoApp({ Component, pageProps }: AppProps) {
-  // reload page when resizing horizontally, to keep correct slider distance
-  /*
-  const [prevWidth, setPrevWidth] = useState<number>(0);
-
-  function handleResize() {
-    if (
-      prevWidth > 0 &&
-      window.innerWidth !== prevWidth &&
-      location.pathname !== "/artwork-generator"
-    ) {
-      setPrevWidth(window.innerWidth);
-      location.reload();
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener("resize", debounce(handleResize, 500));
-    return () => {
-      window.removeEventListener("resize", debounce(handleResize, 500));
-    };
-  });
-
-  useEffect(() => {
-    setPrevWidth(window.innerWidth);
-  }, []);
-  */
   return (
     <Fragment>
       <Header />
