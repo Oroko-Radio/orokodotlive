@@ -88,3 +88,30 @@ export async function getArtistPathsToPreRender() {
 
   return paths;
 }
+
+export async function getActivationPathsToPreRender() {
+  const data = await graphql(/* GraphQL */ `
+    query ActivationPathsToPreRenderQuery {
+      activationCollection(
+        where: { slug_exists: true }
+        limit: 50
+        order: year_DESC
+      ) {
+        items {
+          slug
+        }
+      }
+    }
+  `);
+
+  const collection = extractCollection<{ slug: string }>(
+    data,
+    "activationCollection"
+  );
+
+  const paths = collection.map((el) => ({
+    params: { slug: el.slug },
+  }));
+
+  return paths;
+}

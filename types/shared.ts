@@ -61,6 +61,15 @@ export interface ArticleInterface {
   content: Content;
 }
 
+export interface ActivationInterface {
+  title: string;
+  city: CityInterface;
+  year: string;
+  slug: string;
+  coverImage: CoverImage;
+  content: Content;
+}
+
 export interface CityInterface {
   name: string;
 }
@@ -80,17 +89,6 @@ export interface Entry {
   __typename: string;
   title?: string;
   shareLink?: string;
-}
-
-export interface Links {
-  assets: {
-    block: Asset[];
-  };
-}
-
-export interface Content {
-  json: Document;
-  links?: Links;
 }
 
 export interface ShowInterface {
