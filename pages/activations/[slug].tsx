@@ -19,14 +19,7 @@ export default function Activation({
   preview,
   relatedActivations,
 }: ActivationProps) {
-  const {
-    coverImage,
-    title,
-    slug,
-    year,
-    city,
-    content,
-  } = activation;
+  const { coverImage, title, slug, year, city, content } = activation;
 
   return (
     <SinglePage
@@ -56,7 +49,7 @@ export default function Activation({
           </h1>
         </div>
       </TitleBox>
-      <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8 mb-24">
+      <section className="rich-text activation-content py-6 md:py-8 mb-24">
         {content && renderRichTextWithImages(content)}
       </section>
     </SinglePage>
