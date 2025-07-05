@@ -69,6 +69,48 @@ export const RelatedArticleFragment = /* GraphQL */ `
   }
 `;
 
+export const ActivationPreviewFragment = /* GraphQL */ `
+  fragment ActivationPreviewFragment on Activation {
+    city {
+      name
+    }
+    content {
+      json
+    }
+    coverImage {
+      sys {
+        id
+      }
+      title
+      description
+      url
+      width
+      height
+    }
+    year
+    slug
+    title
+  }
+`;
+
+export const RelatedActivationFragment = /* GraphQL */ `
+  fragment RelatedActivationFragment on Activation {
+    coverImage {
+      sys {
+        id
+      }
+      title
+      description
+      url
+      width
+      height
+    }
+    year
+    slug
+    title
+  }
+`;
+
 export const AllArtistFragment = /* GraphQL */ `
   fragment AllArtistFragment on Artist {
     name

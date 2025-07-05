@@ -141,6 +141,16 @@
     @apply mb-6 border-black;
   }
 
+  /* Special styling for activations content */
+
+  .activation-content :not(.image-block):not(.image-block *) {
+    @apply max-w-5xl mx-auto;
+  }
+
+  .activation-content > :not(.image-block):not(.image-block *) {
+    @apply px-3 md:px-4;
+  }
+
   /* Marquee spacing fix */
 
   .marquee-wrapper .marquee {
