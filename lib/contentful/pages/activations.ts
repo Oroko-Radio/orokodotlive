@@ -84,6 +84,20 @@ export async function getActivationsPageSingle(slug: string, preview: boolean) {
                     title
                     shareLink
                   }
+                  ... on ImageBlock {
+                    title
+                    imagesCollection {
+                      items {
+                        sys {
+                          id
+                        }
+                        title
+                        url
+                        width
+                        height
+                      }
+                    }
+                  }
                 }
               }
             }

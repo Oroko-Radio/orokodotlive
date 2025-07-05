@@ -89,6 +89,9 @@ export interface Entry {
   __typename: string;
   title?: string;
   shareLink?: string;
+  imagesCollection?: {
+    items: Asset[];
+  };
 }
 
 export interface ShowInterface {

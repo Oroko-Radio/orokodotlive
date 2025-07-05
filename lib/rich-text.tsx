@@ -4,6 +4,7 @@ import Link from "next/link";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Block, Inline, BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { Asset, Content, Entry } from "../types/shared";
+import ImageBlock from "../components/ImageBlock";
 
 const getAssetById = (id: string, assets: Asset[]) =>
   assets.filter((asset) => asset.sys.id === id).pop();
@@ -83,6 +84,10 @@ export function renderRichTextWithImages(content: Content) {
                 />
               </div>
             );
+          }
+
+          if (entry.__typename === "ImageBlock") {
+            return <ImageBlock images={entry.imagesCollection.items} />;
           }
         },
       },
