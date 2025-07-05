@@ -58,13 +58,15 @@
 
   .card-half,
   .card-quarter,
+  .card-third,
   .card-featured {
     width: 100%;
   }
 
   @media only screen and (min-width: 768px) {
     .card-half,
-    .card-quarter {
+    .card-quarter,
+    .card-third {
       width: 50%;
     }
   }
@@ -72,6 +74,10 @@
   @media only screen and (min-width: 1024px) {
     .card-quarter {
       width: 25%;
+    }
+
+    .card-third {
+      width: 33.33%;
     }
 
     .card-featured {

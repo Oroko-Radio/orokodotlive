@@ -196,7 +196,7 @@ export interface CardProps {
   link: string;
   idx?: number;
   children?: any;
-  cardWidth?: "half" | "quarter" | "featured";
+  cardWidth?: "half" | "third" | "quarter" | "featured";
   playButton?: boolean;
   mixcloudLink?: string;
   bgColor?: "gray" | "white";
@@ -279,4 +279,11 @@ export type RadioCultResponse =
 
 export interface SettingsInterface {
   applicationsOpen: boolean;
+}
+
+export interface Product {
+  title: string;
+  price: number;
+  link: string;
+  image: CoverImage;
 }

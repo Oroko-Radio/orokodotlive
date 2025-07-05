@@ -50,6 +50,7 @@ const Card = ({
             {
               "xl:h-80": cardWidth === "quarter",
               "lg:h-96 xl:h-[32rem]": cardWidth === "half",
+              "lg:h-96 xl:h-[28rem]": cardWidth === "third",
             }
           )}
         >
@@ -60,6 +61,7 @@ const Card = ({
               alt={title}
               layout="fill"
               objectFit="cover"
+              sizes={`(max-width: 768px) 100vw, (min-width: 769px) 50vw, (min-width: 1024px) ${cardWidth === "third" ? '33vw' : '25vw'}`}
             />
           )}
           {mixcloudLink && (

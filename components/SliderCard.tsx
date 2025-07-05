@@ -22,6 +22,7 @@ const SliderCard = ({
           className={cn(`inline-block flex-shrink-0`, {
             "border-l-0": idx !== 0,
             "card-half": cardWidth === "half",
+            "card-third": cardWidth === "third",
             "card-quarter": cardWidth === "quarter",
             "bg-orokoGray": bgColor === "gray",
             "card-featured": cardWidth === "featured",
