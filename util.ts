@@ -63,7 +63,7 @@ export const getMeta = async (url: string) => {
   return img;
 };
 
-export function download(element: HTMLDivElement) {
+export function domElToImage(element: HTMLDivElement, fileName?: string) {
   domtoimage
     .toJpeg(element, {
       style: {
@@ -80,7 +80,7 @@ export function download(element: HTMLDivElement) {
         })
         .then((dataUrl) => {
           const link = document.createElement("a");
-          link.download = "oroko-thumbnail.jpeg";
+          link.download = fileName ? fileName : "oroko-thumbnail.jpeg";
           link.href = dataUrl;
           link.click();
         });
