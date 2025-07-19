@@ -1,6 +1,11 @@
 module.exports = {
   mode: "jit",
-  content: ["components/**/*.tsx", "pages/**/*.tsx", "views/**/*.tsx"],
+  content: [
+    "components/**/*.tsx",
+    "pages/**/*.tsx",
+    "views/**/*.tsx",
+    "app/**/*.tsx",
+  ],
   theme: {
     fontFamily: {
       sans: [
