@@ -40,7 +40,7 @@ const AllNews = ({
         {articles.map(
           (
             { title, date, slug, articleType, city, subtitle, coverImage },
-            idx
+            idx,
           ) => (
             <div key={idx}>
               <div className="border-black border-2 bg-white">
@@ -55,7 +55,7 @@ const AllNews = ({
                       <Tag text={articleType} transparent card />
                     </div>
                     <p className="font-sans mb-2 font-medium">
-                      {dayjs(date).format("DD MMMM YYYY")}
+                      {dayjs.utc(date).tz("Europe/Oslo").format("DD MMMM YYYY")}
                     </p>
                     <h1 className="font-heading card-leading mb-2 text-4xl">
                       {title}
@@ -67,7 +67,7 @@ const AllNews = ({
                 </Card>
               </div>
             </div>
-          )
+          ),
         )}
       </div>
     </div>

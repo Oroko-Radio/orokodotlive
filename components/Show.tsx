@@ -15,7 +15,7 @@ export default function Show({ show, cityColor }: ShowProps) {
     <div className="p-4 flex flex-col justify-between flex-1">
       <div>
         <p className="font-sans text-sm md:text-base mb-2 font-semibold">
-          {dayjs(date).format("DD MMM YYYY HH:mm") + "H"}
+          {dayjs.utc(date).tz("Europe/Oslo").format("DD MMM YYYY HH:mm") + "H"}
         </p>
         {isFeatured && <FeaturedTag />}
         <h1 className="font-heading card-leading text-4xl">{title}</h1>

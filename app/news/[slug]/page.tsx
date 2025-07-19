@@ -30,9 +30,16 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Article({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Article({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug: articleSlug } = await params;
-  const { article, relatedArticles } = await getNewsPageSingle(articleSlug, false);
+  const { article, relatedArticles } = await getNewsPageSingle(
+    articleSlug,
+    false,
+  );
   const {
     articleType,
     subtitle,
@@ -53,7 +60,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
       title={title}
     >
       <TitleBox
-        boxText={dayjs(date).format("DD MMM YYYY")}
+        boxText={dayjs.utc(date).tz("Europe/Oslo").format("DD MMM YYYY")}
         title={title}
         slug={`news/${slug}`}
       >
@@ -65,7 +72,10 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
             </div>
             {date && (
               <p className="hidden md:inline-block mb-0 font-sans font-semibold tracking-wide text-lg">
-                {dayjs(date).format("ddd DD MMMM YYYY @ HH") + "H"}
+                {dayjs
+                  .utc(date)
+                  .tz("Europe/Oslo")
+                  .format("ddd DD MMMM YYYY @ HH") + "H"}
               </p>
             )}
           </div>

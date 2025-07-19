@@ -19,6 +19,7 @@
     "classnames": "^2.5.1",
     "contentful": "^11.7.7",
     "dayjs": "^1.11.13",
+    "dayjs-plugin-utc": "^0.1.2",
     "dom-to-image": "^2.6.0",
     "fathom-client": "^3.7.2",
     "fuzzysort": "~3.1.0",

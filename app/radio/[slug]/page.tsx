@@ -33,7 +33,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Show({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Show({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug: showSlug } = await params;
   const { show, relatedShows } = await getRadioPageSingle(showSlug, false);
   const {
@@ -56,7 +60,9 @@ export default async function Show({ params }: { params: Promise<{ slug: string 
       title={title}
     >
       <TitleBox
-        boxText={dayjs(date).format("DD MMM YY HH:mm") + "H"}
+        boxText={
+          dayjs.utc(date).tz("Europe/Oslo").format("DD MMM YY HH:mm") + "H"
+        }
         mixcloudLink={mixcloudLink}
         title={title}
         slug={`radio/${slug}`}
@@ -64,7 +70,10 @@ export default async function Show({ params }: { params: Promise<{ slug: string 
         <div className="container max-w-5xl mx-auto">
           {date && (
             <p className="hidden md:block mb-4 font-sans font-semibold tracking-wide text-lg">
-              {dayjs(date).format("ddd DD MMMM YYYY @ HH:mm") + "H"}
+              {dayjs
+                .utc(date)
+                .tz("Europe/Oslo")
+                .format("ddd DD MMMM YYYY @ HH:mm") + "H"}
             </p>
           )}
           {isFeatured && <FeaturedTag />}

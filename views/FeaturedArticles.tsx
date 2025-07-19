@@ -42,7 +42,7 @@ const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
                     <Tag text={articleType} transparent card />
                   </div>
                   <p className="font-sans mb-2 font-semibold">
-                    {dayjs(date).format("DD MMMM YYYY")}
+                    {dayjs.utc(date).tz("Europe/Oslo").format("DD MMMM YYYY")}
                   </p>
                   <h1 className="font-heading card-leading mb-1 text-4xl">
                     {title}
