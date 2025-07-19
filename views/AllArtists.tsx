@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import Card from "../components/Card";
 import Tag from "../components/Tag";
 import { AllArtistEntry, CityInterface } from "../types/shared";
@@ -27,7 +27,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
 
       return params.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
   const filteredArtists = useMemo<AllArtistEntry[]>(() => {
@@ -50,7 +50,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
 
   const artists = useMemo(() => {
     return filteredArtists.filter(
-      (artist) => artist.city.name === city || city === "all"
+      (artist) => artist.city.name === city || city === "all",
     );
   }, [filteredArtists, city]);
 
@@ -71,7 +71,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
           value={filter}
           onChange={(e) => {
             router.push(
-              pathname + "?" + createQueryString("filter", e.target.value)
+              pathname + "?" + createQueryString("filter", e.target.value),
             );
           }}
         >
@@ -86,7 +86,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
         value={city}
         onChange={(e) => {
           router.push(
-            pathname + "?" + createQueryString("city", e.target.value)
+            pathname + "?" + createQueryString("city", e.target.value),
           );
         }}
       >
