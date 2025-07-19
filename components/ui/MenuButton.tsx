@@ -1,3 +1,5 @@
+'use client';
+
 import cx from "classnames";
 import { ReactNode } from "react";
 import CloseIcon from "../../icons/CloseIcon";

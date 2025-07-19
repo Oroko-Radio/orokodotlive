@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from "react";
 import cx from "classnames";
 import Link from "next/link";
@@ -6,13 +8,13 @@ import MenuIcon from "../icons/MenuIcon";
 import CloseIcon from "../icons/CloseIcon";
 import SearchIcon from "../icons/SearchIcon";
 import MenuButton from "./ui/MenuButton";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import ColorLogo from "../icons/ColorLogo";
 import Button from "./ui/Button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <div className="relative flex items-center justify-between py-2 xl:py-1 z-50 bg-black">
@@ -47,7 +49,7 @@ const Header = () => {
         onClick={() => isMenuOpen && setIsMenuOpen(false)}
       >
         <div className="lg:mr-2">
-          {router.pathname !== "/search" && (
+          {pathname !== "/search" && (
             <Link href="/search" passHref>
               <div
                 className={cx("cursor-pointer fill-current", {

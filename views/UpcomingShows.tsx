@@ -3,6 +3,7 @@ import Slider from "../components/Slider";
 import DotButton from "../components/ui/DotButton";
 import Show from "../components/Show";
 import { ShowInterface } from "../types/shared";
+import SliderCard from "../components/SliderCard";
 
 const UpcomingShows = ({
   shows,
@@ -28,7 +29,7 @@ const UpcomingShows = ({
 
       <Slider>
         {shows.map((show, idx) => (
-          <Slider.Card
+          <SliderCard
             imageUrl={show.coverImage.url}
             title={show.title}
             link={`/radio/${show.slug}`}
@@ -37,7 +38,7 @@ const UpcomingShows = ({
             idx={idx}
           >
             <Show show={show} cityColor="blue" />
-          </Slider.Card>
+          </SliderCard>
         ))}
       </Slider>
     </div>

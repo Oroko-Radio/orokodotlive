@@ -1,10 +1,11 @@
+'use client';
+
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Card from "../components/Card";
 import Tag from "../components/Tag";
 import { AllArtistEntry, CityInterface } from "../types/shared";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 interface AllArtistsProps {
   allArtists: AllArtistEntry[];

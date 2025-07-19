@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import cn from "classnames";
 import Image from "next/legacy/image";

@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect, useState } from "react";
 import Card from "../components/Card";
 import Show from "../components/Show";

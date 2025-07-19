@@ -1,3 +1,5 @@
+'use client';
+
 import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
 import usePlayerState from "../hooks/usePlayerState";
