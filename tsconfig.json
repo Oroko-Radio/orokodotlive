@@ -1,5 +1,41 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./app/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@views/*": [
+        "./views/*"
+      ],
+      "@lib/*": [
+        "./lib/*"
+      ],
+      "@hooks/*": [
+        "./hooks/*"
+      ],
+      "@types/*": [
+        "./types/*"
+      ],
+      "@public/*": [
+        "./public/*"
+      ],
+      "@styles/*": [
+        "./styles/*"
+      ],
+      "@icons/*": [
+        "./icons/*"
+      ],
+      "@images/*": [
+        "./images/*"
+      ],
+      "@payload-config": [
+        "./payload.config.ts"
+      ]
+    },
     "target": "es5",
     "lib": [
       "dom",
