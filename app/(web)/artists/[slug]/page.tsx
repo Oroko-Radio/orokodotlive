@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Tag from "../../../../components/Tag";
-import TitleBox from "../../../../components/TitleBox";
-import { getArtistsPageSingle } from "../../../../lib/contentful/pages/artists";
-import { getArtistPathsToPreRender } from "../../../../lib/contentful/paths";
-import { renderRichTextWithImages } from "../../../../lib/rich-text";
-import { ArtistEntry, ShowInterface } from "../../../../types/shared";
-import RelatedShows from "../../../../views/RelatedShows";
-import SinglePage from "../../../../views/SinglePage";
+import Tag from "@/components/Tag";
+import TitleBox from "@/components/TitleBox";
+import { getArtistsPageSingle } from "@/lib/contentful/pages/artists";
+import { getArtistPathsToPreRender } from "@/lib/contentful/paths";
+import { renderRichTextWithImages } from "@/lib/rich-text";
+import { ArtistEntry, ShowInterface } from "@/types/shared";
+import RelatedShows from "@/views/RelatedShows";
+import SinglePage from "@/views/SinglePage";
 
 type ArtistProps = {
   artist: ArtistEntry;

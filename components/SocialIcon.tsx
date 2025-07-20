@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/legacy/image";
 import { StaticImageData } from "next/image";
-import facebook from "../images/socials/Facebook.svg";
-import instagram from "../images/socials/Instagram.svg";
-import tiktok from "../images/socials/TikTok.svg";
-import twitter from "../images/socials/Twitter.svg";
-import discord from "../images/socials/Discord.svg";
+import facebook from "@/images/socials/Facebook.svg";
+import instagram from "@/images/socials/Instagram.svg";
+import tiktok from "@/images/socials/TikTok.svg";
+import twitter from "@/images/socials/Twitter.svg";
+import discord from "@/images/socials/Discord.svg";
 
 const socialsMap: socialsMapType = {
   Facebook: { icon: facebook, link: "https://www.facebook.com/OrokoRadio" },

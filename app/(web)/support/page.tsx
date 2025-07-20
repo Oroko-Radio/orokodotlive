@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import React from "react";
-import SinglePage from "../../../views/SinglePage";
-import TitleBox from "../../../components/TitleBox";
-import { getSupportPage } from "../../../lib/contentful/pages/support";
-import { renderRichTextWithImages } from "../../../lib/rich-text";
+import SinglePage from "@/views/SinglePage";
+import TitleBox from "@/components/TitleBox";
+import { getSupportPage } from "@/lib/contentful/pages/support";
+import { renderRichTextWithImages } from "@/lib/rich-text";
 
 export const revalidate = 3600; // 1 hour
 

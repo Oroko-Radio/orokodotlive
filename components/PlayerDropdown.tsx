@@ -4,10 +4,10 @@ import cn from "classnames";
 import Image from "next/legacy/image";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { RADIO_CULT_STATION_ID } from "../constants";
-import useRadioCult from "../hooks/useRadioCult";
-import { getUpcomingShows } from "../lib/contentful/pages/radio";
-import { ShowInterface } from "../types/shared";
+import { RADIO_CULT_STATION_ID } from "@/constants";
+import useRadioCult from "@/hooks/useRadioCult";
+import { getUpcomingShows } from "@/lib/contentful/pages/radio";
+import { ShowInterface } from "@/types/shared";
 
 export default function PlayerDropdown() {
   const { data } = useRadioCult(RADIO_CULT_STATION_ID);

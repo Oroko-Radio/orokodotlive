@@ -1,17 +1,17 @@
 'use client';
 
 import { useCallback, useEffect, useState } from "react";
-import Card from "../components/Card";
-import Show from "../components/Show";
-import Tag from "../components/Tag";
-import Button from "../components/ui/Button";
+import Card from "@/components/Card";
+import Show from "@/components/Show";
+import Tag from "@/components/Tag";
+import Button from "@/components/ui/Button";
 import {
   GenreCategoryInterface,
   GenreInterface,
   ShowInterface,
-} from "../types/shared";
-import { getAllShows, getShowsByGenre } from "../lib/contentful/pages/radio";
-import { LIMITS } from "../lib/contentful";
+} from "@/types/shared";
+import { getAllShows, getShowsByGenre } from "@/lib/contentful/pages/radio";
+import { LIMITS } from "@/lib/contentful";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 

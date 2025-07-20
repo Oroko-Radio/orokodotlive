@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import React from "react";
-import { getNewsPageSingle } from "../../../../lib/contentful/pages/news";
-import { getArticlePathsToPreRender } from "../../../../lib/contentful/paths";
-import { renderRichTextWithImages } from "../../../../lib/rich-text";
-import { ArticleInterface } from "../../../../types/shared";
-import SinglePage from "../../../../views/SinglePage";
-import Tag from "../../../../components/Tag";
+import { getNewsPageSingle } from "@/lib/contentful/pages/news";
+import { getArticlePathsToPreRender } from "@/lib/contentful/paths";
+import { renderRichTextWithImages } from "@/lib/rich-text";
+import { ArticleInterface } from "@/types/shared";
+import SinglePage from "@/views/SinglePage";
+import Tag from "@/components/Tag";
 import dayjs from "dayjs";
-import TitleBox from "../../../../components/TitleBox";
+import TitleBox from "@/components/TitleBox";
 
 export const revalidate = 3600; // 1 hour
 

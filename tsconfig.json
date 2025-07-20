@@ -3,38 +3,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./app/*"
-      ],
-      "@components/*": [
-        "./components/*"
-      ],
-      "@views/*": [
-        "./views/*"
-      ],
-      "@lib/*": [
-        "./lib/*"
-      ],
-      "@hooks/*": [
-        "./hooks/*"
-      ],
-      "@types/*": [
-        "./types/*"
-      ],
-      "@public/*": [
-        "./public/*"
-      ],
-      "@styles/*": [
-        "./styles/*"
-      ],
-      "@icons/*": [
-        "./icons/*"
-      ],
-      "@images/*": [
-        "./images/*"
+        "./*"
       ],
       "@payload-config": [
         "./payload.config.ts"
-      ]
+      ],
     },
     "target": "es5",
     "lib": [
@@ -52,7 +25,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",

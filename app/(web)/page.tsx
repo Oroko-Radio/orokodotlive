@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import Meta from "../../components/Meta";
-import NewsletterSection from "../../components/NewsletterSection";
-import PatreonBanner from "../../components/PatreonBanner";
-import AllNews from "../../views/AllNews";
-import FeaturedShows from "../../views/FeaturedShows";
-import LatestShows from "../../views/LatestShows";
-import Products from "../../views/Products";
-import UpcomingShows from "../../views/UpcomingShows";
-import SocialSection from "@components/SocialSection";
-import { getHomePage } from "@lib/contentful/pages/home";
+import Meta from "@/components/Meta";
+import NewsletterSection from "@/components/NewsletterSection";
+import PatreonBanner from "@/components/PatreonBanner";
+import AllNews from "@/views/AllNews";
+import FeaturedShows from "@/views/FeaturedShows";
+import LatestShows from "@/views/LatestShows";
+import Products from "@/views/Products";
+import UpcomingShows from "@/views/UpcomingShows";
+import SocialSection from "@/components/SocialSection";
+import { getHomePage } from "@/lib/contentful/pages/home";
 
 export const revalidate = 300; // 5 minutes
 

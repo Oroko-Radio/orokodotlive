@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSearchData } from "../../../../lib/contentful/pages/search";
+import { getSearchData } from "@/lib/contentful/pages/search";
 
 export async function GET(request: NextRequest) {
   try {

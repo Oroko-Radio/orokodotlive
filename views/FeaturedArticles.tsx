@@ -2,10 +2,10 @@ import React from "react";
 import dayjs from "dayjs";
 import Link from "next/link";
 
-import Slider from "../components/Slider";
-import Tag from "../components/Tag";
-import DotButton from "../components/ui/DotButton";
-import SliderCard from "../components/SliderCard";
+import Slider from "@/components/Slider";
+import Tag from "@/components/Tag";
+import DotButton from "@/components/ui/DotButton";
+import SliderCard from "@/components/SliderCard";
 
 const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
   return (

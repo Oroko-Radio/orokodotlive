@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Meta from "../../../components/Meta";
-import { getArtistsPage } from "../../../lib/contentful/pages/artists";
-import AllArtists from "../../../views/AllArtists";
+import Meta from "@/components/Meta";
+import { getArtistsPage } from "@/lib/contentful/pages/artists";
+import AllArtists from "@/views/AllArtists";
 import { Suspense } from "react";
 
 export const revalidate = 3600; // 1 hour

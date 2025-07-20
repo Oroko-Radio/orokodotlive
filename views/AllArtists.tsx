@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo } from "react";
-import Card from "../components/Card";
-import Tag from "../components/Tag";
-import { AllArtistEntry, CityInterface } from "../types/shared";
+import Card from "@/components/Card";
+import Tag from "@/components/Tag";
+import { AllArtistEntry, CityInterface } from "@/types/shared";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 

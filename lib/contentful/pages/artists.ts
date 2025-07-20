@@ -1,13 +1,13 @@
 import dayjs from "dayjs";
-import { graphql } from "..";
+import { graphql } from "@/lib/contentful";
 import {
   AllArtistEntry,
   ArtistEntry,
   GenreInterface,
   ShowInterface,
-} from "../../../types/shared";
-import { extractCollection, extractCollectionItem, sort } from "../../../util";
-import { AllArtistFragment } from "../fragments";
+} from "@/types/shared";
+import { extractCollection, extractCollectionItem, sort } from "@/util";
+import { AllArtistFragment } from "@/lib/contentful/fragments";
 
 export async function getArtistsPage() {
   const ArtistsPageQuery = /* GraphQL */ `

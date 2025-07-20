@@ -1,6 +1,6 @@
 'use client';
 
-import { isServer, mobileCheck } from "../../util";
+import { isServer, mobileCheck } from "@/util";
 import dynamic from "next/dynamic";
 import Button from "./Button";
 

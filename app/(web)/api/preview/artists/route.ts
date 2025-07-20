@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getArtistsPageSingle } from "../../../../../lib/contentful/pages/artists";
+import { getArtistsPageSingle } from "@/lib/contentful/pages/artists";
 import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 

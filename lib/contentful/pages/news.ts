@@ -1,11 +1,11 @@
-import { graphql } from "..";
-import { ArticleInterface } from "../../../types/shared";
-import { extractCollection, extractCollectionItem } from "../../../util";
+import { graphql } from "@/lib/contentful";
+import { ArticleInterface } from "@/types/shared";
+import { extractCollection, extractCollectionItem } from "@/util";
 import {
   ArticlePreviewFragment,
   FeaturedArticleFragment,
   RelatedArticleFragment,
-} from "../fragments";
+} from "@/lib/contentful/fragments";
 
 export async function getNewsPage(preview: boolean) {
   const NewsPageQuery = /* GraphQL */ `

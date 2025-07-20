@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import { client } from "../";
-import { ShowInterface } from "../../../types/shared";
+import { client } from "@/lib/contentful";
+import { ShowInterface } from "@/types/shared";
 
 export async function getSearchData(query: string, limit = 8) {
   const [showsCollection, articlesCollection, artistsCollection] =

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import React from "react";
 import Link from "next/link";
-import TitleBox from "../../../components/TitleBox";
-import SinglePage from "../../../views/SinglePage";
-import DotButton from "../../../components/ui/DotButton";
-import { getApplyPage } from "../../../lib/contentful/pages/apply";
+import TitleBox from "@/components/TitleBox";
+import SinglePage from "@/views/SinglePage";
+import DotButton from "@/components/ui/DotButton";
+import { getApplyPage } from "@/lib/contentful/pages/apply";
 
 export const revalidate = 3600; // 1 hour
 

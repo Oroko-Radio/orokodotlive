@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Block, Inline, BLOCKS, INLINES } from "@contentful/rich-text-types";
-import { Asset, Content, Entry } from "../types/shared";
+import { Asset, Content, Entry } from "@/types/shared";
 
 const getAssetById = (id: string, assets: Asset[]) =>
   assets.filter((asset) => asset.sys.id === id).pop();
@@ -20,7 +20,7 @@ export function renderRichTextWithImages(content: Content) {
       renderNode: {
         [INLINES.HYPERLINK]: function InlineHyperlink(
           node: Block | Inline,
-          children
+          children,
         ) {
           const uri = node.data.uri as string;
 
@@ -76,7 +76,7 @@ export function renderRichTextWithImages(content: Content) {
               <div className="youtube-iframe-container">
                 <iframe
                   src={`https://www.youtube.com/embed/${entry.shareLink.slice(
-                    -11
+                    -11,
                   )}`}
                   allowFullScreen
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

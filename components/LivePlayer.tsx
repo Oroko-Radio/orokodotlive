@@ -2,15 +2,15 @@
 
 import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
-import usePlayerState from "../hooks/usePlayerState";
-import useRadioCult from "../hooks/useRadioCult";
+import usePlayerState from "@/hooks/usePlayerState";
+import useRadioCult from "@/hooks/useRadioCult";
 import Banner from "./Banner";
-import Logo from "../icons/Logo";
-import PauseIcon from "../icons/PauseIcon";
-import PlayIcon from "../icons/PlayIcon";
+import Logo from "@/icons/Logo";
+import PauseIcon from "@/icons/PauseIcon";
+import PlayIcon from "@/icons/PlayIcon";
 import DropdownButton from "./ui/DropdownButton";
 import PlayerDropdown from "./PlayerDropdown";
-import { RADIO_CULT_STATION_ID } from "../constants";
+import { RADIO_CULT_STATION_ID } from "@/constants";
 
 const BroadcastingIndicator = ({
   status,

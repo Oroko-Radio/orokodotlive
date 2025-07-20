@@ -1,14 +1,14 @@
 "use client";
 
 import type { Metadata } from "next";
-import Meta from "../../../components/Meta";
-import Card from "../../../components/Card";
+import Meta from "@/components/Meta";
+import Card from "@/components/Card";
 import dayjs from "dayjs";
-import { getSearchData } from "../../../lib/contentful/pages/search";
+import { getSearchData } from "@/lib/contentful/pages/search";
 import { useDebouncedState } from "@react-hookz/web";
-import useSearchData from "../../../hooks/useSearch";
+import useSearchData from "@/hooks/useSearch";
 // Removed ts-extras dependency
-import Tag from "../../../components/Tag";
+import Tag from "@/components/Tag";
 import { ScaleLoader } from "react-spinners";
 import { useEffect, useState } from "react";
 

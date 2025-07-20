@@ -1,5 +1,5 @@
-import { Product } from "../../../types/shared";
-import { graphql } from "../index";
+import { Product } from "@/types/shared";
+import { graphql } from "@/lib/contentful/index";
 
 const PRODUCTS_GRAPHQL_FIELDS = `
   title

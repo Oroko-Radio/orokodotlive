@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getNewsPageSingle } from "../../../../../lib/contentful/pages/news";
+import { getNewsPageSingle } from "@/lib/contentful/pages/news";
 import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 

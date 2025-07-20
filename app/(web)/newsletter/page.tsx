@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import TitleBox from "../../../components/TitleBox";
-import { getNewsletterPage } from "../../../lib/contentful/pages/newsletter";
-import { renderRichTextWithImages } from "../../../lib/rich-text";
-import SinglePage from "../../../views/SinglePage";
-import NewsletterWidget from "../../../components/NewsletterWidget";
+import TitleBox from "@/components/TitleBox";
+import { getNewsletterPage } from "@/lib/contentful/pages/newsletter";
+import { renderRichTextWithImages } from "@/lib/rich-text";
+import SinglePage from "@/views/SinglePage";
+import NewsletterWidget from "@/components/NewsletterWidget";
 
 export const revalidate = 3600; // 1 hour
 

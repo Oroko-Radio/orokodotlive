@@ -3,8 +3,8 @@
 import React from "react";
 import cn from "classnames";
 import Image from "next/legacy/image";
-import chevronRight from "../../images/ui/chevron-right.svg";
-import chevronLeft from "../../images/ui/chevron-left.svg";
+import chevronRight from "@/images/ui/chevron-right.svg";
+import chevronLeft from "@/images/ui/chevron-left.svg";
 
 const SliderButton = ({
   onClick,

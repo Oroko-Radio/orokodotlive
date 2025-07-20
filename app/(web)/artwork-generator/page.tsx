@@ -3,12 +3,12 @@
 import type { Metadata } from "next";
 import { useEffect, useRef, useState } from "react";
 import cx from "classnames";
-import Meta from "../../../components/Meta";
-import Button from "../../../components/ui/Button";
+import Meta from "@/components/Meta";
+import Button from "@/components/ui/Button";
 import NextImage from "next/image";
 import dayjs from "dayjs";
-import ColorLogo from "../../../icons/ColorLogo";
-import { download, getMeta } from "../../../util";
+import ColorLogo from "@/icons/ColorLogo";
+import { download, getMeta } from "@/util";
 
 export default function ThumbnailGenerator() {
   const thumbnail = useRef<HTMLDivElement | null>(null);

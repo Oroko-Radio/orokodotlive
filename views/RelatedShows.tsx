@@ -1,8 +1,8 @@
 import React from "react";
 
-import Card from "../components/Card";
-import { ShowInterface } from "../types/shared";
-import Show from "../components/Show";
+import Card from "@/components/Card";
+import { ShowInterface } from "@/types/shared";
+import Show from "@/components/Show";
 
 const RelatedShows = ({ shows }: { shows: ShowInterface[] }) => {
   return (

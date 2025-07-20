@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Slider from "../components/Slider";
-import DotButton from "../components/ui/DotButton";
-import Show from "../components/Show";
-import { ShowInterface } from "../types/shared";
-import SliderCard from "../components/SliderCard";
+import Slider from "@/components/Slider";
+import DotButton from "@/components/ui/DotButton";
+import Show from "@/components/Show";
+import { ShowInterface } from "@/types/shared";
+import SliderCard from "@/components/SliderCard";
 
 const LatestShows = ({
   shows,

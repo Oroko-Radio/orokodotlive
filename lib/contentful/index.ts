@@ -1,6 +1,6 @@
 import { createClient } from "contentful";
-import { ENDPOINT } from "../../constants";
-import type { ErrorPayload } from "../../types/shared";
+import { ENDPOINT } from "@/constants";
+import type { ErrorPayload } from "@/types/shared";
 
 export const LIMITS = {
   SHOWS: 64,
@@ -20,7 +20,7 @@ interface GraphQLInterface {
 
 export async function graphql(
   query: string,
-  { preview, variables }: GraphQLInterface = { preview: false, variables: {} }
+  { preview, variables }: GraphQLInterface = { preview: false, variables: {} },
 ) {
   if (process.env.NODE_ENV !== "production") {
     const queryName = query.trimStart().substring(6, query.indexOf("Query"));

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import Image from "next/legacy/image";
-import BackButton from "../components/ui/BackButton";
-import Meta from "../components/Meta";
+import BackButton from "@/components/ui/BackButton";
+import Meta from "@/components/Meta";
 
 interface SinglePageProps {
   title: string;

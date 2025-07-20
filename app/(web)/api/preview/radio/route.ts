@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getRadioPageSingle } from "../../../../../lib/contentful/pages/radio";
+import { getRadioPageSingle } from "@/lib/contentful/pages/radio";
 import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 

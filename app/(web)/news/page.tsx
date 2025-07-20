@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import React from "react";
-import { getNewsPage } from "../../../lib/contentful/pages/news";
-import FeaturedArticles from "../../../views/FeaturedArticles";
-import AllNews from "../../../views/AllNews";
-import Meta from "../../../components/Meta";
+import { getNewsPage } from "@/lib/contentful/pages/news";
+import FeaturedArticles from "@/views/FeaturedArticles";
+import AllNews from "@/views/AllNews";
+import Meta from "@/components/Meta";
 
 export const revalidate = 60;
 

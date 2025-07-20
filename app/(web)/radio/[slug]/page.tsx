@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getRadioPageSingle } from "../../../../lib/contentful/pages/radio";
-import { getShowPathsToPreRender } from "../../../../lib/contentful/paths";
-import { GenreInterface, ShowInterface } from "../../../../types/shared";
-import SinglePage from "../../../../views/SinglePage";
+import { getRadioPageSingle } from "@/lib/contentful/pages/radio";
+import { getShowPathsToPreRender } from "@/lib/contentful/paths";
+import { GenreInterface, ShowInterface } from "@/types/shared";
+import SinglePage from "@/views/SinglePage";
 import dayjs from "dayjs";
-import Tag from "../../../../components/Tag";
-import { renderRichTextWithImages } from "../../../../lib/rich-text";
-import TitleBox from "../../../../components/TitleBox";
-import { GenreTag } from "../../../../components/GenreTag";
-import FeaturedTag from "../../../../components/FeaturedTag";
-import RelatedShows from "../../../../views/RelatedShows";
+import Tag from "@/components/Tag";
+import { renderRichTextWithImages } from "@/lib/rich-text";
+import TitleBox from "@/components/TitleBox";
+import { GenreTag } from "@/components/GenreTag";
+import FeaturedTag from "@/components/FeaturedTag";
+import RelatedShows from "@/views/RelatedShows";
 
 export const revalidate = 3600; // 1 hour
 

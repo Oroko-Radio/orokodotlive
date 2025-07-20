@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
-import { graphql, LIMITS } from "..";
-import { ArticleInterface, ShowInterface } from "../../../types/shared";
-import { extractCollection, sort } from "../../../util";
+import { graphql, LIMITS } from "@/lib/contentful";
+import { ArticleInterface, ShowInterface } from "@/types/shared";
+import { extractCollection, sort } from "@/util";
 import {
   ArticlePreviewFragment,
   FeaturedArticleFragment,
   ShowPreviewFragment,
-} from "../fragments";
+} from "@/lib/contentful/fragments";
 import { getProducts } from "./products";
 
 export async function getHomePage(limit = LIMITS.SHOWS) {

@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
-import { LIMITS, graphql } from "..";
+import { LIMITS, graphql } from "@/lib/contentful";
 import {
   GenreCategoryInterface,
   GenreInterface,
   ShowInterface,
-} from "../../../types/shared";
-import { extractCollection, extractCollectionItem, sort } from "../../../util";
+} from "@/types/shared";
+import { extractCollection, extractCollectionItem, sort } from "@/util";
 
 export async function getRadioPage(preview: boolean) {
   const [shows, genreCategories, upcomingShows, featuredShows] =
