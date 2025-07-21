@@ -2,6 +2,7 @@
   "name": "orokodotlive",
   "version": "1.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,6 +18,7 @@
     "@payloadcms/next": "^3.48.0",
     "@payloadcms/payload-cloud": "^3.48.0",
     "@payloadcms/richtext-lexical": "^3.48.0",
+    "@payloadcms/storage-s3": "^3.48.0",
     "@react-hookz/web": "^25.1.1",
     "@types/react-swipeable": "^5.2.0",
     "@vercel/analytics": "^1.5.0",
@@ -30,6 +32,7 @@
     "graphql": "^16.11.0",
     "next": "^15.4.2",
     "payload": "^3.48.0",
+    "pg": "^8.16.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-fast-marquee": "^1.6.5",
