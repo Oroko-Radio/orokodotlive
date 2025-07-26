@@ -71,7 +71,7 @@ export function renderRichTextWithImages(content: Content) {
         [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
           const entry = getEntryById(node.data.target.sys.id, entryAssets);
 
-          if (entry.__typename === "YouTubeEmbed") {
+          if (entry && entry.__typename === "YouTubeEmbed" && entry.shareLink) {
             return (
               <div className="youtube-iframe-container">
                 <iframe

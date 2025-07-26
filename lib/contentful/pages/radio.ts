@@ -27,7 +27,7 @@ export async function getRadioPage(preview: boolean) {
 export async function getAllShows(
   preview: boolean,
   limit = LIMITS.SHOWS,
-  skip?: number
+  skip?: number,
 ) {
   const AllShowsQuery = /* GraphQL */ `
     query AllShowsQuery($preview: Boolean, $limit: Int, $skip: Int) {
@@ -83,7 +83,7 @@ export async function getAllShows(
   `;
 
   const shows = await graphql(AllShowsQuery, {
-    variables: { preview, limit, skip },
+    variables: { preview, limit, skip: skip || 0 },
     preview,
   });
 
@@ -114,7 +114,7 @@ export async function getGenreCategories(preview: boolean) {
 
   return extractCollection<GenreCategoryInterface>(
     genreCategories,
-    "genreCategoryCollection"
+    "genreCategoryCollection",
   );
 }
 
@@ -211,7 +211,7 @@ export async function getUpcomingShows(preview: boolean) {
 
   const extractedShows = extractCollection<ShowInterface>(
     shows,
-    "showCollection"
+    "showCollection",
   );
 
   const today = dayjs();
@@ -304,7 +304,7 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
   const relatedShows = allShows
     .filter((filterShow) => {
       const currentShowGenres = filterShow.genresCollection.items.map(
-        (genre) => genre.name
+        (genre) => genre.name,
       );
 
       const isRelatedShowFilter =
@@ -328,7 +328,7 @@ export async function getRadioPageSingle(slug: string, preview: boolean) {
 export async function getShowsByGenre(
   genre: string,
   limit: number,
-  skip: number
+  skip: number,
 ) {
   const ShowsByGenreQuery = /* GRAPHQL */ `
   query ShowsByGenreQuery ($genre: String, $limit: Int, $skip: Int) {
@@ -384,8 +384,11 @@ export async function getShowsByGenre(
 
   const extractedGenre = extractCollection<GenreInterface>(
     data,
-    "genresCollection"
+    "genresCollection",
   );
+
+  if (extractedGenre.length === 0) return [];
+  if (!extractedGenre[0].linkedFrom) return [];
 
   return extractedGenre[0].linkedFrom.showCollection.items;
 }

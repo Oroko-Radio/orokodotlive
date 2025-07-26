@@ -133,11 +133,11 @@ export async function getArtistsPageSingle(slug: string, preview: boolean) {
   const date_lt_TODAY = (show: ShowInterface) =>
     dayjs(show.date).isBefore(today);
 
-  const linkedFrom = artist.linkedFrom.showCollection.items;
+  const linkedFrom = artist.linkedFrom?.showCollection.items;
 
-  const linkedFromFiltered = linkedFrom.filter(date_lt_TODAY);
+  const linkedFromFiltered = linkedFrom?.filter(date_lt_TODAY);
 
-  if (linkedFromFiltered.length > 0) {
+  if (linkedFromFiltered && linkedFromFiltered.length > 0) {
     relatedShows = linkedFromFiltered.sort(sort.date_DESC);
   }
 
