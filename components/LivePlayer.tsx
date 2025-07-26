@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
@@ -63,7 +63,7 @@ export default function LivePlayer() {
         artwork: [
           {
             src: live.result.metadata.artwork
-              ? live.result.metadata.artwork["512x512"]
+              ? live.result.metadata.artwork["512x512"]!
               : "https://oroko.live/OROKO_OG_1200px.png",
             sizes: "512x512",
             type: "image/png",
@@ -137,7 +137,7 @@ export default function LivePlayer() {
                     "z-10 -bottom-8 group-hover:-bottom-18 delay-200":
                       !dropdownOpen,
                     "z-20 -bottom-18": dropdownOpen,
-                  }
+                  },
                 )}
               >
                 <DropdownButton
