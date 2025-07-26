@@ -17,7 +17,9 @@ const SliderCard = ({
   bgColor,
 }: CardProps) => (
   <SliderContext.Consumer>
-    {({ elementRef }) => {
+    {(context) => {
+      if (!context) return null;
+      const { elementRef } = context;
       return (
         <div
           ref={elementRef}

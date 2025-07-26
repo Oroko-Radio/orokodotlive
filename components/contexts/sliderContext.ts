@@ -3,7 +3,7 @@
 import React from "react";
 
 interface SliderContextType {
-  elementRef: React.RefObject<HTMLElement | null>;
+  elementRef: React.RefObject<HTMLDivElement | null>;
 }
 
 const SliderContext = React.createContext<SliderContextType | null>(null);
