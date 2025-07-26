@@ -8,7 +8,7 @@ import { getPartnersPage } from "../../lib/contentful/pages/partners";
 export const revalidate = 3600; // 1 hour
 
 export const metadata: Metadata = {
-  title: "Partners - OROKO RADIO",
+  title: "Partners",
 };
 
 export default async function Partners() {

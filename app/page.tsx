@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Meta from "../components/Meta";
 import NewsletterSection from "../components/NewsletterSection";
 import PatreonBanner from "../components/PatreonBanner";
 import { getHomePage } from "../lib/contentful/pages/home";
@@ -13,7 +12,7 @@ import SocialSection from "../components/SocialSection";
 export const revalidate = 300; // 5 minutes
 
 export const metadata: Metadata = {
-  title: "Home - OROKO RADIO",
+  title: "Home",
 };
 
 export default async function HomePage() {
@@ -27,7 +26,6 @@ export default async function HomePage() {
 
   return (
     <main>
-      <Meta title="Home" />
       <FeaturedShows shows={featuredShows} />
       <PatreonBanner />
       <SocialSection className="justify-center bg-orokoGreen py-4 border-b-2 border-black lg:hidden" />

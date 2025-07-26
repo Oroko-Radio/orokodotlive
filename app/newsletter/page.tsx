@@ -8,7 +8,7 @@ import NewsletterWidget from "../../components/NewsletterWidget";
 export const revalidate = 3600; // 1 hour
 
 export const metadata: Metadata = {
-  title: "Newsletter - OROKO RADIO",
+  title: "Newsletter",
 };
 
 export default async function Newsletter() {
