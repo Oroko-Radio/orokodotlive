@@ -13,7 +13,7 @@ const FeaturedArticles = ({
   heading = "Featured News",
 }: {
   featuredArticles: ArticleInterface[];
-  heading: string;
+  heading?: string;
 }) => {
   return (
     <>
