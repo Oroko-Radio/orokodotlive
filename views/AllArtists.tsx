@@ -99,7 +99,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
       </select>
       <div className="hidden md:flex flex-wrap gap-1">
         <Link href={pathname + "?" + createQueryString("city", "all")} passHref>
-          <Tag text="All" color={city === "all" ? "yellow" : null} />
+          <Tag text="All" color={city === "all" ? "yellow" : undefined} />
         </Link>
         {cities.map((name, idx) => (
           <Link
@@ -108,7 +108,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
             key={idx}
             className="cursor-pointer"
           >
-            <Tag color={name === city ? "yellow" : null} text={name} />
+            <Tag color={name === city ? "yellow" : undefined} text={name} />
           </Link>
         ))}
       </div>
@@ -116,13 +116,13 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8">
         {artists.map(({ name, slug, photo }, idx) => (
           <div key={idx} className="border-black border-2">
-            <Card
-              imageUrl={photo && photo.url ? photo.url : null}
-              title={name}
-              link={`/artists/${slug}`}
-            >
-              <h1 className="font-heading card-leading p-4 text-4xl">{name}</h1>
-            </Card>
+            {photo.url && (
+              <Card imageUrl={photo.url} title={name} link={`/artists/${slug}`}>
+                <h1 className="font-heading card-leading p-4 text-4xl">
+                  {name}
+                </h1>
+              </Card>
+            )}
           </div>
         ))}
       </div>

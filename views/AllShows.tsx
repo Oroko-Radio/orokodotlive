@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useCallback, useEffect, useState } from "react";
 import Card from "@/components/Card";
@@ -45,7 +45,7 @@ const AllShows = ({
 
       return params.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
   /* Change category */
@@ -59,16 +59,17 @@ const AllShows = ({
     setShows([]);
     setMore(false);
     const cat = genreCategories.find((c) => c.name === category);
-    const genres = cat.linkedFrom.genresCollection.items;
+    const genres = cat?.linkedFrom?.genresCollection.items;
+    if (!genres) return;
     setGenres(genres);
   }, [category, genreCategories, initialShows]);
 
   /* Change genre */
   useEffect(() => {
-    if (!genre) return;
     setSkip(LIMITS.SHOWS);
 
     async function getShows() {
+      if (!genre) return;
       setLoading(true);
       const shows = await getShowsByGenre(genre, LIMITS.SHOWS, 0);
       if (shows.length >= LIMITS.SHOWS) {
@@ -85,6 +86,7 @@ const AllShows = ({
   async function handleLoadMoreShows() {
     setLoading(true);
     let moreShows: ShowInterface[] = [];
+    if (!genre) return;
     if (category === "all") {
       moreShows = await getAllShows(false, LIMITS.SKIP, skip);
     } else {
@@ -108,7 +110,7 @@ const AllShows = ({
           <Tag
             text={"all"}
             color={category === "all" ? "selected" : "white"}
-            borderColor={category === "all" ? "white" : null}
+            borderColor={category === "all" ? "white" : undefined}
           />
         </Link>
 
@@ -122,7 +124,7 @@ const AllShows = ({
             <Tag
               text={name}
               color={category === name ? "selected" : "white"}
-              borderColor={category === name ? "white" : null}
+              borderColor={category === name ? "white" : undefined}
             />
           </Link>
         ))}
@@ -137,13 +139,16 @@ const AllShows = ({
               passHref
               scroll={false}
             >
-              <Tag text={g.name} color={genre === g.name ? "selected" : null} />
+              <Tag
+                text={g.name}
+                color={genre === g.name ? "selected" : undefined}
+              />
             </Link>
           ))}
         </div>
       </div>
 
-      <ShowList shows={shows} genre={genre} loading={loading} />
+      <ShowList shows={shows} genre={genre || undefined} loading={loading} />
 
       {more ? (
         <div className="pt-4 pb-12">
