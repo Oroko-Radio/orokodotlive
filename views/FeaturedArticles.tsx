@@ -5,6 +5,7 @@ import Link from "next/link";
 import Slider from "../components/Slider";
 import Tag from "../components/Tag";
 import DotButton from "../components/ui/DotButton";
+import SliderCard from "../components/SliderCard";
 
 const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
   return (
@@ -25,9 +26,9 @@ const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
           {featuredArticles.map(
             (
               { title, date, slug, articleType, city, subtitle, coverImage },
-              idx
+              idx,
             ) => (
-              <Slider.Card
+              <SliderCard
                 imageUrl={coverImage.url}
                 title={title}
                 link={`/news/${slug}`}
@@ -41,7 +42,7 @@ const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
                     <Tag text={articleType} transparent card />
                   </div>
                   <p className="font-sans mb-2 font-semibold">
-                    {dayjs(date).format("DD MMMM YYYY")}
+                    {dayjs.utc(date).tz("Europe/Oslo").format("DD MMMM YYYY")}
                   </p>
                   <h1 className="font-heading card-leading mb-1 text-4xl">
                     {title}
@@ -50,8 +51,8 @@ const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
                     {subtitle}
                   </p>
                 </div>
-              </Slider.Card>
-            )
+              </SliderCard>
+            ),
           )}
         </Slider>
       </div>

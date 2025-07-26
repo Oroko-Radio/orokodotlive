@@ -1,11 +1,11 @@
 import Slider from "../components/Slider";
 import { ShowInterface } from "../types/shared";
 import dayjs from "dayjs";
-import ConcentricCircles from "../components/ui/ConcentricCircles";
 import Tag from "../components/Tag";
 import Link from "next/link";
 import { GenreTag } from "../components/GenreTag";
 import FeaturedTag from "../components/FeaturedTag";
+import SliderCard from "../components/SliderCard";
 
 interface FeaturedShowsProps {
   shows: ShowInterface[];
@@ -28,9 +28,9 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
               artistsCollection,
               genresCollection,
             },
-            idx
+            idx,
           ) => (
-            <Slider.Card
+            <SliderCard
               cardWidth="featured"
               imageUrl={coverImage.url}
               title={title}
@@ -43,7 +43,10 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
                 <div>
                   <FeaturedTag />
                   <p className="font-sans text-sm md:text-base pb-2 lg:pt-2 lg:pb-4 font-semibold">
-                    {dayjs(date).format("DD MMM YYYY HH:mm") + "H"}
+                    {dayjs
+                      .utc(date)
+                      .tz("Europe/Oslo")
+                      .format("DD MMM YYYY HH:mm") + "H"}
                   </p>
                   <Link href={"/radio/" + slug} passHref>
                     <div>
@@ -92,8 +95,8 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
                   </div>
                 )}
               </div>
-            </Slider.Card>
-          )
+            </SliderCard>
+          ),
         )}
       </Slider>
     </div>

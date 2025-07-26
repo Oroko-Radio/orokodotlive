@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import SliderContext from "./contexts/sliderContext";
 import SliderButton from "./ui/SliderButton";

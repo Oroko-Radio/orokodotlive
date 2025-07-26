@@ -1,3 +1,5 @@
+'use client';
+
 import PlayIcon from "../../icons/PlayIcon";
 import { playerWidget, showKey } from "../../lib/mixcloud";
 import { getMixcloudKey } from "../../util";

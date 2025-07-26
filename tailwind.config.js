@@ -1,7 +1,11 @@
 module.exports = {
   mode: "jit",
-  purge: ["components/**/*.tsx", "pages/**/*.tsx", "views/**/*.tsx"],
-  darkMode: false,
+  content: [
+    "components/**/*.tsx",
+    "pages/**/*.tsx",
+    "views/**/*.tsx",
+    "app/**/*.tsx",
+  ],
   theme: {
     fontFamily: {
       sans: [
@@ -75,9 +79,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/aspect-ratio"),
-  ],
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 };

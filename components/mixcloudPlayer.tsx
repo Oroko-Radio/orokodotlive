@@ -1,3 +1,5 @@
+'use client';
+
 import { SyntheticEvent } from "react";
 import { shouldUnloadLivePlayerState } from "../hooks/usePlayerState";
 import useScript from "../hooks/useScript";

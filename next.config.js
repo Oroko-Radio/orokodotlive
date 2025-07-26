@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   images: {
-    domains: ["images.ctfassets.net"],
+    remotePatterns: [
+      new URL("https://images.ctfassets.net/**"),
+      new URL("http://images.ctfassets.net/**"),
+    ],
   },
   reactStrictMode: true,
   experimental: {

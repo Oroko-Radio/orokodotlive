@@ -3,6 +3,7 @@ import Slider from "../components/Slider";
 import DotButton from "../components/ui/DotButton";
 import Show from "../components/Show";
 import { ShowInterface } from "../types/shared";
+import SliderCard from "../components/SliderCard";
 
 const LatestShows = ({
   shows,
@@ -26,7 +27,7 @@ const LatestShows = ({
 
       <Slider>
         {shows.map((show, idx) => (
-          <Slider.Card
+          <SliderCard
             imageUrl={show.coverImage.url}
             title={show.title}
             link={`/radio/${show.slug}`}
@@ -36,7 +37,7 @@ const LatestShows = ({
             mixcloudLink={show.mixcloudLink}
           >
             <Show show={show} cityColor="green" />
-          </Slider.Card>
+          </SliderCard>
         ))}
       </Slider>
     </div>
