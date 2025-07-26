@@ -5,14 +5,8 @@ import TitleBox from "@/components/TitleBox";
 import { getArtistsPageSingle } from "@/lib/contentful/pages/artists";
 import { getArtistPathsToPreRender } from "@/lib/contentful/paths";
 import { renderRichTextWithImages } from "@/lib/rich-text";
-import { ArtistEntry, ShowInterface } from "@/types/shared";
 import RelatedShows from "@/views/RelatedShows";
 import SinglePage from "@/views/SinglePage";
-
-type ArtistProps = {
-  artist: ArtistEntry;
-  relatedShows?: ShowInterface[];
-};
 
 export const revalidate = 3600; // 1 hour
 
@@ -49,7 +43,7 @@ export default async function Artist({
 
   return (
     <SinglePage
-      coverImage={artist.photo && artist.photo.url ? artist.photo.url : null}
+      coverImage={artist.photo && artist.photo.url && artist.photo.url}
       coverImageAlt={name}
       withBackButton
       title={name}
