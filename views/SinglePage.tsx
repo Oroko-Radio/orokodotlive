@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import Image from "next/legacy/image";
 import BackButton from "@/components/ui/BackButton";
-import Meta from "@/components/Meta";
 
 interface SinglePageProps {
   title: string;
@@ -22,7 +21,6 @@ const SinglePage = ({
 }: SinglePageProps) => {
   return (
     <>
-      <Meta title={title} />
       <article>
         <div className="relative h-forty md:h-half border-black border-b-2">
           {coverImage && repeatCover ? (

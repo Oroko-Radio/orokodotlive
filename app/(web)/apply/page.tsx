@@ -9,7 +9,7 @@ import { getApplyPage } from "@/lib/contentful/pages/apply";
 export const revalidate = 3600; // 1 hour
 
 export const metadata: Metadata = {
-  title: "Apply - OROKO RADIO",
+  title: "Apply",
 };
 
 export default async function Apply() {

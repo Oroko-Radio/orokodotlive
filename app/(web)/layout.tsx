@@ -7,8 +7,29 @@ import SocialSection from "@/components/SocialSection";
 import { MixcloudPlayer, LivePlayer } from "@/components/ClientComponents";
 
 export const metadata: Metadata = {
-  title: "OROKO RADIO",
-  description: "Community radio in Accra, Ghana",
+  title: {
+    default: "Oroko",
+    template: "Oroko | %s",
+  },
+  description: "Oroko is a not-for-profit independent internet radio station based in Accra, Ghana. We aim to connect, inspire and empower through conversation, collaboration and community.",
+  viewport: "initial-scale=1.0, width=device-width",
+  openGraph: {
+    title: "Oroko Radio",
+    siteName: "Oroko Radio",
+    description: "Oroko is a not-for-profit independent internet radio station based in Accra, Ghana. We aim to connect, inspire and empower through conversation, collaboration and community.",
+    url: "https://oroko.live/",
+    type: "website",
+    images: [
+      {
+        url: "https://oroko.live/OROKO_OG_1200px.png",
+        secureUrl: "https://oroko.live/OROKO_OG_1200px.png",
+        width: 1200,
+        height: 627,
+        type: "image/png",
+        alt: "Oroko Radio Logo",
+      },
+    ],
+  },
   icons: {
     icon: "/favicon.ico",
   },

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Meta from "@/components/Meta";
 import { getRadioPage } from "@/lib/contentful/pages/radio";
 import AllShows from "@/views/AllShows";
 import { Suspense } from "react";
@@ -7,7 +6,7 @@ import { Suspense } from "react";
 export const revalidate = 3600; // 1 hour
 
 export const metadata: Metadata = {
-  title: "Radio - OROKO RADIO",
+  title: "Radio",
 };
 
 export default async function RadioPage() {
@@ -15,7 +14,6 @@ export default async function RadioPage() {
 
   return (
     <>
-      <Meta title="Radio" />
       <Suspense fallback={<div>Loading shows...</div>}>
         <AllShows initialShows={shows} genreCategories={genreCategories} />
       </Suspense>

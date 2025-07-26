@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getRadioPageSingle } from "@/lib/contentful/pages/radio";
 import { getShowPathsToPreRender } from "@/lib/contentful/paths";
-import { GenreInterface, ShowInterface } from "@/types/shared";
 import SinglePage from "@/views/SinglePage";
 import dayjs from "dayjs";
 import Tag from "@/components/Tag";
@@ -22,7 +21,7 @@ export async function generateMetadata({
   const { slug: showSlug } = await params;
   const { show } = await getRadioPageSingle(showSlug, false);
   return {
-    title: `${show.title} - Radio - OROKO RADIO`,
+    title: show.title,
   };
 }
 

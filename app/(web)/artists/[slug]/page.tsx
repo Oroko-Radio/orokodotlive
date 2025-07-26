@@ -24,7 +24,7 @@ export async function generateMetadata({
   const { slug: artistSlug } = await params;
   const { artist } = await getArtistsPageSingle(artistSlug, false);
   return {
-    title: `${artist.name} - Artists - OROKO RADIO`,
+    title: artist.name,
   };
 }
 

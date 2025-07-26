@@ -19,7 +19,7 @@ export async function generateMetadata({
   const { slug: articleSlug } = await params;
   const { article } = await getNewsPageSingle(articleSlug, false);
   return {
-    title: `${article.title} - News - OROKO RADIO`,
+    title: article.title,
   };
 }
 

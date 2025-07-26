@@ -8,7 +8,7 @@ import { renderRichTextWithImages } from "@/lib/rich-text";
 export const revalidate = 3600; // 1 hour
 
 export const metadata: Metadata = {
-  title: "Support - OROKO RADIO",
+  title: "Support",
 };
 
 export default async function Support() {

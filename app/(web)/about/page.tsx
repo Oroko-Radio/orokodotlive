@@ -8,7 +8,7 @@ import { getAboutPage } from "@/lib/contentful/pages/about";
 export const revalidate = 3600; // 1 hour
 
 export const metadata: Metadata = {
-  title: "About - OROKO RADIO",
+  title: "About",
 };
 
 export default async function About() {
