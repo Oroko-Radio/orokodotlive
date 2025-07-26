@@ -69,6 +69,11 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    shows: Show;
+    genres: Genre;
+    genreCategory: GenreCategory;
+    artists: Artist;
+    city: City;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +82,11 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    shows: ShowsSelect<false> | ShowsSelect<true>;
+    genres: GenresSelect<false> | GenresSelect<true>;
+    genreCategory: GenreCategorySelect<false> | GenreCategorySelect<true>;
+    artists: ArtistsSelect<false> | ArtistsSelect<true>;
+    city: CitySelect<false> | CitySelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -144,6 +154,7 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
+  contentfulId?: string | null;
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -159,6 +170,105 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shows".
+ */
+export interface Show {
+  id: number;
+  title: string;
+  slug: string;
+  date: string;
+  isFeatured?: boolean | null;
+  lead?: string | null;
+  mixcloudLink?: string | null;
+  coverImage: number | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  genres?: (number | Genre)[] | null;
+  artists?: (number | Artist)[] | null;
+  contentfulId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genres".
+ */
+export interface Genre {
+  id: number;
+  name: string;
+  genreCategory?: (number | GenreCategory)[] | null;
+  contentfulId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genreCategory".
+ */
+export interface GenreCategory {
+  id: number;
+  name: string;
+  contentfulId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "artists".
+ */
+export interface Artist {
+  id: number;
+  name: string;
+  slug: string;
+  isResident?: boolean | null;
+  isAlumni?: boolean | null;
+  city?: (number | null) | City;
+  photo: number | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  contentfulId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "city".
+ */
+export interface City {
+  id: number;
+  name: string;
+  contentfulId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -171,6 +281,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'shows';
+        value: number | Show;
+      } | null)
+    | ({
+        relationTo: 'genres';
+        value: number | Genre;
+      } | null)
+    | ({
+        relationTo: 'genreCategory';
+        value: number | GenreCategory;
+      } | null)
+    | ({
+        relationTo: 'artists';
+        value: number | Artist;
+      } | null)
+    | ({
+        relationTo: 'city';
+        value: number | City;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -242,6 +372,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  contentfulId?: T;
   prefix?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -254,6 +385,72 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shows_select".
+ */
+export interface ShowsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  date?: T;
+  isFeatured?: T;
+  lead?: T;
+  mixcloudLink?: T;
+  coverImage?: T;
+  content?: T;
+  genres?: T;
+  artists?: T;
+  contentfulId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genres_select".
+ */
+export interface GenresSelect<T extends boolean = true> {
+  name?: T;
+  genreCategory?: T;
+  contentfulId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genreCategory_select".
+ */
+export interface GenreCategorySelect<T extends boolean = true> {
+  name?: T;
+  contentfulId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "artists_select".
+ */
+export interface ArtistsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  isResident?: T;
+  isAlumni?: T;
+  city?: T;
+  photo?: T;
+  content?: T;
+  contentfulId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "city_select".
+ */
+export interface CitySelect<T extends boolean = true> {
+  name?: T;
+  contentfulId?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

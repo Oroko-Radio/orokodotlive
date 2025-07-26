@@ -83,7 +83,7 @@ export default async function Article({
             {title}
           </h1>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl">
-            By <span className="border-b-2 border-black ">{author.name}</span>
+            By <span className="border-b-2 border-black ">{author?.name}</span>
           </h2>
         </div>
       </TitleBox>

@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import domtoimage from "dom-to-image";
+import { FieldHook } from "payload";
 
 interface PageResponse {
   data: {
