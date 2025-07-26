@@ -2,6 +2,10 @@
 
 import React from "react";
 
-const SliderContext = React.createContext(null);
+interface SliderContextType {
+  elementRef: React.RefObject<HTMLElement | null>;
+}
+
+const SliderContext = React.createContext<SliderContextType | null>(null);
 
 export default SliderContext;
