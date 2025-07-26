@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import domtoimage from "dom-to-image";
-import { FieldHook } from "payload";
 
 interface PageResponse {
   data: {
@@ -48,13 +47,16 @@ export const getMixcloudKey = (url: string) =>
 
 export const isServer = typeof window === "undefined";
 
-export function debounce(fn, ms) {
-  let timer;
-  return (_) => {
-    clearTimeout(timer);
-    timer = setTimeout((_) => {
+export function debounce<T extends (...args: any[]) => void>(
+  fn: T,
+  ms: number,
+) {
+  let timer: ReturnType<typeof setTimeout> | null;
+  return function (this: unknown, ...args: Parameters<T>) {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
       timer = null;
-      fn.apply(this);
+      fn.apply(this, args);
     }, ms);
   };
 }
