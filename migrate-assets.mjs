@@ -3,14 +3,7 @@ import config from "@payload-config";
 import exportData from "./contentful-data/export.json";
 import fs from "fs";
 import path from "path";
-import sharp from "sharp";
-import slugify from "slugify";
-
-function makeS3SafeFilename(fileName) {
-  const baseName = fileName.replace(/\.[^.]+$/, ""); // Remove extension
-  const ext = fileName.split(".").pop();
-  return `${slugify(baseName, { lower: true, strict: true })}.${ext}`;
-}
+import { makeS3SafeFilename, convertTiffToJpeg } from "./scripts/utils.js";
 
 const BATCH_SIZE = 250;
 const PROGRESS_FILE = "./progress.json";
@@ -120,7 +113,7 @@ async function migrateAssets() {
 
         // Convert TIFF to JPEG
         if (assetData.contentType === "image/tiff") {
-          fileBuffer = await sharp(assetData.buffer).jpeg().toBuffer();
+          fileBuffer = await convertTiffToJpeg(assetData.buffer);
           contentType = "image/jpeg";
         }
 
