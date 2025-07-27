@@ -4,6 +4,13 @@ import exportData from "./contentful-data/export.json";
 import fs from "fs";
 import path from "path";
 import sharp from "sharp";
+import slugify from "slugify";
+
+function makeS3SafeFilename(fileName) {
+  const baseName = fileName.replace(/\.[^.]+$/, ""); // Remove extension
+  const ext = fileName.split(".").pop();
+  return `${slugify(baseName, { lower: true, strict: true })}.${ext}`;
+}
 
 const BATCH_SIZE = 250;
 const PROGRESS_FILE = "./progress.json";
@@ -38,101 +45,129 @@ function saveProgress(progress) {
 function getAssetBuffer(asset) {
   const assetId = asset.sys.id;
   const fileData = asset.fields.file?.["en-US"];
-  
+
   if (!fileData) return null;
-  
+
   const { contentType, fileName } = fileData;
-  const cdnFolder = CDN_MAPPING[contentType] || CDN_MAPPING.default;
-  const assetDir = `./contentful-data/${cdnFolder}/snuaa94o04yj/${assetId}`;
   
-  try {
-    if (!fs.existsSync(assetDir)) return null;
+  // Try the expected CDN folder first
+  const expectedCdnFolder = CDN_MAPPING[contentType] || CDN_MAPPING.default;
+  const cdnFoldersToTry = [
+    expectedCdnFolder,
+    "images.ctfassets.net",
+    "assets.ctfassets.net", 
+    "downloads.ctfassets.net",
+    "videos.ctfassets.net"
+  ];
+  
+  // Remove duplicates
+  const uniqueFolders = [...new Set(cdnFoldersToTry)];
+  
+  for (const cdnFolder of uniqueFolders) {
+    const assetDir = `./contentful-data/${cdnFolder}/snuaa94o04yj/${assetId}`;
     
-    const subdirs = fs.readdirSync(assetDir);
-    if (subdirs.length === 0) return null;
-    
-    const hashDir = path.join(assetDir, subdirs[0]);
-    const files = fs.readdirSync(hashDir);
-    if (files.length === 0) return null;
-    
-    const filePath = path.join(hashDir, files[0]);
-    const buffer = fs.readFileSync(filePath);
-    
-    return {
-      id: assetId,
-      fileName,
-      contentType,
-      buffer,
-      size: buffer.length,
-    };
-  } catch (error) {
-    return null;
+    try {
+      if (!fs.existsSync(assetDir)) continue;
+
+      const subdirs = fs.readdirSync(assetDir);
+      if (subdirs.length === 0) continue;
+
+      const hashDir = path.join(assetDir, subdirs[0]);
+      const files = fs.readdirSync(hashDir);
+      if (files.length === 0) continue;
+
+      const filePath = path.join(hashDir, files[0]);
+      const buffer = fs.readFileSync(filePath);
+
+      return {
+        id: assetId,
+        fileName,
+        contentType,
+        buffer,
+        size: buffer.length,
+      };
+    } catch (error) {
+      continue;
+    }
   }
+  
+  return null;
 }
 
 async function migrateAssets() {
   const payload = await getPayload({ config: config });
   const progress = loadProgress();
-  
+
   const totalAssets = exportData.assets.length;
   const startIndex = progress.processedCount;
   const endIndex = Math.min(startIndex + BATCH_SIZE, totalAssets);
-  
-  console.log(`Processing assets ${startIndex + 1}-${endIndex} of ${totalAssets}`);
-  console.log(`Previous progress: ${progress.successful} successful, ${progress.failed} failed`);
-  
+
+  console.log(
+    `Processing assets ${startIndex + 1}-${endIndex} of ${totalAssets}`,
+  );
+  console.log(
+    `Previous progress: ${progress.successful} successful, ${progress.failed} failed`,
+  );
+
   for (let i = startIndex; i < endIndex; i++) {
     const asset = exportData.assets[i];
     const assetData = getAssetBuffer(asset);
-    
+
     if (assetData) {
       try {
         let fileBuffer = assetData.buffer;
         let contentType = assetData.contentType;
-        
+
         // Convert TIFF to JPEG
         if (assetData.contentType === "image/tiff") {
           fileBuffer = await sharp(assetData.buffer).jpeg().toBuffer();
           contentType = "image/jpeg";
         }
-        
+
         await payload.create({
           collection: "media",
           file: {
             data: fileBuffer,
-            name: assetData.fileName,
+            name: makeS3SafeFilename(assetData.fileName),
             size: fileBuffer.length,
             mimetype: contentType,
           },
           data: {
-            title: assetData.fileName,
+            title: makeS3SafeFilename(assetData.fileName),
             contentfulId: asset.sys.id,
           },
         });
-        
+
         progress.successful++;
         console.log(`✅ [${i + 1}/${totalAssets}] ${assetData.fileName}`);
-        
       } catch (error) {
         progress.failed++;
         progress.failedIds.push(asset.sys.id);
-        console.log(`❌ [${i + 1}/${totalAssets}] Upload failed: ${asset.sys.id} - ${error.message}`);
+        console.log(
+          `❌ [${i + 1}/${totalAssets}] Upload failed: ${asset.sys.id} - ${error.message}`,
+        );
       }
     } else {
       progress.failed++;
       progress.failedIds.push(asset.sys.id);
-      console.log(`❌ [${i + 1}/${totalAssets}] File not found: ${asset.sys.id}`);
+      console.log(
+        `❌ [${i + 1}/${totalAssets}] File not found: ${asset.sys.id}`,
+      );
     }
-    
+
     progress.processedCount = i + 1;
   }
-  
+
   saveProgress(progress);
-  
+
   const isComplete = progress.processedCount >= totalAssets;
-  console.log(`\nBatch complete! Processed: ${progress.processedCount}/${totalAssets}`);
-  console.log(`Total: ${progress.successful} successful, ${progress.failed} failed`);
-  
+  console.log(
+    `\nBatch complete! Processed: ${progress.processedCount}/${totalAssets}`,
+  );
+  console.log(
+    `Total: ${progress.successful} successful, ${progress.failed} failed`,
+  );
+
   if (isComplete) {
     console.log("🎉 Migration complete!");
     if (progress.failedIds.length > 0) {
