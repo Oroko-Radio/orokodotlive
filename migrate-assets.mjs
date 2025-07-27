@@ -49,23 +49,23 @@ function getAssetBuffer(asset) {
   if (!fileData) return null;
 
   const { contentType, fileName } = fileData;
-  
+
   // Try the expected CDN folder first
   const expectedCdnFolder = CDN_MAPPING[contentType] || CDN_MAPPING.default;
   const cdnFoldersToTry = [
     expectedCdnFolder,
     "images.ctfassets.net",
-    "assets.ctfassets.net", 
+    "assets.ctfassets.net",
     "downloads.ctfassets.net",
-    "videos.ctfassets.net"
+    "videos.ctfassets.net",
   ];
-  
+
   // Remove duplicates
   const uniqueFolders = [...new Set(cdnFoldersToTry)];
-  
+
   for (const cdnFolder of uniqueFolders) {
     const assetDir = `./contentful-data/${cdnFolder}/snuaa94o04yj/${assetId}`;
-    
+
     try {
       if (!fs.existsSync(assetDir)) continue;
 
@@ -90,7 +90,7 @@ function getAssetBuffer(asset) {
       continue;
     }
   }
-  
+
   return null;
 }
 

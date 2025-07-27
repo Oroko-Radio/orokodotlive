@@ -6,6 +6,7 @@ import path from "path";
 import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
+import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
 
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
@@ -38,6 +39,7 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
+    payloadCloudPlugin(),
     s3Storage({
       collections: {
         media: {
