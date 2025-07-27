@@ -7,9 +7,8 @@ export const Media: CollectionConfig = {
   },
   fields: [
     {
-      name: "alt",
+      name: "title",
       type: "text",
-      required: true,
     },
     {
       name: "contentfulId",
