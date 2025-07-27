@@ -236,7 +236,7 @@ export interface Artist {
   isResident?: boolean | null;
   isAlumni?: boolean | null;
   city?: (number | null) | City;
-  photo: number | Media;
+  photo?: (number | null) | Media;
   content?: {
     root: {
       type: string;

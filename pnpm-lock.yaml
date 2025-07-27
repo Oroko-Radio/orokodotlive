@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@contentful/contentful-slatejs-adapter':
+        specifier: ^16.0.2
+        version: 16.0.2
       '@contentful/rich-text-react-renderer':
         specifier: ^16.1.0
         version: 16.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -401,6 +404,10 @@ packages:
 
   '@contentful/content-source-maps@0.11.29':
     resolution: {integrity: sha512-ZxsHSQt9KktVhD+s4jbLzB4uwd+dl/NdBvh+1hh+kNj5ufp/7eAfvCq9BWeWiuTHUrciy8FlYdaqBMIaGXE1/Q==}
+
+  '@contentful/contentful-slatejs-adapter@16.0.2':
+    resolution: {integrity: sha512-1M1FnTvw+0XCUsP2wOug0gsGxZhMStG7dBH2lbOd5eVa6wK/RIrFv87mc1J5sy6W3Vsx5yi7MUQPb/cWINH65w==}
+    engines: {node: '>=6.0.0'}
 
   '@contentful/rich-text-react-renderer@16.1.0':
     resolution: {integrity: sha512-tMhSq6227GJ/bgYYsWyd+KWTPTYD7ZrQVVwzL2ormEYRRfV6NeiGKLo1YOA2zC0U0EBNSJfXrERhH1BA88QOvA==}
@@ -5361,6 +5368,10 @@ snapshots:
     dependencies:
       '@vercel/stega': 0.1.2
       json-pointer: 0.6.2
+
+  '@contentful/contentful-slatejs-adapter@16.0.2':
+    dependencies:
+      '@contentful/rich-text-types': 17.1.0
 
   '@contentful/rich-text-react-renderer@16.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:

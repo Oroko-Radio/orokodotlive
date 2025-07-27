@@ -11,6 +11,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@contentful/contentful-slatejs-adapter": "^16.0.2",
     "@contentful/rich-text-react-renderer": "^16.1.0",
     "@contentful/rich-text-types": "^17.1.0",
     "@headlessui/react": "^2.2.4",

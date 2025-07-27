@@ -1,3 +1,5 @@
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { SlateToLexicalFeature } from "@payloadcms/richtext-lexical/migrate";
 import { CollectionConfig } from "payload";
 
 export const Artists: CollectionConfig = {
@@ -36,14 +38,19 @@ export const Artists: CollectionConfig = {
     {
       name: "photo",
       label: "Photo",
-      type: "relationship",
+      type: "upload",
       relationTo: "media",
-      required: true,
     },
     {
       name: "content",
       label: "Content",
       type: "richText",
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          SlateToLexicalFeature({}),
+        ],
+      }),
     },
     {
       name: "contentfulId",
