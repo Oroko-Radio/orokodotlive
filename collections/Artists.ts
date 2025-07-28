@@ -49,7 +49,20 @@ export const Artists: CollectionConfig = {
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
-          SlateToLexicalFeature({}),
+          SlateToLexicalFeature({
+            converters: ({ defaultConverters }) => [
+              ...defaultConverters,
+              {
+                nodeTypes: ['hr'],
+                converter: ({ slateNode }) => {
+                  return {
+                    type: 'horizontalRule',
+                    version: 1,
+                  };
+                },
+              },
+            ],
+          }),
         ],
       }),
     },

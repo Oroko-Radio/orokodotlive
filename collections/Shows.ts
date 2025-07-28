@@ -1,9 +1,5 @@
 import { CollectionConfig } from "payload";
-import { 
-  lexicalEditor,
-  HorizontalRuleFeature,
-  UploadFeature
-} from "@payloadcms/richtext-lexical";
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { SlateToLexicalFeature } from "@payloadcms/richtext-lexical/migrate";
 
 export const Shows: CollectionConfig = {
@@ -57,19 +53,19 @@ export const Shows: CollectionConfig = {
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
-          SlateToLexicalFeature({}),
-          HorizontalRuleFeature(),
-          UploadFeature({
-            collections: {
-              media: {
-                fields: [
-                  {
-                    name: 'alt',
-                    type: 'text',
-                  },
-                ],
+          SlateToLexicalFeature({
+            converters: ({ defaultConverters }) => [
+              ...defaultConverters,
+              {
+                nodeTypes: ["hr"],
+                converter: ({ slateNode }) => {
+                  return {
+                    type: "hr",
+                    version: 1,
+                  };
+                },
               },
-            },
+            ],
           }),
         ],
       }),

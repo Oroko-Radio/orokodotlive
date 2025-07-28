@@ -45,11 +45,10 @@ async function formatRichText(slateNodes, payload) {
     "list-item": "li",
     hyperlink: "link",
     "embedded-asset-block": "upload",
-    hr: "horizontalrule",
   };
 
   const processedNodes = [];
-  
+
   for (const node of slateNodes) {
     const formattedNode = { ...node };
 
@@ -60,10 +59,20 @@ async function formatRichText(slateNodes, payload) {
     // Handle embedded asset blocks
     if (node.type === "embedded-asset-block" && node.data) {
       formattedNode.relationTo = "media";
+      formattedNode.fields = null;
+      formattedNode.format = "";
+      formattedNode.version = 3;
       const contentfulAssetId = node.data.target?.sys?.id;
       if (contentfulAssetId) {
-        const mediaId = await findMediaByContentfulId(payload, contentfulAssetId);
-        formattedNode.value = mediaId;
+        const media = await payload.find({
+          collection: "media",
+          where: { contentfulId: { equals: contentfulAssetId } },
+          limit: 1,
+        });
+        if (media.docs.length > 0) {
+          formattedNode.value = media.docs[0];
+          formattedNode.id = media.docs[0].id;
+        }
       }
     }
 
@@ -73,23 +82,23 @@ async function formatRichText(slateNodes, payload) {
 
     processedNodes.push(formattedNode);
   }
-  
+
   return processedNodes;
 }
 
 async function convertRichText(contentfulRichText, payload) {
   if (!contentfulRichText) return null;
-  console.log(
-    "Original Contentful rich text:",
-    JSON.stringify(contentfulRichText, null, 2),
-  );
+  // console.log(
+  //   "Original Contentful rich text:",
+  //   JSON.stringify(contentfulRichText, null, 2),
+  // );
   const converted = toSlatejsDocument({ document: contentfulRichText });
-  console.log(
-    "Converted rich text (before formatting):",
-    JSON.stringify(converted, null, 2),
-  );
+  // console.log(
+  //   "Converted rich text (before formatting):",
+  //   JSON.stringify(converted, null, 2),
+  // );
   const formatted = await formatRichText(converted, payload);
-  console.log("Final formatted rich text:", JSON.stringify(formatted, null, 2));
+  // console.log("Final formatted rich text:", JSON.stringify(formatted, null, 2));
   return formatted;
 }
 
@@ -203,7 +212,9 @@ async function migrateShows() {
     } catch (error) {
       progress.failed++;
       progress.failedIds.push(entry.sys.id);
-      console.log(`❌ [${i + 1}/${totalShows}] Failed: ${entry.sys.id} - ${error.message}`);
+      console.log(
+        `❌ [${i + 1}/${totalShows}] Failed: ${entry.sys.id} - ${error.message}`,
+      );
     }
 
     progress.processedCount = i + 1;
