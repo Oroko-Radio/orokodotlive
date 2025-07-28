@@ -2,6 +2,10 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import exportData from "./contentful-data/export.json" with { type: "json" };
 import { toSlatejsDocument } from "@contentful/contentful-slatejs-adapter";
+import fs from "fs";
+
+const BATCH_SIZE = 1000;
+const PROGRESS_FILE = "./progress-shows.json";
 
 const showEntries = exportData.entries.filter(
   (entry) => entry.sys?.contentType?.sys?.id === "show",
@@ -9,7 +13,22 @@ const showEntries = exportData.entries.filter(
 
 console.log(`Found ${showEntries.length} show entries to migrate`);
 
-function formatRichText(slateNodes) {
+function loadProgress() {
+  try {
+    if (fs.existsSync(PROGRESS_FILE)) {
+      return JSON.parse(fs.readFileSync(PROGRESS_FILE, "utf-8"));
+    }
+  } catch (error) {
+    console.log("No progress file found, starting from beginning");
+  }
+  return { processedCount: 0, successful: 0, failed: 0, failedIds: [] };
+}
+
+function saveProgress(progress) {
+  fs.writeFileSync(PROGRESS_FILE, JSON.stringify(progress, null, 2));
+}
+
+async function formatRichText(slateNodes, payload) {
   if (!slateNodes || !Array.isArray(slateNodes)) return slateNodes;
 
   const typeMapping = {
@@ -25,36 +44,53 @@ function formatRichText(slateNodes) {
     "ordered-list": "ol",
     "list-item": "li",
     hyperlink: "link",
+    "embedded-asset-block": "upload",
+    hr: "horizontalrule",
   };
 
-  return slateNodes.map((node) => {
+  const processedNodes = [];
+  
+  for (const node of slateNodes) {
     const formattedNode = { ...node };
 
     if (node.type && typeMapping[node.type]) {
       formattedNode.type = typeMapping[node.type];
     }
 
-    if (node.children && Array.isArray(node.children)) {
-      formattedNode.children = formatRichText(node.children);
+    // Handle embedded asset blocks
+    if (node.type === "embedded-asset-block" && node.data) {
+      formattedNode.relationTo = "media";
+      const contentfulAssetId = node.data.target?.sys?.id;
+      if (contentfulAssetId) {
+        const mediaId = await findMediaByContentfulId(payload, contentfulAssetId);
+        formattedNode.value = mediaId;
+      }
     }
 
-    return formattedNode;
-  });
+    if (node.children && Array.isArray(node.children)) {
+      formattedNode.children = await formatRichText(node.children, payload);
+    }
+
+    processedNodes.push(formattedNode);
+  }
+  
+  return processedNodes;
 }
 
-function convertRichText(contentfulRichText) {
+async function convertRichText(contentfulRichText, payload) {
   if (!contentfulRichText) return null;
-  // console.log(
-  //   "Original Contentful rich text:",
-  //   JSON.stringify(contentfulRichText, null, 2),
-  // );
+  console.log(
+    "Original Contentful rich text:",
+    JSON.stringify(contentfulRichText, null, 2),
+  );
   const converted = toSlatejsDocument({ document: contentfulRichText });
-  const formatted = formatRichText(converted.children);
-  // console.log(
-  //   "Converted rich text:",
-  //   JSON.stringify({ ...converted, children: formatted }, null, 2),
-  // );
-  return { ...converted, children: formatted };
+  console.log(
+    "Converted rich text (before formatting):",
+    JSON.stringify(converted, null, 2),
+  );
+  const formatted = await formatRichText(converted, payload);
+  console.log("Final formatted rich text:", JSON.stringify(formatted, null, 2));
+  return formatted;
 }
 
 async function findMediaByContentfulId(payload, contentfulId) {
@@ -69,8 +105,20 @@ async function findMediaByContentfulId(payload, contentfulId) {
 
 async function migrateShows() {
   const payload = await getPayload({ config: config });
+  const progress = loadProgress();
 
-  for (let i = 0; i < showEntries.length; i++) {
+  const totalShows = showEntries.length;
+  const startIndex = progress.processedCount;
+  const endIndex = Math.min(startIndex + BATCH_SIZE, totalShows);
+
+  console.log(
+    `Processing shows ${startIndex + 1}-${endIndex} of ${totalShows}`,
+  );
+  console.log(
+    `Previous progress: ${progress.successful} successful, ${progress.failed} failed`,
+  );
+
+  for (let i = startIndex; i < endIndex; i++) {
     const entry = showEntries[i];
     if (!entry || !entry.fields) {
       console.log(`❌ Entry ${i} is missing or has no fields`);
@@ -139,7 +187,7 @@ async function migrateShows() {
         lead: fields.lead?.["en-US"],
         mixcloudLink: fields.mixcloudLink?.["en-US"],
         coverImage: coverImagePayloadId,
-        content: convertRichText(fields.content?.["en-US"]),
+        content: await convertRichText(fields.content?.["en-US"], payload),
         artists: artistIds,
         genres: genreIds,
         contentfulId: entry.sys.id,
@@ -150,10 +198,36 @@ async function migrateShows() {
         data: showData,
       });
 
-      console.log(`✅ Migrated: ${showData.title}`);
+      progress.successful++;
+      console.log(`✅ [${i + 1}/${totalShows}] ${showData.title}`);
     } catch (error) {
-      console.log(`❌ Failed: ${entry.sys.id} - ${error.message}`);
+      progress.failed++;
+      progress.failedIds.push(entry.sys.id);
+      console.log(`❌ [${i + 1}/${totalShows}] Failed: ${entry.sys.id} - ${error.message}`);
     }
+
+    progress.processedCount = i + 1;
+  }
+
+  saveProgress(progress);
+
+  const isComplete = progress.processedCount >= totalShows;
+  console.log(
+    `\nBatch complete! Processed: ${progress.processedCount}/${totalShows}`,
+  );
+  console.log(
+    `Total: ${progress.successful} successful, ${progress.failed} failed`,
+  );
+
+  if (isComplete) {
+    console.log("🎉 Migration complete!");
+    if (progress.failedIds.length > 0) {
+      console.log(`Failed show IDs: ${progress.failedIds.join(", ")}`);
+    }
+    process.exit(0);
+  } else {
+    console.log("Run the script again to continue with the next batch.");
+    process.exit(0);
   }
 }
 
