@@ -40,9 +40,9 @@ export const Shows: CollectionConfig = {
     {
       name: "coverImage",
       label: "Cover Image",
-      type: "relationship",
+      type: "upload",
       relationTo: "media",
-      required: true,
+      // required: true,
     },
     {
       name: "content",

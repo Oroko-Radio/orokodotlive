@@ -180,7 +180,7 @@ export interface Show {
   isFeatured?: boolean | null;
   lead?: string | null;
   mixcloudLink?: string | null;
-  coverImage: number | Media;
+  coverImage?: (number | null) | Media;
   content?: {
     root: {
       type: string;

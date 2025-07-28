@@ -40,6 +40,7 @@ export const Artists: CollectionConfig = {
       label: "Photo",
       type: "upload",
       relationTo: "media",
+      // required: true
     },
     {
       name: "content",
