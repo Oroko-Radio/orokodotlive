@@ -10,8 +10,6 @@ import LoadMoreButton from "@/components/ui/LoadMoreButton";
 import CitySelectMobile from "@/components/ui/CitySelectMobile";
 import { City } from "@/payload-types";
 
-export const revalidate = 3600; // 1 hour
-
 export const metadata: Metadata = {
   title: "Artists",
 };
