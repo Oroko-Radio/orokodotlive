@@ -3,13 +3,13 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import Card from "@/components/Card";
 import Tag from "@/components/Tag";
-import { AllArtistEntry, CityInterface } from "@/types/shared";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { Artist, City } from "@/payload-types";
 
 interface AllArtistsProps {
-  allArtists: AllArtistEntry[];
-  cities: CityInterface[];
+  allArtists: Artist[];
+  cities: City[];
 }
 
 const AllArtists = ({ allArtists }: AllArtistsProps) => {
@@ -17,7 +17,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const city = searchParams.get("city") || "all";
+  const currentCity = searchParams.get("city") || "all";
   const filter = searchParams.get("filter") || "all";
 
   const createQueryString = useCallback(
@@ -30,7 +30,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
     [searchParams],
   );
 
-  const filteredArtists = useMemo<AllArtistEntry[]>(() => {
+  const filteredArtists = useMemo<Artist[]>(() => {
     return allArtists.filter((artist) => {
       if (filter === "all") return artist;
       if (filter === "alumni") return artist.isAlumni;
@@ -41,7 +41,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
 
   const cities = useMemo<string[]>(() => {
     const allCities = filteredArtists
-      .map(({ city }) => city.name)
+      .map(({ city }) => (city && typeof city !== "number" ? city.name : ""))
       .filter((value, index, self) => self.indexOf(value) === index)
       .sort((a, b) => (a.toUpperCase() > b.toUpperCase() ? 1 : -1));
 
@@ -50,15 +50,17 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
 
   const artists = useMemo(() => {
     return filteredArtists.filter(
-      (artist) => artist.city.name === city || city === "all",
+      ({ city }) =>
+        (city && typeof city !== "number" && city.name === currentCity) ||
+        currentCity === "all",
     );
-  }, [filteredArtists, city]);
+  }, [filteredArtists, currentCity]);
 
   useEffect(() => {
-    if (city !== "all" && !cities.includes(city)) {
+    if (currentCity !== "all" && !cities.includes(currentCity)) {
       router.push(pathname + "?" + createQueryString("city", "all"));
     }
-  }, [filter, cities, city, router, pathname, createQueryString]);
+  }, [filter, cities, currentCity, router, pathname, createQueryString]);
 
   return (
     <div className="bg-orokoYellow px-4 md:px-8">
@@ -83,7 +85,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
       </div>
       <select
         className="md:hidden appearance-none self-center bg-transparent border-black border-2 text-lg md:text-2xl text-black"
-        value={city}
+        value={currentCity}
         onChange={(e) => {
           router.push(
             pathname + "?" + createQueryString("city", e.target.value),
@@ -99,7 +101,10 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
       </select>
       <div className="hidden md:flex flex-wrap gap-1">
         <Link href={pathname + "?" + createQueryString("city", "all")} passHref>
-          <Tag text="All" color={city === "all" ? "yellow" : undefined} />
+          <Tag
+            text="All"
+            color={currentCity === "all" ? "yellow" : undefined}
+          />
         </Link>
         {cities.map((name, idx) => (
           <Link
@@ -108,7 +113,10 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
             key={idx}
             className="cursor-pointer"
           >
-            <Tag color={name === city ? "yellow" : undefined} text={name} />
+            <Tag
+              color={name === currentCity ? "yellow" : undefined}
+              text={name}
+            />
           </Link>
         ))}
       </div>
@@ -116,7 +124,7 @@ const AllArtists = ({ allArtists }: AllArtistsProps) => {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8">
         {artists.map(({ name, slug, photo }, idx) => (
           <div key={idx} className="border-black border-2">
-            {photo.url && (
+            {photo && typeof photo !== "number" && photo.url && (
               <Card imageUrl={photo.url} title={name} link={`/artists/${slug}`}>
                 <h1 className="font-heading card-leading p-4 text-4xl">
                   {name}
