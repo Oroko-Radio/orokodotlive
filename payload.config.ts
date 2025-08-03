@@ -28,13 +28,13 @@ export default buildConfig({
   },
   collections: [Users, Media, Shows, Genres, GenreCategory, Artists, City],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || "",
+  secret: process.env.PAYLOAD_SECRET!,
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || "",
+      connectionString: process.env.DATABASE_URI!,
     },
   }),
   sharp,
