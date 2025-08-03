@@ -1,6 +1,10 @@
 import { CollectionConfig } from "payload";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import { SlateToLexicalFeature } from "@payloadcms/richtext-lexical/migrate";
+import {
+  defaultSlateConverters,
+  SlateToLexicalFeature,
+} from "@payloadcms/richtext-lexical/migrate";
+import { SlateHRConverter } from "./hrConverter";
 
 export const Shows: CollectionConfig = {
   slug: "shows",
@@ -54,18 +58,8 @@ export const Shows: CollectionConfig = {
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
           SlateToLexicalFeature({
-            converters: ({ defaultConverters }) => [
-              ...defaultConverters,
-              {
-                nodeTypes: ["hr"],
-                converter: ({ slateNode }) => {
-                  return {
-                    type: "hr",
-                    version: 1,
-                  };
-                },
-              },
-            ],
+            converters: [...defaultSlateConverters, SlateHRConverter],
+            disableHooks: true,
           }),
         ],
       }),

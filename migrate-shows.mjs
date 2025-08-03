@@ -45,6 +45,7 @@ async function formatRichText(slateNodes, payload) {
     "list-item": "li",
     hyperlink: "link",
     "embedded-asset-block": "upload",
+    horizontalrule: "hr",
   };
 
   const processedNodes = [];
@@ -54,6 +55,12 @@ async function formatRichText(slateNodes, payload) {
 
     if (node.type && typeMapping[node.type]) {
       formattedNode.type = typeMapping[node.type];
+    }
+
+    // Special handling for horizontal rules
+    if (node.type === "horizontalrule") {
+      formattedNode.type = "hr";
+      formattedNode.children = [{ text: "" }]; // Ensure it has children
     }
 
     // Handle embedded asset blocks
@@ -92,7 +99,10 @@ async function convertRichText(contentfulRichText, payload) {
   //   "Original Contentful rich text:",
   //   JSON.stringify(contentfulRichText, null, 2),
   // );
-  const converted = toSlatejsDocument({ document: contentfulRichText });
+  const converted = toSlatejsDocument({
+    document: contentfulRichText,
+    schema: {},
+  });
   // console.log(
   //   "Converted rich text (before formatting):",
   //   JSON.stringify(converted, null, 2),
