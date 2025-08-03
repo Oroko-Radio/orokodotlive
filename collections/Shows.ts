@@ -54,15 +54,16 @@ export const Shows: CollectionConfig = {
       name: "content",
       label: "Content",
       type: "richText",
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
-          SlateToLexicalFeature({
-            converters: [...defaultSlateConverters, SlateHRConverter],
-            disableHooks: true,
-          }),
-        ],
-      }),
+      // NECESSARY FOR MIGRATION ONLY:
+      // editor: lexicalEditor({
+      //   features: ({ defaultFeatures }) => [
+      //     ...defaultFeatures,
+      //     SlateToLexicalFeature({
+      //       converters: [...defaultSlateConverters, SlateHRConverter],
+      //       disableHooks: true,
+      //     }),
+      //   ],
+      // }),
     },
     {
       name: "genres",
