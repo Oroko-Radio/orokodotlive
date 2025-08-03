@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import "@/styles/globals.css";
@@ -11,12 +11,13 @@ export const metadata: Metadata = {
     default: "Oroko",
     template: "Oroko | %s",
   },
-  description: "Oroko is a not-for-profit independent internet radio station based in Accra, Ghana. We aim to connect, inspire and empower through conversation, collaboration and community.",
-  viewport: "initial-scale=1.0, width=device-width",
+  description:
+    "Oroko is a not-for-profit independent internet radio station based in Accra, Ghana. We aim to connect, inspire and empower through conversation, collaboration and community.",
   openGraph: {
     title: "Oroko Radio",
     siteName: "Oroko Radio",
-    description: "Oroko is a not-for-profit independent internet radio station based in Accra, Ghana. We aim to connect, inspire and empower through conversation, collaboration and community.",
+    description:
+      "Oroko is a not-for-profit independent internet radio station based in Accra, Ghana. We aim to connect, inspire and empower through conversation, collaboration and community.",
     url: "https://oroko.live/",
     type: "website",
     images: [
@@ -33,6 +34,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

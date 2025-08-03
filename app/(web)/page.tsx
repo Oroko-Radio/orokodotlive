@@ -12,7 +12,7 @@ import { getHomePage } from "@/lib/contentful/pages/home";
 export const revalidate = 300; // 5 minutes
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Oroko | Home",
 };
 
 export default async function HomePage() {

@@ -11,6 +11,7 @@ import PlayIcon from "@/icons/PlayIcon";
 import DropdownButton from "./ui/DropdownButton";
 import PlayerDropdown from "./PlayerDropdown";
 import { RADIO_CULT_STATION_ID } from "@/constants";
+import { ScaleLoader } from "react-spinners";
 
 const BroadcastingIndicator = ({
   status,
@@ -72,6 +73,14 @@ export default function LivePlayer() {
       });
     }
   }, [live, isOnline]);
+
+  if (!data) {
+    return (
+      <div className="h-14 md:h-18 border-b-2 border-black bg-orokoRed flex justify-center items-center">
+        <ScaleLoader />
+      </div>
+    );
+  }
 
   return (
     <>
