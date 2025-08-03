@@ -1,6 +1,6 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
-import exportData from "./contentful-data/export.json" with { type: "json" };
+import exportData from "../contentful-data/export.json" with { type: "json" };
 
 const cityEntries = exportData.entries.filter(
   (entry) => entry.sys?.contentType?.sys?.id === "city",

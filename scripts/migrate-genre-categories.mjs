@@ -1,12 +1,14 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
-import exportData from "./contentful-data/export.json" with { type: "json" };
+import exportData from "../contentful-data/export.json" with { type: "json" };
 
 const genreCategoryEntries = exportData.entries.filter(
   (entry) => entry.sys?.contentType?.sys?.id === "genreCategory",
 );
 
-console.log(`Found ${genreCategoryEntries.length} genre category entries to migrate`);
+console.log(
+  `Found ${genreCategoryEntries.length} genre category entries to migrate`,
+);
 
 async function migrateGenreCategories() {
   const payload = await getPayload({ config: config });
