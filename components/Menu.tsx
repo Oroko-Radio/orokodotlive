@@ -22,7 +22,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
       )}
     >
       <nav className="mt-4 mb-10 md:flex md:justify-center">
-        <ul className="hidden sm:flex flex-wrap justify-center max-w-[1000px] 2xl:max-w-none gap-4 xl:gap-6">
+        <ul className="hidden sm:flex flex-wrap justify-center max-w-[1000px] gap-4 xl:gap-6">
           {links.map(({ name, url }, idx) => (
             <Link key={idx} href={url} passHref>
               <li
