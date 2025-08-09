@@ -1,41 +1,26 @@
 "use client";
 
-import { useState, useEffect, useTransition } from "react";
+import { useState, useEffect, useTransition, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { ScaleLoader } from "react-spinners";
+import { debounce } from "@/util";
 import CityTag from "./CityTag";
 import ArtistTypeFilter from "./ArtistTypeFilter";
 import { City } from "@/payload-types";
 
-interface ArtistsFiltersProps {
+interface ArtistFiltersProps {
   cities: City[];
   initialCity: string;
   initialFilter: string;
   children: React.ReactNode;
 }
 
-const useDebounce = (value: any, delay: number) => {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-
-  return debouncedValue;
-};
-
-export default function ArtistsFilters({ 
+export default function ArtistFilters({ 
   cities, 
   initialCity, 
   initialFilter,
   children
-}: ArtistsFiltersProps) {
+}: ArtistFiltersProps) {
   const [currentCity, setCurrentCity] = useState(initialCity);
   const [currentFilter, setCurrentFilter] = useState(initialFilter);
   const [isPending, startTransition] = useTransition();
@@ -43,19 +28,23 @@ export default function ArtistsFilters({
   const router = useRouter();
   const pathname = usePathname();
   
-  const debouncedCity = useDebounce(currentCity, 200);
-  const debouncedFilter = useDebounce(currentFilter, 200);
+  const debouncedUpdateUrl = useCallback(
+    debounce((city: string, filter: string) => {
+      startTransition(() => {
+        const params = new URLSearchParams();
+        if (city !== "all") params.set("city", city);
+        if (filter !== "all") params.set("filter", filter);
+        
+        const newUrl = `${pathname}?${params.toString()}`;
+        router.push(newUrl);
+      });
+    }, 200),
+    [pathname, router]
+  );
   
   useEffect(() => {
-    startTransition(() => {
-      const params = new URLSearchParams();
-      if (debouncedCity !== "all") params.set("city", debouncedCity);
-      if (debouncedFilter !== "all") params.set("filter", debouncedFilter);
-      
-      const newUrl = `${pathname}?${params.toString()}`;
-      router.push(newUrl);
-    });
-  }, [debouncedCity, debouncedFilter, pathname, router]);
+    debouncedUpdateUrl(currentCity, currentFilter);
+  }, [currentCity, currentFilter, debouncedUpdateUrl]);
 
   const handleCityChange = (city: string) => {
     setCurrentCity(city);

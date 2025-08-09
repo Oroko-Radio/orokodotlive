@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { ARTISTS_PAGE_SIZE } from "@/constants";
-import ArtistsFilters from "@/components/ui/ArtistsFilters";
+import ArtistFilters from "@/components/ui/ArtistFilters";
 import LoadMoreButton from "@/components/ui/LoadMoreButton";
 import { City } from "@/payload-types";
 
@@ -92,7 +92,7 @@ export default async function ArtistsPage({ searchParams }: ArtistsPageProps) {
 
   return (
     <div className="bg-orokoYellow px-4 md:px-8">
-      <ArtistsFilters
+      <ArtistFilters
         cities={cities}
         initialCity={currentCity}
         initialFilter={currentFilter}
@@ -112,7 +112,7 @@ export default async function ArtistsPage({ searchParams }: ArtistsPageProps) {
             </div>
           )}
         </>
-      </ArtistsFilters>
+      </ArtistFilters>
     </div>
   );
 }
