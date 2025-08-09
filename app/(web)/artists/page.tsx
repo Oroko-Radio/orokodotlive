@@ -10,9 +10,6 @@ import LoadMoreButton from "@/components/ui/LoadMoreButton";
 import CitySelectMobile from "@/components/ui/CitySelectMobile";
 import { City } from "@/payload-types";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 export const metadata: Metadata = {
   title: "Artists",
 };
@@ -28,9 +25,6 @@ interface ArtistsPageProps {
 }
 
 export default async function ArtistsPage({ searchParams }: ArtistsPageProps) {
-  if (typeof window !== "undefined") {
-    return <div>Loading...</div>;
-  }
   const payload = await getPayload({ config });
 
   const params = await searchParams;
