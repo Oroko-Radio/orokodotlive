@@ -1,16 +1,17 @@
-'use client';
+"use client";
 
 import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
-import usePlayerState from "../hooks/usePlayerState";
-import useRadioCult from "../hooks/useRadioCult";
+import usePlayerState from "@/hooks/usePlayerState";
+import useRadioCult from "@/hooks/useRadioCult";
 import Banner from "./Banner";
-import Logo from "../icons/Logo";
-import PauseIcon from "../icons/PauseIcon";
-import PlayIcon from "../icons/PlayIcon";
+import Logo from "@/icons/Logo";
+import PauseIcon from "@/icons/PauseIcon";
+import PlayIcon from "@/icons/PlayIcon";
 import DropdownButton from "./ui/DropdownButton";
 import PlayerDropdown from "./PlayerDropdown";
-import { RADIO_CULT_STATION_ID } from "../constants";
+import { RADIO_CULT_STATION_ID } from "@/constants";
+import { ScaleLoader } from "react-spinners";
 
 const BroadcastingIndicator = ({
   status,
@@ -63,7 +64,7 @@ export default function LivePlayer() {
         artwork: [
           {
             src: live.result.metadata.artwork
-              ? live.result.metadata.artwork["512x512"]
+              ? live.result.metadata.artwork["512x512"]!
               : "https://oroko.live/OROKO_OG_1200px.png",
             sizes: "512x512",
             type: "image/png",
@@ -72,6 +73,14 @@ export default function LivePlayer() {
       });
     }
   }, [live, isOnline]);
+
+  if (!data) {
+    return (
+      <div className="h-14 md:h-18 border-b-2 border-black bg-orokoRed flex justify-center items-center">
+        <ScaleLoader />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -137,7 +146,7 @@ export default function LivePlayer() {
                     "z-10 -bottom-8 group-hover:-bottom-18 delay-200":
                       !dropdownOpen,
                     "z-20 -bottom-18": dropdownOpen,
-                  }
+                  },
                 )}
               >
                 <DropdownButton

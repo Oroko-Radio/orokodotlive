@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import Tag from "./Tag";
-import { ShowInterface } from "../types/shared";
+import { ShowInterface } from "@/types/shared";
 import FeaturedTag from "./FeaturedTag";
 
 interface ShowProps {

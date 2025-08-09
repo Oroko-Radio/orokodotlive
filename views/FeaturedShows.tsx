@@ -1,11 +1,11 @@
-import Slider from "../components/Slider";
-import { ShowInterface } from "../types/shared";
+import Slider from "@/components/Slider";
+import { ShowInterface } from "@/types/shared";
 import dayjs from "dayjs";
-import Tag from "../components/Tag";
+import Tag from "@/components/Tag";
 import Link from "next/link";
-import { GenreTag } from "../components/GenreTag";
-import FeaturedTag from "../components/FeaturedTag";
-import SliderCard from "../components/SliderCard";
+import { GenreTag } from "@/components/GenreTag";
+import FeaturedTag from "@/components/FeaturedTag";
+import SliderCard from "@/components/SliderCard";
 
 interface FeaturedShowsProps {
   shows: ShowInterface[];

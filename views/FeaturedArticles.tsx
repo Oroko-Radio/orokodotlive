@@ -2,12 +2,19 @@ import React from "react";
 import dayjs from "dayjs";
 import Link from "next/link";
 
-import Slider from "../components/Slider";
-import Tag from "../components/Tag";
-import DotButton from "../components/ui/DotButton";
-import SliderCard from "../components/SliderCard";
+import Slider from "@/components/Slider";
+import Tag from "@/components/Tag";
+import DotButton from "@/components/ui/DotButton";
+import SliderCard from "@/components/SliderCard";
+import { ArticleInterface } from "@/types/shared";
 
-const FeaturedArticles = ({ featuredArticles, heading = "Featured News" }) => {
+const FeaturedArticles = ({
+  featuredArticles,
+  heading = "Featured News",
+}: {
+  featuredArticles: ArticleInterface[];
+  heading?: string;
+}) => {
   return (
     <>
       <div className="overflow-hidden">

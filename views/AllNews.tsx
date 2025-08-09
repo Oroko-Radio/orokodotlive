@@ -1,10 +1,10 @@
 import cn from "classnames";
 import Link from "next/link";
 import dayjs from "dayjs";
-import Card from "../components/Card";
-import Tag from "../components/Tag";
-import { ArticleInterface } from "../types/shared";
-import DotButton from "../components/ui/DotButton";
+import Card from "@/components/Card";
+import Tag from "@/components/Tag";
+import { ArticleInterface } from "@/types/shared";
+import DotButton from "@/components/ui/DotButton";
 
 const AllNews = ({
   articles,

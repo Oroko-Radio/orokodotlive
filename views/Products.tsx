@@ -1,8 +1,8 @@
 import Link from "next/link";
-import DotButton from "../components/ui/DotButton";
-import type { Product } from "../types/shared";
-import Slider from "../components/Slider";
-import SliderCard from "../components/SliderCard";
+import DotButton from "@/components/ui/DotButton";
+import type { Product } from "@/types/shared";
+import Slider from "@/components/Slider";
+import SliderCard from "@/components/SliderCard";
 
 interface ProductsProps {
   products: Product[];

@@ -9,10 +9,11 @@ import useSearchData from "../hooks/useSearch";
 import Tag from "../components/Tag";
 import { ScaleLoader } from "react-spinners";
 import { useEffect, useState } from "react";
+import { ShowInterface } from "@/types/shared";
 
 export default function Search() {
   const [query, querySet] = useDebouncedState("", 500);
-  const [fallbackData, setFallbackData] = useState(null);
+  const [fallbackData, setFallbackData] = useState<any>(null);
 
   useEffect(() => {
     getSearchData("").then(({ data }) => {
@@ -97,7 +98,7 @@ export default function Search() {
           </div>
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-y-10 sm:gap-8">
-            {data.shows.map((show) => (
+            {data.shows.map((show: any) => (
               <li
                 key={show.fields.slug}
                 className="border-2 border-black bg-white"
@@ -120,12 +121,14 @@ export default function Search() {
                         {" "}
                         With{" "}
                         {show.fields.artists &&
-                          show.fields.artists.map((artist, idx) => (
-                            <span key={idx}>
-                              <span>{artist.fields.name}</span>
-                              {idx !== show.fields.artists.length - 1 && ", "}
-                            </span>
-                          ))}
+                          show.fields.artists.map(
+                            (artist: any, idx: number) => (
+                              <span key={idx}>
+                                <span>{artist.fields.name}</span>
+                                {idx !== show.fields.artists.length - 1 && ", "}
+                              </span>
+                            ),
+                          )}
                       </h2>
                     </div>
                   </div>
@@ -148,19 +151,17 @@ export default function Search() {
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-y-6 sm:gap-8">
             {data.artists.map((artist: any) => (
               <li key={artist.fields.slug} className="border-black border-2">
-                <Card
-                  imageUrl={
-                    artist.fields && artist.fields.photo.fields.file.url
-                      ? "http:" + artist.fields.photo.fields.file.url
-                      : null
-                  }
-                  title={artist.fields.name}
-                  link={`/artists/${artist.fields.slug}`}
-                >
-                  <h1 className="font-heading card-leading p-4 text-4xl">
-                    {artist.fields.name}
-                  </h1>
-                </Card>
+                {artist.fields && artist.fields.photo.fields.file.url ? (
+                  <Card
+                    imageUrl={"http:" + artist.fields.photo.fields.file.url}
+                    title={artist.fields.name}
+                    link={`/artists/${artist.fields.slug}`}
+                  >
+                    <h1 className="font-heading card-leading p-4 text-4xl">
+                      {artist.fields.name}
+                    </h1>
+                  </Card>
+                ) : null}
               </li>
             ))}
           </ul>
@@ -177,7 +178,7 @@ export default function Search() {
           </div>
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-y-10 sm:gap-8">
-            {data.articles.map((article) => (
+            {data.articles.map((article: any) => (
               <li
                 key={article.fields.slug}
                 className="border-black border-2 bg-white"
