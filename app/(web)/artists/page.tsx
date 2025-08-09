@@ -4,10 +4,8 @@ import { Suspense } from "react";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { ARTISTS_PAGE_SIZE } from "@/constants";
-import CityTag from "@/components/ui/CityTag";
-import ArtistTypeFilter from "@/components/ui/ArtistTypeFilter";
+import ArtistsFilters from "@/components/ui/ArtistsFilters";
 import LoadMoreButton from "@/components/ui/LoadMoreButton";
-import CitySelectMobile from "@/components/ui/CitySelectMobile";
 import { City } from "@/payload-types";
 
 export const metadata: Metadata = {
@@ -94,52 +92,29 @@ export default async function ArtistsPage({ searchParams }: ArtistsPageProps) {
 
   return (
     <div className="bg-orokoYellow px-4 md:px-8">
-      <div className="md:flex justify-between py-8 pb-2 md:pb-8">
-        <h1 className="font-serif text-black text-4xl md:text-5xl mb-8 md:mb-0">
-          All Artists
-        </h1>
-        <ArtistTypeFilter currentFilter={currentFilter} />
-      </div>
+      <ArtistsFilters
+        cities={cities}
+        initialCity={currentCity}
+        initialFilter={currentFilter}
+      >
+        <>
+          <Suspense fallback={<div>Loading artists...</div>}>
+            <AllArtists artists={artists.docs} />
+          </Suspense>
 
-      <div className="md:hidden mb-4">
-        <CitySelectMobile
-          cities={cities}
-          currentCity={currentCity}
-          currentFilter={currentFilter}
-        />
-      </div>
-
-      <div className="hidden md:flex flex-wrap gap-1 mb-8">
-        <CityTag
-          city="all"
-          label="All"
-          isActive={currentCity === "all"}
-          currentFilter={currentFilter}
-        />
-        {cities.map((city, idx) => (
-          <CityTag
-            key={idx}
-            city={city.id.toString()}
-            label={city.name}
-            isActive={city.id.toString() === currentCity}
-            currentFilter={currentFilter}
-          />
-        ))}
-      </div>
-
-      <Suspense fallback={<div>Loading artists...</div>}>
-        <AllArtists artists={artists.docs} />
-      </Suspense>
-
-      {hasMore && (
-        <div className="flex justify-center py-8">
-          <LoadMoreButton
-            currentPage={currentPage}
-            currentCity={currentCity}
-            currentFilter={currentFilter}
-          />
-        </div>
-      )}
+          {hasMore && (
+            <div className="flex justify-center py-8">
+              <LoadMoreButton
+                currentPage={currentPage}
+                currentCity={currentCity}
+                currentFilter={currentFilter}
+              />
+            </div>
+          )}
+        </>
+      </ArtistsFilters>
     </div>
   );
 }
+
+export const revalidate = 300; // 5 minutes

@@ -2,6 +2,7 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import { useTransition } from "react";
+import { ScaleLoader } from "react-spinners";
 import Button from "./Button";
 
 interface LoadMoreButtonProps {
@@ -29,9 +30,13 @@ export default function LoadMoreButton({
     });
   };
 
-  return (
-    <Button onClick={handleLoadMore} disabled={isPending}>
-      {isPending ? "Loading..." : "Load More"}
-    </Button>
-  );
+  if (isPending) {
+    return (
+      <div className="flex justify-center items-center h-[48px]">
+        <ScaleLoader />
+      </div>
+    );
+  }
+
+  return <Button onClick={handleLoadMore}>Load More</Button>;
 }
