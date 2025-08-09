@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import React from "react";
-import { getNewsPage } from "@/lib/contentful/pages/news";
 import FeaturedArticles from "@/views/FeaturedArticles";
 import AllNews from "@/views/AllNews";
 
@@ -11,7 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default async function NewsPage() {
-  const { articles, featuredArticles } = await getNewsPage(false);
+  // TODO: Convert this page to use Payload CMS
+  const articles: any[] = [];
+  const featuredArticles: any[] = [];
 
   return (
     <>

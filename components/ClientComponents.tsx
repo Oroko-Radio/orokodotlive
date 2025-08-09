@@ -7,9 +7,9 @@ const MixcloudPlayer = dynamic(() => import("./mixcloudPlayer"), {
   ssr: false,
 });
 
-const LivePlayer = dynamic(() => import("./LivePlayer"), {
+const LivePlayerClient = dynamic(() => import("./LivePlayer"), {
   ssr: false,
   loading: LivePlayerLoading,
 });
 
-export { MixcloudPlayer, LivePlayer };
+export { MixcloudPlayer, LivePlayerClient as LivePlayer };

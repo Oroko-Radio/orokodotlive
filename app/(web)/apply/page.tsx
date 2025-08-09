@@ -4,7 +4,6 @@ import Link from "next/link";
 import TitleBox from "@/components/TitleBox";
 import SinglePage from "@/views/SinglePage";
 import DotButton from "@/components/ui/DotButton";
-import { getApplyPage } from "@/lib/contentful/pages/apply";
 
 export const revalidate = 3600; // 1 hour
 
@@ -13,7 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Apply() {
-  const { applicationsOpen } = await getApplyPage();
+  // TODO: Convert this page to use Payload CMS
+  const applicationsOpen = false;
 
   return (
     <SinglePage

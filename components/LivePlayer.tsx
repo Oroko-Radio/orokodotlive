@@ -12,6 +12,7 @@ import DropdownButton from "./ui/DropdownButton";
 import PlayerDropdown from "./PlayerDropdown";
 import { RADIO_CULT_STATION_ID } from "@/constants";
 import { ScaleLoader } from "react-spinners";
+import { Show as ShowType } from "@/payload-types";
 
 const BroadcastingIndicator = ({
   status,
@@ -36,7 +37,11 @@ const BroadcastingIndicator = ({
   );
 };
 
-export default function LivePlayer() {
+interface LivePlayerProps {
+  nextUpShow?: ShowType | null;
+}
+
+export default function LivePlayer({ nextUpShow = null }: LivePlayerProps) {
   const AUDIO_SRC = "https://oroko-radio.radiocult.fm/stream";
 
   const { data } = useRadioCult(RADIO_CULT_STATION_ID);
@@ -161,7 +166,7 @@ export default function LivePlayer() {
                   "h-auto": dropdownOpen,
                 })}
               >
-                <PlayerDropdown />
+                <PlayerDropdown nextUpShow={nextUpShow} />
               </div>
             </div>
           </div>

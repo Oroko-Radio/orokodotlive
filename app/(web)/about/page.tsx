@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import React from "react";
 import SinglePage from "@/views/SinglePage";
 import TitleBox from "@/components/TitleBox";
-import { renderRichTextWithImages } from "@/lib/rich-text";
-import { getAboutPage } from "@/lib/contentful/pages/about";
 
 export const revalidate = 3600; // 1 hour
 
@@ -12,12 +10,14 @@ export const metadata: Metadata = {
 };
 
 export default async function About() {
-  const { title, subtitle, coverImage, content } = await getAboutPage(false);
+  // TODO: Convert this page to use Payload CMS
+  const title = "About Oroko Radio";
+  const subtitle = "Building Community Through Sound";
 
   return (
     <SinglePage
-      coverImage={coverImage.url}
-      coverImageAlt="View"
+      coverImage={undefined}
+      coverImageAlt="About"
       repeatCover={false}
       title="About"
     >
@@ -35,7 +35,7 @@ export default async function About() {
         </div>
       </TitleBox>
       <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8 mb-24">
-        {renderRichTextWithImages(content)}
+        <p>Page content will be restored when converted to Payload CMS.</p>
       </section>
     </SinglePage>
   );

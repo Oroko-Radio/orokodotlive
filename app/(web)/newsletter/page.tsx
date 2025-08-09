@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import TitleBox from "@/components/TitleBox";
-import { getNewsletterPage } from "@/lib/contentful/pages/newsletter";
-import { renderRichTextWithImages } from "@/lib/rich-text";
 import SinglePage from "@/views/SinglePage";
 import NewsletterWidget from "@/components/NewsletterWidget";
 
@@ -12,7 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Newsletter() {
-  const { title, subtitle, content } = await getNewsletterPage(false);
+  // TODO: Convert this page to use Payload CMS
+  const title = "Newsletter";
+  const subtitle = "Stay updated with Oroko Radio";
 
   return (
     <SinglePage
@@ -48,13 +48,11 @@ export default async function Newsletter() {
           </div>
         </section>
       </div>
-      {content && (
-        <div className="bg-orokoGray">
-          <section className="container max-w-5xl mx-auto rich-text pt-12 pb-24">
-            {renderRichTextWithImages(content)}
-          </section>
-        </div>
-      )}
+      <div className="bg-orokoGray">
+        <section className="container max-w-5xl mx-auto rich-text pt-12 pb-24">
+          <p>Newsletter content will be restored when converted to Payload CMS.</p>
+        </section>
+      </div>
     </SinglePage>
   );
 }

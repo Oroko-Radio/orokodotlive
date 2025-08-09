@@ -4,7 +4,7 @@ import BackButton from "@/components/ui/BackButton";
 
 interface SinglePageProps {
   title: string;
-  coverImage: string;
+  coverImage: string | undefined;
   coverImageAlt: string;
   withBackButton?: boolean;
   repeatCover?: boolean;

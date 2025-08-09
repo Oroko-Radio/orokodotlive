@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Tag from "@/components/Tag";
 import TitleBox from "@/components/TitleBox";
-import { getArtistsPageSingle } from "@/lib/contentful/pages/artists";
-import { getArtistPathsToPreRender } from "@/lib/contentful/paths";
-import { renderRichTextWithImages } from "@/lib/rich-text";
+import { getArtistsPageSingle, getAllArtistSlugs } from "@/lib/payload/pages/artists";
+import { renderPayloadRichText } from "@/lib/rich-text";
 import RelatedShows from "@/views/RelatedShows";
 import SinglePage from "@/views/SinglePage";
 
@@ -16,16 +15,16 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug: artistSlug } = await params;
-  const { artist } = await getArtistsPageSingle(artistSlug, false);
+  const { artist } = await getArtistsPageSingle(artistSlug);
   return {
     title: artist.name,
   };
 }
 
 export async function generateStaticParams() {
-  const paths = await getArtistPathsToPreRender();
-  return paths.map((path) => ({
-    slug: path.params.slug,
+  const slugs = await getAllArtistSlugs();
+  return slugs.map((slug) => ({
+    slug: slug,
   }));
 }
 
@@ -35,15 +34,12 @@ export default async function Artist({
   params: Promise<{ slug: string }>;
 }) {
   const { slug: artistSlug } = await params;
-  const { artist, relatedShows } = await getArtistsPageSingle(
-    artistSlug,
-    false,
-  );
+  const { artist, relatedShows } = await getArtistsPageSingle(artistSlug);
   const { name, slug, city, content } = artist;
 
   return (
     <SinglePage
-      coverImage={artist.photo && artist.photo.url && artist.photo.url}
+      coverImage={typeof artist.photo === 'object' && artist.photo?.url ? artist.photo.url : undefined}
       coverImageAlt={name}
       withBackButton
       title={name}
@@ -60,17 +56,17 @@ export default async function Artist({
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-4 mt-6 md:mt-0 font-heading md:mr-36 lg:mr-40">
             {name}
           </h1>
-          {city && city.name && (
+          {city && (
             <div className="inline-block">
-              <Link href={"/artists?city=" + city.name} passHref>
-                <Tag text={city.name} color="black" />
+              <Link href={"/artists?city=" + (typeof city === 'object' ? city.name : city)} passHref>
+                <Tag text={typeof city === 'object' ? city.name : String(city)} color="black" />
               </Link>
             </div>
           )}
         </div>
       </TitleBox>
       <section className="container max-w-5xl mx-auto rich-text py-10 mb-24">
-        {content && renderRichTextWithImages(content)}
+        {content && renderPayloadRichText(content)}
       </section>
       {relatedShows && relatedShows.length > 0 && (
         <RelatedShows shows={relatedShows} />

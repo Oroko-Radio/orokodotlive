@@ -2,14 +2,14 @@ import Link from "next/link";
 import Slider from "@/components/Slider";
 import DotButton from "@/components/ui/DotButton";
 import Show from "@/components/Show";
-import { ShowInterface } from "@/types/shared";
+import { Show as ShowType } from "@/payload-types";
 import SliderCard from "@/components/SliderCard";
 
 const UpcomingShows = ({
   shows,
   heading = "Coming up",
 }: {
-  shows: ShowInterface[];
+  shows: ShowType[];
   heading?: string;
 }) => {
   if (shows.length < 1) return;
@@ -30,7 +30,7 @@ const UpcomingShows = ({
       <Slider>
         {shows.map((show, idx) => (
           <SliderCard
-            imageUrl={show.coverImage.url}
+            imageUrl={typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg"}
             title={show.title}
             link={`/radio/${show.slug}`}
             cardWidth="quarter"

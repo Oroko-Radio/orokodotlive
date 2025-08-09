@@ -1,5 +1,8 @@
 import Image from "next/legacy/image";
 import Link from "next/link";
+import React from "react";
+import { RichText } from "@payloadcms/richtext-lexical/react";
+import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Block, Inline, BLOCKS, INLINES } from "@contentful/rich-text-types";
@@ -10,6 +13,10 @@ const getAssetById = (id: string, assets: Asset[]) =>
 
 const getEntryById = (id: string, entries: Entry[]) =>
   entries.filter((entry) => entry.sys.id === id).pop();
+
+export function renderPayloadRichText(data: SerializedEditorState) {
+  return <RichText data={data} />;
+}
 
 export function renderRichTextWithImages(content: Content) {
   if (content.links) {

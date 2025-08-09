@@ -4,7 +4,8 @@ import Header from "@/components/Header";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import SocialSection from "@/components/SocialSection";
-import { MixcloudPlayer, LivePlayer } from "@/components/ClientComponents";
+import { MixcloudPlayer } from "@/components/ClientComponents";
+import LivePlayerWithData from "@/components/LivePlayerWithData";
 
 export const metadata: Metadata = {
   title: {
@@ -50,7 +51,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <Header />
-        <LivePlayer />
+        <LivePlayerWithData />
 
         {children}
 

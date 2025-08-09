@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import React from "react";
 import SinglePage from "@/views/SinglePage";
 import TitleBox from "@/components/TitleBox";
-import { renderRichTextWithImages } from "@/lib/rich-text";
-import { getPartnersPage } from "@/lib/contentful/pages/partners";
 
 export const revalidate = 3600; // 1 hour
 
@@ -12,12 +10,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Partners() {
-  const { title, subtitle, coverImage, content } = await getPartnersPage(false);
+  // TODO: Convert this page to use Payload CMS
+  const title = "Partners";
+  const subtitle = "Our Community Partners";
 
   return (
     <SinglePage
-      coverImage={coverImage.url}
-      coverImageAlt="View"
+      coverImage={undefined}
+      coverImageAlt="Partners"
       repeatCover={false}
       title="Partners"
     >
@@ -35,7 +35,7 @@ export default async function Partners() {
         </div>
       </TitleBox>
       <section className="container max-w-5xl mx-auto rich-text py-6 md:py-8 mb-24">
-        {renderRichTextWithImages(content)}
+        <p>Partners content will be restored when converted to Payload CMS.</p>
       </section>
     </SinglePage>
   );

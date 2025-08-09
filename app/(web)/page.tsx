@@ -7,7 +7,7 @@ import LatestShows from "@/views/LatestShows";
 import Products from "@/views/Products";
 import UpcomingShows from "@/views/UpcomingShows";
 import SocialSection from "@/components/SocialSection";
-import { getHomePage } from "@/lib/contentful/pages/home";
+import { getHomePage as getPayloadHomePage } from "@/lib/payload/pages/home";
 
 export const revalidate = 300; // 5 minutes
 
@@ -16,13 +16,11 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const {
-    featuredArticles,
-    featuredShows,
-    latestShows,
-    upcomingShows,
-    products,
-  } = await getHomePage();
+  // TODO: Convert news and products to use Payload CMS
+  const featuredArticles: any[] = [];
+  const products: any[] = [];
+  
+  const { featuredShows, latestShows, upcomingShows } = await getPayloadHomePage();
 
   return (
     <main>
