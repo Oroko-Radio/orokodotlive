@@ -15,33 +15,33 @@ interface ArtistFiltersProps {
   children: React.ReactNode;
 }
 
-export default function ArtistFilters({ 
-  cities, 
-  initialCity, 
+export default function ArtistFilters({
+  cities,
+  initialCity,
   initialFilter,
-  children
+  children,
 }: ArtistFiltersProps) {
   const [currentCity, setCurrentCity] = useState(initialCity);
   const [currentFilter, setCurrentFilter] = useState(initialFilter);
   const [isPending, startTransition] = useTransition();
-  
+
   const router = useRouter();
   const pathname = usePathname();
-  
+
   const debouncedUpdateUrl = useCallback(
     debounce((city: string, filter: string) => {
       startTransition(() => {
         const params = new URLSearchParams();
         if (city !== "all") params.set("city", city);
         if (filter !== "all") params.set("filter", filter);
-        
+
         const newUrl = `${pathname}?${params.toString()}`;
         router.push(newUrl);
       });
     }, 200),
-    [pathname, router]
+    [pathname, router],
   );
-  
+
   useEffect(() => {
     debouncedUpdateUrl(currentCity, currentFilter);
   }, [currentCity, currentFilter, debouncedUpdateUrl]);
@@ -63,7 +63,7 @@ export default function ArtistFilters({
         <h1 className="font-serif text-black text-4xl md:text-5xl mb-8 md:mb-0">
           All Artists
         </h1>
-        <ArtistTypeFilter 
+        <ArtistTypeFilter
           currentFilter={currentFilter}
           onChange={handleFilterChange}
         />
@@ -101,7 +101,7 @@ export default function ArtistFilters({
       </div>
 
       {isPending ? (
-        <div className="flex justify-center items-center min-h-[400px] pt-10">
+        <div className="flex justify-center min-h-[500px] pt-10">
           <ScaleLoader />
         </div>
       ) : (
