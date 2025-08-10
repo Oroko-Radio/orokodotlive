@@ -14,7 +14,7 @@ const RelatedShows = ({ shows }: { shows: ShowType[] }) => {
         {shows.map((show, idx) => (
           <div key={idx} className="border-black border-2 bg-white">
             <Card
-              imageUrl={typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg"}
+              imageUrl={typeof show.coverImage === 'object' && show.coverImage?.sizes?.["small-full"]?.url ? show.coverImage.sizes["small-full"].url : (typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg")}
               title={show.title}
               link={`/radio/${show.slug}`}
               mixcloudLink={show.mixcloudLink || undefined}

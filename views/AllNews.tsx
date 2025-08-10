@@ -45,7 +45,7 @@ const AllNews = ({
             <div key={idx}>
               <div className="border-black border-2 bg-white">
                 <Card
-                  imageUrl={coverImage.url}
+                  imageUrl={coverImage.sizes?.["small-full"]?.url || coverImage.url}
                   title={title}
                   link={`/news/${slug}`}
                 >

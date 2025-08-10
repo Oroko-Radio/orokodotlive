@@ -18,9 +18,9 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
     <div className="overflow-hidden bg-orokoOrange border-b-2 border-black">
       <Slider slideByElementWidth fullSize>
         {shows.map((show, idx) => {
-          const coverImageUrl = typeof show.coverImage === 'object' && show.coverImage?.url 
-            ? show.coverImage.url 
-            : "/default-cover.jpg";
+          const coverImageUrl = typeof show.coverImage === 'object' && show.coverImage?.sizes?.["large-full"]?.url 
+            ? show.coverImage.sizes["large-full"].url 
+            : (typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg");
             
           return (
             <SliderCard

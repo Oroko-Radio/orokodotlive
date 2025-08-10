@@ -18,9 +18,9 @@ const AllShows = ({
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-8 xl:pb-12">
       {shows.map((show, idx) => {
-        const coverImageUrl = typeof show.coverImage === 'object' && show.coverImage?.url 
-          ? show.coverImage.url 
-          : "/default-cover.jpg";
+        const coverImageUrl = typeof show.coverImage === 'object' && show.coverImage?.sizes?.["small-full"]?.url 
+          ? show.coverImage.sizes["small-full"].url 
+          : (typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg");
           
         return (
           <div key={idx} className="border-black border-2 bg-white">

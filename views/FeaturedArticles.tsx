@@ -36,7 +36,7 @@ const FeaturedArticles = ({
               idx,
             ) => (
               <SliderCard
-                imageUrl={coverImage.url}
+                imageUrl={coverImage.sizes?.["small-full"]?.url || coverImage.url}
                 title={title}
                 link={`/news/${slug}`}
                 key={idx}

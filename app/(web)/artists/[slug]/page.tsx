@@ -33,9 +33,9 @@ export default async function Artist({
   return (
     <SinglePage
       coverImage={
-        typeof artist.photo === "object" && artist.photo?.url
-          ? artist.photo.url
-          : undefined
+        typeof artist.photo === "object" && artist.photo?.sizes?.["large-full"]?.url
+          ? artist.photo.sizes["large-full"].url
+          : (typeof artist.photo === "object" && artist.photo?.url ? artist.photo.url : undefined)
       }
       coverImageAlt={name}
       withBackButton

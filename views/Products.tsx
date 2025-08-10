@@ -34,7 +34,11 @@ export default function Products({ products }: ProductsProps) {
           {products.map((product, idx) => (
             <SliderCard
               key={product.link || idx}
-              imageUrl={product.image?.url || ""}
+              imageUrl={
+                product.image?.sizes?.["small-full"]?.url ||
+                product.image?.url ||
+                ""
+              }
               title={product.title}
               link={product.link}
               idx={idx}

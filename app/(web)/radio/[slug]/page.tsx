@@ -40,9 +40,9 @@ export default async function Show({
   const { slug: showSlug } = await params;
   const { show, relatedShows } = await getRadioPageSingle(showSlug);
   
-  const coverImageUrl = typeof show.coverImage === 'object' && show.coverImage?.url 
-    ? show.coverImage.url 
-    : "/default-cover.jpg";
+  const coverImageUrl = typeof show.coverImage === 'object' && show.coverImage?.sizes?.["large-full"]?.url 
+    ? show.coverImage.sizes["large-full"].url 
+    : (typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg");
 
   return (
     <SinglePage
