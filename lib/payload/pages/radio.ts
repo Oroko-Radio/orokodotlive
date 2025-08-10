@@ -18,28 +18,28 @@ export async function getRadioPageSingle(slug: string) {
   }
 
   const show = showResult.docs[0];
-  
+
   let relatedShows: any[] = [];
-  
+
   if (show.genres && Array.isArray(show.genres) && show.genres.length > 0) {
-    const genreIds = show.genres.map(genre => 
-      typeof genre === 'object' ? genre.id : genre
+    const genreIds = show.genres.map((genre) =>
+      typeof genre === "object" ? genre.id : genre,
     );
-    
+
     const relatedResult = await payload.find({
       collection: "shows",
       where: {
         and: [
           { slug: { not_equals: slug } },
           { date: { less_than_equal: today.toISOString() } },
-          { genres: { in: genreIds } }
-        ]
+          { genres: { in: genreIds } },
+        ],
       },
       depth: 2,
       limit: 8,
       sort: "-date",
     });
-    
+
     relatedShows = relatedResult.docs;
   }
 
@@ -51,14 +51,15 @@ export async function getRadioPageSingle(slug: string) {
 
 export async function getAllShowSlugs() {
   const payload = await getPayload({ config });
-  
+
   const result = await payload.find({
     collection: "shows",
     select: {
       slug: true,
     },
-    limit: 1000,
+    limit: 0,
+    depth: 0,
   });
 
-  return result.docs.map(show => show.slug).filter(Boolean);
+  return result.docs.map((show) => show.slug).filter(Boolean);
 }

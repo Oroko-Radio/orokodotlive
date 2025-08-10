@@ -34,23 +34,23 @@ export async function getArtistsPageSingle(slug: string) {
   }
 
   const artist = artistResult.docs[0];
-  
+
   let relatedShows: any[] = [];
-  
+
   // Find shows where this artist is featured
   const showsResult = await payload.find({
     collection: "shows",
     where: {
       and: [
         { artists: { in: [artist.id] } },
-        { date: { less_than_equal: today.toISOString() } }
-      ]
+        { date: { less_than_equal: today.toISOString() } },
+      ],
     },
     depth: 2,
     limit: 20,
     sort: "-date",
   });
-  
+
   relatedShows = showsResult.docs;
 
   return {
@@ -61,14 +61,15 @@ export async function getArtistsPageSingle(slug: string) {
 
 export async function getAllArtistSlugs() {
   const payload = await getPayload({ config });
-  
+
   const result = await payload.find({
     collection: "artists",
     select: {
       slug: true,
     },
-    limit: 1000,
+    limit: 0,
+    depth: 0,
   });
 
-  return result.docs.map(artist => artist.slug).filter(Boolean);
+  return result.docs.map((artist) => artist.slug).filter(Boolean);
 }
