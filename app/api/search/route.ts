@@ -1,13 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { searchContent } from "@/lib/payload/pages/search";
 
+// Cache initial data (empty query) for 5 minutes
+export const revalidate = 300;
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("query") || "";
 
   try {
     const results = await searchContent({ query });
-    return NextResponse.json({ data: results });
+    
+    // Set cache headers - cache empty queries longer, search queries shorter
+    const cacheTime = query ? 60 : 300; // 1 min for searches, 5 min for initial data
+    
+    return NextResponse.json({ data: results }, {
+      headers: {
+        'Cache-Control': `public, s-maxage=${cacheTime}, stale-while-revalidate=${cacheTime * 2}`
+      }
+    });
   } catch (error) {
     console.error("Search API error:", error);
     return NextResponse.json(

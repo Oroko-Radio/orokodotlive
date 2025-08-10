@@ -21,10 +21,40 @@ export async function searchContent({
   const today = new Date().toISOString().split("T")[0];
 
   if (!query || query.trim().length === 0) {
+    // Return latest 4 of each type as placeholder when no query
+    const placeholderLimit = 4;
+    
+    const [showsResult, articlesResult, artistsResult] = await Promise.all([
+      payload.find({
+        collection: "shows",
+        where: {
+          and: [
+            { date: { less_than_equal: today } },
+            { mixcloudLink: { exists: true } },
+          ],
+        },
+        depth: 2,
+        limit: placeholderLimit,
+        sort: "-date",
+      }),
+      payload.find({
+        collection: "articles",
+        depth: 2,
+        limit: placeholderLimit,
+        sort: "-date",
+      }),
+      payload.find({
+        collection: "artist-profiles",
+        depth: 2,
+        limit: placeholderLimit,
+        sort: "-createdAt",
+      }),
+    ]);
+
     return {
-      shows: [],
-      articles: [],
-      artists: [],
+      shows: showsResult.docs,
+      articles: articlesResult.docs,
+      artists: artistsResult.docs,
     };
   }
 
