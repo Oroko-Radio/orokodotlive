@@ -2,6 +2,9 @@ import { CollectionConfig } from "payload";
 
 export const GenreCategory: CollectionConfig = {
   slug: "genreCategory",
+  admin: {
+    useAsTitle: "name",
+  },
   fields: [
     {
       name: "name",

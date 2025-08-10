@@ -1,13 +1,10 @@
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import {
-  defaultSlateConverters,
-  SlateToLexicalFeature,
-} from "@payloadcms/richtext-lexical/migrate";
 import { CollectionConfig } from "payload";
-import { SlateHRConverter } from "./hrConverter";
 
 export const Artists: CollectionConfig = {
-  slug: "artists",
+  slug: "artist-profiles",
+  admin: {
+    useAsTitle: "name",
+  },
   fields: [
     {
       name: "name",
@@ -20,6 +17,7 @@ export const Artists: CollectionConfig = {
       label: "Slug",
       type: "text",
       required: true,
+      unique: true,
     },
     {
       name: "isResident",

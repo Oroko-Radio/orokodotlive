@@ -72,7 +72,7 @@ export interface Config {
     shows: Show;
     genres: Genre;
     genreCategory: GenreCategory;
-    artists: Artist;
+    'artist-profiles': ArtistProfile;
     city: City;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -85,7 +85,7 @@ export interface Config {
     shows: ShowsSelect<false> | ShowsSelect<true>;
     genres: GenresSelect<false> | GenresSelect<true>;
     genreCategory: GenreCategorySelect<false> | GenreCategorySelect<true>;
-    artists: ArtistsSelect<false> | ArtistsSelect<true>;
+    'artist-profiles': ArtistProfilesSelect<false> | ArtistProfilesSelect<true>;
     city: CitySelect<false> | CitySelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -197,7 +197,7 @@ export interface Show {
     [k: string]: unknown;
   } | null;
   genres?: (number | Genre)[] | null;
-  artists?: (number | Artist)[] | null;
+  artists?: (number | ArtistProfile)[] | null;
   contentfulId?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -227,9 +227,9 @@ export interface GenreCategory {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "artists".
+ * via the `definition` "artist-profiles".
  */
-export interface Artist {
+export interface ArtistProfile {
   id: number;
   name: string;
   slug: string;
@@ -295,8 +295,8 @@ export interface PayloadLockedDocument {
         value: number | GenreCategory;
       } | null)
     | ({
-        relationTo: 'artists';
-        value: number | Artist;
+        relationTo: 'artist-profiles';
+        value: number | ArtistProfile;
       } | null)
     | ({
         relationTo: 'city';
@@ -428,9 +428,9 @@ export interface GenreCategorySelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "artists_select".
+ * via the `definition` "artist-profiles_select".
  */
-export interface ArtistsSelect<T extends boolean = true> {
+export interface ArtistProfilesSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   isResident?: T;
