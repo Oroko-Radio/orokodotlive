@@ -41,7 +41,7 @@ export default function ShowFilters({
         if (currentGenre !== "all") params.set("genre", currentGenre);
 
         const newUrl = `${pathname}?${params.toString()}`;
-        router.push(newUrl);
+        router.push(newUrl, { scroll: false });
       });
     }, 200);
 

@@ -40,7 +40,7 @@ export default function ArtistFilters({
         if (currentFilter !== "all") params.set("filter", currentFilter);
 
         const newUrl = `${pathname}?${params.toString()}`;
-        router.push(newUrl);
+        router.push(newUrl, { scroll: false });
       });
     }, 200);
 
