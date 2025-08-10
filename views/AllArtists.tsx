@@ -1,9 +1,9 @@
 import React from "react";
 import Card from "@/components/Card";
-import { Artist } from "@/payload-types";
+import { ArtistProfile } from "@/payload-types";
 
 interface AllArtistsProps {
-  artists: Artist[];
+  artists: ArtistProfile[];
 }
 
 const AllArtists = ({ artists }: AllArtistsProps) => {
@@ -13,9 +13,7 @@ const AllArtists = ({ artists }: AllArtistsProps) => {
         <div key={idx} className="border-black border-2">
           {photo && typeof photo !== "number" && photo.url && (
             <Card imageUrl={photo.url} title={name} link={`/artists/${slug}`}>
-              <h1 className="font-heading card-leading p-4 text-4xl">
-                {name}
-              </h1>
+              <h1 className="font-heading card-leading p-4 text-4xl">{name}</h1>
             </Card>
           )}
         </div>
