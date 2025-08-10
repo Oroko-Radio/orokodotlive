@@ -12,7 +12,11 @@ const AllArtists = ({ artists }: AllArtistsProps) => {
       {artists.map(({ name, slug, photo }, idx) => (
         <div key={idx} className="border-black border-2">
           {photo && typeof photo !== "number" && photo.url && (
-            <Card imageUrl={photo.url} title={name} link={`/artists/${slug}`}>
+            <Card
+              imageUrl={photo.sizes?.["small-full"]?.url || photo.url}
+              title={name}
+              link={`/artists/${slug}`}
+            >
               <h1 className="font-heading card-leading p-4 text-4xl">{name}</h1>
             </Card>
           )}
