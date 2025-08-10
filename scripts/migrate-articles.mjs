@@ -9,7 +9,7 @@ const articleEntries = exportData.entries.filter(
 
 console.log(`Found ${articleEntries.length} article entries to migrate`);
 
-function formatRichText(slateNodes) {
+async function formatRichText(slateNodes, payload) {
   if (!slateNodes || !Array.isArray(slateNodes)) return slateNodes;
 
   const typeMapping = {
@@ -25,24 +25,65 @@ function formatRichText(slateNodes) {
     "ordered-list": "ol",
     "list-item": "li",
     hyperlink: "link",
+    "embedded-asset-block": "upload",
+    horizontalrule: "hr",
   };
 
-  return slateNodes.map((node) => {
+  const processedNodes = [];
+
+  for (const node of slateNodes) {
     const formattedNode = { ...node };
 
     if (node.type && typeMapping[node.type]) {
       formattedNode.type = typeMapping[node.type];
     }
 
-    if (node.children && Array.isArray(node.children)) {
-      formattedNode.children = formatRichText(node.children);
+    // Special handling for horizontal rules
+    if (node.type === "horizontalrule") {
+      formattedNode.type = "hr";
+      formattedNode.children = [{ text: "" }]; // Ensure it has children
     }
 
-    return formattedNode;
-  });
+    // Handle embedded asset blocks
+    if (node.type === "embedded-asset-block" && node.data) {
+      formattedNode.relationTo = "media";
+      formattedNode.fields = null;
+      formattedNode.format = "";
+      formattedNode.version = 3;
+      const contentfulAssetId = node.data.target?.sys?.id;
+      if (contentfulAssetId) {
+        const media = await payload.find({
+          collection: "media",
+          where: { contentfulId: { equals: contentfulAssetId } },
+          limit: 1,
+        });
+        if (media.docs.length > 0) {
+          formattedNode.value = media.docs[0];
+          formattedNode.id = media.docs[0].id;
+        } else {
+          console.warn(`Media not found for contentfulId: ${contentfulAssetId}`);
+        }
+      }
+    }
+
+    // Handle links
+    if (node.type === "hyperlink" && node.data?.uri) {
+      formattedNode.url = node.data.uri;
+      formattedNode.newTab = false;
+      formattedNode.linkType = "custom";
+    }
+
+    if (node.children && Array.isArray(node.children)) {
+      formattedNode.children = await formatRichText(node.children, payload);
+    }
+
+    processedNodes.push(formattedNode);
+  }
+
+  return processedNodes;
 }
 
-function convertRichText(contentfulRichText) {
+async function convertRichText(contentfulRichText, payload) {
   if (!contentfulRichText) return null;
   console.log(
     "Original Contentful rich text:",
@@ -53,7 +94,7 @@ function convertRichText(contentfulRichText) {
     "Converted rich text (before formatting):",
     JSON.stringify(converted, null, 2),
   );
-  const formatted = formatRichText(converted);
+  const formatted = await formatRichText(converted, payload);
   console.log("Final formatted rich text:", JSON.stringify(formatted, null, 2));
   return formatted;
 }
@@ -161,7 +202,7 @@ async function run() {
     let convertedContent = null;
     if (fields.content && fields.content["en-US"]) {
       console.log("Converting rich text content...");
-      convertedContent = convertRichText(fields.content["en-US"]);
+      convertedContent = await convertRichText(fields.content["en-US"], payload);
     }
 
     // Create the article
