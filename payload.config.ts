@@ -16,6 +16,8 @@ import { City } from "./collections/City";
 import { Artists } from "./collections/Artists";
 import { Products } from "./collections/Products";
 import { Pages } from "./collections/Pages";
+import { Articles } from "./collections/Articles";
+import { Author } from "./collections/Author";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -37,6 +39,8 @@ export default buildConfig({
     City,
     Products,
     Pages,
+    Articles,
+    Author,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET!,
