@@ -26,7 +26,7 @@ export async function getHomePage() {
   const today = new Date();
   const todayString = today.toISOString().split("T")[0];
 
-  const [featuredShows, allShows, upcomingShows, products] = await Promise.all([
+  const [featuredShows, allShows, upcomingShows, products, featuredArticles] = await Promise.all([
     payload.find({
       collection: "shows",
       where: { isFeatured: { equals: true } },
@@ -59,6 +59,13 @@ export async function getHomePage() {
       limit: 10,
       sort: "title",
     }),
+    payload.find({
+      collection: "articles",
+      where: { isFeatured: { equals: true } },
+      depth: 2,
+      limit: 8,
+      sort: "-date",
+    }),
   ]);
 
   const latestShows = allShows.docs
@@ -74,5 +81,6 @@ export async function getHomePage() {
     latestShows,
     upcomingShows: filteredUpcomingShows,
     products: products.docs,
+    featuredArticles: featuredArticles.docs,
   };
 }

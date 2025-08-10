@@ -3,7 +3,7 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import Card from "@/components/Card";
 import Tag from "@/components/Tag";
-import { ArticleInterface } from "@/types/shared";
+import type { Article } from "@/payload-types";
 import DotButton from "@/components/ui/DotButton";
 
 const AllNews = ({
@@ -12,7 +12,7 @@ const AllNews = ({
   bgColor = "white",
   home = false,
 }: {
-  articles: ArticleInterface[];
+  articles: Article[];
   heading?: string;
   bgColor?: "white" | "gray";
   home?: boolean;
@@ -37,37 +37,41 @@ const AllNews = ({
         )}
       </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6 p-4 md:p-8 pb-10 md:pb-12">
-        {articles.map(
-          (
-            { title, date, slug, articleType, city, subtitle, coverImage },
-            idx,
-          ) => (
+        {articles.map((article, idx) => (
             <div key={idx}>
               <div className="border-black border-2 bg-white">
                 <Card
-                  imageUrl={coverImage.sizes?.["small-full"]?.url || coverImage.url}
-                  title={title}
-                  link={`/news/${slug}`}
+                  imageUrl={
+                    typeof article.coverImage === "object" && article.coverImage?.sizes?.["small-full"]?.url
+                      ? article.coverImage.sizes["small-full"].url
+                      : (typeof article.coverImage === "object" && article.coverImage?.url ? article.coverImage.url : "")
+                  }
+                  title={article.title}
+                  link={`/news/${article.slug}`}
                 >
                   <div className="p-4">
                     <div className="flex flex-wrap gap-1 mb-6">
-                      {city && <Tag text={city.name} color="black" card />}
-                      <Tag text={articleType} transparent card />
+                      {typeof article.city === "object" && article.city && (
+                        <Tag text={article.city.name} color="black" card />
+                      )}
+                      <Tag text={article.articleType} transparent card />
                     </div>
                     <p className="font-sans mb-2 font-medium">
-                      {dayjs.utc(date).tz("Europe/Oslo").format("DD MMMM YYYY")}
+                      {dayjs.utc(article.date).tz("Europe/Oslo").format("DD MMMM YYYY")}
                     </p>
                     <h1 className="font-heading card-leading mb-2 text-4xl">
-                      {title}
+                      {article.title}
                     </h1>
-                    <p className="font-serif mb-4 text-lg md:text-2xl">
-                      {subtitle}
-                    </p>
+                    {article.subtitle && (
+                      <p className="font-serif mb-4 text-lg md:text-2xl">
+                        {article.subtitle}
+                      </p>
+                    )}
                   </div>
                 </Card>
               </div>
             </div>
-          ),
+          )
         )}
       </div>
     </div>

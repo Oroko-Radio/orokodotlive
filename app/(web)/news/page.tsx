@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import React from "react";
 import FeaturedArticles from "@/views/FeaturedArticles";
 import AllNews from "@/views/AllNews";
+import { getFeaturedArticles, getAllArticles } from "@/lib/payload/pages/articles";
 
 export const revalidate = 60;
 
@@ -10,9 +11,10 @@ export const metadata: Metadata = {
 };
 
 export default async function NewsPage() {
-  // TODO: Convert this page to use Payload CMS
-  const articles: any[] = [];
-  const featuredArticles: any[] = [];
+  const [featuredArticles, articles] = await Promise.all([
+    getFeaturedArticles(),
+    getAllArticles(),
+  ]);
 
   return (
     <>

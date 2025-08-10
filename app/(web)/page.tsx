@@ -16,10 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  // TODO: Convert news to use Payload CMS
-  const featuredArticles: any[] = [];
-  
-  const { featuredShows, latestShows, upcomingShows, products } = await getPayloadHomePage();
+  const { featuredShows, latestShows, upcomingShows, products, featuredArticles } = await getPayloadHomePage();
 
   return (
     <main>
