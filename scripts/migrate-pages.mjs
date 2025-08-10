@@ -10,7 +10,7 @@ const pageEntries = exportData.entries.filter(
 
 console.log(`Found ${pageEntries.length} page entries to migrate`);
 
-async function formatRichText(slateNodes, payload) {
+function formatRichText(slateNodes) {
   if (!slateNodes || !Array.isArray(slateNodes)) return slateNodes;
 
   const typeMapping = {
@@ -26,93 +26,37 @@ async function formatRichText(slateNodes, payload) {
     "ordered-list": "ol",
     "list-item": "li",
     hyperlink: "link",
-    "embedded-asset-block": "upload",
-    horizontalrule: "hr",
   };
 
-  const processedNodes = [];
-
-  for (const node of slateNodes) {
+  return slateNodes.map((node) => {
     const formattedNode = { ...node };
 
     if (node.type && typeMapping[node.type]) {
       formattedNode.type = typeMapping[node.type];
     }
 
-    // Special handling for horizontal rules
-    if (node.type === "horizontalrule") {
-      formattedNode.type = "hr";
-      formattedNode.children = [{ text: "" }]; // Ensure it has children
-    }
-
-    // Handle embedded asset blocks
-    if (node.type === "embedded-asset-block" && node.data) {
-      formattedNode.relationTo = "media";
-      formattedNode.fields = null;
-      formattedNode.format = "";
-      formattedNode.version = 3;
-      const contentfulAssetId = node.data.target?.sys?.id;
-      if (contentfulAssetId) {
-        const media = await payload.find({
-          collection: "media",
-          where: { contentfulId: { equals: contentfulAssetId } },
-          limit: 1,
-        });
-        if (media.docs.length > 0) {
-          formattedNode.value = media.docs[0];
-        } else {
-          console.warn(`Media not found for contentfulId: ${contentfulAssetId}`);
-        }
-      }
-    }
-
-    // Handle links
-    if (node.type === "hyperlink" && node.data?.uri) {
-      formattedNode.url = node.data.uri;
-      formattedNode.newTab = false;
-      formattedNode.linkType = "custom";
-    }
-
     if (node.children && Array.isArray(node.children)) {
-      formattedNode.children = await formatRichText(node.children, payload);
+      formattedNode.children = formatRichText(node.children);
     }
 
-    processedNodes.push(formattedNode);
-  }
-
-  return processedNodes;
+    return formattedNode;
+  });
 }
 
-async function convertRichText(contentfulRichText, payload) {
+function convertRichText(contentfulRichText) {
   if (!contentfulRichText) return null;
-  
   console.log(
     "Original Contentful rich text:",
     JSON.stringify(contentfulRichText, null, 2),
   );
-
-  try {
-    const slateDocument = toSlatejsDocument(contentfulRichText);
-    console.log("Converted to Slate:", JSON.stringify(slateDocument, null, 2));
-
-    const formattedDocument = await formatRichText(slateDocument.children, payload);
-    console.log("Formatted document:", JSON.stringify(formattedDocument, null, 2));
-
-    return {
-      root: {
-        type: "root",
-        children: formattedDocument,
-        direction: "ltr",
-        format: "",
-        indent: 0,
-        version: 1,
-      },
-    };
-  } catch (error) {
-    console.error("Error converting rich text:", error);
-    console.log("Problematic rich text:", JSON.stringify(contentfulRichText, null, 2));
-    return null;
-  }
+  const converted = toSlatejsDocument({ document: contentfulRichText });
+  console.log(
+    "Converted rich text (before formatting):",
+    JSON.stringify(converted, null, 2),
+  );
+  const formatted = formatRichText(converted);
+  console.log("Final formatted rich text:", JSON.stringify(formatted, null, 2));
+  return formatted;
 }
 
 function generateSlug(title) {
@@ -182,7 +126,7 @@ async function run() {
     let convertedContent = null;
     if (fields.content && fields.content["en-US"]) {
       console.log("Converting rich text content...");
-      convertedContent = await convertRichText(fields.content["en-US"], payload);
+      convertedContent = convertRichText(fields.content["en-US"]);
     }
 
     // Create the page
