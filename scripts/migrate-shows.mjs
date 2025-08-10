@@ -4,7 +4,7 @@ import exportData from "../contentful-data/export.json" with { type: "json" };
 import { toSlatejsDocument } from "@contentful/contentful-slatejs-adapter";
 import fs from "fs";
 
-const BATCH_SIZE = 1000;
+const BATCH_SIZE = 1;
 const PROGRESS_FILE = "./progress-shows.json";
 
 const showEntries = exportData.entries.filter(

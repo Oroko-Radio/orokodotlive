@@ -108,7 +108,7 @@ async function migrateArtists() {
       };
 
       await payload.create({
-        collection: "artists",
+        collection: "artist-profiles",
         data: artistData,
       });
 

@@ -1,4 +1,10 @@
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import {
+  SlateToLexicalFeature,
+  defaultSlateConverters,
+} from "@payloadcms/richtext-lexical/migrate";
 import { CollectionConfig } from "payload";
+import { SlateHRConverter } from "./hrConverter";
 
 export const Artists: CollectionConfig = {
   slug: "artist-profiles",
@@ -49,15 +55,15 @@ export const Artists: CollectionConfig = {
       label: "Content",
       type: "richText",
       // NECESSARY FOR MIGRATION ONLY:
-      // editor: lexicalEditor({
-      //   features: ({ defaultFeatures }) => [
-      //     ...defaultFeatures,
-      //     SlateToLexicalFeature({
-      //       converters: [...defaultSlateConverters, SlateHRConverter],
-      //       disableHooks: true,
-      //     }),
-      //   ],
-      // }),
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          SlateToLexicalFeature({
+            converters: [...defaultSlateConverters, SlateHRConverter],
+            // disableHooks: true,
+          }),
+        ],
+      }),
     },
     {
       name: "contentfulId",

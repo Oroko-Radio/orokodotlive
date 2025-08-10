@@ -35,4 +35,4 @@ yarn-error.log*
 .vercel
 
 # data
-contentful-data
+contentful-data*

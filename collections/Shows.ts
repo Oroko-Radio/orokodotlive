@@ -1,4 +1,10 @@
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import {
+  SlateToLexicalFeature,
+  defaultSlateConverters,
+} from "@payloadcms/richtext-lexical/migrate";
 import { CollectionConfig } from "payload";
+import { SlateHRConverter } from "./hrConverter";
 
 export const Shows: CollectionConfig = {
   slug: "shows",
@@ -52,15 +58,15 @@ export const Shows: CollectionConfig = {
       label: "Content",
       type: "richText",
       // NECESSARY FOR MIGRATION ONLY:
-      // editor: lexicalEditor({
-      //   features: ({ defaultFeatures }) => [
-      //     ...defaultFeatures,
-      //     SlateToLexicalFeature({
-      //       converters: [...defaultSlateConverters, SlateHRConverter],
-      //       disableHooks: true,
-      //     }),
-      //   ],
-      // }),
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          SlateToLexicalFeature({
+            converters: [...defaultSlateConverters, SlateHRConverter],
+            // disableHooks: true,
+          }),
+        ],
+      }),
     },
     {
       name: "genres",

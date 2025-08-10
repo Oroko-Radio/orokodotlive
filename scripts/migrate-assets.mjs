@@ -5,7 +5,7 @@ import fs from "fs";
 import path from "path";
 import { makeS3SafeFilename, convertTiffToJpeg } from "./utils.js";
 
-const BATCH_SIZE = 1000;
+const BATCH_SIZE = 5000;
 const PROGRESS_FILE = "./progress.json";
 
 const CDN_MAPPING = {
