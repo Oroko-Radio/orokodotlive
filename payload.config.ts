@@ -14,6 +14,7 @@ import { Genres } from "./collections/Genres";
 import { GenreCategory } from "./collections/GenreCategory";
 import { City } from "./collections/City";
 import { Artists } from "./collections/Artists";
+import { Products } from "./collections/Products";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -25,7 +26,16 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Shows, Genres, GenreCategory, Artists, City],
+  collections: [
+    Users,
+    Media,
+    Shows,
+    Genres,
+    GenreCategory,
+    Artists,
+    City,
+    Products,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET!,
   typescript: {

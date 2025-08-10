@@ -74,6 +74,7 @@ export interface Config {
     genreCategory: GenreCategory;
     'artist-profiles': ArtistProfile;
     city: City;
+    products: Product;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -87,6 +88,7 @@ export interface Config {
     genreCategory: GenreCategorySelect<false> | GenreCategorySelect<true>;
     'artist-profiles': ArtistProfilesSelect<false> | ArtistProfilesSelect<true>;
     city: CitySelect<false> | CitySelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -303,6 +305,20 @@ export interface City {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  link: string;
+  image?: (number | null) | Media;
+  contentfulId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -335,6 +351,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'city';
         value: number | City;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: number | Product;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -526,6 +546,19 @@ export interface ArtistProfilesSelect<T extends boolean = true> {
  */
 export interface CitySelect<T extends boolean = true> {
   name?: T;
+  contentfulId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  title?: T;
+  price?: T;
+  link?: T;
+  image?: T;
   contentfulId?: T;
   updatedAt?: T;
   createdAt?: T;

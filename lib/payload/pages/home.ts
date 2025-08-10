@@ -4,12 +4,12 @@ import dayjs from "dayjs";
 
 export async function getUpcomingShows() {
   const payload = await getPayload({ config });
-  const today = new Date().toISOString().split('T')[0];
-  
+  const today = new Date().toISOString().split("T")[0];
+
   const result = await payload.find({
     collection: "shows",
-    where: { 
-      date: { greater_than: today }
+    where: {
+      date: { greater_than: today },
     },
     depth: 2,
     limit: 30,
@@ -24,9 +24,9 @@ export async function getUpcomingShows() {
 export async function getHomePage() {
   const payload = await getPayload({ config });
   const today = new Date();
-  const todayString = today.toISOString().split('T')[0];
+  const todayString = today.toISOString().split("T")[0];
 
-  const [featuredShows, allShows, upcomingShows] = await Promise.all([
+  const [featuredShows, allShows, upcomingShows, products] = await Promise.all([
     payload.find({
       collection: "shows",
       where: { isFeatured: { equals: true } },
@@ -36,9 +36,9 @@ export async function getHomePage() {
     }),
     payload.find({
       collection: "shows",
-      where: { 
+      where: {
         date: { less_than_equal: todayString },
-        mixcloudLink: { exists: true }
+        mixcloudLink: { exists: true },
       },
       depth: 2,
       limit: 16,
@@ -46,12 +46,18 @@ export async function getHomePage() {
     }),
     payload.find({
       collection: "shows",
-      where: { 
-        date: { greater_than: todayString }
+      where: {
+        date: { greater_than: todayString },
       },
       depth: 2,
       limit: 30,
       sort: "date",
+    }),
+    payload.find({
+      collection: "products",
+      depth: 3,
+      limit: 10,
+      sort: "title",
     }),
   ]);
 
@@ -67,5 +73,6 @@ export async function getHomePage() {
     featuredShows: featuredShows.docs,
     latestShows,
     upcomingShows: filteredUpcomingShows,
+    products: products.docs,
   };
 }

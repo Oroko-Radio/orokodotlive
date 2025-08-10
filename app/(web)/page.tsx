@@ -16,11 +16,10 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  // TODO: Convert news and products to use Payload CMS
+  // TODO: Convert news to use Payload CMS
   const featuredArticles: any[] = [];
-  const products: any[] = [];
   
-  const { featuredShows, latestShows, upcomingShows } = await getPayloadHomePage();
+  const { featuredShows, latestShows, upcomingShows, products } = await getPayloadHomePage();
 
   return (
     <main>
