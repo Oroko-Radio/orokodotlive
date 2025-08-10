@@ -4,7 +4,7 @@ import exportData from "../contentful-data/export.json" with { type: "json" };
 import { toSlatejsDocument } from "@contentful/contentful-slatejs-adapter";
 import fs from "fs";
 
-const BATCH_SIZE = 1;
+const BATCH_SIZE = 5000;
 const PROGRESS_FILE = "./progress-shows.json";
 
 const showEntries = exportData.entries.filter(
@@ -162,7 +162,7 @@ async function migrateShows() {
         for (const ref of artistRefs) {
           if (ref?.sys?.id) {
             const artist = await payload.find({
-              collection: "artists",
+              collection: "artist-profiles",
               where: {
                 contentfulId: { equals: ref.sys.id },
               },
