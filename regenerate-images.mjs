@@ -7,29 +7,49 @@ const regenerateImages = async () => {
     local: true,
   });
 
-  const media = await payload.find({
-    collection: "media",
-    limit: 0,
-  });
+  const batchSize = 10; // Process 10 at a time to avoid overwhelming S3
+  let page = 1;
+  let hasMore = true;
 
-  console.log(`Processing ${media.totalDocs} images...`);
+  while (hasMore) {
+    const media = await payload.find({
+      collection: "media",
+      limit: batchSize,
+      page: page,
+    });
 
-  for (const doc of media.docs) {
-    try {
-      // This will trigger regeneration of all image sizes
-      await payload.update({
-        collection: "media",
-        id: doc.id,
-        data: {
-          // Trigger a minimal update to regenerate sizes
-          alt: doc.alt || "",
-        },
-      });
-      console.log(`✓ Processed: ${doc.filename}`);
-    } catch (error) {
-      console.error(`✗ Error processing ${doc.filename}:`, error);
+    console.log(`Processing batch ${page}: ${media.docs.length} images`);
+
+    for (const doc of media.docs) {
+      try {
+        // Force regeneration by updating the document
+        await payload.update({
+          collection: "media",
+          id: doc.id,
+          data: {
+            alt: doc.alt || "", // Minimal update to trigger regeneration
+          },
+        });
+        console.log(`✓ Regenerated: ${doc.filename}`);
+
+        // Small delay to be nice to S3
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      } catch (error) {
+        console.error(`✗ Error processing ${doc.filename}:`, error.message);
+      }
+    }
+
+    hasMore = media.hasNextPage;
+    page++;
+
+    // Longer pause between batches
+    if (hasMore) {
+      console.log("Pausing between batches...");
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     }
   }
+
+  console.log("🎉 Image regeneration complete!");
 };
 
-regenerateImages();
+regenerateImages().catch(console.error);
