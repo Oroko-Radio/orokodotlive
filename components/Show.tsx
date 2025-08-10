@@ -12,6 +12,35 @@ interface ShowProps {
 export default function Show({ show, cityColor }: ShowProps) {
   const { date, title, isFeatured, artists, genres } = show;
 
+  // Extract and normalize artist names
+  const artistNames =
+    artists && Array.isArray(artists)
+      ? artists.map((artist) =>
+          typeof artist === "object" ? artist.name : artist,
+        )
+      : [];
+
+  // Extract first artist's city for display
+  const firstArtist =
+    artists &&
+    Array.isArray(artists) &&
+    artists[0] &&
+    typeof artists[0] === "object"
+      ? artists[0]
+      : null;
+
+  const cityName = firstArtist?.city
+    ? typeof firstArtist.city === "object"
+      ? firstArtist.city.name
+      : String(firstArtist.city)
+    : null;
+
+  // Extract and normalize genre names
+  const genreNames =
+    genres && Array.isArray(genres)
+      ? genres.map((genre) => (typeof genre === "object" ? genre.name : ""))
+      : [];
+
   return (
     <div className="p-4 flex flex-col justify-between flex-1">
       <div>
@@ -23,42 +52,19 @@ export default function Show({ show, cityColor }: ShowProps) {
         <h2 className="font-serif text-2xl lg:text-3xl mb-4">
           {" "}
           With{" "}
-          {artists &&
-            Array.isArray(artists) &&
-            artists.map((artist: any, idx: number) => (
-              <span key={idx}>
-                <span>{typeof artist === "object" ? artist.name : artist}</span>
-                {idx !== artists.length - 1 && ", "}
-              </span>
-            ))}
+          {artistNames.map((name, idx) => (
+            <span key={idx}>
+              <span>{name}</span>
+              {idx !== artistNames.length - 1 && ", "}
+            </span>
+          ))}
         </h2>
       </div>
       <div className="flex flex-wrap gap-1 mb-4">
-        {artists &&
-          Array.isArray(artists) &&
-          artists[0] &&
-          typeof artists[0] === "object" &&
-          artists[0].city && (
-            <Tag
-              text={
-                typeof artists[0].city === "object"
-                  ? artists[0].city.name
-                  : String(artists[0].city)
-              }
-              color={cityColor}
-              card
-            />
-          )}
-        {genres &&
-          Array.isArray(genres) &&
-          genres.map((genre: any, idx: number) => (
-            <Tag
-              key={idx}
-              text={typeof genre === "object" ? genre.name : genre}
-              transparent
-              card
-            />
-          ))}
+        {cityName && <Tag text={cityName} color={cityColor} card />}
+        {genreNames.map((name, idx) => (
+          <Tag key={idx} text={name} transparent card />
+        ))}
       </div>
     </div>
   );
