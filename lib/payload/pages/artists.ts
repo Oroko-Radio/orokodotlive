@@ -6,7 +6,7 @@ export async function getArtistsPage() {
   const payload = await getPayload({ config });
 
   const allArtists = await payload.find({
-    collection: "artists",
+    collection: "artist-profiles",
     depth: 2,
     limit: 2000,
     sort: "name",
@@ -23,7 +23,7 @@ export async function getArtistsPageSingle(slug: string) {
   const today = dayjs();
 
   const artistResult = await payload.find({
-    collection: "artists",
+    collection: "artist-profiles",
     where: { slug: { equals: slug } },
     depth: 2,
     limit: 1,

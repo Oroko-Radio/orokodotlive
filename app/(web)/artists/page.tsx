@@ -50,7 +50,7 @@ export default async function ArtistsPage({ searchParams }: ArtistsPageProps) {
   }
 
   const artists = await payload.find({
-    collection: "artists",
+    collection: "artist-profiles",
     depth: 1,
     limit: ARTISTS_PAGE_SIZE * currentPage,
     where: Object.keys(where).length > 0 ? where : undefined,
@@ -58,7 +58,7 @@ export default async function ArtistsPage({ searchParams }: ArtistsPageProps) {
 
   // Get all artists for the current filter to build cities list
   const allFilteredArtists = await payload.find({
-    collection: "artists",
+    collection: "artist-profiles",
     depth: 1,
     limit: 0,
     where:
