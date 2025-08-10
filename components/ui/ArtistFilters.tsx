@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect, useTransition, useCallback } from "react";
+import { useState, useEffect, useTransition, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { ScaleLoader } from "react-spinners";
-import { debounce } from "@/util";
 import CityTag from "./CityTag";
 import ArtistTypeFilter from "./ArtistTypeFilter";
 import { City } from "@/payload-types";
@@ -27,24 +26,30 @@ export default function ArtistFilters({
 
   const router = useRouter();
   const pathname = usePathname();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const debouncedUpdateUrl = useCallback(
-    debounce((city: string, filter: string) => {
+  useEffect(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
       startTransition(() => {
         const params = new URLSearchParams();
-        if (city !== "all") params.set("city", city);
-        if (filter !== "all") params.set("filter", filter);
+        if (currentCity !== "all") params.set("city", currentCity);
+        if (currentFilter !== "all") params.set("filter", currentFilter);
 
         const newUrl = `${pathname}?${params.toString()}`;
         router.push(newUrl);
       });
-    }, 200),
-    [pathname, router],
-  );
+    }, 200);
 
-  useEffect(() => {
-    debouncedUpdateUrl(currentCity, currentFilter);
-  }, [currentCity, currentFilter, debouncedUpdateUrl]);
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [currentCity, currentFilter, pathname, router]);
 
   const handleCityChange = (city: string) => {
     setCurrentCity(city);

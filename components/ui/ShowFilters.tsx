@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect, useTransition, useCallback } from "react";
+import { useState, useEffect, useTransition, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { ScaleLoader } from "react-spinners";
-import { debounce } from "@/util";
 import Tag from "../Tag";
 import { GenreCategory, Genre } from "@/payload-types";
 
@@ -28,24 +27,30 @@ export default function ShowFilters({
 
   const router = useRouter();
   const pathname = usePathname();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const debouncedUpdateUrl = useCallback(
-    debounce((category: string, genre: string) => {
+  useEffect(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
       startTransition(() => {
         const params = new URLSearchParams();
-        if (category !== "all") params.set("category", category);
-        if (genre !== "all") params.set("genre", genre);
+        if (currentCategory !== "all") params.set("category", currentCategory);
+        if (currentGenre !== "all") params.set("genre", currentGenre);
 
         const newUrl = `${pathname}?${params.toString()}`;
         router.push(newUrl);
       });
-    }, 200),
-    [pathname, router],
-  );
+    }, 200);
 
-  useEffect(() => {
-    debouncedUpdateUrl(currentCategory, currentGenre);
-  }, [currentCategory, currentGenre, debouncedUpdateUrl]);
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [currentCategory, currentGenre, pathname, router]);
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
