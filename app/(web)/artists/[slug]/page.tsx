@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Tag from "@/components/Tag";
 import TitleBox from "@/components/TitleBox";
-import { getArtistsPageSingle, getAllArtistSlugs } from "@/lib/payload/pages/artists";
+import { getArtistsPageSingle } from "@/lib/payload/pages/artists";
 import { renderPayloadRichText } from "@/lib/rich-text";
 import RelatedShows from "@/views/RelatedShows";
 import SinglePage from "@/views/SinglePage";
@@ -21,13 +21,6 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams() {
-  const slugs = await getAllArtistSlugs();
-  return slugs.map((slug) => ({
-    slug: slug,
-  }));
-}
-
 export default async function Artist({
   params,
 }: {
@@ -39,7 +32,11 @@ export default async function Artist({
 
   return (
     <SinglePage
-      coverImage={typeof artist.photo === 'object' && artist.photo?.url ? artist.photo.url : undefined}
+      coverImage={
+        typeof artist.photo === "object" && artist.photo?.url
+          ? artist.photo.url
+          : undefined
+      }
       coverImageAlt={name}
       withBackButton
       title={name}
@@ -58,8 +55,17 @@ export default async function Artist({
           </h1>
           {city && (
             <div className="inline-block">
-              <Link href={"/artists?city=" + (typeof city === 'object' ? city.name : city)} passHref>
-                <Tag text={typeof city === 'object' ? city.name : String(city)} color="black" />
+              <Link
+                href={
+                  "/artists?city=" +
+                  (typeof city === "object" ? city.name : city)
+                }
+                passHref
+              >
+                <Tag
+                  text={typeof city === "object" ? city.name : String(city)}
+                  color="black"
+                />
               </Link>
             </div>
           )}

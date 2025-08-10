@@ -57,7 +57,13 @@ export async function getAllShowSlugs() {
     select: {
       slug: true,
     },
-    limit: 0,
+    where: {
+      or: [
+        { isFeatured: { equals: true } },
+        { date: { greater_than: dayjs().subtract(30, "days") } },
+      ],
+    },
+    limit: 100,
     depth: 0,
   });
 

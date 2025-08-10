@@ -58,18 +58,3 @@ export async function getArtistsPageSingle(slug: string) {
     relatedShows,
   };
 }
-
-export async function getAllArtistSlugs() {
-  const payload = await getPayload({ config });
-
-  const result = await payload.find({
-    collection: "artists",
-    select: {
-      slug: true,
-    },
-    limit: 0,
-    depth: 0,
-  });
-
-  return result.docs.map((artist) => artist.slug).filter(Boolean);
-}
