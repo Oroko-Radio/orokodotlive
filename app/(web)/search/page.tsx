@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default async function SearchPage() {
+  // Initial data always has 4 items per section
   const initialData = await searchContent({ query: "" });
   
   return <Search initialData={initialData} />;

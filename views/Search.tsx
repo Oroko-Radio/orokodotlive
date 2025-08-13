@@ -8,11 +8,18 @@ import dayjs from "dayjs";
 import Tag from "../components/Tag";
 import { ScaleLoader } from "react-spinners";
 import { Show, Article, ArtistProfile } from "@/payload-types";
+import { SEARCH_PAGE_SIZE } from "@/constants";
+import SearchLoadMoreButton from "../components/ui/SearchLoadMoreButton";
 
 interface SearchData {
   shows: Show[];
   articles: Article[];
   artists: ArtistProfile[];
+  totalDocs: {
+    shows: number;
+    articles: number;
+    artists: number;
+  };
 }
 
 interface SearchProps {
@@ -33,20 +40,26 @@ export default function Search({ initialData }: SearchProps) {
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Get limits from URL params
+  const showsLimit = parseInt(searchParams.get("showsLimit") || SEARCH_PAGE_SIZE.toString());
+  const articlesLimit = parseInt(searchParams.get("articlesLimit") || SEARCH_PAGE_SIZE.toString());
+  const artistsLimit = parseInt(searchParams.get("artistsLimit") || SEARCH_PAGE_SIZE.toString());
+
   const shouldFetch = debouncedQuery.trim().length > 0;
 
   const { data, isValidating } = useSWR(
     shouldFetch
-      ? `/api/search?query=${encodeURIComponent(debouncedQuery.trim())}`
+      ? `/api/search?query=${encodeURIComponent(debouncedQuery.trim())}&showsLimit=${showsLimit}&articlesLimit=${articlesLimit}&artistsLimit=${artistsLimit}`
       : null,
     fetcher,
     {
       revalidateOnFocus: false,
       dedupingInterval: 5000,
+      keepPreviousData: true, // This prevents data from disappearing during loading
     },
   );
 
-  // Use initial data when no query, otherwise use SWR data
+  // Use initial data when no query, otherwise use SWR data (but keep previous data during loading)
   const displayData: SearchData | null = !shouldFetch
     ? initialData
     : data || null;
@@ -182,6 +195,19 @@ export default function Search({ initialData }: SearchProps) {
               </li>
             ))}
           </ul>
+          
+          {shouldFetch && displayData.shows.length < displayData.totalDocs.shows && (
+            <div className="flex justify-center py-8">
+              <SearchLoadMoreButton
+                section="shows"
+                currentLimit={showsLimit}
+                query={debouncedQuery}
+                showsLimit={showsLimit}
+                articlesLimit={articlesLimit}
+                artistsLimit={artistsLimit}
+              />
+            </div>
+          )}
         </section>
       )}
 
@@ -214,6 +240,19 @@ export default function Search({ initialData }: SearchProps) {
               </li>
             ))}
           </ul>
+          
+          {shouldFetch && displayData.artists.length < displayData.totalDocs.artists && (
+            <div className="flex justify-center py-8">
+              <SearchLoadMoreButton
+                section="artists"
+                currentLimit={artistsLimit}
+                query={debouncedQuery}
+                showsLimit={showsLimit}
+                articlesLimit={articlesLimit}
+                artistsLimit={artistsLimit}
+              />
+            </div>
+          )}
         </section>
       )}
 
@@ -261,6 +300,19 @@ export default function Search({ initialData }: SearchProps) {
               </li>
             ))}
           </ul>
+          
+          {shouldFetch && displayData.articles.length < displayData.totalDocs.articles && (
+            <div className="flex justify-center py-8">
+              <SearchLoadMoreButton
+                section="articles"
+                currentLimit={articlesLimit}
+                query={debouncedQuery}
+                showsLimit={showsLimit}
+                articlesLimit={articlesLimit}
+                artistsLimit={artistsLimit}
+              />
+            </div>
+          )}
         </section>
       )}
     </>

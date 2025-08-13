@@ -9,3 +9,4 @@ export const ENDPOINT = `https://graphql.contentful.com/content/v1/spaces/${proc
 
 export const ARTISTS_PAGE_SIZE = 8;
 export const SHOWS_PAGE_SIZE = 16;
+export const SEARCH_PAGE_SIZE = 8;
