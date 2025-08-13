@@ -205,6 +205,7 @@ export default function Search({ initialData }: SearchProps) {
                 showsLimit={showsLimit}
                 articlesLimit={articlesLimit}
                 artistsLimit={artistsLimit}
+                isLoading={isValidating}
               />
             </div>
           )}
@@ -250,6 +251,7 @@ export default function Search({ initialData }: SearchProps) {
                 showsLimit={showsLimit}
                 articlesLimit={articlesLimit}
                 artistsLimit={artistsLimit}
+                isLoading={isValidating}
               />
             </div>
           )}
@@ -310,6 +312,7 @@ export default function Search({ initialData }: SearchProps) {
                 showsLimit={showsLimit}
                 articlesLimit={articlesLimit}
                 artistsLimit={artistsLimit}
+                isLoading={isValidating}
               />
             </div>
           )}

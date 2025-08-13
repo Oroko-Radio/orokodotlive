@@ -13,6 +13,7 @@ interface SearchLoadMoreButtonProps {
   showsLimit: number;
   articlesLimit: number;
   artistsLimit: number;
+  isLoading: boolean;
 }
 
 export default function SearchLoadMoreButton({
@@ -22,6 +23,7 @@ export default function SearchLoadMoreButton({
   showsLimit,
   articlesLimit,
   artistsLimit,
+  isLoading,
 }: SearchLoadMoreButtonProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -62,7 +64,7 @@ export default function SearchLoadMoreButton({
     });
   };
 
-  if (isPending) {
+  if (isPending || isLoading) {
     return (
       <div className="flex justify-center items-center h-[48px]">
         <ScaleLoader />
