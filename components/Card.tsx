@@ -2,7 +2,7 @@ import cn from "classnames";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import PlayButton from "./ui/PlayButton";
-import { CardProps } from "../types/shared";
+import { CardProps } from "@/types/shared";
 
 const Card = ({
   imageUrl,

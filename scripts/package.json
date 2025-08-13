@@ -1,0 +1,9 @@
+{
+  "name": "migration-scripts",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "sharp": "^0.33.5",
+    "slugify": "^1.6.6"
+  }
+}

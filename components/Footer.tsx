@@ -1,7 +1,7 @@
 import Link from "next/link";
 import SocialSection from "./SocialSection";
-import Logo from "../icons/Logo";
-import { links } from "../menuPaths";
+import Logo from "@/icons/Logo";
+import { links } from "@/menuPaths";
 
 const Footer = () => {
   return (

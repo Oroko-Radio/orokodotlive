@@ -1,26 +1,40 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSearchData } from "../../../lib/contentful/pages/search";
+import { searchContent } from "@/lib/payload/pages/search";
+import { SEARCH_PAGE_SIZE } from "@/constants";
+
+// Cache initial data (empty query) for 5 minutes
+export const revalidate = 300;
 
 export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const query = searchParams.get("query") || "";
+  const showsLimit = parseInt(searchParams.get("showsLimit") || SEARCH_PAGE_SIZE.toString());
+  const articlesLimit = parseInt(searchParams.get("articlesLimit") || SEARCH_PAGE_SIZE.toString());
+  const artistsLimit = parseInt(searchParams.get("artistsLimit") || SEARCH_PAGE_SIZE.toString());
+
   try {
-    const { searchParams } = new URL(request.url);
-    const query = searchParams.get("query") || "";
-
-    const { data } = await getSearchData(query);
-
-    return NextResponse.json(data, {
+    const results = await searchContent({ 
+      query,
+      limits: {
+        shows: showsLimit,
+        articles: articlesLimit,
+        artists: artistsLimit
+      }
+    });
+    
+    // Set cache headers - cache empty queries longer, search queries shorter
+    const cacheTime = query ? 60 : 300; // 1 min for searches, 5 min for initial data
+    
+    return NextResponse.json({ data: results }, {
       headers: {
-        "Cache-Control": "s-maxage=1, stale-while-revalidate=59",
-      },
+        'Cache-Control': `public, s-maxage=${cacheTime}, stale-while-revalidate=${cacheTime * 2}`
+      }
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "An unknown error occurred";
-
+    console.error("Search API error:", error);
     return NextResponse.json(
-      {
-        message,
-      },
-      { status: 400 }
+      { error: "Search failed" },
+      { status: 500 }
     );
   }
 }

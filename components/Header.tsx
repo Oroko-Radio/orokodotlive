@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import cx from "classnames";
 import Link from "next/link";
 import Menu from "./Menu";
-import MenuIcon from "../icons/MenuIcon";
-import CloseIcon from "../icons/CloseIcon";
-import SearchIcon from "../icons/SearchIcon";
+import MenuIcon from "@/icons/MenuIcon";
+import CloseIcon from "@/icons/CloseIcon";
+import SearchIcon from "@/icons/SearchIcon";
 import MenuButton from "./ui/MenuButton";
 import { usePathname } from "next/navigation";
-import ColorLogo from "../icons/ColorLogo";
+import ColorLogo from "@/icons/ColorLogo";
 import Button from "./ui/Button";
 
 const Header = () => {

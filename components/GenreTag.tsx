@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Tag from "./Tag";
-import { GenreInterface } from "../types/shared";
+import { GenreInterface } from "@/types/shared";
 
 export function GenreTag({ genre }: { genre: GenreInterface }) {
   const { name, genreCategory } = genre;

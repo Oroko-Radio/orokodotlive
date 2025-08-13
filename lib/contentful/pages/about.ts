@@ -1,6 +1,6 @@
-import { graphql } from "..";
-import { SinglePageData } from "../../../types/shared";
-import { extractPage } from "../../../util";
+import { graphql } from "@/lib/contentful";
+import { SinglePageData } from "@/types/shared";
+import { extractPage } from "@/util";
 
 export async function getAboutPage(preview: boolean) {
   const AboutPageQuery = /* GraphQL */ `

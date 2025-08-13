@@ -59,6 +59,7 @@ export default function ArtworkGenerator() {
   }, [zoom]);
 
   function handleDownload() {
+    if (!thumbnail.current) return;
     if (!title || !artists || !dateTime) {
       setError("The fields Title, Artists and Date and Time are required");
       return;
@@ -192,6 +193,7 @@ export default function ArtworkGenerator() {
             accept=".jpg, .png, .jpeg, .gif, .tif, .tiff|image/*"
             id="image"
             onChange={(e) => {
+              if (!e.target.files) return;
               setBgFile(e.target.files[0]);
             }}
           />

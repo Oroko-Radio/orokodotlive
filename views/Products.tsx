@@ -1,8 +1,8 @@
 import Link from "next/link";
-import DotButton from "../components/ui/DotButton";
-import type { Product } from "../types/shared";
-import Slider from "../components/Slider";
-import SliderCard from "../components/SliderCard";
+import DotButton from "@/components/ui/DotButton";
+import type { Product } from "@/payload-types";
+import Slider from "@/components/Slider";
+import SliderCard from "@/components/SliderCard";
 
 interface ProductsProps {
   products: Product[];
@@ -34,7 +34,12 @@ export default function Products({ products }: ProductsProps) {
           {products.map((product, idx) => (
             <SliderCard
               key={product.link || idx}
-              imageUrl={product.image?.url || ""}
+              imageUrl={
+                (typeof product.image === "object" &&
+                  product.image?.sizes?.["small-full"]?.url) ||
+                (typeof product.image === "object" && product.image?.url) ||
+                ""
+              }
               title={product.title}
               link={product.link}
               idx={idx}
