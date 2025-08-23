@@ -4,11 +4,15 @@
  */
 
 export function encodeNameForUrl(name: string): string {
-  return name.toLowerCase().replace(/\s+/g, '_');
+  // Convert to lowercase, replace spaces with underscores, then URL encode
+  return encodeURIComponent(name.toLowerCase().replace(/\s+/g, '_'));
 }
 
 export function decodeNameFromUrl(urlName: string): string {
-  return urlName.replace(/_/g, ' ');
+  // First decode any URL encoding (like %2F -> /)
+  const urlDecoded = decodeURIComponent(urlName);
+  // Then convert underscores to spaces
+  return urlDecoded.replace(/_/g, ' ');
 }
 
 /**

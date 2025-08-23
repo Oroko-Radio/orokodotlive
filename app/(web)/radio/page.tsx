@@ -125,8 +125,8 @@ export default async function RadioPage({ searchParams }: RadioPageProps) {
       <ShowFilters
         genreCategories={genreCategories.docs}
         genres={genres}
-        initialCategory={currentCategory}
-        initialGenre={currentGenre}
+        initialCategory={decodedCategory}
+        initialGenre={decodedGenre}
       >
         <>
           <AllShows shows={shows.docs} />

@@ -5,7 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { ScaleLoader } from "react-spinners";
 import Tag from "../Tag";
 import { GenreCategory, Genre } from "@/payload-types";
-import { encodeNameForUrl, decodeNameFromUrl } from "@/lib/utils/url-helpers";
+import { encodeNameForUrl } from "@/lib/utils/url-helpers";
 
 interface ShowFiltersProps {
   genreCategories: GenreCategory[];
@@ -22,13 +22,8 @@ export default function ShowFilters({
   initialGenre,
   children,
 }: ShowFiltersProps) {
-  // Decode URL parameters for internal state (but keep display names as-is from database)
-  const [currentCategory, setCurrentCategory] = useState(
-    initialCategory !== "all" ? decodeNameFromUrl(initialCategory) : "all",
-  );
-  const [currentGenre, setCurrentGenre] = useState(
-    initialGenre !== "all" ? decodeNameFromUrl(initialGenre) : "all",
-  );
+  const [currentCategory, setCurrentCategory] = useState(initialCategory);
+  const [currentGenre, setCurrentGenre] = useState(initialGenre);
   const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
@@ -88,9 +83,15 @@ export default function ShowFilters({
           <button key={idx} onClick={() => handleCategoryChange(category.name)}>
             <Tag
               text={category.name}
-              color={currentCategory === category.name ? "selected" : "white"}
+              color={
+                currentCategory === category.name.toLowerCase()
+                  ? "selected"
+                  : "white"
+              }
               borderColor={
-                currentCategory === category.name ? "white" : undefined
+                currentCategory === category.name.toLowerCase()
+                  ? "white"
+                  : undefined
               }
             />
           </button>
@@ -103,7 +104,11 @@ export default function ShowFilters({
             <button key={idx} onClick={() => handleGenreChange(genre.name)}>
               <Tag
                 text={genre.name}
-                color={currentGenre === genre.name ? "selected" : "black"}
+                color={
+                  currentGenre === genre.name.toLowerCase()
+                    ? "selected"
+                    : "black"
+                }
               />
             </button>
           ))}
