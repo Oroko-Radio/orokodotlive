@@ -68,15 +68,15 @@ export const Articles: CollectionConfig = {
       label: "Content",
       type: "richText",
       // NECESSARY FOR MIGRATION ONLY:
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
-          SlateToLexicalFeature({
-            converters: [...defaultSlateConverters, SlateHRConverter],
-            // disableHooks: true,
-          }),
-        ],
-      }),
+      // editor: lexicalEditor({
+      //   features: ({ defaultFeatures }) => [
+      //     ...defaultFeatures,
+      //     SlateToLexicalFeature({
+      //       converters: [...defaultSlateConverters, SlateHRConverter],
+      //       disableHooks: true,
+      //     }),
+      //   ],
+      // }),
     },
     {
       name: "city",
