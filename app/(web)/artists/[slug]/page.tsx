@@ -6,6 +6,7 @@ import { getArtistsPageSingle } from "@/lib/payload/pages/artists";
 import { renderPayloadRichText } from "@/lib/rich-text";
 import RelatedShows from "@/views/RelatedShows";
 import SinglePage from "@/views/SinglePage";
+import { RefreshRouteOnSave } from "@/components/RefreshRouteOnSave";
 
 export const revalidate = 3600; // 1 hour
 
@@ -33,9 +34,12 @@ export default async function Artist({
   return (
     <SinglePage
       coverImage={
-        typeof artist.photo === "object" && artist.photo?.sizes?.["large-full"]?.url
+        typeof artist.photo === "object" &&
+        artist.photo?.sizes?.["large-full"]?.url
           ? artist.photo.sizes["large-full"].url
-          : (typeof artist.photo === "object" && artist.photo?.url ? artist.photo.url : undefined)
+          : typeof artist.photo === "object" && artist.photo?.url
+            ? artist.photo.url
+            : undefined
       }
       coverImageAlt={name}
       withBackButton
@@ -77,6 +81,7 @@ export default async function Artist({
       {relatedShows && relatedShows.length > 0 && (
         <RelatedShows shows={relatedShows} />
       )}
+      <RefreshRouteOnSave />
     </SinglePage>
   );
 }

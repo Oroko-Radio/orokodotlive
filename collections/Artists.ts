@@ -5,6 +5,17 @@ export const Artists: CollectionConfig = {
   admin: {
     useAsTitle: "name",
     defaultColumns: ["name", "photo", "slug", "city"],
+    livePreview: {
+      url: ({ data }) =>
+        `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/artists/${data.slug}`,
+    },
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 375,
+      },
+    },
   },
   fields: [
     {

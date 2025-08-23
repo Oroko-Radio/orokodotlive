@@ -23,6 +23,9 @@ importers:
       '@payloadcms/db-postgres':
         specifier: ^3.48.0
         version: 3.49.0(payload@3.49.0(graphql@16.11.0)(typescript@5.8.3))
+      '@payloadcms/live-preview-react':
+        specifier: ^3.53.0
+        version: 3.53.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@payloadcms/next':
         specifier: ^3.48.0
         version: 3.49.0(@types/react@19.1.8)(graphql@16.11.0)(monaco-editor@0.52.2)(next@15.4.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.49.0(graphql@16.11.0)(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
@@ -1377,6 +1380,15 @@ packages:
     peerDependencies:
       graphql: ^16.8.1
       payload: 3.49.0
+
+  '@payloadcms/live-preview-react@3.53.0':
+    resolution: {integrity: sha512-5LHJBhsQE4+7sIL0QE6ine4PXTwwAjz5Y+i2mgCLMugOFviqlFQFUS+4cirIH4VUkJacj2cVBujQl+cReuC98g==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
+
+  '@payloadcms/live-preview@3.53.0':
+    resolution: {integrity: sha512-tc5qg5o4UzG/pRIBQSh8moxWTlci/pyJAiWZ8jbv/vG3WWQDKHTWD4Rm+Kg/SZt5kTn4GsKojC/6kzlWiXyYyg==}
 
   '@payloadcms/next@3.49.0':
     resolution: {integrity: sha512-fu/nOB7/vE5r6JtwjqNM7jbt4pWrJdJkydU3F5NyL/yHhNg2irTmL0HkjDgENjY0lJNlIt23IoRyjC3LHH+PNg==}
@@ -6262,6 +6274,14 @@ snapshots:
       tsx: 4.19.2
     transitivePeerDependencies:
       - typescript
+
+  '@payloadcms/live-preview-react@3.53.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@payloadcms/live-preview': 3.53.0
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@payloadcms/live-preview@3.53.0': {}
 
   '@payloadcms/next@3.49.0(@types/react@19.1.8)(graphql@16.11.0)(monaco-editor@0.52.2)(next@15.4.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.49.0(graphql@16.11.0)(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)':
     dependencies:

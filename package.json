@@ -16,6 +16,7 @@
     "@contentful/rich-text-types": "^17.1.0",
     "@headlessui/react": "^2.2.4",
     "@payloadcms/db-postgres": "^3.48.0",
+    "@payloadcms/live-preview-react": "^3.53.0",
     "@payloadcms/next": "^3.48.0",
     "@payloadcms/payload-cloud": "^3.48.0",
     "@payloadcms/richtext-lexical": "^3.48.0",
