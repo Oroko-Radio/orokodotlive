@@ -1,15 +1,10 @@
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import {
-  SlateToLexicalFeature,
-  defaultSlateConverters,
-} from "@payloadcms/richtext-lexical/migrate";
 import { CollectionConfig } from "payload";
-import { SlateHRConverter } from "./hrConverter";
 
 export const Articles: CollectionConfig = {
   slug: "articles",
   admin: {
     useAsTitle: "title",
+    defaultColumns: ["title", "coverImage", "slug", "articleType", "date"],
   },
   fields: [
     {
