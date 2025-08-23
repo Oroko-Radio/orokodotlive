@@ -10,6 +10,7 @@ import TitleBox from "@/components/TitleBox";
 import { GenreTag } from "@/components/GenreTag";
 import FeaturedTag from "@/components/FeaturedTag";
 import RelatedShows from "@/views/RelatedShows";
+import type { Show, Genre, ArtistProfile } from "@/payload-types";
 
 export const revalidate = 3600; // 1 hour
 
@@ -96,12 +97,14 @@ export default async function Show({
             )}
             {show.genres &&
               Array.isArray(show.genres) &&
-              show.genres.map((genre: any, idx: number) => (
-                <GenreTag 
-                  genre={typeof genre === 'object' ? genre : { name: genre }} 
-                  key={idx} 
-                />
-              ))}
+              show.genres
+                .filter((genre): genre is Genre => typeof genre === 'object')
+                .map((genre, idx) => (
+                  <GenreTag 
+                    genre={genre} 
+                    key={idx} 
+                  />
+                ))}
           </div>
         </div>
       </TitleBox>

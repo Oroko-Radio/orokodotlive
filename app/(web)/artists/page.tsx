@@ -35,7 +35,16 @@ export default async function ArtistsPage({ searchParams }: ArtistsPageProps) {
   const where: any = {};
 
   if (currentCity !== "all") {
-    where.city = { equals: parseInt(currentCity) };
+    // Look up city by name to get ID
+    const cityResult = await payload.find({
+      collection: "city",
+      where: { name: { equals: currentCity } },
+      limit: 1,
+    });
+
+    if (cityResult.docs.length > 0) {
+      where.city = { equals: cityResult.docs[0].id };
+    }
   }
 
   if (currentFilter === "alumni") {
@@ -104,11 +113,7 @@ export default async function ArtistsPage({ searchParams }: ArtistsPageProps) {
 
           {hasMore && (
             <div className="flex justify-center py-8">
-              <LoadMoreButton
-                currentPage={currentPage}
-                currentCity={currentCity}
-                currentFilter={currentFilter}
-              />
+              <LoadMoreButton currentPage={currentPage} />
             </div>
           )}
         </>

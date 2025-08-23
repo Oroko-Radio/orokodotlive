@@ -6,6 +6,7 @@ import { SHOWS_PAGE_SIZE } from "@/constants";
 import ShowFilters from "@/components/ui/ShowFilters";
 import LoadMoreButton from "@/components/ui/LoadMoreButton";
 import { Genre } from "@/payload-types";
+import { decodeNameFromUrl } from "@/lib/utils/url-helpers";
 
 export const revalidate = 300; // 5 minutes
 
@@ -31,6 +32,10 @@ export default async function RadioPage({ searchParams }: RadioPageProps) {
   const currentGenre = params.genre || "all";
   const currentPage = parseInt(params.page || "1");
 
+  // Decode URL-encoded names for database queries
+  const decodedCategory = currentCategory !== "all" ? decodeNameFromUrl(currentCategory) : "all";
+  const decodedGenre = currentGenre !== "all" ? decodeNameFromUrl(currentGenre) : "all";
+
   let shows: any;
   let genreCategories: any;
   let genres: Genre[] = [];
@@ -47,22 +52,22 @@ export default async function RadioPage({ searchParams }: RadioPageProps) {
     date: { less_than_equal: new Date().toISOString().split("T")[0] },
   };
 
-  if (currentGenre !== "all") {
-    // Find genre by name
+  if (decodedGenre !== "all") {
+    // Find genre by name (case-insensitive)
     const genreResult = await payload.find({
       collection: "genres",
-      where: { name: { equals: currentGenre } },
+      where: { name: { like: decodedGenre } },
       limit: 1,
     });
 
     if (genreResult.docs.length > 0) {
       where.genres = { contains: genreResult.docs[0].id };
     }
-  } else if (currentCategory !== "all") {
-    // Find category by name
+  } else if (decodedCategory !== "all") {
+    // Find category by name (case-insensitive)
     const categoryResult = await payload.find({
       collection: "genreCategory",
-      where: { name: { equals: currentCategory } },
+      where: { name: { like: decodedCategory } },
       limit: 1,
     });
 
@@ -94,10 +99,10 @@ export default async function RadioPage({ searchParams }: RadioPageProps) {
   });
 
   // If category is selected, get genres for that category
-  if (currentCategory !== "all") {
+  if (decodedCategory !== "all") {
     const categoryResult = await payload.find({
       collection: "genreCategory",
-      where: { name: { equals: currentCategory } },
+      where: { name: { like: decodedCategory } },
       limit: 1,
     });
 
@@ -130,8 +135,6 @@ export default async function RadioPage({ searchParams }: RadioPageProps) {
             <div className="flex justify-center py-8">
               <LoadMoreButton
                 currentPage={currentPage}
-                currentCity={currentCategory}
-                currentFilter={currentGenre}
               />
             </div>
           )}

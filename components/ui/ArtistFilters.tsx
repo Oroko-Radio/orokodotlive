@@ -82,7 +82,7 @@ export default function ArtistFilters({
         >
           <option value="all">All Cities</option>
           {cities.map((city) => (
-            <option key={city.id} value={city.id.toString()}>
+            <option key={city.id} value={city.name}>
               {city.name}
             </option>
           ))}
@@ -99,8 +99,8 @@ export default function ArtistFilters({
           <CityTag
             key={city.id}
             label={city.name}
-            isActive={city.id.toString() === currentCity}
-            onClick={() => handleCityChange(city.id.toString())}
+            isActive={city.name === currentCity}
+            onClick={() => handleCityChange(city.name)}
           />
         ))}
       </div>
