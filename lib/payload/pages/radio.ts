@@ -11,6 +11,7 @@ export async function getRadioPageSingle(slug: string) {
     where: { slug: { equals: slug } },
     depth: 2,
     limit: 1,
+    draft: true,
   });
 
   if (showResult.docs.length === 0) {

@@ -5,6 +5,17 @@ export const Shows: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "artists", "coverImage", "slug", "date"],
+    livePreview: {
+      url: ({ data }) =>
+        `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/radio/${data.slug}`,
+    },
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 375,
+      },
+    },
   },
   fields: [
     {
