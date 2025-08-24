@@ -5,6 +5,17 @@ export const Articles: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "coverImage", "slug", "articleType", "date"],
+    livePreview: {
+      url: ({ data }) =>
+        `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/news/${data.slug}`,
+    },
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 375,
+      },
+    },
   },
   fields: [
     {

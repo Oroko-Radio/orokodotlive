@@ -3,7 +3,7 @@ import config from "@payload-config";
 
 export async function getFeaturedArticles() {
   const payload = await getPayload({ config });
-  
+
   const result = await payload.find({
     collection: "articles",
     where: {
@@ -21,7 +21,7 @@ export async function getFeaturedArticles() {
 
 export async function getAllArticles() {
   const payload = await getPayload({ config });
-  
+
   const result = await payload.find({
     collection: "articles",
     depth: 2,
@@ -34,7 +34,7 @@ export async function getAllArticles() {
 
 export async function getArticleBySlug(slug: string) {
   const payload = await getPayload({ config });
-  
+
   const result = await payload.find({
     collection: "articles",
     where: {
@@ -44,6 +44,7 @@ export async function getArticleBySlug(slug: string) {
     },
     depth: 2,
     limit: 1,
+    draft: true,
   });
 
   if (result.docs.length === 0) {
@@ -55,7 +56,7 @@ export async function getArticleBySlug(slug: string) {
 
 export async function getAllArticleSlugs() {
   const payload = await getPayload({ config });
-  
+
   const result = await payload.find({
     collection: "articles",
     select: {
@@ -64,5 +65,5 @@ export async function getAllArticleSlugs() {
     limit: 1000,
   });
 
-  return result.docs.map(doc => doc.slug);
+  return result.docs.map((doc) => doc.slug);
 }
