@@ -84,12 +84,12 @@ export default function ShowFilters({
             <Tag
               text={category.name}
               color={
-                currentCategory === category.name.toLowerCase()
+                currentCategory.toLowerCase() === category.name.toLowerCase()
                   ? "selected"
                   : "white"
               }
               borderColor={
-                currentCategory === category.name.toLowerCase()
+                currentCategory.toLowerCase() === category.name.toLowerCase()
                   ? "white"
                   : undefined
               }
@@ -105,7 +105,7 @@ export default function ShowFilters({
               <Tag
                 text={genre.name}
                 color={
-                  currentGenre === genre.name.toLowerCase()
+                  currentGenre.toLowerCase() === genre.name.toLowerCase()
                     ? "selected"
                     : "black"
                 }
