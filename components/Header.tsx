@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState } from "react";
 import cx from "classnames";
@@ -27,7 +27,7 @@ const Header = () => {
             <ColorLogo className="text-black stroke-current stroke-1 mt-1 md:mt-0 w-8 h-8 md:w-10 md:h-10" />
           </div>
         </Link>
-        <div className="absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:-translate-x-0">
+        <div className="absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:-translate-x-0 z-50">
           <Link href="/" passHref className="z-50">
             <h1
               onClick={() => isMenuOpen && setIsMenuOpen(false)}
@@ -36,7 +36,7 @@ const Header = () => {
                 {
                   "text-black": isMenuOpen,
                   "text-white": !isMenuOpen,
-                }
+                },
               )}
             >
               Oroko Radio
@@ -97,7 +97,7 @@ const Header = () => {
             {
               "text-white": !isMenuOpen,
               "text-black": isMenuOpen,
-            }
+            },
           )}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
