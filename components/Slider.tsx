@@ -1,10 +1,10 @@
 'use client';
 
 import React from "react";
-import SliderContext from "./contexts/sliderContext";
+import SliderContext from "@/components/contexts/sliderContext";
 import SliderButton from "./ui/SliderButton";
-import useSliding from "../hooks/useSliding";
-import useSizeElement from "../hooks/useSizeElement";
+import useSliding from "@/hooks/useSliding";
+import useSizeElement from "@/hooks/useSizeElement";
 import SliderCard from "./SliderCard";
 import { useSwipeable } from "react-swipeable";
 import cx from "classnames";

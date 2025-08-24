@@ -1,16 +1,20 @@
 import Link from "next/link";
 import Tag from "./Tag";
-import { GenreInterface } from "../types/shared";
+import type { Genre, GenreCategory } from "@/payload-types";
+import { encodeNameForUrl } from "@/lib/utils/url-helpers";
 
-export function GenreTag({ genre }: { genre: GenreInterface }) {
+export function GenreTag({ genre }: { genre: Genre }) {
   const { name, genreCategory } = genre;
 
-  if (!genreCategory || !genreCategory.name)
+  // Find the first populated genreCategory
+  const category = genreCategory?.find(cat => typeof cat === 'object') as GenreCategory | undefined;
+  
+  if (!category)
     return <Tag text={name} transparent />;
 
   return (
     <Link
-      href={`/radio?category=${genreCategory.name}&genre=${name}#all-shows`}
+      href={`/radio?category=${encodeNameForUrl(category.name)}&genre=${encodeNameForUrl(name)}#all-shows`}
       passHref
     >
       <Tag text={name} transparent />

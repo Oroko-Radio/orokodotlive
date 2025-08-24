@@ -15,8 +15,8 @@ export default function useScript(src: string) {
 
       // Fetch existing script element by src
       // It may have been added by another instance of this hook
-      let script: HTMLScriptElement = document.querySelector(
-        `script[src="${src}"]`
+      let script: HTMLScriptElement | null = document.querySelector(
+        `script[src="${src}"]`,
       );
 
       if (!script) {
@@ -31,18 +31,20 @@ export default function useScript(src: string) {
 
         // Store status in attribute on script
         // This can be read by other instances of this hook
-        const setAttributeFromEvent = (event) => {
-          script.setAttribute(
-            "data-status",
-            event.type === "load" ? "ready" : "error"
-          );
+        const setAttributeFromEvent = (event: Event) => {
+          if (script) {
+            script.setAttribute(
+              "data-status",
+              event.type === "load" ? "ready" : "error",
+            );
+          }
         };
 
         script.addEventListener("load", setAttributeFromEvent);
         script.addEventListener("error", setAttributeFromEvent);
       } else {
         // Grab existing script status from attribute and set to state.
-        const attr: string = script.getAttribute("data-status");
+        const attr: string = script.getAttribute("data-status")!;
         setStatus(attr);
       }
 
@@ -65,7 +67,7 @@ export default function useScript(src: string) {
         }
       };
     },
-    [src] // Only re-run effect if script src changes
+    [src], // Only re-run effect if script src changes
   );
 
   return status;

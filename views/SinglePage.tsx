@@ -1,10 +1,10 @@
 import React, { ReactNode } from "react";
 import Image from "next/legacy/image";
-import BackButton from "../components/ui/BackButton";
+import BackButton from "@/components/ui/BackButton";
 
 interface SinglePageProps {
   title: string;
-  coverImage: string;
+  coverImage: string | undefined;
   coverImageAlt: string;
   withBackButton?: boolean;
   repeatCover?: boolean;

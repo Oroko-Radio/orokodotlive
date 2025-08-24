@@ -1,10 +1,10 @@
 import React from "react";
 
-import Card from "../components/Card";
-import { ShowInterface } from "../types/shared";
-import Show from "../components/Show";
+import Card from "@/components/Card";
+import { Show as ShowType } from "@/payload-types";
+import Show from "@/components/Show";
 
-const RelatedShows = ({ shows }: { shows: ShowInterface[] }) => {
+const RelatedShows = ({ shows }: { shows: ShowType[] }) => {
   return (
     <div className="bg-offBlack" id="all-shows">
       <h1 className="font-serif text-white text-4xl md:text-5xl pt-8 px-4 md:px-8 pb-0">
@@ -14,10 +14,10 @@ const RelatedShows = ({ shows }: { shows: ShowInterface[] }) => {
         {shows.map((show, idx) => (
           <div key={idx} className="border-black border-2 bg-white">
             <Card
-              imageUrl={show.coverImage.url}
+              imageUrl={typeof show.coverImage === 'object' && show.coverImage?.sizes?.["small-full"]?.url ? show.coverImage.sizes["small-full"].url : (typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg")}
               title={show.title}
               link={`/radio/${show.slug}`}
-              mixcloudLink={show.mixcloudLink}
+              mixcloudLink={show.mixcloudLink || undefined}
             >
               <Show show={show} cityColor="black" />
             </Card>

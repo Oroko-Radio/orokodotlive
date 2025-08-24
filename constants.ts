@@ -6,3 +6,7 @@ export const FATHOM_SITE_ID = "";
 export const RADIO_CULT_STATION_ID = "Oroko%20Radio";
 
 export const ENDPOINT = `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`;
+
+export const ARTISTS_PAGE_SIZE = 8;
+export const SHOWS_PAGE_SIZE = 16;
+export const SEARCH_PAGE_SIZE = 8;

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { isServer, mobileCheck } from "../../util";
+import { isServer, mobileCheck } from "@/util";
 import dynamic from "next/dynamic";
 import Button from "./Button";
 
@@ -32,7 +32,7 @@ export default function ShareButton({
     }
   };
 
-  if (!isServer && navigator.share) {
+  if (!isServer) {
     const isMobile = mobileCheck();
 
     if (isMobile) {

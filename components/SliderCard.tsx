@@ -2,9 +2,9 @@
 
 import React from "react";
 import cn from "classnames";
-import SliderContext from "./contexts/sliderContext";
+import SliderContext from "@/components/contexts/sliderContext";
 import Card from "./Card";
-import { CardProps } from "../types/shared";
+import { CardProps } from "@/types/shared";
 
 const SliderCard = ({
   imageUrl,
@@ -17,7 +17,9 @@ const SliderCard = ({
   bgColor,
 }: CardProps) => (
   <SliderContext.Consumer>
-    {({ elementRef }) => {
+    {(context) => {
+      if (!context) return null;
+      const { elementRef } = context;
       return (
         <div
           ref={elementRef}
