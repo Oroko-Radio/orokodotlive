@@ -4,39 +4,32 @@ import config from "@payload-config";
 const migrateVersions = async () => {
   const payload = await getPayload({ config: config });
 
-  const limit = 1;
-  let page = 1;
+  const docs = await payload.find({
+    collection: "artist-profiles",
+    limit: 0, // 0 means no limit - get all docs
+  });
 
-  while (true) {
-    const docs = await payload.find({
-      collection: "artist-profiles",
-      limit,
-      page,
-    });
+  console.log(`Found ${docs.docs.length} artists to update`);
 
-    if (!docs.docs.length) break;
-
-    for (const doc of docs.docs) {
-      console.log(`Updating artist: ${doc.name} (ID: ${doc.id})`);
-      
-      try {
-        await payload.update({
-          collection: "artist-profiles",
-          id: doc.id,
-          data: {
-            _status: "published",
-          },
-        });
-        console.log(`✅ Successfully updated: ${doc.name}`);
-      } catch (error) {
-        console.error(`❌ Failed to update ${doc.name}:`, error.message);
-      }
+  for (let i = 0; i < docs.docs.length; i++) {
+    const doc = docs.docs[i];
+    console.log(`[${i + 1}/${docs.docs.length}] Updating artist: ${doc.name} (ID: ${doc.id})`);
+    
+    try {
+      await payload.update({
+        collection: "artist-profiles",
+        id: doc.id,
+        data: {
+          _status: "published",
+        },
+      });
+      console.log(`✅ Successfully updated: ${doc.name}`);
+    } catch (error) {
+      console.error(`❌ Failed to update ${doc.name}:`, error.message);
     }
-
-    page++;
   }
 
-  console.log("Migration done.");
+  console.log(`Migration done. Processed ${docs.docs.length} artists.`);
 };
 
 migrateVersions();
