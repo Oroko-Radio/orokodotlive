@@ -41,9 +41,15 @@ export default function Search({ initialData }: SearchProps) {
   const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Get limits from URL params
-  const showsLimit = parseInt(searchParams.get("showsLimit") || SEARCH_PAGE_SIZE.toString());
-  const articlesLimit = parseInt(searchParams.get("articlesLimit") || SEARCH_PAGE_SIZE.toString());
-  const artistsLimit = parseInt(searchParams.get("artistsLimit") || SEARCH_PAGE_SIZE.toString());
+  const showsLimit = parseInt(
+    searchParams.get("showsLimit") || SEARCH_PAGE_SIZE.toString(),
+  );
+  const articlesLimit = parseInt(
+    searchParams.get("articlesLimit") || SEARCH_PAGE_SIZE.toString(),
+  );
+  const artistsLimit = parseInt(
+    searchParams.get("artistsLimit") || SEARCH_PAGE_SIZE.toString(),
+  );
 
   const shouldFetch = debouncedQuery.trim().length > 0;
 
@@ -163,6 +169,11 @@ export default function Search({ initialData }: SearchProps) {
                       show.coverImage?.url) ||
                     ""
                   }
+                  objectPosition={
+                    typeof show.coverImage === "object"
+                      ? `${show.coverImage?.focalX ?? 50}% ${show.coverImage?.focalY ?? 50}%`
+                      : "center"
+                  }
                   title={show.title}
                   link={`/radio/${show.slug}`}
                   mixcloudLink={show.mixcloudLink || undefined}
@@ -195,20 +206,21 @@ export default function Search({ initialData }: SearchProps) {
               </li>
             ))}
           </ul>
-          
-          {shouldFetch && displayData.shows.length < displayData.totalDocs.shows && (
-            <div className="flex justify-center py-8">
-              <SearchLoadMoreButton
-                section="shows"
-                currentLimit={showsLimit}
-                query={debouncedQuery}
-                showsLimit={showsLimit}
-                articlesLimit={articlesLimit}
-                artistsLimit={artistsLimit}
-                isLoading={isValidating}
-              />
-            </div>
-          )}
+
+          {shouldFetch &&
+            displayData.shows.length < displayData.totalDocs.shows && (
+              <div className="flex justify-center py-8">
+                <SearchLoadMoreButton
+                  section="shows"
+                  currentLimit={showsLimit}
+                  query={debouncedQuery}
+                  showsLimit={showsLimit}
+                  articlesLimit={articlesLimit}
+                  artistsLimit={artistsLimit}
+                  isLoading={isValidating}
+                />
+              </div>
+            )}
         </section>
       )}
 
@@ -231,6 +243,11 @@ export default function Search({ initialData }: SearchProps) {
                     (typeof artist.photo === "object" && artist.photo?.url) ||
                     ""
                   }
+                  objectPosition={
+                    typeof artist.photo === "object"
+                      ? `${artist.photo?.focalX ?? 50}% ${artist.photo?.focalY ?? 50}%`
+                      : "center"
+                  }
                   title={artist.name}
                   link={`/artists/${artist.slug}`}
                 >
@@ -241,20 +258,21 @@ export default function Search({ initialData }: SearchProps) {
               </li>
             ))}
           </ul>
-          
-          {shouldFetch && displayData.artists.length < displayData.totalDocs.artists && (
-            <div className="flex justify-center py-8">
-              <SearchLoadMoreButton
-                section="artists"
-                currentLimit={artistsLimit}
-                query={debouncedQuery}
-                showsLimit={showsLimit}
-                articlesLimit={articlesLimit}
-                artistsLimit={artistsLimit}
-                isLoading={isValidating}
-              />
-            </div>
-          )}
+
+          {shouldFetch &&
+            displayData.artists.length < displayData.totalDocs.artists && (
+              <div className="flex justify-center py-8">
+                <SearchLoadMoreButton
+                  section="artists"
+                  currentLimit={artistsLimit}
+                  query={debouncedQuery}
+                  showsLimit={showsLimit}
+                  articlesLimit={articlesLimit}
+                  artistsLimit={artistsLimit}
+                  isLoading={isValidating}
+                />
+              </div>
+            )}
         </section>
       )}
 
@@ -277,6 +295,11 @@ export default function Search({ initialData }: SearchProps) {
                     (typeof article.coverImage === "object" &&
                       article.coverImage?.url) ||
                     ""
+                  }
+                  objectPosition={
+                    typeof article.coverImage === "object"
+                      ? `${article.coverImage?.focalX ?? 50}% ${article.coverImage?.focalY ?? 50}%`
+                      : "center"
                   }
                   title={article.title}
                   link={`/news/${article.slug}`}
@@ -302,20 +325,21 @@ export default function Search({ initialData }: SearchProps) {
               </li>
             ))}
           </ul>
-          
-          {shouldFetch && displayData.articles.length < displayData.totalDocs.articles && (
-            <div className="flex justify-center py-8">
-              <SearchLoadMoreButton
-                section="articles"
-                currentLimit={articlesLimit}
-                query={debouncedQuery}
-                showsLimit={showsLimit}
-                articlesLimit={articlesLimit}
-                artistsLimit={artistsLimit}
-                isLoading={isValidating}
-              />
-            </div>
-          )}
+
+          {shouldFetch &&
+            displayData.articles.length < displayData.totalDocs.articles && (
+              <div className="flex justify-center py-8">
+                <SearchLoadMoreButton
+                  section="articles"
+                  currentLimit={articlesLimit}
+                  query={debouncedQuery}
+                  showsLimit={showsLimit}
+                  articlesLimit={articlesLimit}
+                  artistsLimit={artistsLimit}
+                  isLoading={isValidating}
+                />
+              </div>
+            )}
         </section>
       )}
     </>

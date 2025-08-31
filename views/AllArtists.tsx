@@ -14,6 +14,7 @@ const AllArtists = ({ artists }: AllArtistsProps) => {
           {photo && typeof photo !== "number" && photo.url && (
             <Card
               imageUrl={photo.sizes?.["small-full"]?.url || photo.url}
+              objectPosition={`${photo.focalX ?? 50}% ${photo.focalY ?? 50}%`}
               title={name}
               link={`/artists/${slug}`}
             >
