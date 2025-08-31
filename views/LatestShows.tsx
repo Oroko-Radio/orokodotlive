@@ -29,6 +29,11 @@ const LatestShows = ({
         {shows.map((show, idx) => (
           <SliderCard
             imageUrl={typeof show.coverImage === 'object' && show.coverImage?.sizes?.["small-full"]?.url ? show.coverImage.sizes["small-full"].url : (typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg")}
+            objectPosition={
+              typeof show.coverImage === "object"
+                ? `${show.coverImage?.focalX ?? 50}% ${show.coverImage?.focalY ?? 50}%`
+                : "center"
+            }
             title={show.title}
             link={`/radio/${show.slug}`}
             cardWidth="quarter"

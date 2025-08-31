@@ -8,6 +8,7 @@ import { CardProps } from "@/types/shared";
 
 const SliderCard = ({
   imageUrl,
+  objectPosition,
   title,
   link,
   idx,
@@ -36,6 +37,7 @@ const SliderCard = ({
           <Card
             mixcloudLink={mixcloudLink}
             imageUrl={imageUrl}
+            objectPosition={objectPosition}
             title={title}
             link={link}
             cardWidth={cardWidth}

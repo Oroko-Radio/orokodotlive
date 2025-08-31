@@ -29,19 +29,23 @@ export default async function Artist({
 }) {
   const { slug: artistSlug } = await params;
   const { artist, relatedShows } = await getArtistsPageSingle(artistSlug);
-  const { name, slug, city, content } = artist;
+  const { name, slug, city, photo, content } = artist;
 
   return (
     <SinglePage
       coverImage={
-        typeof artist.photo === "object" &&
-        artist.photo?.sizes?.["large-full"]?.url
-          ? artist.photo.sizes["large-full"].url
-          : typeof artist.photo === "object" && artist.photo?.url
-            ? artist.photo.url
+        typeof photo === "object" && photo?.sizes?.["large-full"]?.url
+          ? photo.sizes["large-full"].url
+          : typeof photo === "object" && photo?.url
+            ? photo.url
             : undefined
       }
       coverImageAlt={name}
+      objectPosition={
+        typeof photo === "object"
+          ? `${photo?.focalX ?? 50}% ${photo?.focalY ?? 50}%`
+          : "center"
+      }
       withBackButton
       title={name}
     >

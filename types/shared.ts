@@ -192,6 +192,7 @@ export interface SinglePageData {
 
 export interface CardProps {
   imageUrl: string;
+  objectPosition?: string;
   title: string;
   link: string;
   idx?: number;

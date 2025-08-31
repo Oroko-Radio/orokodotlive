@@ -26,6 +26,11 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
             <SliderCard
               cardWidth="featured"
               imageUrl={coverImageUrl}
+              objectPosition={
+                typeof show.coverImage === "object"
+                  ? `${show.coverImage?.focalX ?? 50}% ${show.coverImage?.focalY ?? 50}%`
+                  : "center"
+              }
               title={show.title}
               link={`/radio/${show.slug}`}
               key={idx}
