@@ -63,6 +63,7 @@ export default async function ArtistsPage({ searchParams }: ArtistsPageProps) {
     depth: 1,
     limit: ARTISTS_PAGE_SIZE * currentPage,
     where: Object.keys(where).length > 0 ? where : undefined,
+    sort: "name",
   });
 
   // Get all artists for the current filter to build cities list
