@@ -44,7 +44,7 @@ export async function getArticleBySlug(slug: string) {
     },
     depth: 2,
     limit: 1,
-    draft: true,
+    // draft: true,
   });
 
   if (result.docs.length === 0) {
