@@ -41,6 +41,11 @@ const FeaturedArticles = ({
                     ? article.coverImage.url
                     : ""
               }
+              objectPosition={
+                typeof article.coverImage === "object"
+                  ? `${article.coverImage?.focalX ?? 50}% ${article.coverImage?.focalY ?? 50}%`
+                  : "center"
+              }
               title={article.title}
               link={`/news/${article.slug}`}
               key={idx}
