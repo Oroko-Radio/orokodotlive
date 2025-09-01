@@ -129,6 +129,10 @@
     @apply mb-0;
   }
 
+  .rich-text li {
+    @apply text-lg md:text-xl xl:text-2xl font-sans;
+  }
+
   .rich-text a {
     @apply text-orokoRed underline font-bold;
   }
