@@ -26,47 +26,48 @@ export async function getHomePage() {
   const today = new Date();
   const todayString = today.toISOString().split("T")[0];
 
-  const [featuredShows, allShows, upcomingShows, products, featuredArticles] = await Promise.all([
-    payload.find({
-      collection: "shows",
-      where: { isFeatured: { equals: true } },
-      depth: 2,
-      limit: 8,
-      sort: "-date",
-    }),
-    payload.find({
-      collection: "shows",
-      where: {
-        date: { less_than_equal: todayString },
-        mixcloudLink: { exists: true },
-      },
-      depth: 2,
-      limit: 16,
-      sort: "-date",
-    }),
-    payload.find({
-      collection: "shows",
-      where: {
-        date: { greater_than: todayString },
-      },
-      depth: 2,
-      limit: 30,
-      sort: "date",
-    }),
-    payload.find({
-      collection: "products",
-      depth: 3,
-      limit: 10,
-      sort: "title",
-    }),
-    payload.find({
-      collection: "articles",
-      where: { isFeatured: { equals: true } },
-      depth: 2,
-      limit: 8,
-      sort: "-date",
-    }),
-  ]);
+  const [featuredShows, allShows, upcomingShows, products, featuredArticles] =
+    await Promise.all([
+      payload.find({
+        collection: "shows",
+        where: { isFeatured: { equals: true } },
+        depth: 2,
+        limit: 8,
+        sort: "-date",
+      }),
+      payload.find({
+        collection: "shows",
+        where: {
+          date: { less_than_equal: todayString },
+          mixcloudLink: { exists: true },
+        },
+        depth: 2,
+        limit: 16,
+        sort: "-date",
+      }),
+      payload.find({
+        collection: "shows",
+        where: {
+          date: { greater_than: todayString },
+        },
+        depth: 2,
+        limit: 30,
+        sort: "date",
+      }),
+      payload.find({
+        collection: "products",
+        depth: 3,
+        limit: 10,
+        sort: "title",
+      }),
+      payload.find({
+        collection: "articles",
+        where: { isFeatured: { equals: true } },
+        depth: 2,
+        limit: 9,
+        sort: "-date",
+      }),
+    ]);
 
   const latestShows = allShows.docs
     .filter((show) => dayjs(show.date).isBefore(dayjs()))

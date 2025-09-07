@@ -12,7 +12,7 @@ export async function getFeaturedArticles() {
       },
     },
     depth: 2,
-    limit: 8,
+    limit: 9,
     sort: "-date",
   });
 
@@ -27,6 +27,7 @@ export async function getAllArticles() {
     depth: 2,
     limit: 50,
     sort: "-date",
+    pagination: false,
   });
 
   return result.docs;
@@ -62,6 +63,10 @@ export async function getAllArticleSlugs() {
     select: {
       slug: true,
     },
+    where: {
+      slug: { exists: true },
+    },
+    pagination: false,
     limit: 1000,
   });
 
