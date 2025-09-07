@@ -3,12 +3,12 @@ import config from "@payload-config";
 import exportData from "../contentful-data/export.json" with { type: "json" };
 import fs from "fs";
 
-const LIMIT = 1; // Start with 1 for testing
+const LIMIT = 5000; // Start with 1 for testing
 const PROGRESS_FILE = "./progress-fix-hyperlinks.json";
 
 // Get all show entries from Contentful data
 const showEntries = exportData.entries.filter(
-  (entry) => entry.sys?.contentType?.sys?.id === "show"
+  (entry) => entry.sys?.contentType?.sys?.id === "show",
 );
 
 console.log(`Found ${showEntries.length} show entries in Contentful data`);
@@ -21,7 +21,13 @@ function loadProgress() {
   } catch (error) {
     console.log("No progress file found, starting from beginning");
   }
-  return { processedCount: 0, successful: 0, failed: 0, skipped: 0, failedIds: [] };
+  return {
+    processedCount: 0,
+    successful: 0,
+    failed: 0,
+    skipped: 0,
+    failedIds: [],
+  };
 }
 
 function saveProgress(progress) {
@@ -36,7 +42,7 @@ function extractHyperlinksFromContentful(node, links = []) {
     const linkText = extractTextFromNode(node);
     links.push({
       text: linkText,
-      url: node.data.uri
+      url: node.data.uri,
     });
   }
 
@@ -54,11 +60,11 @@ function extractTextFromNode(node) {
   if (node.nodeType === "text") {
     return node.value || "";
   }
-  
+
   if (node.content && Array.isArray(node.content)) {
-    return node.content.map(child => extractTextFromNode(child)).join("");
+    return node.content.map((child) => extractTextFromNode(child)).join("");
   }
-  
+
   return "";
 }
 
@@ -76,9 +82,9 @@ function fixLinksInLexicalContent(lexicalContent, contentfulLinks) {
     if (node.type === "link" && node.fields?.url === "https") {
       // Extract the text from the link's children
       const linkText = extractLexicalNodeText(node);
-      
+
       // Find matching link in Contentful data
-      const matchingLink = contentfulLinks.find(link => {
+      const matchingLink = contentfulLinks.find((link) => {
         // Try exact match first
         if (link.text === linkText) return true;
         // Try trimmed match
@@ -118,15 +124,15 @@ function fixLinksInLexicalContent(lexicalContent, contentfulLinks) {
 // Extract text from Lexical node
 function extractLexicalNodeText(node) {
   if (!node) return "";
-  
+
   if (node.text) {
     return node.text;
   }
-  
+
   if (node.children && Array.isArray(node.children)) {
-    return node.children.map(child => extractLexicalNodeText(child)).join("");
+    return node.children.map((child) => extractLexicalNodeText(child)).join("");
   }
-  
+
   return "";
 }
 
@@ -135,31 +141,39 @@ async function fixShowHyperlinks() {
   const progress = loadProgress();
 
   console.log("Querying shows with contentfulId...");
-  
+
   // Query shows that have a contentfulId, sorted by ID ascending
   const shows = await payload.find({
     collection: "shows",
     where: {
       contentfulId: {
-        exists: true
-      }
+        exists: true,
+      },
     },
     limit: LIMIT,
     sort: "id",
-    depth: 0 // We don't need relationships
+    depth: 0, // We don't need relationships
   });
 
-  console.log(`Found ${shows.docs.length} shows to process (Total: ${shows.totalDocs})`);
+  console.log(
+    `Found ${shows.docs.length} shows to process (Total: ${shows.totalDocs})`,
+  );
 
   for (const show of shows.docs) {
-    console.log(`\nProcessing show: ${show.title} (ID: ${show.id}, Contentful: ${show.contentfulId})`);
-    
+    console.log(
+      `\nProcessing show: ${show.title} (ID: ${show.id}, Contentful: ${show.contentfulId})`,
+    );
+
     try {
       // Find the corresponding Contentful entry
-      const contentfulEntry = showEntries.find(entry => entry.sys.id === show.contentfulId);
-      
+      const contentfulEntry = showEntries.find(
+        (entry) => entry.sys.id === show.contentfulId,
+      );
+
       if (!contentfulEntry) {
-        console.log(`  ⚠ Contentful entry not found for ID: ${show.contentfulId}`);
+        console.log(
+          `  ⚠ Contentful entry not found for ID: ${show.contentfulId}`,
+        );
         progress.skipped++;
         continue;
       }
@@ -172,9 +186,10 @@ async function fixShowHyperlinks() {
         continue;
       }
 
-      const contentfulLinks = extractHyperlinksFromContentful(contentfulContent);
+      const contentfulLinks =
+        extractHyperlinksFromContentful(contentfulContent);
       console.log(`  Found ${contentfulLinks.length} links in Contentful data`);
-      
+
       if (contentfulLinks.length === 0) {
         console.log(`  ℹ No links to fix`);
         progress.skipped++;
@@ -182,7 +197,7 @@ async function fixShowHyperlinks() {
       }
 
       // Log the links we found for debugging
-      contentfulLinks.forEach(link => {
+      contentfulLinks.forEach((link) => {
         console.log(`    - "${link.text}" -> ${link.url}`);
       });
 
@@ -194,20 +209,22 @@ async function fixShowHyperlinks() {
       }
 
       // Fix the links in the Lexical content
-      const fixedContent = fixLinksInLexicalContent(show.content, contentfulLinks);
+      const fixedContent = fixLinksInLexicalContent(
+        show.content,
+        contentfulLinks,
+      );
 
       // Update the show with fixed content
       await payload.update({
         collection: "shows",
         id: show.id,
         data: {
-          content: fixedContent
-        }
+          content: fixedContent,
+        },
       });
 
       progress.successful++;
       console.log(`  ✅ Successfully updated show: ${show.title}`);
-
     } catch (error) {
       progress.failed++;
       progress.failedIds.push(show.contentfulId);
@@ -224,14 +241,18 @@ async function fixShowHyperlinks() {
   console.log(`Successful: ${progress.successful}`);
   console.log(`Failed: ${progress.failed}`);
   console.log(`Skipped: ${progress.skipped}`);
-  
+
   if (progress.failedIds.length > 0) {
     console.log(`Failed IDs: ${progress.failedIds.join(", ")}`);
   }
 
   if (LIMIT === 1) {
-    console.log("\n🔍 Test run complete! Check the first show to verify the fix worked.");
-    console.log("If successful, change LIMIT in the script to process all shows.");
+    console.log(
+      "\n🔍 Test run complete! Check the first show to verify the fix worked.",
+    );
+    console.log(
+      "If successful, change LIMIT in the script to process all shows.",
+    );
   }
 
   process.exit(0);
