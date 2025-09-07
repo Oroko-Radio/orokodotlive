@@ -3,7 +3,6 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { useEffect, useState } from "react";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -21,32 +20,14 @@ export default function DateTime({
   showTime = true,
   className,
 }: DateTimeProps) {
-  const [formattedDate, setFormattedDate] = useState<string>("");
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-
-    // Parse the date as UTC and convert to user's local timezone
-    const dateObj = dayjs.utc(date);
-
-    // Determine format based on props
-    let displayFormat = format;
-    if (!displayFormat) {
-      displayFormat = showTime ? "ddd DD MMMM YYYY, HH:mm" : "ddd DD MMMM YYYY";
-    }
-
-    // Convert to local timezone and format
-    const localDate = dateObj.local().format(displayFormat);
-    setFormattedDate(localDate);
-  }, [date, format, showTime]);
-
-  // Return a placeholder or the server-rendered date while client is loading
-  // This prevents hydration mismatches
-  if (!isClient) {
-    // Return empty span with same className to prevent layout shift
-    return <span className={className}></span>;
-  }
+  // Parse the date as UTC and convert to user's local timezone
+  const dateObj = dayjs.utc(date);
+  
+  // Determine format based on props
+  const displayFormat = format || (showTime ? "ddd DD MMMM YYYY, HH:mm" : "ddd DD MMMM YYYY");
+  
+  // Convert to local timezone and format
+  const formattedDate = dateObj.local().format(displayFormat);
 
   return <span className={className}>{formattedDate}</span>;
 }
