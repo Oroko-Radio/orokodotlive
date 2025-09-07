@@ -43,7 +43,7 @@ export default function Show({ show, cityColor }: ShowProps) {
   return (
     <div className="p-4 flex flex-col justify-between flex-1">
       <div>
-        <p className="font-sans text-sm md:text-base mb-2 font-semibold">
+        <p className="font-sans text-sm md:text-base mb-2 font-medium">
           <DateTime date={date} format="DD MMM YYYY HH:mm" />
           <span>H</span>
         </p>
