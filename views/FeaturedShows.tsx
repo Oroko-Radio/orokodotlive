@@ -1,7 +1,6 @@
 import Slider from "@/components/Slider";
 import { Show as ShowType } from "@/payload-types";
-import dayjs from "dayjs";
-import "@/util";
+import DateTime from "@/components/DateTime";
 import Tag from "@/components/Tag";
 import Link from "next/link";
 import { GenreTag } from "@/components/GenreTag";
@@ -18,10 +17,14 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
     <div className="overflow-hidden bg-orokoOrange border-b-2 border-black">
       <Slider slideByElementWidth fullSize>
         {shows.map((show, idx) => {
-          const coverImageUrl = typeof show.coverImage === 'object' && show.coverImage?.sizes?.["large-full"]?.url 
-            ? show.coverImage.sizes["large-full"].url 
-            : (typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg");
-            
+          const coverImageUrl =
+            typeof show.coverImage === "object" &&
+            show.coverImage?.sizes?.["large-full"]?.url
+              ? show.coverImage.sizes["large-full"].url
+              : typeof show.coverImage === "object" && show.coverImage?.url
+                ? show.coverImage.url
+                : "/default-cover.jpg";
+
           return (
             <SliderCard
               cardWidth="featured"
@@ -40,8 +43,9 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
               <div className="py-4 lg:p-4 flex flex-col justify-between flex-1">
                 <div>
                   <FeaturedTag />
-                  <p className="font-sans text-sm md:text-base pb-2 lg:pt-2 lg:pb-4 font-semibold">
-                    {dayjs(show.date).tz("Europe/Oslo").format("DD MMM YYYY HH:mm") + "H"}
+                  <p className="font-sans text-sm md:text-base pb-2 lg:pt-2 lg:pb-4 font-medium">
+                    <DateTime date={show.date} format="DD MMM YYYY HH:mm" />
+                    <span>H</span>
                   </p>
                   <Link href={"/radio/" + show.slug} passHref>
                     <div>
@@ -55,7 +59,11 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
                           Array.isArray(show.artists) &&
                           show.artists.map((artist: any, artistIdx: number) => (
                             <span key={artistIdx}>
-                              <span>{typeof artist === 'object' ? artist.name : artist}</span>
+                              <span>
+                                {typeof artist === "object"
+                                  ? artist.name
+                                  : artist}
+                              </span>
                               {artistIdx !== show.artists!.length - 1 && ", "}
                             </span>
                           ))}
@@ -64,23 +72,38 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
                   </Link>
                 </div>
                 <div className="flex flex-wrap gap-1 mb-4">
-                  {show.artists && Array.isArray(show.artists) && show.artists[0] && typeof show.artists[0] === 'object' && show.artists[0].city && (
-                    <Link
-                      href={"/artists?city=" + (typeof show.artists[0].city === 'object' ? show.artists[0].city.name : show.artists[0].city)}
-                      passHref
-                    >
-                      <Tag
-                        text={typeof show.artists[0].city === 'object' ? show.artists[0].city.name : String(show.artists[0].city)}
-                        color="orange"
-                      />
-                    </Link>
-                  )}
+                  {show.artists &&
+                    Array.isArray(show.artists) &&
+                    show.artists[0] &&
+                    typeof show.artists[0] === "object" &&
+                    show.artists[0].city && (
+                      <Link
+                        href={
+                          "/artists?city=" +
+                          (typeof show.artists[0].city === "object"
+                            ? show.artists[0].city.name
+                            : show.artists[0].city)
+                        }
+                        passHref
+                      >
+                        <Tag
+                          text={
+                            typeof show.artists[0].city === "object"
+                              ? show.artists[0].city.name
+                              : String(show.artists[0].city)
+                          }
+                          color="orange"
+                        />
+                      </Link>
+                    )}
                   {show.genres &&
                     Array.isArray(show.genres) &&
                     show.genres.map((genre: any, genreIdx: number) => (
-                      <GenreTag 
-                        genre={typeof genre === 'object' ? genre : { name: genre }} 
-                        key={genreIdx} 
+                      <GenreTag
+                        genre={
+                          typeof genre === "object" ? genre : { name: genre }
+                        }
+                        key={genreIdx}
                       />
                     ))}
                 </div>

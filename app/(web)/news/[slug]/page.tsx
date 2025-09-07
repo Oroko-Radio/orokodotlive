@@ -86,7 +86,7 @@ export default async function Article({
                 {dayjs
                   .utc(article.date)
                   .tz("Europe/Oslo")
-                  .format("ddd DD MMMM YYYY @ HH") + "H"}
+                  .format("ddd DD MMMM YYYY")}
               </p>
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl lg:pt-6 mb-4 font-heading md:mr-36 lg:mr-40">

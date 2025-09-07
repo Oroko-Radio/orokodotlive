@@ -364,7 +364,6 @@ export interface Article {
   slug: string;
   articleType: 'News' | 'Blog' | 'Event';
   date: string;
-  date_tz: SupportedTimezones;
   subtitle?: string | null;
   coverImage: number | Media;
   content?: {
@@ -684,7 +683,6 @@ export interface ArticlesSelect<T extends boolean = true> {
   slug?: T;
   articleType?: T;
   date?: T;
-  date_tz?: T;
   subtitle?: T;
   coverImage?: T;
   content?: T;

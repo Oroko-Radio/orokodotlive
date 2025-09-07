@@ -1,8 +1,7 @@
-import dayjs from "dayjs";
-import "@/util";
 import Tag from "./Tag";
 import { Show as ShowType } from "@/payload-types";
 import FeaturedTag from "./FeaturedTag";
+import DateTime from "./DateTime";
 
 interface ShowProps {
   show: ShowType;
@@ -44,8 +43,9 @@ export default function Show({ show, cityColor }: ShowProps) {
   return (
     <div className="p-4 flex flex-col justify-between flex-1">
       <div>
-        <p className="font-sans text-sm md:text-base mb-2 font-semibold">
-          {dayjs(date).tz("Europe/Oslo").format("DD MMM YYYY HH:mm") + "H"}
+        <p className="font-sans text-sm md:text-base mb-2 font-medium">
+          <DateTime date={date} format="DD MMM YYYY HH:mm" />
+          <span>H</span>
         </p>
         {isFeatured && <FeaturedTag />}
         <h1 className="font-heading card-leading text-4xl">{title}</h1>

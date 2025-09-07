@@ -38,46 +38,52 @@ const AllNews = ({
       </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6 p-4 md:p-8 pb-10 md:pb-12">
         {articles.map((article, idx) => (
-            <div key={idx}>
-              <div className="border-black border-2 bg-white">
-                <Card
-                  imageUrl={
-                    typeof article.coverImage === "object" && article.coverImage?.sizes?.["small-full"]?.url
-                      ? article.coverImage.sizes["small-full"].url
-                      : (typeof article.coverImage === "object" && article.coverImage?.url ? article.coverImage.url : "")
-                  }
-                  objectPosition={
-                    typeof article.coverImage === "object"
-                      ? `${article.coverImage?.focalX ?? 50}% ${article.coverImage?.focalY ?? 50}%`
-                      : "center"
-                  }
-                  title={article.title}
-                  link={`/news/${article.slug}`}
-                >
-                  <div className="p-4">
-                    <div className="flex flex-wrap gap-1 mb-6">
-                      {typeof article.city === "object" && article.city && (
-                        <Tag text={article.city.name} color="black" card />
-                      )}
-                      <Tag text={article.articleType} transparent card />
-                    </div>
-                    <p className="font-sans mb-2 font-medium">
-                      {dayjs.utc(article.date).tz("Europe/Oslo").format("DD MMMM YYYY")}
-                    </p>
-                    <h1 className="font-heading card-leading mb-2 text-4xl">
-                      {article.title}
-                    </h1>
-                    {article.subtitle && (
-                      <p className="font-serif mb-4 text-lg md:text-2xl">
-                        {article.subtitle}
-                      </p>
+          <div key={idx}>
+            <div className="border-black border-2 bg-white">
+              <Card
+                imageUrl={
+                  typeof article.coverImage === "object" &&
+                  article.coverImage?.sizes?.["small-full"]?.url
+                    ? article.coverImage.sizes["small-full"].url
+                    : typeof article.coverImage === "object" &&
+                        article.coverImage?.url
+                      ? article.coverImage.url
+                      : ""
+                }
+                objectPosition={
+                  typeof article.coverImage === "object"
+                    ? `${article.coverImage?.focalX ?? 50}% ${article.coverImage?.focalY ?? 50}%`
+                    : "center"
+                }
+                title={article.title}
+                link={`/news/${article.slug}`}
+              >
+                <div className="p-4">
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {typeof article.city === "object" && article.city && (
+                      <Tag text={article.city.name} color="black" card />
                     )}
+                    <Tag text={article.articleType} transparent card />
                   </div>
-                </Card>
-              </div>
+                  <p className="font-sans mb-2 font-medium">
+                    {dayjs
+                      .utc(article.date)
+                      .tz("Europe/Oslo")
+                      .format("DD MMMM YYYY")}
+                  </p>
+                  <h1 className="font-heading card-leading mb-2 text-4xl">
+                    {article.title}
+                  </h1>
+                  {article.subtitle && (
+                    <p className="font-serif mb-4 text-lg md:text-2xl">
+                      {article.subtitle}
+                    </p>
+                  )}
+                </div>
+              </Card>
             </div>
-          )
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );

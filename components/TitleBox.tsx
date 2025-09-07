@@ -14,7 +14,7 @@ export default function TitleBox({
   children: ReactNode;
   bgColor?: "green" | "red" | "orange" | "light-orange";
   mixcloudLink?: string;
-  boxText?: string;
+  boxText?: string | ReactNode;
   title: string;
   slug: string;
 }) {
@@ -40,9 +40,9 @@ export default function TitleBox({
             }
           )}
         >
-          <p className="mb-0 font-sans font-semibold tracking-wide text-base">
+          <div className="mb-0 font-sans font-semibold tracking-wide text-base">
             {boxText}
-          </p>
+          </div>
         </div>
 
         <div
