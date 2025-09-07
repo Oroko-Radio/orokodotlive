@@ -42,13 +42,13 @@ const Tag = ({
     >
       <p
         className={cn(
-          "font-sans inline-block font-semibold text-sm md:text-base mb-0 px-2 py-1",
+          "font-sans inline-block font-semibold text-sm md:text-base mb-0 px-2 py-1 uppercase",
           {
             "lg:text-lg": !card,
-          }
+          },
         )}
       >
-        {text.toUpperCase()}
+        {text}
       </p>
     </div>
   );

@@ -56,6 +56,12 @@ export const Articles: CollectionConfig = {
       label: "Date",
       type: "date",
       required: true,
+      admin: {
+        date: {
+          pickerAppearance: "dayAndTime",
+        },
+      },
+      timezone: true,
     },
     {
       name: "subtitle",
