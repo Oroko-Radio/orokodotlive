@@ -1,7 +1,6 @@
 import Slider from "@/components/Slider";
 import { Show as ShowType } from "@/payload-types";
-import dayjs from "dayjs";
-import "@/util";
+import DateTime from "@/components/DateTime";
 import Tag from "@/components/Tag";
 import Link from "next/link";
 import { GenreTag } from "@/components/GenreTag";
@@ -41,7 +40,8 @@ const FeaturedShows = ({ shows }: FeaturedShowsProps) => {
                 <div>
                   <FeaturedTag />
                   <p className="font-sans text-sm md:text-base pb-2 lg:pt-2 lg:pb-4 font-semibold">
-                    {dayjs(show.date).tz("Europe/Oslo").format("DD MMM YYYY HH:mm") + "H"}
+                    <DateTime date={show.date} format="DD MMM YYYY HH:mm" />
+                    <span>H</span>
                   </p>
                   <Link href={"/radio/" + show.slug} passHref>
                     <div>

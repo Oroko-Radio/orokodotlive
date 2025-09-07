@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getRadioPageSingle, getAllShowSlugs } from "@/lib/payload/pages/radio";
 import SinglePage from "@/views/SinglePage";
-import dayjs from "dayjs";
-import "@/util";
+import DateTime from "@/components/DateTime";
 import Tag from "@/components/Tag";
 import { renderPayloadRichText } from "@/lib/rich-text";
 import TitleBox from "@/components/TitleBox";
@@ -54,7 +53,10 @@ export default async function Show({
     >
       <TitleBox
         boxText={
-          dayjs(show.date).tz("Europe/Oslo").format("DD MMM YY HH:mm") + "H"
+          <>
+            <DateTime date={show.date} format="DD MMM YY HH:mm" />
+            <span>H</span>
+          </>
         }
         mixcloudLink={show.mixcloudLink || undefined}
         title={show.title}
@@ -63,7 +65,8 @@ export default async function Show({
         <div className="container max-w-5xl mx-auto">
           {show.date && (
             <p className="hidden md:block mb-4 font-sans font-semibold tracking-wide text-lg">
-              {dayjs(show.date).tz("Europe/Oslo").format("ddd DD MMMM YYYY @ HH:mm") + "H"}
+              <DateTime date={show.date} format="ddd DD MMMM YYYY @ HH:mm" />
+              <span>H</span>
             </p>
           )}
           {show.isFeatured && <FeaturedTag />}
