@@ -219,6 +219,7 @@ export interface Show {
   title: string;
   slug: string;
   date: string;
+  date_tz: SupportedTimezones;
   isFeatured?: boolean | null;
   lead?: string | null;
   mixcloudLink?: string | null;
@@ -587,6 +588,7 @@ export interface ShowsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   date?: T;
+  date_tz?: T;
   isFeatured?: T;
   lead?: T;
   mixcloudLink?: T;

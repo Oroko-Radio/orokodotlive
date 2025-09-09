@@ -40,6 +40,7 @@ export const Shows: CollectionConfig = {
           pickerAppearance: "dayAndTime",
         },
       },
+      timezone: true,
       required: true,
     },
     {
