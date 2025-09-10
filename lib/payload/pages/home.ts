@@ -1,6 +1,9 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 export async function getUpcomingShows() {
   const payload = await getPayload({ config });
@@ -17,7 +20,7 @@ export async function getUpcomingShows() {
   });
 
   return result.docs
-    .filter((show) => dayjs(show.date).isAfter(dayjs()))
+    .filter((show) => dayjs.utc(show.date).isAfter(dayjs.utc()))
     .slice(0, 16);
 }
 
@@ -70,11 +73,11 @@ export async function getHomePage() {
     ]);
 
   const latestShows = allShows.docs
-    .filter((show) => dayjs(show.date).isBefore(dayjs()))
+    .filter((show) => dayjs.utc(show.date).isBefore(dayjs.utc()))
     .slice(0, 8);
 
   const filteredUpcomingShows = upcomingShows.docs
-    .filter((show) => dayjs(show.date).isAfter(dayjs()))
+    .filter((show) => dayjs.utc(show.date).isAfter(dayjs.utc()))
     .slice(0, 16);
 
   return {

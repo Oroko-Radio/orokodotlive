@@ -5,7 +5,10 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import useSWR from "swr";
 import Card from "../components/Card";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import Tag from "../components/Tag";
+
+dayjs.extend(utc);
 import { ScaleLoader } from "react-spinners";
 import { Show, Article, ArtistProfile } from "@/payload-types";
 import { SEARCH_PAGE_SIZE } from "@/constants";

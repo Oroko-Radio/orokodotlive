@@ -1,10 +1,13 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 export async function getRadioPageSingle(slug: string) {
   const payload = await getPayload({ config });
-  const today = dayjs();
+  const today = dayjs.utc();
 
   const showResult = await payload.find({
     collection: "shows",
@@ -61,7 +64,7 @@ export async function getAllShowSlugs() {
     where: {
       or: [
         { isFeatured: { equals: true } },
-        { date: { greater_than: dayjs().subtract(30, "days") } },
+        { date: { greater_than: dayjs.utc().subtract(30, "days").toISOString() } },
       ],
     },
     limit: 100,

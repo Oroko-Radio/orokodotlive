@@ -1,6 +1,9 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 export async function getArtistsPage() {
   const payload = await getPayload({ config });
@@ -20,7 +23,7 @@ export async function getArtistsPage() {
 
 export async function getArtistsPageSingle(slug: string) {
   const payload = await getPayload({ config });
-  const today = dayjs();
+  const today = dayjs.utc();
 
   const artistResult = await payload.find({
     collection: "artist-profiles",

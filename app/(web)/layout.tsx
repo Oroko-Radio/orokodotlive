@@ -6,12 +6,6 @@ import { Analytics } from "@vercel/analytics/react";
 import SocialSection from "@/components/SocialSection";
 import { MixcloudPlayer } from "@/components/ClientComponents";
 import LivePlayerWithData from "@/components/LivePlayerWithData";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 export const metadata: Metadata = {
   title: {
