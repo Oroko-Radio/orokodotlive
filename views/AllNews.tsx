@@ -66,10 +66,7 @@ const AllNews = ({
                     <Tag text={article.articleType} transparent card />
                   </div>
                   <p className="font-sans mb-2 font-medium">
-                    {dayjs
-                      .utc(article.date)
-                      .tz("Europe/Oslo")
-                      .format("DD MMMM YYYY")}
+                    {dayjs().format("DD MMMM YYYY")}
                   </p>
                   <h1 className="font-heading card-leading mb-2 text-4xl">
                     {article.title}

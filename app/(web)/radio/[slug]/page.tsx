@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getRadioPageSingle, getAllShowSlugs } from "@/lib/payload/pages/radio";
 import SinglePage from "@/views/SinglePage";
-import DateTime from "@/components/DateTime";
+import DateTimeWrapper from "@/components/DateTimeWrapper";
 import Tag from "@/components/Tag";
 import { renderPayloadRichText } from "@/lib/rich-text";
 import TitleBox from "@/components/TitleBox";
@@ -58,7 +58,7 @@ export default async function Show({
       <TitleBox
         boxText={
           <>
-            <DateTime date={show.date} format="DD MMM YY HH:mm" />
+            <DateTimeWrapper date={show.date} format="DD MMM YY HH:mm" />
             <span>H</span>
           </>
         }
@@ -69,7 +69,7 @@ export default async function Show({
         <div className="container max-w-5xl mx-auto">
           {show.date && (
             <p className="hidden md:block mb-4 font-sans font-semibold tracking-wide text-lg">
-              <DateTime date={show.date} format="ddd DD MMMM YYYY @ HH:mm" />
+              <DateTimeWrapper date={show.date} format="ddd DD MMMM YYYY @ HH:mm" />
               <span>H</span>
             </p>
           )}

@@ -1,7 +1,7 @@
 import Tag from "./Tag";
 import { Show as ShowType } from "@/payload-types";
 import FeaturedTag from "./FeaturedTag";
-import DateTime from "./DateTime";
+import DateTimeWrapper from "./DateTimeWrapper";
 
 interface ShowProps {
   show: ShowType;
@@ -44,7 +44,7 @@ export default function Show({ show, cityColor }: ShowProps) {
     <div className="p-4 flex flex-col justify-between flex-1">
       <div>
         <p className="font-sans text-sm md:text-base mb-2 font-medium">
-          <DateTime date={date} format="DD MMM YYYY HH:mm" />
+          <DateTimeWrapper date={date} format="DD MMM YYYY HH:mm" />
           <span>H</span>
         </p>
         {isFeatured && <FeaturedTag />}
