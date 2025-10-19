@@ -39,6 +39,9 @@ export const Shows: CollectionConfig = {
         date: {
           pickerAppearance: "dayAndTime",
         },
+        components: {
+          Field: "/components/UTCDateTime",
+        },
       },
       timezone: true,
       required: true,
