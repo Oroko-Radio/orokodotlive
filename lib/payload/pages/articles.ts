@@ -45,7 +45,7 @@ export async function getArticleBySlug(slug: string) {
     },
     depth: 2,
     limit: 1,
-    // draft: true,
+    draft: process.env.VERCEL_ENV !== "production",
   });
 
   if (result.docs.length === 0) {

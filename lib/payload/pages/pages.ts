@@ -3,7 +3,7 @@ import config from "@payload-config";
 
 export async function getPageBySlug(slug: string) {
   const payload = await getPayload({ config });
-  
+
   const result = await payload.find({
     collection: "pages",
     where: {
@@ -13,6 +13,7 @@ export async function getPageBySlug(slug: string) {
     },
     depth: 2,
     limit: 1,
+    draft: process.env.VERCEL_ENV !== "production",
   });
 
   if (result.docs.length === 0) {

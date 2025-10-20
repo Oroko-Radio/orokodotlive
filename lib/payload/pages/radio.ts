@@ -11,7 +11,7 @@ export async function getRadioPageSingle(slug: string) {
     where: { slug: { equals: slug } },
     depth: 2,
     limit: 1,
-    // draft: true,
+    draft: process.env.VERCEL_ENV !== "production",
   });
 
   if (showResult.docs.length === 0) {
