@@ -27,7 +27,9 @@ export async function getArtistsPageSingle(slug: string) {
     where: { slug: { equals: slug } },
     depth: 2,
     limit: 1,
-    draft: process.env.VERCEL_ENV !== "production",
+    draft:
+      process.env.VERCEL_ENV !== "production" ||
+      process.env.NODE_ENV === "development",
   });
 
   if (artistResult.docs.length === 0) {
