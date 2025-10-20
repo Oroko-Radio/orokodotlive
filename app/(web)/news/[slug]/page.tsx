@@ -10,6 +10,7 @@ import {
   getAllArticleSlugs,
 } from "@/lib/payload/pages/articles";
 import { renderPayloadRichText } from "@/lib/rich-text";
+import { draftMode } from "next/headers";
 
 export const revalidate = 3600; // 1 hour
 
@@ -19,8 +20,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug: articleSlug } = await params;
+  const { isEnabled: isDraftMode } = await draftMode();
   try {
-    const article = await getArticleBySlug(articleSlug);
+    const article = await getArticleBySlug(articleSlug, isDraftMode);
     return {
       title: article.title,
     };
@@ -48,9 +50,10 @@ export default async function Article({
   params: Promise<{ slug: string }>;
 }) {
   const { slug: articleSlug } = await params;
+  const { isEnabled: isDraftMode } = await draftMode();
 
   try {
-    const article = await getArticleBySlug(articleSlug);
+    const article = await getArticleBySlug(articleSlug, isDraftMode);
 
     return (
       <SinglePage

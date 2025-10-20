@@ -1,11 +1,8 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { draftMode } from "next/headers";
 
-export async function getPageBySlug(slug: string) {
+export async function getPageBySlug(slug: string, isDraftMode: boolean) {
   const payload = await getPayload({ config });
-
-  const { isEnabled: isDraftMode } = await draftMode();
 
   const result = await payload.find({
     collection: "pages",
@@ -17,6 +14,7 @@ export async function getPageBySlug(slug: string) {
     depth: 2,
     limit: 1,
     draft: isDraftMode,
+    overrideAccess: isDraftMode,
   });
 
   if (result.docs.length === 0) {

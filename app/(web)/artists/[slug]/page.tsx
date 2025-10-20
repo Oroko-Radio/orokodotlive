@@ -7,6 +7,7 @@ import { renderPayloadRichText } from "@/lib/rich-text";
 import RelatedShows from "@/views/RelatedShows";
 import SinglePage from "@/views/SinglePage";
 import { RefreshRouteOnSave } from "@/components/RefreshRouteOnSave";
+import { draftMode } from "next/headers";
 
 export const revalidate = 3600; // 1 hour
 
@@ -16,7 +17,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug: artistSlug } = await params;
-  const { artist } = await getArtistsPageSingle(artistSlug);
+  const { isEnabled: isDraftMode } = await draftMode();
+  const { artist } = await getArtistsPageSingle(artistSlug, isDraftMode);
   return {
     title: artist.name,
   };
@@ -28,7 +30,8 @@ export default async function Artist({
   params: Promise<{ slug: string }>;
 }) {
   const { slug: artistSlug } = await params;
-  const { artist, relatedShows } = await getArtistsPageSingle(artistSlug);
+  const { isEnabled: isDraftMode } = await draftMode();
+  const { artist, relatedShows } = await getArtistsPageSingle(artistSlug, isDraftMode);
   const { name, slug, city, photo, content } = artist;
 
   return (

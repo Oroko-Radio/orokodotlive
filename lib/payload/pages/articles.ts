@@ -1,6 +1,5 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { draftMode } from "next/headers";
 
 export async function getFeaturedArticles() {
   const payload = await getPayload({ config });
@@ -34,10 +33,8 @@ export async function getAllArticles() {
   return result.docs;
 }
 
-export async function getArticleBySlug(slug: string) {
+export async function getArticleBySlug(slug: string, isDraftMode: boolean) {
   const payload = await getPayload({ config });
-
-  const { isEnabled: isDraftMode } = await draftMode();
 
   const result = await payload.find({
     collection: "articles",
@@ -49,6 +46,7 @@ export async function getArticleBySlug(slug: string) {
     depth: 2,
     limit: 1,
     draft: isDraftMode,
+    overrideAccess: isDraftMode,
   });
 
   if (result.docs.length === 0) {

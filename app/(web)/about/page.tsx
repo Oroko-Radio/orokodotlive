@@ -4,12 +4,14 @@ import SinglePage from "@/views/SinglePage";
 import TitleBox from "@/components/TitleBox";
 import { getPageBySlug } from "@/lib/payload/pages/pages";
 import { renderPayloadRichText } from "@/lib/rich-text";
+import { draftMode } from "next/headers";
 
 export const revalidate = 3600; // 1 hour
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { isEnabled: isDraftMode } = await draftMode();
   try {
-    const page = await getPageBySlug("about-oroko-radio");
+    const page = await getPageBySlug("about-oroko-radio", isDraftMode);
     return {
       title: page.title,
     };
@@ -21,8 +23,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function About() {
+  const { isEnabled: isDraftMode } = await draftMode();
   try {
-    const page = await getPageBySlug("about-oroko-radio");
+    const page = await getPageBySlug("about-oroko-radio", isDraftMode);
     
     return (
       <SinglePage

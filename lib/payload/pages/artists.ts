@@ -1,7 +1,6 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
 import dayjs from "dayjs";
-import { draftMode } from "next/headers";
 
 export async function getArtistsPage() {
   const payload = await getPayload({ config });
@@ -19,11 +18,9 @@ export async function getArtistsPage() {
   };
 }
 
-export async function getArtistsPageSingle(slug: string) {
+export async function getArtistsPageSingle(slug: string, isDraftMode: boolean) {
   const payload = await getPayload({ config });
   const today = dayjs();
-
-  const { isEnabled: isDraftMode } = await draftMode();
 
   const artistResult = await payload.find({
     collection: "artist-profiles",
@@ -31,6 +28,7 @@ export async function getArtistsPageSingle(slug: string) {
     depth: 2,
     limit: 1,
     draft: isDraftMode,
+    overrideAccess: isDraftMode,
   });
 
   if (artistResult.docs.length === 0) {

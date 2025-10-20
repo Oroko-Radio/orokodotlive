@@ -3,6 +3,16 @@ import { CollectionConfig } from "payload";
 export const Articles: CollectionConfig = {
   slug: "articles",
   admin: {
+    preview: ({ slug }) => {
+      const encodedParams = new URLSearchParams({
+        slug: String(slug),
+        collection: "articles",
+        path: `/news/${slug}`,
+        previewSecret: process.env.PREVIEW_SECRET || "",
+      });
+
+      return `/api/preview?${encodedParams.toString()}`;
+    },
     useAsTitle: "title",
     defaultColumns: ["title", "coverImage", "slug", "articleType", "date"],
     livePreview: {

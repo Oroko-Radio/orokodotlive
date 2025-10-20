@@ -3,6 +3,16 @@ import { CollectionConfig } from "payload";
 export const Artists: CollectionConfig = {
   slug: "artist-profiles",
   admin: {
+    preview: ({ slug }) => {
+      const encodedParams = new URLSearchParams({
+        slug: String(slug),
+        collection: "artist-profiles",
+        path: `/artists/${slug}`,
+        previewSecret: process.env.PREVIEW_SECRET || "",
+      });
+
+      return `/api/preview?${encodedParams.toString()}`;
+    },
     useAsTitle: "name",
     defaultColumns: ["name", "photo", "slug", "city"],
     livePreview: {

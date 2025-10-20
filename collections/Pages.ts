@@ -3,7 +3,24 @@ import { CollectionConfig } from "payload";
 export const Pages: CollectionConfig = {
   slug: "pages",
   admin: {
+    preview: ({ slug }) => {
+      const encodedParams = new URLSearchParams({
+        slug: String(slug),
+        collection: "pages",
+        path: `/${slug}`,
+        previewSecret: process.env.PREVIEW_SECRET || "",
+      });
+
+      return `/api/preview?${encodedParams.toString()}`;
+    },
     useAsTitle: "title",
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 375,
+      },
+    },
   },
   fields: [
     {
