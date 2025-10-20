@@ -2,7 +2,7 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import dayjs from "dayjs";
 
-export async function getRadioPageSingle(slug: string) {
+export async function getRadioPageSingle(slug: string, isDraftMode: boolean) {
   const payload = await getPayload({ config });
   const today = dayjs();
 
@@ -11,9 +11,8 @@ export async function getRadioPageSingle(slug: string) {
     where: { slug: { equals: slug } },
     depth: 2,
     limit: 1,
-    draft:
-      process.env.VERCEL_ENV !== "production" ||
-      process.env.NODE_ENV === "development",
+    draft: isDraftMode,
+    overrideAccess: isDraftMode,
   });
 
   if (showResult.docs.length === 0) {

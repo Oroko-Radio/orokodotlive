@@ -9,7 +9,8 @@ import TitleBox from "@/components/TitleBox";
 import { GenreTag } from "@/components/GenreTag";
 import FeaturedTag from "@/components/FeaturedTag";
 import RelatedShows from "@/views/RelatedShows";
-import type { Show, Genre, ArtistProfile } from "@/payload-types";
+import type { Show, Genre } from "@/payload-types";
+import { draftMode } from "next/headers";
 
 export const revalidate = 3600; // 1 hour
 
@@ -19,7 +20,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug: showSlug } = await params;
-  const { show } = await getRadioPageSingle(showSlug);
+  const { isEnabled: isDraftMode } = await draftMode();
+  const { show } = await getRadioPageSingle(showSlug, isDraftMode);
   return {
     title: show.title,
   };
@@ -38,11 +40,19 @@ export default async function Show({
   params: Promise<{ slug: string }>;
 }) {
   const { slug: showSlug } = await params;
-  const { show, relatedShows } = await getRadioPageSingle(showSlug);
-  
-  const coverImageUrl = typeof show.coverImage === 'object' && show.coverImage?.sizes?.["large-full"]?.url 
-    ? show.coverImage.sizes["large-full"].url 
-    : (typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg");
+  const { isEnabled: isDraftMode } = await draftMode();
+  const { show, relatedShows } = await getRadioPageSingle(
+    showSlug,
+    isDraftMode,
+  );
+
+  const coverImageUrl =
+    typeof show.coverImage === "object" &&
+    show.coverImage?.sizes?.["large-full"]?.url
+      ? show.coverImage.sizes["large-full"].url
+      : typeof show.coverImage === "object" && show.coverImage?.url
+        ? show.coverImage.url
+        : "/default-cover.jpg";
 
   return (
     <SinglePage
@@ -80,9 +90,12 @@ export default async function Show({
               Array.isArray(show.artists) &&
               show.artists.map((artist: any, idx: number) => (
                 <span key={idx}>
-                  <Link href={`/artists/${typeof artist === 'object' ? artist.slug : artist}`} passHref>
+                  <Link
+                    href={`/artists/${typeof artist === "object" ? artist.slug : artist}`}
+                    passHref
+                  >
                     <span className="border-b-2 border-black cursor-pointer">
-                      {typeof artist === 'object' ? artist.name : artist}
+                      {typeof artist === "object" ? artist.name : artist}
                     </span>
                   </Link>
                   {idx !== show.artists!.length - 1 && ", "}
@@ -90,24 +103,35 @@ export default async function Show({
               ))}
           </h2>
           <div className="flex gap-1 flex-wrap">
-            {show.artists && Array.isArray(show.artists) && show.artists[0] && typeof show.artists[0] === 'object' && show.artists[0].city && (
-              <Link
-                href={"/artists?city=" + (typeof show.artists[0].city === 'object' ? show.artists[0].city.name : show.artists[0].city)}
-                passHref
-              >
-                <Tag text={typeof show.artists[0].city === 'object' ? show.artists[0].city.name : String(show.artists[0].city)} color="black" />
-              </Link>
-            )}
+            {show.artists &&
+              Array.isArray(show.artists) &&
+              show.artists[0] &&
+              typeof show.artists[0] === "object" &&
+              show.artists[0].city && (
+                <Link
+                  href={
+                    "/artists?city=" +
+                    (typeof show.artists[0].city === "object"
+                      ? show.artists[0].city.name
+                      : show.artists[0].city)
+                  }
+                  passHref
+                >
+                  <Tag
+                    text={
+                      typeof show.artists[0].city === "object"
+                        ? show.artists[0].city.name
+                        : String(show.artists[0].city)
+                    }
+                    color="black"
+                  />
+                </Link>
+              )}
             {show.genres &&
               Array.isArray(show.genres) &&
               show.genres
-                .filter((genre): genre is Genre => typeof genre === 'object')
-                .map((genre, idx) => (
-                  <GenreTag 
-                    genre={genre} 
-                    key={idx} 
-                  />
-                ))}
+                .filter((genre): genre is Genre => typeof genre === "object")
+                .map((genre, idx) => <GenreTag genre={genre} key={idx} />)}
           </div>
         </div>
       </TitleBox>

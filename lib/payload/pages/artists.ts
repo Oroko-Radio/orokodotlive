@@ -1,6 +1,7 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
 import dayjs from "dayjs";
+import { draftMode } from "next/headers";
 
 export async function getArtistsPage() {
   const payload = await getPayload({ config });
@@ -22,14 +23,14 @@ export async function getArtistsPageSingle(slug: string) {
   const payload = await getPayload({ config });
   const today = dayjs();
 
+  const { isEnabled: isDraftMode } = await draftMode();
+
   const artistResult = await payload.find({
     collection: "artist-profiles",
     where: { slug: { equals: slug } },
     depth: 2,
     limit: 1,
-    draft:
-      process.env.VERCEL_ENV !== "production" ||
-      process.env.NODE_ENV === "development",
+    draft: isDraftMode,
   });
 
   if (artistResult.docs.length === 0) {
