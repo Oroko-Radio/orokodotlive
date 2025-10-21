@@ -33,7 +33,7 @@ export async function getAllArticles() {
   return result.docs;
 }
 
-export async function getArticleBySlug(slug: string) {
+export async function getArticleBySlug(slug: string, isDraftMode: boolean) {
   const payload = await getPayload({ config });
 
   const result = await payload.find({
@@ -45,9 +45,8 @@ export async function getArticleBySlug(slug: string) {
     },
     depth: 2,
     limit: 1,
-    draft:
-      process.env.VERCEL_ENV !== "production" ||
-      process.env.NODE_ENV === "development",
+    draft: isDraftMode,
+    overrideAccess: isDraftMode,
   });
 
   if (result.docs.length === 0) {

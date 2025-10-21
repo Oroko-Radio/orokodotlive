@@ -2,7 +2,23 @@ import { CollectionConfig } from "payload";
 
 export const Shows: CollectionConfig = {
   slug: "shows",
+  access: {
+    read: () => true,
+    create: ({ req: { user } }) => Boolean(user),
+    update: ({ req: { user } }) => Boolean(user),
+    delete: ({ req: { user } }) => Boolean(user),
+  },
   admin: {
+    preview: ({ slug }) => {
+      const encodedParams = new URLSearchParams({
+        slug: String(slug),
+        collection: "shows",
+        path: `/radio/${slug}`,
+        previewSecret: process.env.PREVIEW_SECRET || "",
+      });
+
+      return `/api/preview?${encodedParams.toString()}`;
+    },
     useAsTitle: "title",
     defaultColumns: ["title", "artists", "coverImage", "slug", "date"],
     livePreview: {

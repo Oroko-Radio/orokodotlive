@@ -18,7 +18,7 @@ export async function getArtistsPage() {
   };
 }
 
-export async function getArtistsPageSingle(slug: string) {
+export async function getArtistsPageSingle(slug: string, isDraftMode: boolean) {
   const payload = await getPayload({ config });
   const today = dayjs();
 
@@ -27,9 +27,8 @@ export async function getArtistsPageSingle(slug: string) {
     where: { slug: { equals: slug } },
     depth: 2,
     limit: 1,
-    draft:
-      process.env.VERCEL_ENV !== "production" ||
-      process.env.NODE_ENV === "development",
+    draft: isDraftMode,
+    overrideAccess: isDraftMode,
   });
 
   if (artistResult.docs.length === 0) {
