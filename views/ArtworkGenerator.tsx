@@ -17,7 +17,7 @@ export default function ArtworkGenerator() {
   const [dateTime, setDateTime] = useState<Date | null>(null);
   const [durationHr, setDurationHr] = useState<number>(1);
   const [durationMin, setDurationMin] = useState<number>(0);
-  const [aspectRatio, setAspectRatio] = useState<"square" | "portrait">(
+  const [aspectRatio, setAspectRatio] = useState<"square" | "portrait" | "instagram">(
     "square",
   );
   const [bgFile, setBgFile] = useState<File | null>(null);
@@ -216,31 +216,46 @@ export default function ArtworkGenerator() {
 
           <fieldset className="pb-4">
             <legend>Aspect ratio</legend>
-            <div className="flex items-center">
-              <input
-                type="radio"
-                id="square"
-                onChange={(e) => {
-                  if (e.target.value === "on") {
-                    setAspectRatio("square");
-                  }
-                }}
-                checked={aspectRatio === "square"}
-              />
-              <label htmlFor="square">Square</label>
-            </div>
-            <div className="flex items-center">
-              <input
-                type="radio"
-                id="portrait"
-                onChange={(e) => {
-                  if (e.target.value === "on") {
-                    setAspectRatio("portrait");
-                  }
-                }}
-                checked={aspectRatio === "portrait"}
-              />
-              <label htmlFor="portrait">Portrait</label>
+            <div className="flex gap-8">
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="square"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setAspectRatio("square");
+                    }
+                  }}
+                  checked={aspectRatio === "square"}
+                />
+                <label htmlFor="square">Square</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="portrait"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setAspectRatio("portrait");
+                    }
+                  }}
+                  checked={aspectRatio === "portrait"}
+                />
+                <label htmlFor="portrait">Portrait</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="instagram"
+                  onChange={(e) => {
+                    if (e.target.value === "on") {
+                      setAspectRatio("instagram");
+                    }
+                  }}
+                  checked={aspectRatio === "instagram"}
+                />
+                <label htmlFor="instagram">Instagram Post</label>
+              </div>
             </div>
           </fieldset>
 
@@ -354,6 +369,7 @@ export default function ArtworkGenerator() {
             {
               "h-[1080px] w-[1080px]": aspectRatio === "square",
               "h-[1920px] w-[1080px]": aspectRatio === "portrait",
+              "h-[1440px] w-[1080px]": aspectRatio === "instagram",
             },
           )}
         >
