@@ -254,7 +254,7 @@ export default function ArtworkGenerator() {
                   }}
                   checked={aspectRatio === "instagram"}
                 />
-                <label htmlFor="instagram">Instagram Post</label>
+                <label htmlFor="instagram">Instagram</label>
               </div>
             </div>
           </fieldset>
