@@ -13,8 +13,6 @@ export async function getPageBySlug(slug: string, isDraftMode: boolean) {
     },
     depth: 2,
     limit: 1,
-    // draft: isDraftMode,
-    // overrideAccess: isDraftMode,
   });
 
   if (result.docs.length === 0) {
