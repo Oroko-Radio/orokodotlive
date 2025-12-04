@@ -2,32 +2,32 @@ import { CollectionConfig } from "payload";
 
 export const Pages: CollectionConfig = {
   slug: "pages",
-  access: {
-    read: () => true,
-    create: ({ req: { user } }) => Boolean(user),
-    update: ({ req: { user } }) => Boolean(user),
-    delete: ({ req: { user } }) => Boolean(user),
-  },
+  // access: {
+  //   read: () => true,
+  //   create: ({ req: { user } }) => Boolean(user),
+  //   update: ({ req: { user } }) => Boolean(user),
+  //   delete: ({ req: { user } }) => Boolean(user),
+  // },
   admin: {
-    preview: ({ slug }) => {
-      const encodedParams = new URLSearchParams({
-        slug: String(slug),
-        collection: "pages",
-        path: `/${slug}`,
-        previewSecret: process.env.PREVIEW_SECRET || "",
-      });
+    // preview: ({ slug }) => {
+    //   const encodedParams = new URLSearchParams({
+    //     slug: String(slug),
+    //     collection: "pages",
+    //     path: `/${slug}`,
+    //     previewSecret: process.env.PREVIEW_SECRET || "",
+    //   });
 
-      return `/api/preview?${encodedParams.toString()}`;
-    },
+    //   return `/api/preview?${encodedParams.toString()}`;
+    // },
     useAsTitle: "title",
   },
-  versions: {
-    drafts: {
-      autosave: {
-        interval: 375,
-      },
-    },
-  },
+  // versions: {
+  //   drafts: {
+  //     autosave: {
+  //       interval: 375,
+  //     },
+  //   },
+  // },
   fields: [
     {
       name: "title",
