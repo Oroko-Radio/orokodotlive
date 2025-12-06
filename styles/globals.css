@@ -147,11 +147,11 @@
 
   /* Special styling for activations content */
 
-  .activation-content :not(.image-block):not(.image-block *) {
+  .rich-text .payload-richtext :not(.image-block):not(.image-block *) {
     @apply max-w-5xl mx-auto;
   }
 
-  .activation-content > :not(.image-block):not(.image-block *) {
+  .rich-text .payload-richtext > :not(.image-block):not(.image-block *) {
     @apply px-3 md:px-4;
   }
 

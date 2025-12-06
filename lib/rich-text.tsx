@@ -110,13 +110,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({
 });
 
 export function renderPayloadRichText(data: SerializedEditorState) {
-  return (
-    <RichText
-      className="activation-content"
-      data={data}
-      converters={jsxConverters}
-    />
-  );
+  return <RichText data={data} converters={jsxConverters} />;
 }
 
 export function renderRichTextWithImages(content: Content) {
