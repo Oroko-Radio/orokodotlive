@@ -1,18 +1,20 @@
+"use client";
+
 import React, { useState } from "react";
 import cx from "classnames";
 import Link from "next/link";
 import Menu from "./Menu";
-import MenuIcon from "../icons/MenuIcon";
-import CloseIcon from "../icons/CloseIcon";
-import SearchIcon from "../icons/SearchIcon";
+import MenuIcon from "@/icons/MenuIcon";
+import CloseIcon from "@/icons/CloseIcon";
+import SearchIcon from "@/icons/SearchIcon";
 import MenuButton from "./ui/MenuButton";
-import { useRouter } from "next/router";
-import ColorLogo from "../icons/ColorLogo";
+import { usePathname } from "next/navigation";
+import ColorLogo from "@/icons/ColorLogo";
 import Button from "./ui/Button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <div className="relative flex items-center justify-between py-2 xl:py-1 z-50 bg-black">
@@ -25,7 +27,7 @@ const Header = () => {
             <ColorLogo className="text-black stroke-current stroke-1 mt-1 md:mt-0 w-8 h-8 md:w-10 md:h-10" />
           </div>
         </Link>
-        <div className="absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:-translate-x-0">
+        <div className="absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:-translate-x-0 z-50">
           <Link href="/" passHref className="z-50">
             <h1
               onClick={() => isMenuOpen && setIsMenuOpen(false)}
@@ -34,7 +36,7 @@ const Header = () => {
                 {
                   "text-black": isMenuOpen,
                   "text-white": !isMenuOpen,
-                }
+                },
               )}
             >
               Oroko Radio
@@ -47,7 +49,7 @@ const Header = () => {
         onClick={() => isMenuOpen && setIsMenuOpen(false)}
       >
         <div className="lg:mr-2">
-          {router.pathname !== "/search" && (
+          {pathname !== "/search" && (
             <Link href="/search" passHref>
               <div
                 className={cx("cursor-pointer fill-current", {
@@ -95,7 +97,7 @@ const Header = () => {
             {
               "text-white": !isMenuOpen,
               "text-black": isMenuOpen,
-            }
+            },
           )}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >

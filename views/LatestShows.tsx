@@ -1,14 +1,15 @@
 import Link from "next/link";
-import Slider from "../components/Slider";
-import DotButton from "../components/ui/DotButton";
-import Show from "../components/Show";
-import { ShowInterface } from "../types/shared";
+import Slider from "@/components/Slider";
+import DotButton from "@/components/ui/DotButton";
+import Show from "@/components/Show";
+import { Show as ShowType } from "@/payload-types";
+import SliderCard from "@/components/SliderCard";
 
 const LatestShows = ({
   shows,
   heading = "Latest Shows",
 }: {
-  shows: ShowInterface[];
+  shows: ShowType[];
   heading?: string;
 }) => {
   return (
@@ -26,17 +27,22 @@ const LatestShows = ({
 
       <Slider>
         {shows.map((show, idx) => (
-          <Slider.Card
-            imageUrl={show.coverImage.url}
+          <SliderCard
+            imageUrl={typeof show.coverImage === 'object' && show.coverImage?.sizes?.["small-full"]?.url ? show.coverImage.sizes["small-full"].url : (typeof show.coverImage === 'object' && show.coverImage?.url ? show.coverImage.url : "/default-cover.jpg")}
+            objectPosition={
+              typeof show.coverImage === "object"
+                ? `${show.coverImage?.focalX ?? 50}% ${show.coverImage?.focalY ?? 50}%`
+                : "center"
+            }
             title={show.title}
             link={`/radio/${show.slug}`}
             cardWidth="quarter"
             key={idx}
             idx={idx}
-            mixcloudLink={show.mixcloudLink}
+            mixcloudLink={show.mixcloudLink || undefined}
           >
             <Show show={show} cityColor="green" />
-          </Slider.Card>
+          </SliderCard>
         ))}
       </Slider>
     </div>

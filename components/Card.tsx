@@ -1,11 +1,12 @@
 import cn from "classnames";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import PlayButton from "./ui/PlayButton";
-import { CardProps } from "../types/shared";
+import { CardProps } from "@/types/shared";
 
 const Card = ({
   imageUrl,
+  objectPosition,
   link,
   title,
   mixcloudLink,
@@ -20,10 +21,13 @@ const Card = ({
             {imageUrl && (
               <Image
                 quality={50}
-                src={imageUrl}
                 alt={title}
-                layout="fill"
-                objectFit="cover"
+                src={imageUrl}
+                fill
+                className="object-cover"
+                style={{
+                  objectPosition: objectPosition || "center",
+                }}
               />
             )}
             {mixcloudLink && (
@@ -50,16 +54,20 @@ const Card = ({
             {
               "xl:h-80": cardWidth === "quarter",
               "lg:h-96 xl:h-[32rem]": cardWidth === "half",
-            }
+              "lg:h-96 xl:h-[28rem]": cardWidth === "third",
+            },
           )}
         >
           {imageUrl && (
             <Image
               quality={50}
-              src={imageUrl}
               alt={title}
-              layout="fill"
-              objectFit="cover"
+              src={imageUrl}
+              fill
+              className="object-cover"
+              style={{
+                objectPosition: objectPosition || "center",
+              }}
             />
           )}
           {mixcloudLink && (

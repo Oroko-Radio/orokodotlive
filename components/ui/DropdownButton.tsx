@@ -1,8 +1,10 @@
+'use client';
+
 import React from "react";
 import cn from "classnames";
 import Image from "next/legacy/image";
-import chevronUp from "../../images/ui/chevron-up.svg";
-import chevronDown from "../../images/ui/chevron-down.svg";
+import chevronUp from "@/images/ui/chevron-up.svg";
+import chevronDown from "@/images/ui/chevron-down.svg";
 
 const DropdownButton = ({
   onClick,

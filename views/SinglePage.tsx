@@ -1,12 +1,12 @@
 import React, { ReactNode } from "react";
-import Image from "next/legacy/image";
-import BackButton from "../components/ui/BackButton";
-import Meta from "../components/Meta";
+import Image from "next/image";
+import BackButton from "@/components/ui/BackButton";
 
 interface SinglePageProps {
   title: string;
-  coverImage: string;
+  coverImage: string | undefined;
   coverImageAlt: string;
+  objectPosition?: string;
   withBackButton?: boolean;
   repeatCover?: boolean;
   children: ReactNode;
@@ -16,13 +16,13 @@ const SinglePage = ({
   title,
   coverImage,
   coverImageAlt,
+  objectPosition,
   withBackButton = false,
   repeatCover = true,
   children,
 }: SinglePageProps) => {
   return (
     <>
-      <Meta title={title} />
       <article>
         <div className="relative h-forty md:h-half border-black border-b-2">
           {coverImage && repeatCover ? (
@@ -37,8 +37,12 @@ const SinglePage = ({
                     key={idx}
                     alt={coverImageAlt}
                     src={coverImage}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    className="object-cover"
+                    style={{
+                      objectPosition: objectPosition || "center",
+                    }}
+                    priority
                   />
                 </div>
               ))}

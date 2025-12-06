@@ -1,4 +1,4 @@
-import { extractCollection } from "../../util";
+import { extractCollection } from "@/util";
 import { graphql } from ".";
 import dayjs from "dayjs";
 
@@ -19,7 +19,7 @@ export async function getArticlePathsToPreRender() {
 
   const collection = extractCollection<{ slug: string }>(
     data,
-    "articleCollection"
+    "articleCollection",
   );
 
   const paths = collection.map((el) => ({
@@ -52,7 +52,7 @@ export async function getShowPathsToPreRender() {
 
   const collection = extractCollection<{ slug: string }>(
     data,
-    "showCollection"
+    "showCollection",
   );
 
   const paths = collection.map((el) => ({
@@ -79,7 +79,7 @@ export async function getArtistPathsToPreRender() {
 
   const collection = extractCollection<{ slug: string }>(
     data,
-    "artistCollection"
+    "artistCollection",
   );
 
   const paths = collection.map((el) => ({

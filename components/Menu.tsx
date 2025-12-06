@@ -1,6 +1,8 @@
+'use client';
+
 import cn from "classnames";
 import Link from "next/link";
-import { links } from "../menuPaths";
+import { links } from "@/menuPaths";
 import DotButton from "./ui/DotButton";
 
 interface MenuProps {

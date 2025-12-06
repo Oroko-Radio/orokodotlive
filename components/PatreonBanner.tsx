@@ -1,6 +1,8 @@
+'use client';
+
 import cx from "classnames";
 import Link from "next/link";
-import useHover from "../hooks/useHover";
+import useHover from "@/hooks/useHover";
 import Button from "./ui/Button";
 
 export default function PatreonBanner() {

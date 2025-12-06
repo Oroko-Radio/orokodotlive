@@ -1,5 +1,17 @@
+"use client";
+
 import { Menu } from "@headlessui/react";
 import classNames from "classnames";
+
+interface BaseShareItemProps {
+  link: string;
+  active?: boolean;
+}
+interface ShareItemProps extends BaseShareItemProps {
+  link: string;
+  text: string;
+  active?: boolean;
+}
 
 export default function ShareMenu({ url }: { url: string }) {
   const TEXT =
@@ -41,12 +53,12 @@ export default function ShareMenu({ url }: { url: string }) {
 
 const menuItemClasses = "block text-small font-medium py-2 px-6";
 
-const WhatsApp = ({ link, text, active = false }) => (
+const WhatsApp = ({ link, text, active = false }: ShareItemProps) => (
   <a
     className={classNames(
       menuItemClasses,
       "hover:text-social-whatsapp",
-      active ? "text-social-whatsapp" : ""
+      active ? "text-social-whatsapp" : "",
     )}
     target="_blank"
     rel="noopener nofollow noreferrer"
@@ -56,12 +68,12 @@ const WhatsApp = ({ link, text, active = false }) => (
   </a>
 );
 
-const Facebook = ({ link, active = false }) => (
+const Facebook = ({ link, active = false }: BaseShareItemProps) => (
   <a
     className={classNames(
       menuItemClasses,
       "hover:text-social-facebook",
-      active ? "text-social-facebook" : ""
+      active ? "text-social-facebook" : "",
     )}
     target="_blank"
     rel="noopener nofollow noreferrer"
@@ -71,34 +83,34 @@ const Facebook = ({ link, active = false }) => (
   </a>
 );
 
-const Twitter = ({ link, text, active = false }) => (
+const Twitter = ({ link, text, active = false }: ShareItemProps) => (
   <a
     className={classNames(
       menuItemClasses,
       "hover:text-social-twitter",
-      active ? "text-social-twitter" : ""
+      active ? "text-social-twitter" : "",
     )}
     target="_blank"
     rel="noopener nofollow noreferrer"
     href={`https://twitter.com/intent/tweet?text=${encodeURI(
-      text
+      text,
     )}&url=${encodeURI(link)}&via=orokoradio`}
   >
     Twitter
   </a>
 );
 
-const Telegram = ({ link, text, active = false }) => (
+const Telegram = ({ link, text, active = false }: ShareItemProps) => (
   <a
     className={classNames(
       menuItemClasses,
       "hover:text-social-telegram",
-      active ? "text-social-telegram" : ""
+      active ? "text-social-telegram" : "",
     )}
     target="_blank"
     rel="noopener nofollow noreferrer"
     href={`https://telegram.me/share/url?url=${encodeURI(
-      link
+      link,
     )}&text=${encodeURI(text)}`}
   >
     Telegram

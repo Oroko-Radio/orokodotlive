@@ -1,6 +1,6 @@
-import { graphql } from "..";
-import { SettingsInterface } from "../../../types/shared";
-import { extractPage } from "../../../util";
+import { graphql } from "@/lib/contentful";
+import { SettingsInterface } from "@/types/shared";
+import { extractPage } from "@/util";
 
 export async function getApplyPage() {
   const SettingsQuery = /* GraphQL */ `

@@ -1,8 +1,10 @@
+'use client';
+
 import { SyntheticEvent } from "react";
-import { shouldUnloadLivePlayerState } from "../hooks/usePlayerState";
-import useScript from "../hooks/useScript";
-import { playerWidget, showKey } from "../lib/mixcloud";
-import { MixcloudPlayerWidget } from "../types/mixcloud";
+import { shouldUnloadLivePlayerState } from "@/hooks/usePlayerState";
+import useScript from "@/hooks/useScript";
+import { playerWidget, showKey } from "@/lib/mixcloud";
+import { MixcloudPlayerWidget } from "@/types/mixcloud";
 
 export default function MixcloudPlayer({ mini = true }: { mini?: boolean }) {
   const [shouldUnloadLivePlayer, shouldUnloadLivePlayerSet] =

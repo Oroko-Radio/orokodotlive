@@ -1,11 +1,14 @@
+"use client";
+
 import React from "react";
 import cn from "classnames";
-import SliderContext from "./contexts/sliderContext";
+import SliderContext from "@/components/contexts/sliderContext";
 import Card from "./Card";
-import { CardProps } from "../types/shared";
+import { CardProps } from "@/types/shared";
 
 const SliderCard = ({
   imageUrl,
+  objectPosition,
   title,
   link,
   idx,
@@ -15,13 +18,16 @@ const SliderCard = ({
   bgColor,
 }: CardProps) => (
   <SliderContext.Consumer>
-    {({ elementRef }) => {
+    {(context) => {
+      if (!context) return null;
+      const { elementRef } = context;
       return (
         <div
           ref={elementRef}
           className={cn(`inline-block flex-shrink-0`, {
             "border-l-0": idx !== 0,
             "card-half": cardWidth === "half",
+            "card-third": cardWidth === "third",
             "card-quarter": cardWidth === "quarter",
             "bg-orokoGray": bgColor === "gray",
             "card-featured": cardWidth === "featured",
@@ -31,6 +37,7 @@ const SliderCard = ({
           <Card
             mixcloudLink={mixcloudLink}
             imageUrl={imageUrl}
+            objectPosition={objectPosition}
             title={title}
             link={link}
             cardWidth={cardWidth}

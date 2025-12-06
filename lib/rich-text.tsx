@@ -1,16 +1,23 @@
 import Image from "next/legacy/image";
 import Link from "next/link";
+import React from "react";
+import { RichText } from "@payloadcms/richtext-lexical/react";
+import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Block, Inline, BLOCKS, INLINES } from "@contentful/rich-text-types";
-import { Asset, Content, Entry } from "../types/shared";
-import ImageBlock from "../components/ImageBlock";
+import { Asset, Content, Entry } from "@/types/shared";
+import ImageBlock from "@/components/ImageBlock";
 
 const getAssetById = (id: string, assets: Asset[]) =>
   assets.filter((asset) => asset.sys.id === id).pop();
 
 const getEntryById = (id: string, entries: Entry[]) =>
   entries.filter((entry) => entry.sys.id === id).pop();
+
+export function renderPayloadRichText(data: SerializedEditorState) {
+  return <RichText data={data} />;
+}
 
 export function renderRichTextWithImages(content: Content) {
   if (content.links) {
@@ -21,7 +28,7 @@ export function renderRichTextWithImages(content: Content) {
       renderNode: {
         [INLINES.HYPERLINK]: function InlineHyperlink(
           node: Block | Inline,
-          children
+          children,
         ) {
           const uri = node.data.uri as string;
 
@@ -72,12 +79,12 @@ export function renderRichTextWithImages(content: Content) {
         [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
           const entry = getEntryById(node.data.target.sys.id, entryAssets);
 
-          if (entry.__typename === "YouTubeEmbed") {
+          if (entry && entry.__typename === "YouTubeEmbed" && entry.shareLink) {
             return (
               <div className="youtube-iframe-container">
                 <iframe
                   src={`https://www.youtube.com/embed/${entry.shareLink.slice(
-                    -11
+                    -11,
                   )}`}
                   allowFullScreen
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -86,8 +93,8 @@ export function renderRichTextWithImages(content: Content) {
             );
           }
 
-          if (entry.__typename === "ImageBlock") {
-            return <ImageBlock images={entry.imagesCollection.items} />;
+          if (entry?.__typename === "ImageBlock") {
+            return <ImageBlock images={entry.imagesCollection?.items || []} />;
           }
         },
       },
