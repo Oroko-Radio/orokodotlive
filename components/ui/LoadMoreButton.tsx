@@ -9,9 +9,7 @@ interface LoadMoreButtonProps {
   currentPage: number;
 }
 
-export default function LoadMoreButton({
-  currentPage,
-}: LoadMoreButtonProps) {
+export default function LoadMoreButton({ currentPage }: LoadMoreButtonProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -19,7 +17,7 @@ export default function LoadMoreButton({
 
   const handleLoadMore = () => {
     startTransition(() => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParams?.toString());
       params.set("page", (currentPage + 1).toString());
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     });
