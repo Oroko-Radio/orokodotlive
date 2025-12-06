@@ -17,7 +17,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { Block, Inline, BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { Asset, Content, Entry } from "@/types/shared";
 import ImageBlock from "@/components/ImageBlock";
-import type { ImageGridBlock } from "@/payload-types";
+import type { Media } from "@/payload-types";
 
 const getAssetById = (id: string, assets: Asset[]) =>
   assets.filter((asset) => asset.sys.id === id).pop();
@@ -25,11 +25,20 @@ const getAssetById = (id: string, assets: Asset[]) =>
 const getEntryById = (id: string, entries: Entry[]) =>
   entries.filter((entry) => entry.sys.id === id).pop();
 
+// Type for the ImageGrid block embedded in rich text
+type ImageGridBlockData = {
+  images?: Array<{
+    image: Media | number;
+    id?: string | null;
+  }> | null;
+  blockType: "imageGrid";
+};
+
 // Type for nodes including our custom block
-type NodeTypes = DefaultNodeTypes | SerializedBlockNode<ImageGridBlock>;
+type NodeTypes = DefaultNodeTypes | SerializedBlockNode<ImageGridBlockData>;
 
 // Component for rendering the image grid from Payload
-function PayloadImageGridBlock({ data }: { data: ImageGridBlock }) {
+function PayloadImageGridBlock({ data }: { data: ImageGridBlockData }) {
   const images = data.images || [];
   if (images.length === 0) return null;
 
@@ -50,7 +59,7 @@ function PayloadImageGridBlock({ data }: { data: ImageGridBlock }) {
         if (isFourLayout) {
           return (
             <NextImage
-              key={image.id || idx}
+              key={image.id ?? idx}
               className={cn(
                 "object-cover h-full w-full border-black border-t-2",
                 {
@@ -60,7 +69,7 @@ function PayloadImageGridBlock({ data }: { data: ImageGridBlock }) {
                 },
               )}
               src={imageUrl || ""}
-              alt={image.alt || ""}
+              alt={image.title || ""}
               width={image.width || 600}
               height={image.height || 400}
             />
@@ -69,15 +78,18 @@ function PayloadImageGridBlock({ data }: { data: ImageGridBlock }) {
 
         return (
           <NextImage
-            key={image.id || idx}
-            className={cn("object-cover h-full w-full border-black border-t-2", {
-              "border-b-2": idx >= 4,
-              "md:border-b-2": idx >= 3,
-              "border-r-2 md:border-r-0": idx % 2 === 0,
-              "md:border-l-2": idx !== 0 && idx !== 3,
-            })}
+            key={image.id ?? idx}
+            className={cn(
+              "object-cover h-full w-full border-black border-t-2",
+              {
+                "border-b-2": idx >= 4,
+                "md:border-b-2": idx >= 3,
+                "border-r-2 md:border-r-0": idx % 2 === 0,
+                "md:border-l-2": idx !== 0 && idx !== 3,
+              },
+            )}
             src={imageUrl || ""}
-            alt={image.alt || ""}
+            alt={image.title || ""}
             width={image.width || 600}
             height={image.height || 400}
           />
