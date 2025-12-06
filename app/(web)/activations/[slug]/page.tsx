@@ -56,7 +56,8 @@ export default async function ActivationPage({
       typeof activation.coverImage === "object" &&
       activation.coverImage?.sizes?.["large-full"]?.url
         ? activation.coverImage.sizes["large-full"].url
-        : typeof activation.coverImage === "object" && activation.coverImage?.url
+        : typeof activation.coverImage === "object" &&
+            activation.coverImage?.url
           ? activation.coverImage.url
           : "/default-cover.jpg";
 
@@ -93,7 +94,7 @@ export default async function ActivationPage({
             </h1>
           </div>
         </TitleBox>
-        <section className="rich-text activation-content py-6 md:py-8 mb-24">
+        <section className="rich-text py-6 md:py-8 mb-24">
           {activation.content && renderPayloadRichText(activation.content)}
         </section>
       </SinglePage>
