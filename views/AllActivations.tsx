@@ -12,7 +12,7 @@ const AllActivations = ({
   heading?: string;
 }) => {
   return (
-    <div id="all-activations" className={cn("bg-offBlack")}>
+    <div id="all-activations" className="bg-offBlack min-h-[800px]">
       <div className="py-8 px-4 md:px-8 pb-0">
         <h1 className="font-serif text-4xl md:text-5xl text-white">
           {heading}

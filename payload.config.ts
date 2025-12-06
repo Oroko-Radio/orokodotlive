@@ -18,6 +18,7 @@ import { Products } from "./collections/Products";
 import { Pages } from "./collections/Pages";
 import { Articles } from "./collections/Articles";
 import { Author } from "./collections/Author";
+import { Activations } from "./collections/Activations";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -41,6 +42,7 @@ export default buildConfig({
     Pages,
     Articles,
     Author,
+    Activations,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET!,

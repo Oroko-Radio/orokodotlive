@@ -1,13 +1,23 @@
 import Image from "next/legacy/image";
+import NextImage from "next/image";
 import Link from "next/link";
 import React from "react";
-import { RichText } from "@payloadcms/richtext-lexical/react";
+import {
+  RichText,
+  type JSXConvertersFunction,
+} from "@payloadcms/richtext-lexical/react";
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
+import type {
+  DefaultNodeTypes,
+  SerializedBlockNode,
+} from "@payloadcms/richtext-lexical";
+import cn from "classnames";
 
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Block, Inline, BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { Asset, Content, Entry } from "@/types/shared";
 import ImageBlock from "@/components/ImageBlock";
+import type { ImageGridBlock } from "@/payload-types";
 
 const getAssetById = (id: string, assets: Asset[]) =>
   assets.filter((asset) => asset.sys.id === id).pop();
@@ -15,8 +25,80 @@ const getAssetById = (id: string, assets: Asset[]) =>
 const getEntryById = (id: string, entries: Entry[]) =>
   entries.filter((entry) => entry.sys.id === id).pop();
 
+// Type for nodes including our custom block
+type NodeTypes = DefaultNodeTypes | SerializedBlockNode<ImageGridBlock>;
+
+// Component for rendering the image grid from Payload
+function PayloadImageGridBlock({ data }: { data: ImageGridBlock }) {
+  const images = data.images || [];
+  if (images.length === 0) return null;
+
+  const isFourLayout = images.length === 4;
+
+  return (
+    <section
+      className={cn("image-block grid grid-cols-2 pb-6", {
+        "md:grid-cols-3": !isFourLayout,
+      })}
+    >
+      {images.map((item, idx) => {
+        const image = typeof item.image === "object" ? item.image : null;
+        if (!image) return null;
+
+        const imageUrl = image.sizes?.["small-full"]?.url || image.url;
+
+        if (isFourLayout) {
+          return (
+            <NextImage
+              key={image.id || idx}
+              className={cn(
+                "object-cover h-full w-full border-black border-t-2",
+                {
+                  "md:border-b-2": idx >= 2,
+                  "border-b-2": idx >= 2,
+                  "border-r-2": idx % 2 === 0,
+                },
+              )}
+              src={imageUrl || ""}
+              alt={image.alt || ""}
+              width={image.width || 600}
+              height={image.height || 400}
+            />
+          );
+        }
+
+        return (
+          <NextImage
+            key={image.id || idx}
+            className={cn("object-cover h-full w-full border-black border-t-2", {
+              "border-b-2": idx >= 4,
+              "md:border-b-2": idx >= 3,
+              "border-r-2 md:border-r-0": idx % 2 === 0,
+              "md:border-l-2": idx !== 0 && idx !== 3,
+            })}
+            src={imageUrl || ""}
+            alt={image.alt || ""}
+            width={image.width || 600}
+            height={image.height || 400}
+          />
+        );
+      })}
+    </section>
+  );
+}
+
+// Custom JSX converters for Payload rich text
+const jsxConverters: JSXConvertersFunction<NodeTypes> = ({
+  defaultConverters,
+}) => ({
+  ...defaultConverters,
+  blocks: {
+    imageGrid: ({ node }) => <PayloadImageGridBlock data={node.fields} />,
+  },
+});
+
 export function renderPayloadRichText(data: SerializedEditorState) {
-  return <RichText data={data} />;
+  return <RichText data={data} converters={jsxConverters} />;
 }
 
 export function renderRichTextWithImages(content: Content) {
