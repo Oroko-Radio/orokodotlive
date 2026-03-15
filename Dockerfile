@@ -33,7 +33,7 @@ ENV PREVIEW_SECRET=$PREVIEW_SECRET
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
-RUN corepack enable pnpm && pnpm run build
+RUN corepack enable pnpm && NODE_OPTIONS="--dns-result-order=ipv4first" pnpm run build
 
 FROM base AS runner
 WORKDIR /app
