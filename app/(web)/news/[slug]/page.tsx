@@ -5,10 +5,7 @@ import Tag from "@/components/Tag";
 import dayjs from "dayjs";
 import "@/util";
 import TitleBox from "@/components/TitleBox";
-import {
-  getArticleBySlug,
-  getAllArticleSlugs,
-} from "@/lib/payload/pages/articles";
+import { getArticleBySlug } from "@/lib/payload/pages/articles";
 import { renderPayloadRichText } from "@/lib/rich-text";
 import { draftMode } from "next/headers";
 
@@ -30,17 +27,6 @@ export async function generateMetadata({
     return {
       title: "Article",
     };
-  }
-}
-
-export async function generateStaticParams() {
-  try {
-    const slugs = await getAllArticleSlugs();
-    return slugs.map((slug) => ({
-      slug: slug,
-    }));
-  } catch {
-    return [];
   }
 }
 
