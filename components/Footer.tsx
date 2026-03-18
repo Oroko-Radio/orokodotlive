@@ -35,7 +35,7 @@ const Footer = () => {
           <SocialSection />
         </div>
         <Logo className="stroke-current stroke-2 text-white w-10 h-10 lg:w-14 lg:h-14 inline-block mb-4" />
-        <p className="mt-2 mb-8 font-sans xl:text-base">©OROKO 2021</p>
+        <p className="mt-2 mb-8 font-sans xl:text-base">© OROKO 2025</p>
         <div className="flex flex-col md:flex-row justify-center gap-2 font-sans text-sm xl:text-base">
           <div>
             Designed by{" "}

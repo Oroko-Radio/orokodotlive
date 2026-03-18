@@ -32,8 +32,9 @@ export default function SearchLoadMoreButton({
 
   const handleLoadMore = () => {
     startTransition(() => {
+      if (!searchParams) return;
       const params = new URLSearchParams(searchParams);
-      
+
       // Increment the limit for the specific section
       const newLimit = currentLimit + SEARCH_PAGE_SIZE;
       if (section === "shows") {
@@ -43,7 +44,7 @@ export default function SearchLoadMoreButton({
       } else if (section === "artists") {
         params.set("artistsLimit", newLimit.toString());
       }
-      
+
       // Preserve other limits
       if (showsLimit > SEARCH_PAGE_SIZE && section !== "shows") {
         params.set("showsLimit", showsLimit.toString());
@@ -54,12 +55,12 @@ export default function SearchLoadMoreButton({
       if (artistsLimit > SEARCH_PAGE_SIZE && section !== "artists") {
         params.set("artistsLimit", artistsLimit.toString());
       }
-      
+
       // Preserve query
       if (query) {
         params.set("query", query);
       }
-      
+
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     });
   };

@@ -42,13 +42,13 @@ export default function Search({ initialData }: SearchProps) {
 
   // Get limits from URL params
   const showsLimit = parseInt(
-    searchParams.get("showsLimit") || SEARCH_PAGE_SIZE.toString(),
+    searchParams?.get("showsLimit") || SEARCH_PAGE_SIZE.toString(),
   );
   const articlesLimit = parseInt(
-    searchParams.get("articlesLimit") || SEARCH_PAGE_SIZE.toString(),
+    searchParams?.get("articlesLimit") || SEARCH_PAGE_SIZE.toString(),
   );
   const artistsLimit = parseInt(
-    searchParams.get("artistsLimit") || SEARCH_PAGE_SIZE.toString(),
+    searchParams?.get("artistsLimit") || SEARCH_PAGE_SIZE.toString(),
   );
 
   const shouldFetch = debouncedQuery.trim().length > 0;
@@ -96,7 +96,7 @@ export default function Search({ initialData }: SearchProps) {
 
   // Sync with URL params on mount
   useEffect(() => {
-    const initialQuery = searchParams.get("query") || "";
+    const initialQuery = searchParams?.get("query") || "";
     setQuery(initialQuery);
     setDebouncedQuery(initialQuery);
   }, [searchParams]);
