@@ -145,6 +145,16 @@
     @apply mb-6 border-black;
   }
 
+  /* Special styling for activations content */
+
+  .rich-text .payload-richtext :not(.image-block):not(.image-block *) {
+    @apply max-w-5xl mx-auto;
+  }
+
+  .rich-text .payload-richtext > :not(.image-block):not(.image-block *) {
+    @apply px-3 md:px-4;
+  }
+
   /* Marquee spacing fix */
 
   .marquee-wrapper .marquee {
