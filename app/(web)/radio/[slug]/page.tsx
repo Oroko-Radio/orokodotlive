@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getRadioPageSingle, getAllShowSlugs } from "@/lib/payload/pages/radio";
+import { getRadioPageSingle } from "@/lib/payload/pages/radio";
 import SinglePage from "@/views/SinglePage";
 import DateTime from "@/components/DateTime";
 import Tag from "@/components/Tag";
@@ -25,13 +25,6 @@ export async function generateMetadata({
   return {
     title: show.title,
   };
-}
-
-export async function generateStaticParams() {
-  const slugs = await getAllShowSlugs();
-  return slugs.map((slug) => ({
-    slug: slug,
-  }));
 }
 
 export default async function Show({

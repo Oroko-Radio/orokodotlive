@@ -2,13 +2,13 @@ import type { Metadata, Viewport } from "next";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import "@/styles/globals.css";
-import { Analytics } from "@vercel/analytics/react";
 import SocialSection from "@/components/SocialSection";
 import { MixcloudPlayer } from "@/components/ClientComponents";
 import LivePlayerWithData from "@/components/LivePlayerWithData";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import Script from "next/script";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -66,7 +66,12 @@ export default function RootLayout({
         <SocialSection className="hidden lg:flex fixed bottom-4 right-8" />
         <Footer />
 
-        <Analytics />
+        <Script
+          defer
+          src="https://stats.oroko.live/script.js"
+          data-website-id="129b06c6-b9d3-42ba-b751-ae42990532ed"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
